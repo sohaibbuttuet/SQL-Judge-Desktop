@@ -13,19 +13,16 @@ namespace SQL_Judge_System.Models
         public int TestCaseID { get; set; }   // FK → TestCases
         public string ActualOutput { get; set; }   // What the student's query actually returned
         public bool IsPassed { get; set; } = false;
-        public int ScoreEarned { get; set; } = 0;
 
-        public SubmissionResult(int resultID, int submissionID, int testCaseID, string actualOutput, bool isPassed, int scoreEarned)
+
+        public SubmissionResult() { }
+        public SubmissionResult(int resultID, int submissionID, int testCaseID, string actualOutput, bool isPassed)
         {
             ResultID = resultID;
             SubmissionID = submissionID;
             TestCaseID = testCaseID;
             ActualOutput = actualOutput;
             IsPassed = isPassed;
-            ScoreEarned = scoreEarned;
         }
-
-        // Helper read-only property — useful for showing a tick/cross icon in UI
-        public string PassedLabel => IsPassed ? "Passed" : "Failed";
     }
 }

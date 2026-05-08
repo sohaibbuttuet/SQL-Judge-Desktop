@@ -17,6 +17,13 @@ namespace SQL_Judge_System.Models
         public int ProblemsSolved { get; set; } = 0;
 
         public Student() { }
+        public Student(int userID, string fullName, string registrationNumber, int skillLevelID)
+        {
+            UserID = userID;
+            FullName = fullName;
+            RegistrationNumber = registrationNumber;
+            SkillLevelID = skillLevelID;
+        }
         public Student(int studentID, int userID, string fullName, string registrationNumber, int skillLevelID, int totalScore, int problemsSolved)
         {
             StudentID = studentID;

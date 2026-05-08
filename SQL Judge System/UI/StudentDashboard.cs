@@ -1,0 +1,87 @@
+﻿using System;
+using System.Data;
+using System.Windows.Forms;
+using SQL_Judge_System.BL;
+using SQL_Judge_System.DL;
+using SQL_Judge_System.Models;
+
+namespace SQL_Judge_System.UI
+{
+    public partial class StudentDashboard : Form
+    {
+        private int UserID;
+        Student student;
+        public StudentDashboard(int userId)
+        {
+            UserID = userId;
+            student = StudentBL.GetStudentByUserID(UserID);
+            InitializeComponent();
+        }
+
+        private void LoadleaderBoard()
+        {
+            dgvLeaderboard.DataSource = StudentLeaderboardBL.GetLeaderboard();
+
+            // --- RESPONSIVE LOGIC ---
+
+            // 1. Make columns fill the entire width of the grid
+            dgvLeaderboard.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+            // 2. Set specific weight to columns 
+            dgvLeaderboard.Columns["GlobalRank"].FillWeight = 50;
+            dgvLeaderboard.Columns["StudentID"].FillWeight = 50;
+            dgvLeaderboard.Columns["FullName"].FillWeight = 150;
+            dgvLeaderboard.Columns["LevelName"].FillWeight = 100;
+            dgvLeaderboard.Columns["ProblemsSolved"].FillWeight = 80;
+            dgvLeaderboard.Columns["TotalScore"].FillWeight = 80;
+
+            // 3. Set the header text for each column
+            dgvLeaderboard.Columns["GlobalRank"].HeaderText = "Global Rank";
+            dgvLeaderboard.Columns["StudentID"].HeaderText = "Student ID";
+            dgvLeaderboard.Columns["FullName"].HeaderText = "Student Name";
+            dgvLeaderboard.Columns["LevelName"].HeaderText = "Skill Level";
+            dgvLeaderboard.Columns["ProblemsSolved"].HeaderText = "Problems Solved";
+            dgvLeaderboard.Columns["TotalScore"].HeaderText = "Total Score";
+        }
+        private void LoadStudentData()
+        {
+            if (student != null)
+            {
+                lblWelcome.Text = $"Welcome, {student.FullName}!";
+                lblRankValue.Text = $"#{StudentLeaderboardBL.GetRank(student.StudentID)}".ToString();
+                lblScoreValue.Text = StudentLeaderboardBL.GetTotalScore(student.StudentID).ToString();
+                lblSkillValue.Text = StudentLeaderboardBL.GetSkillLevel(student.StudentID).ToString();
+                lblSolvedValue.Text = StudentLeaderboardBL.GetSolvedProblemsCount(student.StudentID).ToString();
+            }
+            else
+            {
+                MessageBox.Show("Student data not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private void StudentDashboard_Load(object sender, EventArgs e)
+        {
+            LoadleaderBoard();
+            LoadStudentData();
+        }
+
+        private void btn_problems_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void btn_contest_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_leaderboard_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void btn_Logout_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+    }
+}

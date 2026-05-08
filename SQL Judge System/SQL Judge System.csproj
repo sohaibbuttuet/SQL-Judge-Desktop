@@ -95,13 +95,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DL\ContestStatusDL.cs" />
+    <Compile Include="BL\AdminDashboardBL.cs" />
+    <Compile Include="BL\StudentBL.cs" />
+    <Compile Include="BL\StudentLeaderboardBL.cs" />
+    <Compile Include="BL\UserBL.cs" />
+    <Compile Include="BL\UserRoleBL.cs" />
+    <Compile Include="DL\ContestDL.cs" />
+    <Compile Include="DL\ProblemDL.cs" />
+    <Compile Include="DL\StudentLeaderboardDL.cs" />
+    <Compile Include="LookupDL\ContestStatusDL.cs" />
     <Compile Include="DL\DatabaseHelper.cs" />
-    <Compile Include="DL\ProblemDifficultyDL.cs" />
-    <Compile Include="DL\RoleDL.cs" />
-    <Compile Include="DL\SkillLevelDL.cs" />
+    <Compile Include="LookupDL\ProblemDifficultyDL.cs" />
+    <Compile Include="LookupDL\RoleDL.cs" />
+    <Compile Include="LookupDL\ProblemTagsDL.cs" />
+    <Compile Include="LookupDL\SkillLevelDL.cs" />
     <Compile Include="DL\StudentDL.cs" />
-    <Compile Include="DL\SubmissionStatusDL.cs" />
+    <Compile Include="LookupDL\SubmissionStatusDL.cs" />
     <Compile Include="DL\UserRoleDL.cs" />
     <Compile Include="DL\UserDL.cs" />
     <Compile Include="Form1.cs">
@@ -112,23 +121,41 @@
     </Compile>
     <Compile Include="Models\Contest.cs" />
     <Compile Include="Models\ContestProblem.cs" />
-    <Compile Include="Models\ContestStatus.cs" />
     <Compile Include="Models\Leaderboard.cs" />
     <Compile Include="Models\Problem.cs" />
-    <Compile Include="Models\ProblemDifficulty.cs" />
     <Compile Include="Models\ProblemTagMap.cs" />
-    <Compile Include="Models\ProblemTags.cs" />
-    <Compile Include="Models\Role.cs" />
-    <Compile Include="Models\SkillLevel.cs" />
     <Compile Include="Models\Student.cs" />
     <Compile Include="Models\Submission.cs" />
     <Compile Include="Models\SubmissionResult.cs" />
-    <Compile Include="Models\SubmissionStatus.cs" />
     <Compile Include="Models\TestCase.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserRole.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UI\AdminDashboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\AdminDashboard.Designer.cs">
+      <DependentUpon>AdminDashboard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\AuthForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\AuthForm.Designer.cs">
+      <DependentUpon>AuthForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\SolveProblemsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\SolveProblemsForm.Designer.cs">
+      <DependentUpon>SolveProblemsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\StudentDashboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\StudentDashboard.Designer.cs">
+      <DependentUpon>StudentDashboard.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -138,6 +165,15 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UI\AdminDashboard.resx">
+      <DependentUpon>AdminDashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\AuthForm.resx">
+      <DependentUpon>AuthForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\StudentDashboard.resx">
+      <DependentUpon>StudentDashboard.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -152,9 +188,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="BL\" />
-    <Folder Include="UI\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

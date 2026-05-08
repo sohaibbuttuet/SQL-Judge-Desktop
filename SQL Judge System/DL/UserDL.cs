@@ -4,46 +4,34 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MidDb26_2025CS259;
 using SQL_Judge_System.Models;
 
 namespace SQL_Judge_System.DL
 {
     internal class UserDL
     {
-        public static int AddUser(User user)
+        public static int SignUp(User user)
         {
-            string query = $"INSERT INTO Users (Email, PasswordHash, IsActive, CreatedAt) " +
-                           $"VALUES ('{user.Email}', '{user.PasswordHash}', {user.IsActive}, '{user.CreatedAt}'); " +
+            string query = $"INSERT INTO Users (Email, Password) " +
+                           $"VALUES ('{user.Email}', '{user.Password}'); " +
                            $"SELECT LAST_INSERT_ID();";
 
             return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
         }
-        public static void UpdateUser(User user)
+        public static void UpdateUser(User user, string previousEmail)
         {
-            string query = $"UPDATE Users SET Email = '{user.Email}', PasswordHash = '{user.PasswordHash}' WHERE UserID = {user.UserID};";
+            string query = $"UPDATE Users SET Email = '{user.Email}', Password = '{user.Password}' WHERE Email = '{previousEmail}';";
             DatabaseHelper.Instance.Update(query);
         }
-        public static User GetUserById(int userId)
+        public static void ActivateUser(int userId)
         {
-            string query = $"SELECT * FROM Users WHERE UserID = {userId};";
-            DataTable dt = DatabaseHelper.Instance.GetDataTable(query);
-
-            if (dt.Rows.Count == 0)
-                return null;
-
-            return MapDataRowToUser(dt.Rows[0]);
-
+            string query = $"UPDATE Users SET IsActive = 1 WHERE UserID = {userId};";
+            DatabaseHelper.Instance.Update(query);
         }
-        public static User GetUserByEmail(string email)
+        public static void DeactivateUser(int userId)
         {
-            string query = $"SELECT * FROM Users WHERE Email = '{email}';";
-            DataTable dt = DatabaseHelper.Instance.GetDataTable(query);
-
-            if (dt.Rows.Count == 0)
-                return null;
-
-            return MapDataRowToUser(dt.Rows[0]);
+            string query = $"UPDATE Users SET IsActive = 0 WHERE UserID = {userId};";
+            DatabaseHelper.Instance.Update(query);
         }
         public static List<User> GetAllUsers()
         {
@@ -81,16 +69,40 @@ namespace SQL_Judge_System.DL
                 users.Add(MapDataRowToUser(row));
             }
             return users;
-        }
-        public static void ActivateUser(int userId)
+        }        
+        public static int GetUserIdByCredentials(string email, string password)
         {
-            string query = $"UPDATE Users SET IsActive = 1 WHERE UserID = {userId};";
-            DatabaseHelper.Instance.Update(query);
+            string query = $"SELECT UserID FROM Users WHERE Email = '{email}' AND Password = '{password}';";
+            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
         }
-        public static void DeactivateUser(int userId)
+        public static int TotalAdmins()
         {
-            string query = $"UPDATE Users SET IsActive = 0 WHERE UserID = {userId};";
-            DatabaseHelper.Instance.Update(query);
+            string query = "SELECT COUNT(*) " +
+                           "FROM users u " +
+                           "JOIN userroles ur ON u.UserID = ur.UserID " +
+                           "JOIN roles r ON ur.RoleID = r.RoleID " +
+                           "WHERE r.RoleName = 'admin';";
+            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
+        }
+        public static int ActiveAdmins()
+        {
+            string query = "SELECT COUNT(*) " +
+                           "FROM users u " +
+                           "JOIN userroles ur ON u.UserID = ur.UserID " +
+                           "JOIN roles r ON ur.RoleID = r.RoleID " +
+                           "WHERE r.RoleName = 'admin' " +
+                           "AND u.IsActive = 1;";
+            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
+        }
+        public static int InactiveAdmins()
+        {
+            string query = "SELECT COUNT(*) " +
+                           "FROM users u " +
+                           "JOIN userroles ur ON u.UserID = ur.UserID " +
+                           "JOIN roles r ON ur.RoleID = r.RoleID " +
+                           "WHERE r.RoleName = 'admin' " +
+                           "AND u.IsActive = 0;";
+            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
         }
 
         // Helper Function
@@ -100,16 +112,16 @@ namespace SQL_Judge_System.DL
             {
                 UserID = Convert.ToInt32(row["UserID"]),
                 Email = row["Email"].ToString(),
-                PasswordHash = row["PasswordHash"].ToString(),
+                Password = row["PasswordHash"].ToString(),
                 IsActive = Convert.ToBoolean(row["IsActive"]),
                 CreatedAt = Convert.ToDateTime(row["CreatedAt"])
             };
         }
 
         // Validation Functions
-        public static bool ValidateUserCredentials(string email, string passwordHash)
+        public static bool ValidateUserCredentials(User user)
         {
-            string query = $"SELECT COUNT(*) FROM Users WHERE Email = '{email}' AND PasswordHash = '{passwordHash}' AND IsActive = 1;";
+            string query = $"SELECT COUNT(*) FROM Users WHERE Email = '{user.Email}' AND Password = '{user.Password}' AND IsActive = 1;";
             int count = Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
             return count > 0;
         }
@@ -119,14 +131,14 @@ namespace SQL_Judge_System.DL
             int count = Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
             return count > 0;
         }
-        public static bool IsUserActive(int userId)
-        {
-            string query = $"SELECT IsActive FROM Users WHERE UserID = {userId};";
-            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query)) == 1; // 1 for true, 0 for false
-        }
         public static bool IsUserExists(int userId)
         {
-            string query = $"SELECT COUNT(*) FROM Users WHERE UserID = {userId};";  
+            string query = $"SELECT COUNT(*) FROM Users WHERE UserID = {userId} AND IsActive = 1;";  
+            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query)) > 0;
+        }
+        public static bool IsUserAdmin(int userId)
+        {
+            string query = $"SELECT COUNT(*) FROM userroles ur JOIN roles r ON ur.RoleID = r.RoleID WHERE ur.UserID = {userId} AND r.RoleName = 'admin';"; 
             return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query)) > 0;
         }
     }

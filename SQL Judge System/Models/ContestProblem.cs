@@ -13,6 +13,7 @@ namespace SQL_Judge_System.Models
         public int ProblemID { get; set; }
         public int OrderNumber { get; set; }   // Controls display order in the contest
 
+        public ContestProblem() { }
         public ContestProblem(int contestID, int problemID, int orderNumber)
         {
             ContestID = contestID;

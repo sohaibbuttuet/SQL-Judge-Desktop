@@ -10,15 +10,21 @@ namespace SQL_Judge_System.Models
     {
         public int UserID { get; set; }
         public string Email { get; set; }
-        public string PasswordHash { get; set; }   // SHA-256 hash — never store plain text
-        public bool IsActive { get; set; } = true;
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public string Password { get; set; }   
+        public bool IsActive { get; set; }
+        public DateTime CreatedAt { get; set; }
 
-        public User() { }
-        public User(string email, string passwordHash)
+        public User()
+        {
+            IsActive = true;
+            CreatedAt = DateTime.Now;
+        }
+        public User(string email, string password)
         {
             Email = email;
-            PasswordHash = passwordHash;
+            Password = password;
+            IsActive = true;
+            CreatedAt = DateTime.Now;
         }
     }
 }

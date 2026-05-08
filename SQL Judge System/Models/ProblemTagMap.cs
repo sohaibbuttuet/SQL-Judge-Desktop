@@ -10,6 +10,10 @@ namespace SQL_Judge_System.Models
     {
         public int ProblemID { get; set; }
         public int TagID { get; set; }
+
+        public ProblemTagMap()
+        {
+        }
         public ProblemTagMap(int problemID, int tagID)
         {
             ProblemID = problemID;

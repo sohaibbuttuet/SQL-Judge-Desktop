@@ -16,6 +16,7 @@ namespace SQL_Judge_System.Models
         public int StatusID { get; set; }   // FK → ContestStatus
         public int CreatedBy { get; set; }   // FK → Users
 
+        public Contest() { }
         public Contest(int contestID, string title, string description, DateTime startDate, DateTime endDate, int statusID, int createdBy)
         {
             ContestID = contestID;

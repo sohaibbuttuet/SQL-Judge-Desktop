@@ -5,7 +5,6 @@ using System.Linq;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
-using MidDb26_2025CS259;
 using SQL_Judge_System.Models;
 
 namespace SQL_Judge_System.DL
@@ -14,8 +13,8 @@ namespace SQL_Judge_System.DL
     {
         public static int AddStudent(Student student)
         {
-            string query = $"INSERT INTO Students (StudentID, UserID, FullName, RegistrationNumber, SkillLevelID, TotalScore, ProblemsSolved) " +
-                           $"VALUES ('{student.StudentID}', '{student.UserID}', '{student.FullName}', '{student.RegistrationNumber}', '{student.SkillLevelID}', {student.TotalScore}, {student.ProblemsSolved}); " +
+            string query = $"INSERT INTO Students (UserID, FullName, RegistrationNumber, SkillLevelID, TotalScore, ProblemsSolved) " +
+                           $"VALUES ({student.UserID}, '{student.FullName}', '{student.RegistrationNumber}', {student.SkillLevelID}, {student.TotalScore}, {student.ProblemsSolved}); " +
                            $"SELECT LAST_INSERT_ID();";
 
             return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
@@ -23,18 +22,18 @@ namespace SQL_Judge_System.DL
         public static void UpdateStudent(Student student)
         {
             string query = $"UPDATE Students SET FullName = '{student.FullName}', RegistrationNumber = '{student.RegistrationNumber}', " +
-                           $"SkillLevelID = '{student.SkillLevelID}', TotalScore = {student.TotalScore}, ProblemsSolved = {student.ProblemsSolved} " +
-                           $"WHERE StudentID = '{student.StudentID}';";
+                           $"SkillLevelID = {student.SkillLevelID}, TotalScore = {student.TotalScore}, ProblemsSolved = {student.ProblemsSolved} " +
+                           $"WHERE StudentID = {student.StudentID};";
             DatabaseHelper.Instance.Update(query);
         }
-        public static void DeleteStudent(int studentID)
+        public static void UpdateStudentScore(int studentId, int score, int solved)
         {
-            string query = $"DELETE FROM Students WHERE StudentID = '{studentID}';";
+            string query = $"UPDATE Students SET TotalScore = {score}, ProblemsSolved = {solved} WHERE StudentID = {studentId}";
             DatabaseHelper.Instance.Update(query);
         }
         public static Student GetStudentByUserID(int userID)
         {
-            string query = $"SELECT * FROM Students WHERE UserID = '{userID}';";
+            string query = $"SELECT * FROM Students WHERE UserID = {userID};";
             DataTable dt = DatabaseHelper.Instance.GetDataTable(query);
 
             if (dt.Rows.Count == 0)
@@ -44,7 +43,7 @@ namespace SQL_Judge_System.DL
         }
         public static Student GetStudentByID(int studentID)
         {
-            string query = $"SELECT * FROM Students WHERE StudentID = '{studentID}';";
+            string query = $"SELECT * FROM Students WHERE StudentID = {studentID};";
             DataTable dt = DatabaseHelper.Instance.GetDataTable(query);
 
             if (dt.Rows.Count == 0)
@@ -54,7 +53,7 @@ namespace SQL_Judge_System.DL
         }
         public static List<Student> GetAllStudents()
         {
-            string query = "SELECT * FROM Students;";
+            string query = "SELECT * FROM Students ORDER BY TotalScore DESC;";
             DataTable dt = DatabaseHelper.Instance.GetDataTable(query);
 
             List<Student> students = new List<Student>();
@@ -64,17 +63,46 @@ namespace SQL_Judge_System.DL
             }
             return students;
         }
-        public static List<Student> GetStudentsBySkillLevel(int skillLevelID)
+        public static List<Student> GetTopStudents(int limit)
         {
-            string query = $"SELECT * FROM Students WHERE SkillLevelID = '{skillLevelID}';";
+            string query = $"SELECT * FROM Students ORDER BY TotalScore DESC LIMIT {limit};";
             DataTable dt = DatabaseHelper.Instance.GetDataTable(query);
 
-            List<Student> students = new List<Student>();
+            List<Student> list = new List<Student>();
+
             foreach (DataRow row in dt.Rows)
-            {
-                students.Add(MapDataRowToStudent(row));
-            }
-            return students;
+                list.Add(MapDataRowToStudent(row));
+
+            return list;
+        }
+        public static int TotalStudents()
+        {
+            string query = "SELECT COUNT(*) " +
+                           "FROM users u " +
+                           "JOIN userroles ur ON u.UserID = ur.UserID " +
+                           "JOIN roles r ON ur.RoleID = r.RoleID " +
+                           "WHERE r.RoleName = 'student';";
+            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
+        }
+        public static int ActiveStudents()
+        {
+            string query = "SELECT COUNT(*) " +
+                           "FROM users u " +
+                           "JOIN userroles ur ON u.UserID = ur.UserID " +
+                           "JOIN roles r ON ur.RoleID = r.RoleID " +
+                           "WHERE r.RoleName = 'student' " +
+                           "AND u.IsActive = 1;";
+            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
+        }
+        public static int InactiveStudents()
+        {
+            string query = "SELECT COUNT(*) " +
+                           "FROM users u " +
+                           "JOIN userroles ur ON u.UserID = ur.UserID " +
+                           "JOIN roles r ON ur.RoleID = r.RoleID " +
+                           "WHERE r.RoleName = 'student' " +
+                           "AND u.IsActive = 0;";
+            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
         }
 
         // Helping Function
@@ -93,25 +121,10 @@ namespace SQL_Judge_System.DL
         }
 
         // Validation Function
-        public static bool IsRegistrationNumberUnique(string registrationNumber)
-        {
-            string query = $"SELECT COUNT(*) FROM Students WHERE RegistrationNumber = '{registrationNumber}';";
-            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query)) == 0;
-        }
-        public static bool IsStudentExist(int studentID)
-        {
-            string query = $"SELECT COUNT(*) FROM Students WHERE StudentID = '{studentID}';";
-            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query)) > 0;
-        }
-        public static bool IsStudentExistByUserID(int userID)
-        {
-            string query = $"SELECT COUNT(*) FROM Students WHERE UserID = '{userID}';";
-            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query)) > 0;
-        }
-        public static bool IsStudentExistByRegistrationNumber(string registrationNumber)
-        {
-            string query = $"SELECT COUNT(*) FROM Students WHERE RegistrationNumber = '{registrationNumber}';";
-            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query)) > 0;
+        public static bool IsStudentExist(string regno) 
+        { 
+            string query = $"SELECT COUNT(*) FROM Students WHERE RegistrationNumber = '{regno}';"; 
+            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query)) > 0; 
         }
     }
 } 

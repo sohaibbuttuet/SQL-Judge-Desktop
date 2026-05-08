@@ -12,15 +12,14 @@ namespace SQL_Judge_System.Models
         public int ProblemID { get; set; }   // FK → Problems
         public string SetupSQL { get; set; }   // SQL that sets up the test environment
         public string ExpectedOutput { get; set; }   // Correct result the student must match
-        public int ScorePoints { get; set; } = 10;
 
-        public TestCase(int testCaseID, int problemID, string setupSQL, string expectedOutput, int scorePoints)
+        public TestCase() { }
+        public TestCase(int testCaseID, int problemID, string setupSQL, string expectedOutput)
         {
             TestCaseID = testCaseID;
             ProblemID = problemID;
             SetupSQL = setupSQL;
             ExpectedOutput = expectedOutput;
-            ScorePoints = scorePoints;
         }
     }
 }

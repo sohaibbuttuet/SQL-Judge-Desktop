@@ -2,7 +2,7 @@
 using System;
 using System.Data;
 
-namespace MidDb26_2025CS259
+namespace SQL_Judge_System.DL
 {
     internal class DatabaseHelper
     {
@@ -31,14 +31,6 @@ namespace MidDb26_2025CS259
             var connection = new MySqlConnection(connectionString);
             connection.Open();
             return connection;
-        }
-        public MySqlDataReader getData(string query)
-        {
-            var connection = getConnection();
-            var command = new MySqlCommand(query, connection);
-
-            // NOTE: connection will close automatically when reader is closed
-            return command.ExecuteReader(System.Data.CommandBehavior.CloseConnection);
         }
         public int Update(string query)
         {
