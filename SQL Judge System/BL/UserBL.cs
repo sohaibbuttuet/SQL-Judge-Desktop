@@ -10,6 +10,11 @@ namespace SQL_Judge_System.BL
 {
     internal class UserBL
     {
+        // --- For Auth Form ---
+        public static bool IsUserAdmin(int userId)
+        {
+            return UserDL.IsUserAdmin(userId);
+        }
         public static void SignUp(User user)
         {
             if (user == null)
@@ -44,10 +49,6 @@ namespace SQL_Judge_System.BL
             user.UserID = UserDL.GetUserIdByCredentials(user.Email, user.Password);
             return true;
         }
-
-        public static bool IsUserAdmin(int userId)
-        {
-            return UserDL.IsUserAdmin(userId);
-        }
+        
     }
 }

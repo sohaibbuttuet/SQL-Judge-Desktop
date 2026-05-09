@@ -12,22 +12,25 @@ namespace SQL_Judge_System.Models
         public string Title { get; set; }
         public string Description { get; set; }
         public int DifficultyID { get; set; }  // nullable FK → ProblemDifficulties
-        public int Score { get; set; }
+        public int Points { get; set; } 
         public DateTime CreatedAt { get; set; } 
+        public bool IsActive { get; set; } 
 
         public Problem()
         {
             CreatedAt = DateTime.Now;
-            Score = 0;
+            Points = 10;
+            IsActive = true;
         }
-        public Problem(int problemID, string title, string description, int difficultyID, int score)
+        public Problem(int problemID, string title, string description, int difficultyID, int points)
         {
             ProblemID = problemID;
             Title = title;
             Description = description;
             DifficultyID = difficultyID;
-            Score = score;
+            Points = points;
             CreatedAt = DateTime.Now;   
+            IsActive = true;
         }
     }
 }

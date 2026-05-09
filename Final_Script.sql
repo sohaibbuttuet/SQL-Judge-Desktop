@@ -23,6 +23,30 @@ CREATE TABLE Users (
     CreatedAt DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE OR REPLACE VIEW studentsForAdmin
+AS
+SELECT 
+    s.StudentID, 
+    s.UserID, 
+    s.FullName, 
+    s.RegistrationNumber, 
+    sk.LevelName, 
+    s.ProblemsSolved, 
+    s.TotalScore, 
+    u.IsActive, 
+    u.CreatedAt
+FROM students s 
+JOIN skilllevels sk ON s.SkillLevelID = sk.SkillLevelID
+JOIN User_Student u ON s.UserID = u.UserID;
+
+CREATE VIEW User_Student
+AS
+SELECT u.* 
+FROM users u 
+JOIN userroles ur ON u.UserID = ur.UserID 
+JOIN roles r ON ur.RoleID = r.RoleID 
+WHERE r.RoleName = 'student';
+
 CREATE INDEX idx_users_email ON Users(Email);
 
 -- =====================================
@@ -62,6 +86,24 @@ CREATE TABLE Students (
     FOREIGN KEY (SkillLevelID) REFERENCES SkillLevels(SkillLevelID) ON DELETE SET NULL
 );
 
+CREATE VIEW studentsForAdmin
+AS
+SELECT s.StudentID, s.UserID, s.FullName, s.RegistrationNumber, sk.LevelName, s.ProblemsSolved, s.TotalScore, u.IsActive, u.CreatedAt
+FROM students s JOIN skilllevels sk USING(SkillLevelID) JOIN user_student u ON s.UserID = u.UserID;
+
+CREATE VIEW Students_LeaderBoard
+AS
+SELECT 
+    RANK() OVER (ORDER BY s.TotalScore DESC) AS GlobalRank,
+    s.StudentID,
+    s.FullName,
+    s.RegistrationNumber,
+    sk.LevelName,
+    s.ProblemsSolved, 
+    s.TotalScore
+FROM students s
+JOIN skilllevels sk ON s.SkillLevelID = sk.SkillLevelID;
+
 CREATE INDEX idx_students_user ON Students(UserID);
 CREATE INDEX idx_students_skill ON Students(SkillLevelID);
 
@@ -82,7 +124,7 @@ CREATE TABLE ProblemTags (
 );
 
 -- =====================================
--- 8. PROBLEMS (FIXED SCORE SYSTEM ⭐)
+-- 8. PROBLEMS 
 -- =====================================
 CREATE TABLE Problems (
     ProblemID INT AUTO_INCREMENT PRIMARY KEY,
@@ -90,12 +132,15 @@ CREATE TABLE Problems (
     Description TEXT NOT NULL,
     DifficultyID INT,
 
-    Score INT NOT NULL DEFAULT 100 CHECK (Score > 0),
+    Points INT NOT NULL DEFAULT 10,
 
     CreatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+    IsActive BOOLEAN DEFAULT TRUE,
 
     FOREIGN KEY (DifficultyID) REFERENCES ProblemDifficulties(DifficultyID)
-        ON DELETE RESTRICT
+        ON DELETE RESTRICT,
+	
+    CONSTRAINT chk_points CHECK (Points > 0)        
 );
 
 CREATE INDEX idx_problems_difficulty ON Problems(DifficultyID);
@@ -117,7 +162,7 @@ CREATE INDEX idx_ptm_problem ON ProblemTagMap(ProblemID);
 CREATE INDEX idx_ptm_tag ON ProblemTagMap(TagID);
 
 -- =====================================
--- 10. TEST CASES (VALIDATION ONLY)
+-- 10. TEST CASES 
 -- =====================================
 CREATE TABLE TestCases (
     TestCaseID INT AUTO_INCREMENT PRIMARY KEY,
@@ -125,6 +170,7 @@ CREATE TABLE TestCases (
 
     SetupSQL TEXT NOT NULL,
     ExpectedOutput TEXT NOT NULL,
+    IsActive BOOLEAN DEFAULT TRUE,
 
     FOREIGN KEY (ProblemID) REFERENCES Problems(ProblemID)
         ON DELETE CASCADE
@@ -211,6 +257,7 @@ CREATE TABLE Contests (
 
     StatusID INT NOT NULL,
     CreatedBy INT NOT NULL,
+    IsActive BOOLEAN DEFAULT TRUE,
 
     CHECK (EndDate > StartDate),
 

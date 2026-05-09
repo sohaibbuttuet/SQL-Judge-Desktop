@@ -96,6 +96,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BL\AdminDashboardBL.cs" />
+    <Compile Include="BL\ProblemBL.cs" />
     <Compile Include="BL\StudentBL.cs" />
     <Compile Include="BL\StudentLeaderboardBL.cs" />
     <Compile Include="BL\UserBL.cs" />
@@ -132,11 +133,11 @@
     <Compile Include="Models\UserRole.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UI\AdminDashboard.cs">
+    <Compile Include="UI\AdminDashboardUI.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\AdminDashboard.Designer.cs">
-      <DependentUpon>AdminDashboard.cs</DependentUpon>
+    <Compile Include="UI\AdminDashboardUI.Designer.cs">
+      <DependentUpon>AdminDashboardUI.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\AuthForm.cs">
       <SubType>Form</SubType>
@@ -144,17 +145,11 @@
     <Compile Include="UI\AuthForm.Designer.cs">
       <DependentUpon>AuthForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\SolveProblemsForm.cs">
+    <Compile Include="UI\StudentDashboardUI.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\SolveProblemsForm.Designer.cs">
-      <DependentUpon>SolveProblemsForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI\StudentDashboard.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI\StudentDashboard.Designer.cs">
-      <DependentUpon>StudentDashboard.cs</DependentUpon>
+    <Compile Include="UI\StudentDashboardUI.Designer.cs">
+      <DependentUpon>StudentDashboardUI.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -165,14 +160,14 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="UI\AdminDashboard.resx">
-      <DependentUpon>AdminDashboard.cs</DependentUpon>
+    <EmbeddedResource Include="UI\AdminDashboardUI.resx">
+      <DependentUpon>AdminDashboardUI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\AuthForm.resx">
       <DependentUpon>AuthForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\StudentDashboard.resx">
-      <DependentUpon>StudentDashboard.cs</DependentUpon>
+    <EmbeddedResource Include="UI\StudentDashboardUI.resx">
+      <DependentUpon>StudentDashboardUI.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

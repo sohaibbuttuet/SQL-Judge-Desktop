@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SQL_Judge_System.DL;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;

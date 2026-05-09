@@ -30,5 +30,9 @@ namespace SQL_Judge_System.BL
             }
             return StudentDL.GetStudentByUserID(userId);
         }
+        public static List<Student> GetStudents()
+        {
+            return StudentDL.GetAllStudents();
+        }
     }
 }

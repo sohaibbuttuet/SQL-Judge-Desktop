@@ -155,11 +155,11 @@ namespace SQL_Judge_System.UI
                     {
                         if (UserBL.IsUserAdmin(user.UserID))
                         {
-                            new AdminDashboard(user.UserID).Show();
+                            new AdminDashboardUI().Show();
                         }
                         else
                         {
-                            new StudentDashboard(user.UserID).Show();
+                            new StudentDashboardUI(user.UserID).Show();
                         }
                         this.Hide();
                     }

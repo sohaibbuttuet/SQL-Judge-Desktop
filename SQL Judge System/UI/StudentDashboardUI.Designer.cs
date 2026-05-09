@@ -1,6 +1,6 @@
 ﻿namespace SQL_Judge_System.UI
 {
-    partial class StudentDashboard
+    partial class StudentDashboardUI
     {
         private System.ComponentModel.IContainer components = null;
 

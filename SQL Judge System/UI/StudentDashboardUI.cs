@@ -7,11 +7,11 @@ using SQL_Judge_System.Models;
 
 namespace SQL_Judge_System.UI
 {
-    public partial class StudentDashboard : Form
+    public partial class StudentDashboardUI : Form
     {
         private int UserID;
         Student student;
-        public StudentDashboard(int userId)
+        public StudentDashboardUI(int userId)
         {
             UserID = userId;
             student = StudentBL.GetStudentByUserID(UserID);
@@ -31,6 +31,7 @@ namespace SQL_Judge_System.UI
             dgvLeaderboard.Columns["GlobalRank"].FillWeight = 50;
             dgvLeaderboard.Columns["StudentID"].FillWeight = 50;
             dgvLeaderboard.Columns["FullName"].FillWeight = 150;
+            dgvLeaderboard.Columns["RegistrationNumber"].FillWeight = 100;
             dgvLeaderboard.Columns["LevelName"].FillWeight = 100;
             dgvLeaderboard.Columns["ProblemsSolved"].FillWeight = 80;
             dgvLeaderboard.Columns["TotalScore"].FillWeight = 80;
@@ -39,6 +40,7 @@ namespace SQL_Judge_System.UI
             dgvLeaderboard.Columns["GlobalRank"].HeaderText = "Global Rank";
             dgvLeaderboard.Columns["StudentID"].HeaderText = "Student ID";
             dgvLeaderboard.Columns["FullName"].HeaderText = "Student Name";
+            dgvLeaderboard.Columns["RegistrationNumber"].HeaderText = "Reg No";
             dgvLeaderboard.Columns["LevelName"].HeaderText = "Skill Level";
             dgvLeaderboard.Columns["ProblemsSolved"].HeaderText = "Problems Solved";
             dgvLeaderboard.Columns["TotalScore"].HeaderText = "Total Score";

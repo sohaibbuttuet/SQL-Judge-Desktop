@@ -53,7 +53,7 @@ namespace SQL_Judge_System.DL
         }
         public static List<Student> GetAllStudents()
         {
-            string query = "SELECT * FROM Students ORDER BY TotalScore DESC;";
+            string query = "SELECT * FROM Students;";
             DataTable dt = DatabaseHelper.Instance.GetDataTable(query);
 
             List<Student> students = new List<Student>();
@@ -75,35 +75,6 @@ namespace SQL_Judge_System.DL
 
             return list;
         }
-        public static int TotalStudents()
-        {
-            string query = "SELECT COUNT(*) " +
-                           "FROM users u " +
-                           "JOIN userroles ur ON u.UserID = ur.UserID " +
-                           "JOIN roles r ON ur.RoleID = r.RoleID " +
-                           "WHERE r.RoleName = 'student';";
-            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
-        }
-        public static int ActiveStudents()
-        {
-            string query = "SELECT COUNT(*) " +
-                           "FROM users u " +
-                           "JOIN userroles ur ON u.UserID = ur.UserID " +
-                           "JOIN roles r ON ur.RoleID = r.RoleID " +
-                           "WHERE r.RoleName = 'student' " +
-                           "AND u.IsActive = 1;";
-            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
-        }
-        public static int InactiveStudents()
-        {
-            string query = "SELECT COUNT(*) " +
-                           "FROM users u " +
-                           "JOIN userroles ur ON u.UserID = ur.UserID " +
-                           "JOIN roles r ON ur.RoleID = r.RoleID " +
-                           "WHERE r.RoleName = 'student' " +
-                           "AND u.IsActive = 0;";
-            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
-        }
 
         // Helping Function
         private static Student MapDataRowToStudent(DataRow row)
@@ -121,10 +92,32 @@ namespace SQL_Judge_System.DL
         }
 
         // Validation Function
-        public static bool IsStudentExist(string regno) 
-        { 
-            string query = $"SELECT COUNT(*) FROM Students WHERE RegistrationNumber = '{regno}';"; 
-            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query)) > 0; 
+        public static bool IsStudentExist(string regno)
+        {
+            string query = $"SELECT COUNT(*) FROM Students WHERE RegistrationNumber = '{regno}';";
+            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query)) > 0;
+        }
+
+        // --- For AdminDashboardBL ---
+        public static int TotalStudents()
+        {
+            string query = "SELECT COUNT(*) FROM User_Student;";
+            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
+        }
+        public static int ActiveStudents()
+        {
+            string query = "SELECT COUNT(*) FROM User_Student WHERE IsActive = 1;";
+            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
+        }
+        public static int InactiveStudents()
+        {
+            string query = "SELECT COUNT(*) FROM User_Student WHERE IsActive = 0;";
+            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
+        }
+        public static DataTable GetStudentsForAdmin()
+        {
+            string query = "SELECT * FROM StudentsForAdmin;";
+            return DatabaseHelper.Instance.GetDataTable(query);
         }
     }
 } 
