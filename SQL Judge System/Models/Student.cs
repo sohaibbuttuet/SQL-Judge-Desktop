@@ -10,17 +10,15 @@ namespace SQL_Judge_System.Models
     {
         public int StudentID { get; set; }
         public int UserID { get; set; }   // FK → Users
-        public string FullName { get; set; }
-        public string RegistrationNumber { get; set; }   // e.g. "21-CS-01", must be unique
-        public int SkillLevelID { get; set; }   // nullable FK → SkillLevels
+        public string RegistrationNumber { get; set; }   // must be unique
+        public int SkillLevelID { get; set; }   // FK → SkillLevels
         public int TotalScore { get; set; } = 0;
         public int ProblemsSolved { get; set; } = 0;
 
         public Student() { }
-        public Student(int userID, string fullName, string registrationNumber, int skillLevelID)
+        public Student(int userID, string registrationNumber, int skillLevelID)
         {
             UserID = userID;
-            FullName = fullName;
             RegistrationNumber = registrationNumber;
             SkillLevelID = skillLevelID;
         }
@@ -28,7 +26,6 @@ namespace SQL_Judge_System.Models
         {
             StudentID = studentID;
             UserID = userID;
-            FullName = fullName;
             RegistrationNumber = registrationNumber;
             SkillLevelID = skillLevelID;
             TotalScore = totalScore;

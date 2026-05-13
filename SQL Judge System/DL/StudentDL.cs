@@ -13,20 +13,19 @@ namespace SQL_Judge_System.DL
     {
         public static int AddStudent(Student student)
         {
-            string query = $"INSERT INTO Students (UserID, FullName, RegistrationNumber, SkillLevelID, TotalScore, ProblemsSolved) " +
-                           $"VALUES ({student.UserID}, '{student.FullName}', '{student.RegistrationNumber}', {student.SkillLevelID}, {student.TotalScore}, {student.ProblemsSolved}); " +
+            string query = $"INSERT INTO Students (UserID, RegistrationNumber, SkillLevelID, TotalScore, ProblemsSolved) " +
+                           $"VALUES ({student.UserID}, '{student.RegistrationNumber}', {student.SkillLevelID}, {student.TotalScore}, {student.ProblemsSolved}); " +
                            $"SELECT LAST_INSERT_ID();";
 
             return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
         }
         public static void UpdateStudent(Student student)
         {
-            string query = $"UPDATE Students SET FullName = '{student.FullName}', RegistrationNumber = '{student.RegistrationNumber}', " +
-                           $"SkillLevelID = {student.SkillLevelID}, TotalScore = {student.TotalScore}, ProblemsSolved = {student.ProblemsSolved} " +
+            string query = $"UPDATE Students SET RegistrationNumber = '{student.RegistrationNumber}', SkillLevelID = {student.SkillLevelID}, TotalScore = {student.TotalScore}, ProblemsSolved = {student.ProblemsSolved} " +
                            $"WHERE StudentID = {student.StudentID};";
             DatabaseHelper.Instance.Update(query);
         }
-        public static void UpdateStudentScore(int studentId, int score, int solved)
+        public static void UpdateStudentRecord(int studentId, int score, int solved)
         {
             string query = $"UPDATE Students SET TotalScore = {score}, ProblemsSolved = {solved} WHERE StudentID = {studentId}";
             DatabaseHelper.Instance.Update(query);
@@ -75,6 +74,11 @@ namespace SQL_Judge_System.DL
 
             return list;
         }
+        public static DataTable GetStudent(int userId)
+        {
+            string query = $"SELECT * FROM vw_studentsforadmin WHERE UserID = {userId};";
+            return DatabaseHelper.Instance.GetDataTable(query);          
+        }
 
         // Helping Function
         private static Student MapDataRowToStudent(DataRow row)
@@ -83,7 +87,6 @@ namespace SQL_Judge_System.DL
             {
                 StudentID = Convert.ToInt32(row["StudentID"]),
                 UserID = Convert.ToInt32(row["UserID"]),
-                FullName = row["FullName"].ToString(),
                 RegistrationNumber = row["RegistrationNumber"].ToString(),
                 SkillLevelID = Convert.ToInt32(row["SkillLevelID"]),
                 TotalScore = Convert.ToInt32(row["TotalScore"]),
@@ -98,25 +101,25 @@ namespace SQL_Judge_System.DL
             return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query)) > 0;
         }
 
-        // --- For AdminDashboardBL ---
+        // --- For AdminDashboard ---
         public static int TotalStudents()
         {
-            string query = "SELECT COUNT(*) FROM User_Student;";
+            string query = "SELECT COUNT(*) FROM vw_userstudents;";
             return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
         }
         public static int ActiveStudents()
         {
-            string query = "SELECT COUNT(*) FROM User_Student WHERE IsActive = 1;";
+            string query = "SELECT COUNT(*) FROM vw_userstudents WHERE IsActive = 1;";
             return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
         }
         public static int InactiveStudents()
         {
-            string query = "SELECT COUNT(*) FROM User_Student WHERE IsActive = 0;";
+            string query = "SELECT COUNT(*) FROM vw_userstudents WHERE IsActive = 0;";
             return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
         }
         public static DataTable GetStudentsForAdmin()
         {
-            string query = "SELECT * FROM StudentsForAdmin;";
+            string query = "SELECT * FROM vw_studentsforadmin;";
             return DatabaseHelper.Instance.GetDataTable(query);
         }
     }

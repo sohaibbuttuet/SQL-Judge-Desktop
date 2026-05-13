@@ -76,7 +76,7 @@ namespace SQL_Judge_System.DL
         // --- For AdminDashboardBL ---
         public static DataTable ProblemsList()
         {
-            string query = "SELECT * FROM Problem_View;";
+            string query = "SELECT * FROM vw_problems;";
             return DatabaseHelper.Instance.GetDataTable(query);
         }
         public static int TotalProblems()

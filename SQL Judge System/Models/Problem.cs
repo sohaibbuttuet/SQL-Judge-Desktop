@@ -12,6 +12,7 @@ namespace SQL_Judge_System.Models
         public string Title { get; set; }
         public string Description { get; set; }
         public int DifficultyID { get; set; }  // nullable FK → ProblemDifficulties
+        public int CreatedBy { get; set; }  // FK → Users
         public int Points { get; set; } 
         public DateTime CreatedAt { get; set; } 
         public bool IsActive { get; set; } 
@@ -22,12 +23,13 @@ namespace SQL_Judge_System.Models
             Points = 10;
             IsActive = true;
         }
-        public Problem(int problemID, string title, string description, int difficultyID, int points)
+        public Problem(int problemID, string title, string description, int difficultyID, int createdBy, int points)
         {
             ProblemID = problemID;
             Title = title;
             Description = description;
             DifficultyID = difficultyID;
+            CreatedBy = createdBy;
             Points = points;
             CreatedAt = DateTime.Now;   
             IsActive = true;

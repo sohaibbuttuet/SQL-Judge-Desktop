@@ -12,6 +12,8 @@
 
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlSidebar = new System.Windows.Forms.Panel();
             this.btnSettings = new System.Windows.Forms.Button();
             this.btn_Logout = new System.Windows.Forms.Button();
@@ -21,27 +23,29 @@
             this.pnlHeader = new System.Windows.Forms.Panel();
             this.lblWelcome = new System.Windows.Forms.Label();
             this.pnlStatsContainer = new System.Windows.Forms.Panel();
-            this.pnlSkillLevel = new System.Windows.Forms.Panel();
-            this.lblSkillValue = new System.Windows.Forms.Label();
-            this.lblSkillLevel = new System.Windows.Forms.Label();
-            this.pnlSolvedCard = new System.Windows.Forms.Panel();
-            this.lblSolvedValue = new System.Windows.Forms.Label();
-            this.lblSolvedTitle = new System.Windows.Forms.Label();
-            this.pnlScoreCard = new System.Windows.Forms.Panel();
-            this.lblScoreValue = new System.Windows.Forms.Label();
-            this.lblScoreTitle = new System.Windows.Forms.Label();
+            this.tlpnlStudentDashboard = new System.Windows.Forms.TableLayoutPanel();
             this.pnlRankCard = new System.Windows.Forms.Panel();
             this.lblRankValue = new System.Windows.Forms.Label();
             this.lblRankTitle = new System.Windows.Forms.Label();
+            this.pnlScoreCard = new System.Windows.Forms.Panel();
+            this.lblScoreValue = new System.Windows.Forms.Label();
+            this.lblScoreTitle = new System.Windows.Forms.Label();
+            this.pnlSolvedCard = new System.Windows.Forms.Panel();
+            this.lblSolvedValue = new System.Windows.Forms.Label();
+            this.lblSolvedTitle = new System.Windows.Forms.Label();
+            this.pnlSkillLevel = new System.Windows.Forms.Panel();
+            this.lblSkillValue = new System.Windows.Forms.Label();
+            this.lblSkillLevel = new System.Windows.Forms.Label();
             this.dgvLeaderboard = new System.Windows.Forms.DataGridView();
             this.lblGridTitle = new System.Windows.Forms.Label();
             this.pnlSidebar.SuspendLayout();
             this.pnlHeader.SuspendLayout();
             this.pnlStatsContainer.SuspendLayout();
-            this.pnlSkillLevel.SuspendLayout();
-            this.pnlSolvedCard.SuspendLayout();
-            this.pnlScoreCard.SuspendLayout();
+            this.tlpnlStudentDashboard.SuspendLayout();
             this.pnlRankCard.SuspendLayout();
+            this.pnlScoreCard.SuspendLayout();
+            this.pnlSolvedCard.SuspendLayout();
+            this.pnlSkillLevel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLeaderboard)).BeginInit();
             this.SuspendLayout();
             // 
@@ -61,6 +65,7 @@
             // 
             // btnSettings
             // 
+            this.btnSettings.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSettings.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.btnSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSettings.ForeColor = System.Drawing.Color.White;
@@ -72,6 +77,7 @@
             // 
             // btn_Logout
             // 
+            this.btn_Logout.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_Logout.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.btn_Logout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_Logout.ForeColor = System.Drawing.Color.White;
@@ -84,6 +90,7 @@
             // 
             // btn_leaderboard
             // 
+            this.btn_leaderboard.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_leaderboard.Dock = System.Windows.Forms.DockStyle.Top;
             this.btn_leaderboard.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_leaderboard.ForeColor = System.Drawing.Color.White;
@@ -97,6 +104,7 @@
             // 
             // btn_contest
             // 
+            this.btn_contest.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_contest.Dock = System.Windows.Forms.DockStyle.Top;
             this.btn_contest.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_contest.ForeColor = System.Drawing.Color.White;
@@ -110,6 +118,7 @@
             // 
             // btn_problems
             // 
+            this.btn_problems.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_problems.Dock = System.Windows.Forms.DockStyle.Top;
             this.btn_problems.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_problems.ForeColor = System.Drawing.Color.White;
@@ -143,114 +152,33 @@
             // pnlStatsContainer
             // 
             this.pnlStatsContainer.BackColor = System.Drawing.Color.White;
-            this.pnlStatsContainer.Controls.Add(this.pnlSkillLevel);
-            this.pnlStatsContainer.Controls.Add(this.pnlSolvedCard);
-            this.pnlStatsContainer.Controls.Add(this.pnlScoreCard);
-            this.pnlStatsContainer.Controls.Add(this.pnlRankCard);
+            this.pnlStatsContainer.Controls.Add(this.tlpnlStudentDashboard);
             this.pnlStatsContainer.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlStatsContainer.Location = new System.Drawing.Point(200, 80);
             this.pnlStatsContainer.Name = "pnlStatsContainer";
             this.pnlStatsContainer.Size = new System.Drawing.Size(804, 180);
             this.pnlStatsContainer.TabIndex = 2;
             // 
-            // pnlSkillLevel
+            // tlpnlStudentDashboard
             // 
-            this.pnlSkillLevel.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.pnlSkillLevel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlSkillLevel.Controls.Add(this.lblSkillValue);
-            this.pnlSkillLevel.Controls.Add(this.lblSkillLevel);
-            this.pnlSkillLevel.Location = new System.Drawing.Point(38, 26);
-            this.pnlSkillLevel.Name = "pnlSkillLevel";
-            this.pnlSkillLevel.Size = new System.Drawing.Size(150, 130);
-            this.pnlSkillLevel.TabIndex = 4;
-            // 
-            // lblSkillValue
-            // 
-            this.lblSkillValue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblSkillValue.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSkillValue.Location = new System.Drawing.Point(0, 30);
-            this.lblSkillValue.Name = "lblSkillValue";
-            this.lblSkillValue.Size = new System.Drawing.Size(148, 98);
-            this.lblSkillValue.TabIndex = 0;
-            this.lblSkillValue.Text = "Beginner";
-            this.lblSkillValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblSkillLevel
-            // 
-            this.lblSkillLevel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblSkillLevel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.lblSkillLevel.Location = new System.Drawing.Point(0, 0);
-            this.lblSkillLevel.Name = "lblSkillLevel";
-            this.lblSkillLevel.Size = new System.Drawing.Size(148, 30);
-            this.lblSkillLevel.TabIndex = 1;
-            this.lblSkillLevel.Text = "Skill Level";
-            this.lblSkillLevel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // pnlSolvedCard
-            // 
-            this.pnlSolvedCard.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.pnlSolvedCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlSolvedCard.Controls.Add(this.lblSolvedValue);
-            this.pnlSolvedCard.Controls.Add(this.lblSolvedTitle);
-            this.pnlSolvedCard.Location = new System.Drawing.Point(424, 25);
-            this.pnlSolvedCard.Name = "pnlSolvedCard";
-            this.pnlSolvedCard.Size = new System.Drawing.Size(150, 130);
-            this.pnlSolvedCard.TabIndex = 0;
-            // 
-            // lblSolvedValue
-            // 
-            this.lblSolvedValue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblSolvedValue.Font = new System.Drawing.Font("Segoe UI", 28F, System.Drawing.FontStyle.Bold);
-            this.lblSolvedValue.Location = new System.Drawing.Point(0, 30);
-            this.lblSolvedValue.Name = "lblSolvedValue";
-            this.lblSolvedValue.Size = new System.Drawing.Size(148, 98);
-            this.lblSolvedValue.TabIndex = 0;
-            this.lblSolvedValue.Text = "215";
-            this.lblSolvedValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblSolvedTitle
-            // 
-            this.lblSolvedTitle.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblSolvedTitle.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.lblSolvedTitle.Location = new System.Drawing.Point(0, 0);
-            this.lblSolvedTitle.Name = "lblSolvedTitle";
-            this.lblSolvedTitle.Size = new System.Drawing.Size(148, 30);
-            this.lblSolvedTitle.TabIndex = 1;
-            this.lblSolvedTitle.Text = "Problems Solved";
-            this.lblSolvedTitle.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // pnlScoreCard
-            // 
-            this.pnlScoreCard.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.pnlScoreCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlScoreCard.Controls.Add(this.lblScoreValue);
-            this.pnlScoreCard.Controls.Add(this.lblScoreTitle);
-            this.pnlScoreCard.Location = new System.Drawing.Point(617, 27);
-            this.pnlScoreCard.Name = "pnlScoreCard";
-            this.pnlScoreCard.Size = new System.Drawing.Size(150, 130);
-            this.pnlScoreCard.TabIndex = 1;
-            // 
-            // lblScoreValue
-            // 
-            this.lblScoreValue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblScoreValue.Font = new System.Drawing.Font("Segoe UI", 28F, System.Drawing.FontStyle.Bold);
-            this.lblScoreValue.Location = new System.Drawing.Point(0, 30);
-            this.lblScoreValue.Name = "lblScoreValue";
-            this.lblScoreValue.Size = new System.Drawing.Size(148, 98);
-            this.lblScoreValue.TabIndex = 0;
-            this.lblScoreValue.Text = "1,250";
-            this.lblScoreValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblScoreTitle
-            // 
-            this.lblScoreTitle.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblScoreTitle.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.lblScoreTitle.Location = new System.Drawing.Point(0, 0);
-            this.lblScoreTitle.Name = "lblScoreTitle";
-            this.lblScoreTitle.Size = new System.Drawing.Size(148, 30);
-            this.lblScoreTitle.TabIndex = 1;
-            this.lblScoreTitle.Text = "Total Score";
-            this.lblScoreTitle.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.tlpnlStudentDashboard.ColumnCount = 4;
+            this.tlpnlStudentDashboard.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlpnlStudentDashboard.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlpnlStudentDashboard.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlpnlStudentDashboard.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlpnlStudentDashboard.Controls.Add(this.pnlRankCard, 1, 0);
+            this.tlpnlStudentDashboard.Controls.Add(this.pnlScoreCard, 3, 0);
+            this.tlpnlStudentDashboard.Controls.Add(this.pnlSolvedCard, 2, 0);
+            this.tlpnlStudentDashboard.Controls.Add(this.pnlSkillLevel, 0, 0);
+            this.tlpnlStudentDashboard.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlpnlStudentDashboard.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.tlpnlStudentDashboard.Location = new System.Drawing.Point(0, 0);
+            this.tlpnlStudentDashboard.Margin = new System.Windows.Forms.Padding(20);
+            this.tlpnlStudentDashboard.Name = "tlpnlStudentDashboard";
+            this.tlpnlStudentDashboard.RowCount = 1;
+            this.tlpnlStudentDashboard.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpnlStudentDashboard.Size = new System.Drawing.Size(804, 180);
+            this.tlpnlStudentDashboard.TabIndex = 5;
             // 
             // pnlRankCard
             // 
@@ -258,10 +186,11 @@
             this.pnlRankCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlRankCard.Controls.Add(this.lblRankValue);
             this.pnlRankCard.Controls.Add(this.lblRankTitle);
-            this.pnlRankCard.Location = new System.Drawing.Point(231, 23);
+            this.pnlRankCard.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlRankCard.Location = new System.Drawing.Point(204, 3);
             this.pnlRankCard.Name = "pnlRankCard";
-            this.pnlRankCard.Size = new System.Drawing.Size(150, 130);
-            this.pnlRankCard.TabIndex = 2;
+            this.pnlRankCard.Size = new System.Drawing.Size(195, 174);
+            this.pnlRankCard.TabIndex = 8;
             // 
             // lblRankValue
             // 
@@ -269,7 +198,7 @@
             this.lblRankValue.Font = new System.Drawing.Font("Segoe UI", 28F, System.Drawing.FontStyle.Bold);
             this.lblRankValue.Location = new System.Drawing.Point(0, 30);
             this.lblRankValue.Name = "lblRankValue";
-            this.lblRankValue.Size = new System.Drawing.Size(148, 98);
+            this.lblRankValue.Size = new System.Drawing.Size(193, 142);
             this.lblRankValue.TabIndex = 0;
             this.lblRankValue.Text = "#3";
             this.lblRankValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -280,34 +209,155 @@
             this.lblRankTitle.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             this.lblRankTitle.Location = new System.Drawing.Point(0, 0);
             this.lblRankTitle.Name = "lblRankTitle";
-            this.lblRankTitle.Size = new System.Drawing.Size(148, 30);
+            this.lblRankTitle.Size = new System.Drawing.Size(193, 30);
             this.lblRankTitle.TabIndex = 1;
             this.lblRankTitle.Text = "Rank";
             this.lblRankTitle.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
+            // pnlScoreCard
+            // 
+            this.pnlScoreCard.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.pnlScoreCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlScoreCard.Controls.Add(this.lblScoreValue);
+            this.pnlScoreCard.Controls.Add(this.lblScoreTitle);
+            this.pnlScoreCard.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlScoreCard.Location = new System.Drawing.Point(606, 3);
+            this.pnlScoreCard.Name = "pnlScoreCard";
+            this.pnlScoreCard.Size = new System.Drawing.Size(195, 174);
+            this.pnlScoreCard.TabIndex = 7;
+            // 
+            // lblScoreValue
+            // 
+            this.lblScoreValue.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblScoreValue.Font = new System.Drawing.Font("Segoe UI", 28F, System.Drawing.FontStyle.Bold);
+            this.lblScoreValue.Location = new System.Drawing.Point(0, 30);
+            this.lblScoreValue.Name = "lblScoreValue";
+            this.lblScoreValue.Size = new System.Drawing.Size(193, 142);
+            this.lblScoreValue.TabIndex = 0;
+            this.lblScoreValue.Text = "1,250";
+            this.lblScoreValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblScoreTitle
+            // 
+            this.lblScoreTitle.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblScoreTitle.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.lblScoreTitle.Location = new System.Drawing.Point(0, 0);
+            this.lblScoreTitle.Name = "lblScoreTitle";
+            this.lblScoreTitle.Size = new System.Drawing.Size(193, 30);
+            this.lblScoreTitle.TabIndex = 1;
+            this.lblScoreTitle.Text = "Total Score";
+            this.lblScoreTitle.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // pnlSolvedCard
+            // 
+            this.pnlSolvedCard.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.pnlSolvedCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlSolvedCard.Controls.Add(this.lblSolvedValue);
+            this.pnlSolvedCard.Controls.Add(this.lblSolvedTitle);
+            this.pnlSolvedCard.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlSolvedCard.Location = new System.Drawing.Point(405, 3);
+            this.pnlSolvedCard.Name = "pnlSolvedCard";
+            this.pnlSolvedCard.Size = new System.Drawing.Size(195, 174);
+            this.pnlSolvedCard.TabIndex = 6;
+            // 
+            // lblSolvedValue
+            // 
+            this.lblSolvedValue.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblSolvedValue.Font = new System.Drawing.Font("Segoe UI", 28F, System.Drawing.FontStyle.Bold);
+            this.lblSolvedValue.Location = new System.Drawing.Point(0, 30);
+            this.lblSolvedValue.Name = "lblSolvedValue";
+            this.lblSolvedValue.Size = new System.Drawing.Size(193, 142);
+            this.lblSolvedValue.TabIndex = 0;
+            this.lblSolvedValue.Text = "215";
+            this.lblSolvedValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblSolvedTitle
+            // 
+            this.lblSolvedTitle.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblSolvedTitle.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.lblSolvedTitle.Location = new System.Drawing.Point(0, 0);
+            this.lblSolvedTitle.Name = "lblSolvedTitle";
+            this.lblSolvedTitle.Size = new System.Drawing.Size(193, 30);
+            this.lblSolvedTitle.TabIndex = 1;
+            this.lblSolvedTitle.Text = "Problems Solved";
+            this.lblSolvedTitle.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // pnlSkillLevel
+            // 
+            this.pnlSkillLevel.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.pnlSkillLevel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlSkillLevel.Controls.Add(this.lblSkillValue);
+            this.pnlSkillLevel.Controls.Add(this.lblSkillLevel);
+            this.pnlSkillLevel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlSkillLevel.Location = new System.Drawing.Point(3, 3);
+            this.pnlSkillLevel.Name = "pnlSkillLevel";
+            this.pnlSkillLevel.Size = new System.Drawing.Size(195, 174);
+            this.pnlSkillLevel.TabIndex = 5;
+            // 
+            // lblSkillValue
+            // 
+            this.lblSkillValue.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblSkillValue.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSkillValue.Location = new System.Drawing.Point(0, 30);
+            this.lblSkillValue.Name = "lblSkillValue";
+            this.lblSkillValue.Size = new System.Drawing.Size(193, 142);
+            this.lblSkillValue.TabIndex = 0;
+            this.lblSkillValue.Text = "Beginner";
+            this.lblSkillValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblSkillLevel
+            // 
+            this.lblSkillLevel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblSkillLevel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.lblSkillLevel.Location = new System.Drawing.Point(0, 0);
+            this.lblSkillLevel.Name = "lblSkillLevel";
+            this.lblSkillLevel.Size = new System.Drawing.Size(193, 30);
+            this.lblSkillLevel.TabIndex = 1;
+            this.lblSkillLevel.Text = "Skill Level";
+            this.lblSkillLevel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
             // dgvLeaderboard
             // 
+            this.dgvLeaderboard.AllowUserToAddRows = false;
+            this.dgvLeaderboard.AllowUserToDeleteRows = false;
             this.dgvLeaderboard.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvLeaderboard.BackgroundColor = System.Drawing.Color.White;
-            this.dgvLeaderboard.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvLeaderboard.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvLeaderboard.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvLeaderboard.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvLeaderboard.Location = new System.Drawing.Point(220, 320);
             this.dgvLeaderboard.Name = "dgvLeaderboard";
+            this.dgvLeaderboard.RowHeadersVisible = false;
             this.dgvLeaderboard.Size = new System.Drawing.Size(754, 211);
             this.dgvLeaderboard.TabIndex = 0;
             // 
             // lblGridTitle
             // 
-            this.lblGridTitle.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
+            this.lblGridTitle.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblGridTitle.ForeColor = System.Drawing.SystemColors.ControlText;
             this.lblGridTitle.Location = new System.Drawing.Point(220, 280);
             this.lblGridTitle.Name = "lblGridTitle";
-            this.lblGridTitle.Size = new System.Drawing.Size(300, 30);
+            this.lblGridTitle.Size = new System.Drawing.Size(198, 30);
             this.lblGridTitle.TabIndex = 1;
             this.lblGridTitle.Text = "Global Leaderboard";
             // 
-            // StudentDashboard
+            // StudentDashboardUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -319,17 +369,18 @@
             this.Controls.Add(this.pnlHeader);
             this.Controls.Add(this.pnlSidebar);
             this.MaximizeBox = false;
-            this.Name = "StudentDashboard";
+            this.Name = "StudentDashboardUI";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Student Portal";
             this.Load += new System.EventHandler(this.StudentDashboard_Load);
             this.pnlSidebar.ResumeLayout(false);
             this.pnlHeader.ResumeLayout(false);
             this.pnlStatsContainer.ResumeLayout(false);
-            this.pnlSkillLevel.ResumeLayout(false);
-            this.pnlSolvedCard.ResumeLayout(false);
-            this.pnlScoreCard.ResumeLayout(false);
+            this.tlpnlStudentDashboard.ResumeLayout(false);
             this.pnlRankCard.ResumeLayout(false);
+            this.pnlScoreCard.ResumeLayout(false);
+            this.pnlSolvedCard.ResumeLayout(false);
+            this.pnlSkillLevel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvLeaderboard)).EndInit();
             this.ResumeLayout(false);
 
@@ -344,18 +395,19 @@
         private System.Windows.Forms.Panel pnlHeader;
         private System.Windows.Forms.Label lblWelcome;
         private System.Windows.Forms.Panel pnlStatsContainer;
-        private System.Windows.Forms.Panel pnlRankCard;
-        private System.Windows.Forms.Label lblRankTitle;
-        private System.Windows.Forms.Label lblRankValue;
-        private System.Windows.Forms.Panel pnlScoreCard;
-        private System.Windows.Forms.Label lblScoreTitle;
-        private System.Windows.Forms.Label lblScoreValue;
-        private System.Windows.Forms.Panel pnlSolvedCard;
-        private System.Windows.Forms.Label lblSolvedTitle;
-        private System.Windows.Forms.Label lblSolvedValue;
         private System.Windows.Forms.DataGridView dgvLeaderboard;
         private System.Windows.Forms.Label lblGridTitle;
         private System.Windows.Forms.Button btnSettings;
+        private System.Windows.Forms.TableLayoutPanel tlpnlStudentDashboard;
+        private System.Windows.Forms.Panel pnlRankCard;
+        private System.Windows.Forms.Label lblRankValue;
+        private System.Windows.Forms.Label lblRankTitle;
+        private System.Windows.Forms.Panel pnlScoreCard;
+        private System.Windows.Forms.Label lblScoreValue;
+        private System.Windows.Forms.Label lblScoreTitle;
+        private System.Windows.Forms.Panel pnlSolvedCard;
+        private System.Windows.Forms.Label lblSolvedValue;
+        private System.Windows.Forms.Label lblSolvedTitle;
         private System.Windows.Forms.Panel pnlSkillLevel;
         private System.Windows.Forms.Label lblSkillValue;
         private System.Windows.Forms.Label lblSkillLevel;

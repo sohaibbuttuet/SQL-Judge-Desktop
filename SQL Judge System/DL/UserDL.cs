@@ -12,6 +12,15 @@ namespace SQL_Judge_System.DL
     internal class UserDL
     {
         // --- For User BL ---
+        public static int SignUp(User user)
+        {
+            string query = $"INSERT INTO Users (FullName, Email, Password, IsActive, CreatedAt) " +
+                           $"VALUES ('{user.FullName}', '{user.Email}', '{user.Password}', {user.IsActive}, '{user.CreatedAt:yyyy-MM-dd HH:mm:ss}'); " +
+                           $"SELECT LAST_INSERT_ID();";
+
+            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
+        }
+
         public static void ActivateUser(int userId)
         {
             string query = $"UPDATE Users SET IsActive = 1 WHERE UserID = {userId};";
@@ -22,25 +31,18 @@ namespace SQL_Judge_System.DL
             string query = $"UPDATE Users SET IsActive = 0 WHERE UserID = {userId};";
             DatabaseHelper.Instance.Update(query);
         }
-        public static int SignUp(User user)
-        {
-            string query = $"INSERT INTO Users (Email, Password) " +
-                           $"VALUES ('{user.Email}', '{user.Password}'); " +
-                           $"SELECT LAST_INSERT_ID();";
 
-            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
+        public static bool ValidateUserCredentials(User user)
+        {
+            string query = $"SELECT COUNT(*) FROM Users WHERE Email = '{user.Email}' AND Password = '{user.Password}' AND IsActive = 1;";
+            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query)) > 0;
         }
         public static int GetUserIdByCredentials(string email, string password)
         {
             string query = $"SELECT UserID FROM Users WHERE Email = '{email}' AND Password = '{password}';";
             return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
         }
-        public static bool ValidateUserCredentials(User user)
-        {
-            string query = $"SELECT COUNT(*) FROM Users WHERE Email = '{user.Email}' AND Password = '{user.Password}' AND IsActive = 1;";
-            int count = Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
-            return count > 0;
-        }
+        
         public static bool IsEmailRegistered(string email)
         {
             string query = $"SELECT COUNT(*) FROM Users WHERE Email = '{email}';";
@@ -54,13 +56,39 @@ namespace SQL_Judge_System.DL
         }
         public static bool IsUserAdmin(int userId)
         {
-            string query = $"SELECT COUNT(*) FROM userroles ur JOIN roles r ON ur.RoleID = r.RoleID WHERE ur.UserID = {userId} AND r.RoleName = 'admin';";
+            string query = $"SELECT COUNT(*) FROM vw_useradmins WHERE UserID = {userId};";
+            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query)) > 0;
+        }
+        public static bool IsUserSuperAdmin(int userId)
+        {
+            string query = $"SELECT COUNT(*) FROM vw_SuperAdmins WHERE UserID = {userId};";
             return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query)) > 0;
         }
         public static void UpdateUser(User user, string previousEmail)
         {
             string query = $"UPDATE Users SET Email = '{user.Email}', Password = '{user.Password}' WHERE Email = '{previousEmail}';";
             DatabaseHelper.Instance.Update(query);
+        }
+
+        public static User GetUserByID(int userId)
+        {
+            string query = $"SELECT * FROM Users WHERE UserID = {userId};";
+            DataTable dt = DatabaseHelper.Instance.GetDataTable(query);
+            if (dt.Rows.Count == 0)
+                return null;
+            return MapDataRowToUser(dt.Rows[0]);
+        }
+
+        // --- For Admin DashboardBL ---
+        public static DataTable GetAdminList()
+        {
+            string query = "SELECT * FROM vw_UserAdmins;";
+            return DatabaseHelper.Instance.GetDataTable(query);
+        }
+        public static int TotalAdmins()
+        {
+            string query = "SELECT COUNT(*) FROM vw_UserAdmins;";
+            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
         }
 
         // Helper Function
@@ -74,25 +102,7 @@ namespace SQL_Judge_System.DL
                 IsActive = Convert.ToBoolean(row["IsActive"]),
                 CreatedAt = Convert.ToDateTime(row["CreatedAt"])
             };
-        }        
-
-        // --- For Admin DashboardBL ---
-        public static List<User> GetAdminList()
-        {
-            string query = "SELECT * FROM User_Admin;";
-            DataTable dt = DatabaseHelper.Instance.GetDataTable(query);
-
-            List<User> admins = new List<User>();
-            foreach (DataRow row in dt.Rows)
-            {
-                admins.Add(MapDataRowToUser(row));
-            }
-            return admins;
         }
-        public static int TotalAdmins()
-        {
-            string query = "SELECT COUNT(*) FROM User_Admin;";
-            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
-        }        
+
     }
 }

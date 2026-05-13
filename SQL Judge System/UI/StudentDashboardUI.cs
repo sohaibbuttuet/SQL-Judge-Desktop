@@ -9,12 +9,12 @@ namespace SQL_Judge_System.UI
 {
     public partial class StudentDashboardUI : Form
     {
-        private int UserID;
-        Student student;
+        User user = null;
+        Student student = null;
         public StudentDashboardUI(int userId)
         {
-            UserID = userId;
-            student = StudentBL.GetStudentByUserID(UserID);
+            user = UserBL.GetUserById(userId);
+            student = StudentBL.GetStudentByUserID(userId);
             InitializeComponent();
         }
 
@@ -49,7 +49,7 @@ namespace SQL_Judge_System.UI
         {
             if (student != null)
             {
-                lblWelcome.Text = $"Welcome, {student.FullName}!";
+                lblWelcome.Text = $"Welcome, {user.FullName}!";
                 lblRankValue.Text = $"#{StudentLeaderboardBL.GetRank(student.StudentID)}".ToString();
                 lblScoreValue.Text = StudentLeaderboardBL.GetTotalScore(student.StudentID).ToString();
                 lblSkillValue.Text = StudentLeaderboardBL.GetSkillLevel(student.StudentID).ToString();

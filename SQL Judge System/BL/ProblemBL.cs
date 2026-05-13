@@ -1,10 +1,11 @@
-﻿using System;
+﻿using SQL_Judge_System.DL;
+using SQL_Judge_System.Models;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SQL_Judge_System.Models;
-using SQL_Judge_System.DL;
 
 namespace SQL_Judge_System.BL
 {
@@ -30,5 +31,46 @@ namespace SQL_Judge_System.BL
         {
             ProblemDL.UpdateProblemStatus(problemID, isActive);
         }
+
+        public static void ActivateProblem(int problemId)
+        {
+            if (problemId < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(problemId), "Problem ID must be a non-negative integer.");
+            }
+            if (!ProblemDL.IsProblemExists(problemId))
+            {
+                throw new InvalidOperationException("Problem does not exist.");
+            }
+            ProblemDL.ActivateProblem(problemId);
+        }
+        public static void DeactivateProblem(int problemId)
+        {
+            if (problemId < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(problemId), "Problem ID must be a non-negative integer.");
+            }
+            if (!ProblemDL.IsProblemExists(problemId))
+            {
+                throw new InvalidOperationException("Problem does not exist.");
+            }
+            ProblemDL.DeactivateProblem(problemId);
+        }
+        public static int TotalProblems()
+        {
+            return ProblemDL.TotalProblems();
+        }
+        public static int ActiveProblems()
+        {
+            return ProblemDL.ActiveProblems();
+        }
+        public static int InactiveProblems()
+        {
+            return ProblemDL.InactiveProblems();
+        }
+        public static DataTable ProblemsList()
+        {
+            return ProblemDL.ProblemsList();
+        }    
     }
 }

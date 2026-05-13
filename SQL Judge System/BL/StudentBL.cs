@@ -2,6 +2,7 @@
 using SQL_Judge_System.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +11,24 @@ namespace SQL_Judge_System.BL
 {
     internal class StudentBL
     {
+        // --- STUDENT PANEL IN ADMIN DASHBOARD ---
+        public static DataTable GetStudentsForAdmin()
+        {
+            return StudentDL.GetStudentsForAdmin();
+        }
+        public static int TotalStudents()
+        {
+            return StudentDL.TotalStudents();
+        }
+        public static int ActiveStudents()
+        {
+            return StudentDL.ActiveStudents();
+        }
+        public static int InactiveStudents()
+        {
+            return StudentDL.InactiveStudents();
+        }
+
         public static void RegisterStudent(Student s)
         {
             if(s== null)
@@ -30,9 +49,10 @@ namespace SQL_Judge_System.BL
             }
             return StudentDL.GetStudentByUserID(userId);
         }
-        public static List<Student> GetStudents()
+
+        public static DataTable GetStudent(int id)
         {
-            return StudentDL.GetAllStudents();
+            return StudentDL.GetStudent(id);
         }
     }
 }

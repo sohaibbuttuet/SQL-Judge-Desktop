@@ -13,18 +13,15 @@ namespace SQL_Judge_System.Models
         public string Description { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public int StatusID { get; set; }   // FK → ContestStatus
         public int CreatedBy { get; set; }   // FK → Users
 
         public Contest() { }
-        public Contest(int contestID, string title, string description, DateTime startDate, DateTime endDate, int statusID, int createdBy)
+        public Contest(string title, string description, DateTime startDate, DateTime endDate, int createdBy)
         {
-            ContestID = contestID;
             Title = title;
             Description = description;
             StartDate = startDate;
             EndDate = endDate;
-            StatusID = statusID;
             CreatedBy = createdBy;
         }
     }

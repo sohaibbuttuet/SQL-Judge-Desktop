@@ -13,24 +13,25 @@ namespace SQL_Judge_System.Models
         public int ProblemID { get; set; }   // FK → Problems
         public string QueryText { get; set; }   // The SQL the student wrote
         public int StatusID { get; set; }   // FK → SubmissionStatuses
-        public bool IsAccepted { get; set; } = false;   // Whether the submission is accepted or not
-        public int TotalScore { get; set; } = 0;
-        public DateTime SubmittedAt { get; set; }
+        public int AttemptNumber { get; set; } // The attempt number for this problem by the student
+        public int TotalScore { get; set; } 
+        public DateTime SubmittedAt { get; set; } 
 
         public Submission()
         {
             SubmittedAt = DateTime.Now;
+            AttemptNumber = 1;
+            TotalScore = 0;
         }
-        public Submission(int submissionID, int studentID, int problemID, string queryText, bool isAccepted, int statusID, int totalScore, DateTime submittedAt)
+        public Submission(int studentID, int problemID, string queryText, int statusID, int attemptNumber, int totalScore)
         {
-            SubmissionID = submissionID;
             StudentID = studentID;
             ProblemID = problemID;
             QueryText = queryText;
-            IsAccepted = isAccepted;
             StatusID = statusID;
+            AttemptNumber = attemptNumber;
             TotalScore = totalScore;
-            SubmittedAt = submittedAt;
+            SubmittedAt = DateTime.Now;
         }
     }
 }

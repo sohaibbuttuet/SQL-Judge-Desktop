@@ -9,17 +9,21 @@ namespace SQL_Judge_System.UI
         public AdminDashboardUI()
         {
             InitializeComponent();
-            ShowPanel(pnlAdmin, "Admin Dashboard");
+            ShowPanel(pnlSuperAdmin, "Admin Dashboard");
         }
+
+        
 
         private void AdminDashboard_Load(object sender, EventArgs e)
         {
             LoadAdminData();
             LoadStudentData();
             LoadProblemData();
+            LoadContestData();
+            ToolTip();        
         }
 
-        // --- ADMIN PANEL ---
+        // --- SUPER ADMIN PANEL ---
         private void LoadAdminData()
         {
             LoadAdminDashboard();
@@ -27,27 +31,39 @@ namespace SQL_Judge_System.UI
         }
         private void LoadAdmin()
         {
-            dgvAdmins.DataSource = AdminDashboardBL.GetAdminList();          
+            dgvAdmins.DataSource = UserBL.GetAdminList();          
 
             dgvAdmins.Columns["UserID"].FillWeight = 20;
+            dgvAdmins.Columns["FullName"].FillWeight = 80;
             dgvAdmins.Columns["Email"].FillWeight = 40;
             dgvAdmins.Columns["IsActive"].FillWeight = 20;
             dgvAdmins.Columns["CreatedAt"].FillWeight = 50;
-            dgvAdmins.Columns["Password"].Visible = false; // Hide password column for security
 
             dgvAdmins.Columns["UserID"].HeaderText = "ID";
+            dgvAdmins.Columns["FullName"].HeaderText = "Admin Name";
             dgvAdmins.Columns["Email"].HeaderText = "Email";
             dgvAdmins.Columns["IsActive"].HeaderText = "Status";
             dgvAdmins.Columns["CreatedAt"].HeaderText = "Created At";
         }
         public void LoadAdminDashboard()
         {
-            lblStdValue.Text = AdminDashboardBL.TotalStudents().ToString();
-            lbladminValue.Text = AdminDashboardBL.TotalAdmins().ToString();
-            lblContestValue.Text = AdminDashboardBL.TotalContests().ToString();
-            lblProblemValue.Text = AdminDashboardBL.TotalProblems().ToString();            
+            lblStdValue.Text = StudentBL.TotalStudents().ToString();
+            lbladminValue.Text = UserBL.TotalAdmins().ToString();
+            lblContestValue.Text = ContestBL.TotalContests().ToString();
+            lblProblemValue.Text = ProblemBL.TotalProblems().ToString();            
         }
+        private void btnAddAdmin_Click(object sender, EventArgs e)
+        {
 
+        }
+        private void btnUpdateAdmin_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void btnToggleAdmin_Click(object sender, EventArgs e)
+        {
+
+        }
 
         // --- STUDENT PANEL ---
         private void LoadStudentData()
@@ -57,7 +73,7 @@ namespace SQL_Judge_System.UI
         }
         private void LoadStudents()
         {
-            dgvStudents.DataSource = AdminDashboardBL.GetStudentsForAdmin();
+            dgvStudents.DataSource = StudentBL.GetStudentsForAdmin();
 
             // Set specific weight to columns 
             dgvStudents.Columns["StudentID"].FillWeight = 20;
@@ -83,9 +99,9 @@ namespace SQL_Judge_System.UI
         }
         private void LoadStudentDashboard()
         {
-            lbl_stdValue.Text = AdminDashboardBL.TotalStudents().ToString();
-            lblactstdValue.Text = AdminDashboardBL.ActiveStudents().ToString();
-            lblinactstdValue.Text = AdminDashboardBL.InactiveStudents().ToString();
+            lbl_stdValue.Text = StudentBL.TotalStudents().ToString();
+            lblactstdValue.Text = StudentBL.ActiveStudents().ToString();
+            lblinactstdValue.Text = StudentBL.InactiveStudents().ToString();
         }
         private void btntoggleStd_Click(object sender, EventArgs e)
         {
@@ -99,13 +115,13 @@ namespace SQL_Judge_System.UI
                     DialogResult confirm = MessageBox.Show("Are you sure you want to deactivate this student?", "Confirm Deactivation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                     if (confirm == DialogResult.Yes)
                     {
-                        AdminDashboardBL.DeactivateUser(studentID);
+                        UserBL.DeactivateUser(studentID);
                         MessageBox.Show("Student deactivated successfully.");
                     }
                 }
                 else
                 {
-                    AdminDashboardBL.ActivateUser(studentID);
+                    UserBL.ActivateUser(studentID);
                     MessageBox.Show("Student activated successfully.");
                 }
                 RefreshData();
@@ -124,7 +140,7 @@ namespace SQL_Judge_System.UI
         }
         private void LoadProblem()
         {
-            dgvProblems.DataSource = AdminDashboardBL.ProblemsList();
+            dgvProblems.DataSource = ProblemBL.ProblemsList();
             dgvProblems.Columns["ProblemID"].FillWeight = 20;
             dgvProblems.Columns["Title"].FillWeight = 100;
             dgvProblems.Columns["DifficultyName"].FillWeight = 30;
@@ -141,9 +157,9 @@ namespace SQL_Judge_System.UI
         }
         private void LoadProblemDashboard()
         {
-            lblTotalProbValue.Text = AdminDashboardBL.TotalProblems().ToString();
-            lblActProbValue.Text = AdminDashboardBL.ActiveProblems().ToString();
-            lblInActProbValue.Text = AdminDashboardBL.InactiveProblems().ToString();
+            lblTotalProbValue.Text = ProblemBL.TotalProblems().ToString();
+            lblActProbValue.Text = ProblemBL.ActiveProblems().ToString();
+            lblInActProbValue.Text = ProblemBL.InactiveProblems().ToString();
         }
         private void btnAddProb_Click(object sender, EventArgs e)
         {
@@ -165,13 +181,13 @@ namespace SQL_Judge_System.UI
                     DialogResult confirm = MessageBox.Show("Are you sure you want to deactivate this problem?", "Confirm Deactivation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                     if (confirm == DialogResult.Yes)
                     {
-                        AdminDashboardBL.DeactivateProblem(problemID);
+                        ProblemBL.DeactivateProblem(problemID);
                         MessageBox.Show("Problem deactivated successfully.");
                     }
                 }
                 else
                 {
-                    AdminDashboardBL.ActivateProblem(problemID);
+                    ProblemBL.ActivateProblem(problemID);
                     MessageBox.Show("Problem activated successfully.");
                 }
                 RefreshData();
@@ -182,10 +198,53 @@ namespace SQL_Judge_System.UI
             }
         }
 
+        // --- Contest Panel ---
+        private void LoadContestData()
+        {
+            LoadContest();
+            LoadContestDashboard();
+        }
+        private void LoadContest()
+        {
+            dgvContest.DataSource = ContestBL.GetContests();
+            dgvContest.Columns["ContestID"].FillWeight = 20;
+            dgvContest.Columns["Title"].FillWeight = 100;
+            dgvContest.Columns["StartDate"].FillWeight = 50;
+            dgvContest.Columns["EndDate"].FillWeight = 50;
+            dgvContest.Columns["CreatedBy"].FillWeight = 30;
+            dgvContest.Columns["ContestStatus"].FillWeight = 50;
+
+            dgvContest.Columns["ContestID"].HeaderText = "ID";
+            dgvContest.Columns["Title"].HeaderText = "Title";
+            dgvContest.Columns["StartDate"].HeaderText = "Start Date";
+            dgvContest.Columns["EndDate"].HeaderText = "End Date";
+            dgvContest.Columns["CreatedBy"].HeaderText = "Created By";
+            dgvContest.Columns["ContestStatus"].HeaderText = "Status";
+        }
+        private void LoadContestDashboard()
+        {
+            ContestValue.Text = ContestBL.TotalContests().ToString();
+            ActContestValue.Text = ContestBL.ActiveContests().ToString();
+            InActcontestValue.Text = ContestBL.InactiveContests().ToString();
+            UpcommingContestValue.Text = ContestBL.UpcomingContests().ToString();
+        }
+        private void btnAddContest_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void btnUpdContest_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void btnToggleContest_Click(object sender, EventArgs e)
+        {
+
+        }
+
         // Slide Bar Menu Buttons
         private void btnHome_Click(object sender, EventArgs e)
         {
-            ShowPanel(pnlAdmin, "Admin Dashboard");
+            ShowPanel(pnlSuperAdmin, "Admin Dashboard");
         }
         private void btn_students_Click(object sender, EventArgs e)
         {
@@ -193,12 +252,25 @@ namespace SQL_Judge_System.UI
         }
         private void btn_problems_Click(object sender, EventArgs e)
         {
-            ShowPanel(pnlProblem, "Problem Management");
+            ShowPanel(pnlProblems, "Problem Management");
         }
         private void btn_contests_Click(object sender, EventArgs e)
         {
-
+            ShowPanel(pnlContest, "Contest Management");
         }
+        private void btnTestCases_Click(object sender, EventArgs e)
+        {
+            ShowPanel(pnlTestCases, "Test Case Management");
+        }
+        private void btnContestLeaderboard_Click(object sender, EventArgs e)
+        {
+            //ShowPanel(pnlContestLeaderboard, "Contest Leaderboard");
+        }
+        private void btnSubmissions_Click(object sender, EventArgs e)
+        {
+            ShowPanel(pnlsubmissions, "Submission Management");
+        }
+
         private void btnLogout_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show("Are you sure you want to logout?", "Logout", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -212,6 +284,7 @@ namespace SQL_Judge_System.UI
 
         }
 
+        // --- Utility Methods ---
         private void RefreshData()
         {
             // Code to reload Admin data from Database into dgvAdmins
@@ -220,8 +293,8 @@ namespace SQL_Judge_System.UI
         private void ShowPanel(Panel targetPanel, string headerText)
         {
             // 1. Hide all panels first
-            pnlAdmin.Visible = false;
-            pnlProblem.Visible = false;
+            pnlSuperAdmin.Visible = false;
+            pnlProblems.Visible = false;
             pnlStudent.Visible = false;
 
             // 2. Show the target panel
@@ -232,7 +305,15 @@ namespace SQL_Judge_System.UI
             targetPanel.BringToFront();
 
             // 4. Update the header label
-            lblTitle.Text = headerText;
+            lblMainTitle.Text = headerText;
+        }
+        private void ToolTip()
+        {
+            ToolTip tip = new ToolTip();
+            tip.SetToolTip(btntoggleStd, "Active/Inactive");
+            tip.SetToolTip(btnToggleTestCase, "Active/Inactive");
+            tip.SetToolTip(btnToggleProb, "Active/Inactive");
+            tip.SetToolTip(btnToggleAdmin, "Active/Inactive");
         }
     }
 }

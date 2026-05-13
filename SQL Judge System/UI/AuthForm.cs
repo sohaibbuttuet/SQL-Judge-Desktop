@@ -21,7 +21,6 @@ namespace SQL_Judge_System.UI
         public AuthForm()
         {
             InitializeComponent();
-            LoadRoles();
             LoadSkillLevels();
             SetSignInMode();
         }
@@ -44,26 +43,6 @@ namespace SQL_Judge_System.UI
             catch (Exception ex)
             {
                 MessageBox.Show("Failed to load skill levels.\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-        private void LoadRoles()
-        {
-            try
-            {
-                DataTable dt = RoleDL.GetAllRoles();
-
-                cmbRole.DataSource = null;
-                cmbRole.Items.Clear();
-
-                cmbRole.DataSource = dt;
-                cmbRole.DisplayMember = "RoleName";
-                cmbRole.ValueMember = "RoleID";
-
-                cmbRole.SelectedIndex = -1;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Failed to load roles.\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -118,16 +97,16 @@ namespace SQL_Judge_System.UI
             {
                 string email = txtEmail.Text.Trim();
                 string password = txtPassword.Text;
+                string name = txtName.Text.Trim();
 
-                if(string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
+                if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
                 {
                     MessageBox.Show("Please fill in all required fields.");
                     return;
                 }
 
                 if (isSignUpMode)
-                {
-                    string name = txtName.Text.Trim();
+                {                    
                     string regNo = txtRegNo.Text.Trim();
                     int skillId = Convert.ToInt32(cmbSkillLevel.SelectedValue);
 
@@ -138,12 +117,17 @@ namespace SQL_Judge_System.UI
                     }
 
                     // Create User object
-                    User user = new User(email, password);
+                    User user = new User(name, email, password);
                     UserBL.SignUp(user);
 
                     // Create Student object
-                    Student student = new Student(user.UserID, name, regNo, skillId);
+                    Student student = new Student(user.UserID, regNo, skillId);
                     StudentBL.RegisterStudent(student);
+
+                    // Assign Role to User
+                    int roleId = RoleDL.GetStudentRoleID();
+                    UserRole userRole = new UserRole(user.UserID, roleId);
+                    UserRoleBL.AssignRoleToUser(userRole);
 
                     MessageBox.Show("Student registered successfully!");
                     SetSignInMode();
@@ -153,7 +137,11 @@ namespace SQL_Judge_System.UI
                     User user = new User(email, password);
                     if (UserBL.SignIn(user))
                     {
-                        if (UserBL.IsUserAdmin(user.UserID))
+                        if (UserBL.IsUserSuperAdmin(user.UserID))
+                        {
+                            new AdminDashboardUI().Show();
+                        }
+                        else if (UserBL.IsUserAdmin(user.UserID))
                         {
                             new AdminDashboardUI().Show();
                         }
@@ -178,8 +166,6 @@ namespace SQL_Judge_System.UI
             txtRegNo.Clear();
             if (cmbSkillLevel.Items.Count > 0) 
                 cmbSkillLevel.SelectedIndex = -1;
-            if (cmbRole.Items.Count > 0) 
-                cmbRole.SelectedIndex = -1;
         }
     } 
 }

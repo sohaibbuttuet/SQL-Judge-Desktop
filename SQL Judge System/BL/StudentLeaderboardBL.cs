@@ -12,7 +12,7 @@ namespace SQL_Judge_System.BL
     {
         public static DataTable GetLeaderboard()
         {
-            return DL.StudentLeaderboardDL.GetLeaderboard();
+            return StudentLeaderboardDL.GetLeaderboard();
         }
         public static int GetRank(int studentId)
         {
@@ -20,7 +20,7 @@ namespace SQL_Judge_System.BL
             {
                 throw new ArgumentException("Student ID must be a positive integer.", nameof(studentId));
             }
-            return DL.StudentLeaderboardDL.GetRank(studentId);
+            return StudentLeaderboardDL.GetRank(studentId);
         }
         public static int GetTotalScore(int studentId)
         {
@@ -36,7 +36,7 @@ namespace SQL_Judge_System.BL
             {
                 throw new ArgumentException("Student ID must be a positive integer.", nameof(studentId));
             }
-            return DL.StudentLeaderboardDL.GetSolvedProblemsCount(studentId);
+            return StudentLeaderboardDL.GetSolvedProblemsCount(studentId);
         }
         public static string GetSkillLevel(int studentId)
         {
@@ -44,7 +44,7 @@ namespace SQL_Judge_System.BL
             {
                 throw new ArgumentException("Student ID must be a positive integer.", nameof(studentId));
             }
-            return DL.StudentLeaderboardDL.GetSkillLevel(studentId);
+            return StudentLeaderboardDL.GetSkillLevel(studentId);
         }
     }
 }

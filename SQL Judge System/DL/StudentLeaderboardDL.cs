@@ -11,27 +11,27 @@ namespace SQL_Judge_System.DL
     {
         public static DataTable GetLeaderboard()
         {
-            string query = "SELECT * FROM Students_LeaderBoard;";
+            string query = "SELECT * FROM vw_studentsleaderboard;";
             return DatabaseHelper.Instance.GetDataTable(query);
         }
         public static int GetRank(int studentId)
         {
-            string query = $"SELECT GlobalRank FROM Students_LeaderBoard WHERE StudentID = {studentId};";
+            string query = $"SELECT GlobalRank FROM vw_studentsleaderboard WHERE StudentID = {studentId};";
             return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
         }
         public static int GetTotalScore(int studentId)
         {
-            string query = $"SELECT TotalScore FROM Students_LeaderBoard WHERE StudentID = {studentId};";
+            string query = $"SELECT TotalScore FROM vw_studentsleaderboard WHERE StudentID = {studentId};";
             return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
         }
         public static int GetSolvedProblemsCount(int studentId)
         {
-            string query = $"SELECT ProblemsSolved FROM Students_LeaderBoard WHERE StudentID = {studentId};";
+            string query = $"SELECT ProblemsSolved FROM vw_studentsleaderboard WHERE StudentID = {studentId};";
             return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
         }
         public static string GetSkillLevel(int studentId)
         {
-            string query = $"SELECT LevelName FROM Students_LeaderBoard WHERE StudentID = {studentId};";
+            string query = $"SELECT LevelName FROM vw_studentsleaderboard WHERE StudentID = {studentId};";
             DataTable dt = DatabaseHelper.Instance.GetDataTable(query);
 
             if (dt != null && dt.Rows.Count > 0)

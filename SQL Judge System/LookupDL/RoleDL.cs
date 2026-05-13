@@ -10,10 +10,10 @@ namespace SQL_Judge_System.LookupDL
 {
     internal class RoleDL
     {
-        public static DataTable GetAllRoles()
+        public static int GetStudentRoleID()
         {
-            string query = "SELECT RoleID, RoleName FROM Roles;";
-            return DatabaseHelper.Instance.GetDataTable(query);
+            string query = "SELECT RoleID FROM Roles WHERE RoleName = 'Student';";
+            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
         }
     }
 }

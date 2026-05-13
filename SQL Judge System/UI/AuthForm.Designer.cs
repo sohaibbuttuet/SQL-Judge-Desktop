@@ -31,8 +31,6 @@ namespace SQL_Judge_System.UI
             this.txtRegNo = new System.Windows.Forms.TextBox();
             this.lblSkill = new System.Windows.Forms.Label();
             this.cmbSkillLevel = new System.Windows.Forms.ComboBox();
-            this.lblRole = new System.Windows.Forms.Label();
-            this.cmbRole = new System.Windows.Forms.ComboBox();
             this.pnlStudentExtra.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -157,28 +155,10 @@ namespace SQL_Judge_System.UI
             // cmbSkillLevel
             // 
             this.cmbSkillLevel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbSkillLevel.Items.AddRange(new object[] {
-            "Beginner",
-            "Intermediate",
-            "Expert"});
             this.cmbSkillLevel.Location = new System.Drawing.Point(0, 155);
             this.cmbSkillLevel.Name = "cmbSkillLevel";
             this.cmbSkillLevel.Size = new System.Drawing.Size(300, 21);
             this.cmbSkillLevel.TabIndex = 5;
-            // 
-            // lblRole
-            // 
-            this.lblRole.Location = new System.Drawing.Point(0, 0);
-            this.lblRole.Name = "lblRole";
-            this.lblRole.Size = new System.Drawing.Size(100, 23);
-            this.lblRole.TabIndex = 0;
-            // 
-            // cmbRole
-            // 
-            this.cmbRole.Location = new System.Drawing.Point(0, 0);
-            this.cmbRole.Name = "cmbRole";
-            this.cmbRole.Size = new System.Drawing.Size(121, 21);
-            this.cmbRole.TabIndex = 0;
             // 
             // AuthForm
             // 
@@ -203,9 +183,9 @@ namespace SQL_Judge_System.UI
 
         }
 
-        private System.Windows.Forms.Label lblTitle, lblEmail, lblPassword, lblName, lblRegNo, lblSkill, lblRole;
+        private System.Windows.Forms.Label lblTitle, lblEmail, lblPassword, lblName, lblRegNo, lblSkill;
         private System.Windows.Forms.TextBox txtEmail, txtPassword, txtName, txtRegNo;
-        private System.Windows.Forms.ComboBox cmbSkillLevel, cmbRole;
+        private System.Windows.Forms.ComboBox cmbSkillLevel;
         private System.Windows.Forms.Button btnMainAction;
         private System.Windows.Forms.LinkLabel lnkToggle;
         private System.Windows.Forms.Panel pnlStudentExtra;
