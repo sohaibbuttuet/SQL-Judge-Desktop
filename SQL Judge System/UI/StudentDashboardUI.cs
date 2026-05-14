@@ -66,24 +66,36 @@ namespace SQL_Judge_System.UI
             LoadStudentData();
         }
 
+
+        private void btn_home_Click(object sender, EventArgs e)
+        {
+
+        }
         private void btn_problems_Click(object sender, EventArgs e)
         {
             
         }
-
         private void btn_contest_Click(object sender, EventArgs e)
         {
 
         }
-
-        private void btn_leaderboard_Click(object sender, EventArgs e)
+        private void btnReport_Click(object sender, EventArgs e)
         {
-            
-        }
 
+        }
+        private void btn_settings_Click(object sender, EventArgs e)
+        {
+
+        }
         private void btn_Logout_Click(object sender, EventArgs e)
         {
-            this.Close();
+            DialogResult result = MessageBox.Show("Are you sure you want to logout?", "Logout", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                this.Close();
+            }
         }
+
+       
     }
 }

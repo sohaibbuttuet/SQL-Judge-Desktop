@@ -137,6 +137,7 @@
 		SetupSQL TEXT NOT NULL,
 		ExpectedOutput TEXT NOT NULL,
 		IsActive BOOLEAN DEFAULT TRUE,
+		CreatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
 
 		FOREIGN KEY (ProblemID)	REFERENCES Problems(ProblemID) ON DELETE CASCADE
 	);
@@ -256,6 +257,7 @@
 	-- VIEWS
 	-- =====================================
 
+	-- ===================================== (1) =====================================
 	CREATE VIEW vw_UserStudents
 	AS
 	SELECT
@@ -269,6 +271,7 @@
 	JOIN Roles r ON ur.RoleID = r.RoleID
 	WHERE r.RoleName = 'Student';
 
+	-- ===================================== (2) =====================================
 	CREATE OR REPLACE VIEW vw_UserAdmins
 	AS
 	SELECT
@@ -282,7 +285,8 @@
 	JOIN UserRoles ur ON u.UserID = ur.UserID
 	JOIN Roles r ON ur.RoleID = r.RoleID
 	WHERE r.RoleName = 'Admin';
-
+	
+    -- ===================================== (3) =====================================
 	CREATE OR REPLACE VIEW vw_SuperAdmins
 	AS
 	SELECT
@@ -297,6 +301,7 @@
 	JOIN Roles r ON ur.RoleID = r.RoleID
 	WHERE r.RoleName = 'SuperAdmin';
 
+	-- ===================================== (4) =====================================
 	CREATE VIEW vw_StudentsForAdmin
 	AS
 	SELECT
@@ -313,6 +318,7 @@
 	JOIN SkillLevels sk ON s.SkillLevelID = sk.SkillLevelID
 	JOIN vw_UserStudents u ON s.UserID = u.UserID;
 
+	-- ===================================== (5) =====================================
 	CREATE VIEW vw_StudentsLeaderboard	
 	AS
 	SELECT
@@ -327,6 +333,7 @@
 	JOIN Users u ON s.UserID = u.UserID
 	JOIN SkillLevels sk ON s.SkillLevelID = sk.SkillLevelID;
     
+    -- ===================================== (6) =====================================
     CREATE VIEW vw_problems
 	AS
 	SELECT p.ProblemID, 
@@ -339,19 +346,63 @@
 	FROM problems p 
     JOIN problemdifficulties d ON p.DifficultyID = d.DifficultyID;
     
-    CREATE VIEW vw_Contests AS
+    -- ===================================== (7) =====================================
+    CREATE OR REPLACE VIEW vw_Contests AS
 	SELECT
-		ContestID,
-		Title,
-		StartDate,
-		EndDate,
-		CreatedBy,
+		c.ContestID,
+		c.Title,
+		c.StartDate,
+		c.EndDate,
+		c.CreatedBy,
+        COUNT(cp.StudentID) TotalParticipants,
 		CASE
-			WHEN NOW() < StartDate THEN 'Upcoming'
-			WHEN NOW() BETWEEN StartDate AND EndDate THEN 'Active'
+			WHEN NOW() < c.StartDate THEN 'Upcoming'
+			WHEN NOW() BETWEEN c.StartDate AND EndDate THEN 'Active'
 			ELSE 'Ended'
 		END AS ContestStatus
-	FROM Contests;
+	FROM Contests c 
+    LEFT JOIN contestparticipants cp ON c.ContestID = cp.ContestID
+    GROUP BY c.ContestID, c.Title, c.StartDate, c.EndDate, c.CreatedBy, ContestStatus;
+    
+    -- ===================================== (8) =====================================
+    CREATE OR REPLACE VIEW vw_testcases
+    AS
+    SELECT
+    t.TestCaseID,
+    t.ProblemID,
+    p.Title,
+
+    CASE
+        WHEN t.SetupSQL IS NULL THEN ''
+        WHEN LENGTH(t.SetupSQL) > 50
+        THEN CONCAT(LEFT(t.SetupSQL, 50), '...')
+        ELSE t.SetupSQL
+    END AS SetupSQL,
+
+    CASE
+        WHEN t.ExpectedOutput IS NULL THEN ''
+        WHEN LENGTH(t.ExpectedOutput) > 50
+        THEN CONCAT(LEFT(t.ExpectedOutput, 50), '...')
+        ELSE t.ExpectedOutput
+    END AS ExpectedOutput,
+
+	t.CreatedAt,
+    t.IsActive
+	FROM testcases t
+	JOIN Problems p ON t.ProblemID = p.ProblemID;
+
+
+	CREATE OR REPLACE VIEW vw_Submissions
+	AS
+	SELECT s.SubmissionID,
+		   s.StudentID,
+		   s.ProblemID,
+		   ss.StatusName,
+		   s.AttemptNumber,
+           s.TotalScore,
+          s.SubmittedAt
+    FROM submissions s
+    JOIN submissionstatuses ss ON s.StatusID = ss.StatusID;
 
 	-- =====================================
 	-- LOOKUP DATA

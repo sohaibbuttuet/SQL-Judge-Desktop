@@ -100,13 +100,16 @@
     <Compile Include="BL\ProblemBL.cs" />
     <Compile Include="BL\StudentBL.cs" />
     <Compile Include="BL\StudentLeaderboardBL.cs" />
+    <Compile Include="BL\SubmissionBL.cs" />
+    <Compile Include="BL\TestCaseBL.cs" />
     <Compile Include="BL\UserBL.cs" />
     <Compile Include="BL\UserRoleBL.cs" />
     <Compile Include="DL\ContestDL.cs" />
     <Compile Include="DL\ContestParticipentDL.cs" />
     <Compile Include="DL\ProblemDL.cs" />
     <Compile Include="DL\StudentLeaderboardDL.cs" />
-    <Compile Include="LookupDL\ContestStatusDL.cs" />
+    <Compile Include="DL\SubmissionDL.cs" />
+    <Compile Include="DL\TestCasesDL.cs" />
     <Compile Include="DL\DatabaseHelper.cs" />
     <Compile Include="LookupDL\ProblemDifficultyDL.cs" />
     <Compile Include="LookupDL\RoleDL.cs" />
