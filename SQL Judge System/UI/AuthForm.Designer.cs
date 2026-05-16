@@ -37,7 +37,7 @@ namespace SQL_Judge_System.UI
             // lblTitle
             // 
             this.lblTitle.Font = new System.Drawing.Font("Segoe UI Semibold", 18F);
-            this.lblTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
+            this.lblTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
             this.lblTitle.Location = new System.Drawing.Point(50, 20);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(300, 40);
@@ -78,7 +78,7 @@ namespace SQL_Judge_System.UI
             // 
             // btnMainAction
             // 
-            this.btnMainAction.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
+            this.btnMainAction.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
             this.btnMainAction.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMainAction.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
             this.btnMainAction.ForeColor = System.Drawing.Color.White;

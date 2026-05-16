@@ -15,10 +15,12 @@ namespace SQL_Judge_System.UI
         {
             InitializeComponent();
             user = UserBL.GetUserById(userID);
+
             if (!UserBL.IsUserSuperAdmin(userID))
             {
                 btn_Admin.Visible = false;
             }
+
             ShowPanel(pnlHome, "Home");
         }
 
@@ -122,11 +124,10 @@ namespace SQL_Judge_System.UI
         {
             try
             {
-                //AddAdminUI addAdminForm = new AddAdminUI();
-                //if (addAdminForm.ShowDialog() == DialogResult.OK)
-                //{
-                //    RefreshData();
-                //}
+                AdminPopupForm form = new AdminPopupForm();
+
+                form.ShowAddPanel();   // show ADD panel
+                form.ShowDialog();
             }
             catch (Exception ex)
             {
@@ -136,7 +137,13 @@ namespace SQL_Judge_System.UI
         }
         private void btnUpdateAdmin_Click(object sender, EventArgs e)
         {
-            try { }
+            try 
+            {
+                AdminPopupForm form = new AdminPopupForm();
+
+                form.ShowEditPanel();  // show EDIT panel
+                form.ShowDialog();
+            }
             catch (Exception ex)
             {
                 MessageBox.Show("Failed to update admin: " + ex.Message);
@@ -310,7 +317,12 @@ namespace SQL_Judge_System.UI
         }
         private void btnAddProb_Click(object sender, EventArgs e)
         {
-            try { }
+            try
+            {
+                ProblemPopupForm form = new ProblemPopupForm();
+                form.ShowAddPanel();
+                form.ShowDialog();
+            }
             catch (Exception ex)
             {
                 MessageBox.Show("Failed to update admin: " + ex.Message);
@@ -318,7 +330,12 @@ namespace SQL_Judge_System.UI
         }
         private void btnUpdateProb_Click(object sender, EventArgs e)
         {
-            try { }
+            try 
+            {
+                ProblemPopupForm form = new ProblemPopupForm();
+                form.ShowUpdatePanel();
+                form.ShowDialog();
+            }
             catch (Exception ex)
             {
                 MessageBox.Show("Failed to update admin: " + ex.Message);
@@ -408,7 +425,12 @@ namespace SQL_Judge_System.UI
         }
         private void btnAddContest_Click(object sender, EventArgs e)
         {
-            try { }
+            try
+            {
+                ContestPopupForm form = new ContestPopupForm();
+                form.ShowAddPanel();
+                form.ShowDialog();
+            }
             catch (Exception ex)
             {
                 MessageBox.Show("Failed to update admin: " + ex.Message);
@@ -416,7 +438,12 @@ namespace SQL_Judge_System.UI
         }
         private void btnUpdContest_Click(object sender, EventArgs e)
         {
-            try { }
+            try 
+            {
+                ContestPopupForm form = new ContestPopupForm();
+                form.ShowUpdatePanel();
+                form.ShowDialog();
+            }
             catch (Exception ex)
             {
                 MessageBox.Show("Failed to update admin: " + ex.Message);
@@ -470,7 +497,12 @@ namespace SQL_Judge_System.UI
         }
         private void btnAddTestCase_Click(object sender, EventArgs e)
         {
-            try { }
+            try
+            {
+                TestCasePopupForm form = new TestCasePopupForm();
+                form.ShowAddPanel();
+                form.ShowDialog();
+            }
             catch (Exception ex)
             {
                 MessageBox.Show("Failed to update admin: " + ex.Message);
@@ -478,7 +510,12 @@ namespace SQL_Judge_System.UI
         }
         private void btnUpdateTestCase_Click(object sender, EventArgs e)
         {
-            try { }
+            try
+            {
+                TestCasePopupForm form = new TestCasePopupForm();
+                form.ShowUpdatePanel();
+                form.ShowDialog();
+            }
             catch (Exception ex)
             {
                 MessageBox.Show("Failed to update admin: " + ex.Message);

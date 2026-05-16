@@ -33,6 +33,7 @@ namespace SQL_Judge_System.UI
             this.btnTestCases = new FontAwesome.Sharp.IconButton();
             this.btn_problems = new FontAwesome.Sharp.IconButton();
             this.btn_students = new FontAwesome.Sharp.IconButton();
+            this.btn_Admin = new FontAwesome.Sharp.IconButton();
             this.btn_Home = new FontAwesome.Sharp.IconButton();
             this.pnlProblems = new System.Windows.Forms.Panel();
             this.btnToggleProb = new FontAwesome.Sharp.IconButton();
@@ -144,6 +145,7 @@ namespace SQL_Judge_System.UI
             this.panel3 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.pnlHome = new System.Windows.Forms.Panel();
+            this.label25 = new System.Windows.Forms.Label();
             this.pnlHomeCards = new System.Windows.Forms.Panel();
             this.tlpnlHomeCards = new System.Windows.Forms.TableLayoutPanel();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -158,8 +160,6 @@ namespace SQL_Judge_System.UI
             this.dgv_Users = new System.Windows.Forms.DataGridView();
             this.panel9 = new System.Windows.Forms.Panel();
             this.lblMainTitle = new System.Windows.Forms.Label();
-            this.btn_Admin = new FontAwesome.Sharp.IconButton();
-            this.label25 = new System.Windows.Forms.Label();
             this.pnlSidebar.SuspendLayout();
             this.pnlProblems.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProblems)).BeginInit();
@@ -429,6 +429,27 @@ namespace SQL_Judge_System.UI
             this.btn_students.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btn_students.UseVisualStyleBackColor = true;
             this.btn_students.Click += new System.EventHandler(this.btn_students_Click);
+            // 
+            // btn_Admin
+            // 
+            this.btn_Admin.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btn_Admin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_Admin.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_Admin.ForeColor = System.Drawing.Color.White;
+            this.btn_Admin.IconChar = FontAwesome.Sharp.IconChar.RankingStar;
+            this.btn_Admin.IconColor = System.Drawing.Color.White;
+            this.btn_Admin.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btn_Admin.IconSize = 24;
+            this.btn_Admin.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_Admin.Location = new System.Drawing.Point(0, 51);
+            this.btn_Admin.Name = "btn_Admin";
+            this.btn_Admin.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.btn_Admin.Size = new System.Drawing.Size(200, 51);
+            this.btn_Admin.TabIndex = 26;
+            this.btn_Admin.Text = "Manage Admins";
+            this.btn_Admin.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btn_Admin.UseVisualStyleBackColor = true;
+            this.btn_Admin.Click += new System.EventHandler(this.btn_Admin_Click);
             // 
             // btn_Home
             // 
@@ -2013,6 +2034,18 @@ namespace SQL_Judge_System.UI
             this.pnlHome.Size = new System.Drawing.Size(805, 557);
             this.pnlHome.TabIndex = 14;
             // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.BackColor = System.Drawing.Color.Transparent;
+            this.label25.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label25.ForeColor = System.Drawing.Color.Black;
+            this.label25.Location = new System.Drawing.Point(25, 261);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(108, 25);
+            this.label25.TabIndex = 13;
+            this.label25.Text = "Users View";
+            // 
             // pnlHomeCards
             // 
             this.pnlHomeCards.BackColor = System.Drawing.Color.White;
@@ -2203,50 +2236,17 @@ namespace SQL_Judge_System.UI
             this.lblMainTitle.TabIndex = 1;
             this.lblMainTitle.Text = "Welcome, Admin!";
             // 
-            // btn_Admin
-            // 
-            this.btn_Admin.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btn_Admin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_Admin.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Admin.ForeColor = System.Drawing.Color.White;
-            this.btn_Admin.IconChar = FontAwesome.Sharp.IconChar.RankingStar;
-            this.btn_Admin.IconColor = System.Drawing.Color.White;
-            this.btn_Admin.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btn_Admin.IconSize = 24;
-            this.btn_Admin.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_Admin.Location = new System.Drawing.Point(0, 51);
-            this.btn_Admin.Name = "btn_Admin";
-            this.btn_Admin.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btn_Admin.Size = new System.Drawing.Size(200, 51);
-            this.btn_Admin.TabIndex = 26;
-            this.btn_Admin.Text = "Manage Admins";
-            this.btn_Admin.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btn_Admin.UseVisualStyleBackColor = true;
-            this.btn_Admin.Click += new System.EventHandler(this.btn_Admin_Click);
-            // 
-            // label25
-            // 
-            this.label25.AutoSize = true;
-            this.label25.BackColor = System.Drawing.Color.Transparent;
-            this.label25.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label25.ForeColor = System.Drawing.Color.Black;
-            this.label25.Location = new System.Drawing.Point(25, 261);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(108, 25);
-            this.label25.TabIndex = 13;
-            this.label25.Text = "Users View";
-            // 
             // AdminDashboardUI
             // 
             this.ClientSize = new System.Drawing.Size(1004, 561);
             this.Controls.Add(this.pnlSidebar);
-            this.Controls.Add(this.pnlHome);
             this.Controls.Add(this.pnlSuperAdmin);
             this.Controls.Add(this.pnlContest);
             this.Controls.Add(this.pnlProblems);
             this.Controls.Add(this.pnlTestCases);
             this.Controls.Add(this.pnlsubmissions);
             this.Controls.Add(this.pnlStudent);
+            this.Controls.Add(this.pnlHome);
             this.Name = "AdminDashboardUI";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Admin Dashboard";

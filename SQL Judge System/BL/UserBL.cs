@@ -61,12 +61,8 @@ namespace SQL_Judge_System.BL
             {
                 throw new ArgumentOutOfRangeException(nameof(userId), "User ID must be a non-negative integer.");
             }
-            User user = UserDL.GetUserByID(userId);
-            if (user == null)
-            {
-                throw new InvalidOperationException("User not found.");
-            }
-            return user;
+
+            return UserDL.GetUserByID(userId);
         }
 
         // Students in AdminDashboard

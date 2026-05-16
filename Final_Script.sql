@@ -135,13 +135,12 @@
 		TestCaseID INT AUTO_INCREMENT PRIMARY KEY,
 		ProblemID INT NOT NULL,
 		SetupSQL TEXT NOT NULL,
-		ExpectedOutput TEXT NOT NULL,
+	    SolutionQuery TEXT NOT NULL,
 		IsActive BOOLEAN DEFAULT TRUE,
 		CreatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
-
+        SolutionQuery TEXT NOT NULL,
 		FOREIGN KEY (ProblemID)	REFERENCES Problems(ProblemID) ON DELETE CASCADE
 	);
-
 	CREATE INDEX idx_testcases_problem ON TestCases(ProblemID);
 
 	-- =====================================
@@ -272,7 +271,7 @@
 	JOIN Roles r ON ur.RoleID = r.RoleID;
 
 	-- ===================================== (2) =====================================
-	CREATE VIEW vw_StudentsForAdmin
+	CREATE OR REPLACE VIEW vw_StudentsForAdmin
 	AS
 	SELECT
 		s.StudentID,
@@ -286,7 +285,7 @@
 		u.CreatedAt
 	FROM Students s
 	JOIN SkillLevels sk ON s.SkillLevelID = sk.SkillLevelID
-	JOIN vw_UserStudents u ON s.UserID = u.UserID;
+	JOIN vw_Users u ON s.UserID = u.UserID;
 
 	-- ===================================== (3) =====================================
 	CREATE VIEW vw_StudentsLeaderboard	
@@ -361,7 +360,7 @@
 	FROM testcases t
 	JOIN Problems p ON t.ProblemID = p.ProblemID;
 
-
+  -- ===================================== (7) =====================================
 	CREATE OR REPLACE VIEW vw_Submissions
 	AS
 	SELECT s.SubmissionID,

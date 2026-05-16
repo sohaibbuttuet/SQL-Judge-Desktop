@@ -70,6 +70,7 @@ namespace SQL_Judge_System.DL
         {
             string query = $"SELECT * FROM Users WHERE UserID = {userId};";
             DataTable dt = DatabaseHelper.Instance.GetDataTable(query);
+
             if (dt.Rows.Count == 0)
                 return null;
             return MapDataRowToUser(dt.Rows[0]);
@@ -128,6 +129,7 @@ namespace SQL_Judge_System.DL
             return new User
             {
                 UserID = Convert.ToInt32(row["UserID"]),
+                FullName = row["FullName"].ToString(),
                 Email = row["Email"].ToString(),
                 Password = row["Password"].ToString(),
                 IsActive = Convert.ToBoolean(row["IsActive"]),
