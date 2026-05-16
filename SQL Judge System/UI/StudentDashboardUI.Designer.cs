@@ -12,12 +12,9 @@
 
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlSidebar = new System.Windows.Forms.Panel();
-            this.btn_Logout = new System.Windows.Forms.Button();
-            this.btn_contest = new System.Windows.Forms.Button();
-            this.btn_problems = new System.Windows.Forms.Button();
             this.pnlHeader = new System.Windows.Forms.Panel();
             this.lblWelcome = new System.Windows.Forms.Label();
             this.pnlStatsContainer = new System.Windows.Forms.Panel();
@@ -36,9 +33,12 @@
             this.lblSkillLevel = new System.Windows.Forms.Label();
             this.dgvLeaderboard = new System.Windows.Forms.DataGridView();
             this.lblGridTitle = new System.Windows.Forms.Label();
-            this.btnReport = new System.Windows.Forms.Button();
-            this.btn_settings = new System.Windows.Forms.Button();
-            this.btn_home = new System.Windows.Forms.Button();
+            this.btnReport = new FontAwesome.Sharp.IconButton();
+            this.btn_contest = new FontAwesome.Sharp.IconButton();
+            this.btn_problems = new FontAwesome.Sharp.IconButton();
+            this.btn_home = new FontAwesome.Sharp.IconButton();
+            this.btn_settings = new FontAwesome.Sharp.IconButton();
+            this.btn_Logout = new FontAwesome.Sharp.IconButton();
             this.pnlSidebar.SuspendLayout();
             this.pnlHeader.SuspendLayout();
             this.pnlStatsContainer.SuspendLayout();
@@ -54,8 +54,8 @@
             // 
             this.pnlSidebar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(30)))), ((int)(((byte)(54)))));
             this.pnlSidebar.Controls.Add(this.btn_settings);
-            this.pnlSidebar.Controls.Add(this.btnReport);
             this.pnlSidebar.Controls.Add(this.btn_Logout);
+            this.pnlSidebar.Controls.Add(this.btnReport);
             this.pnlSidebar.Controls.Add(this.btn_contest);
             this.pnlSidebar.Controls.Add(this.btn_problems);
             this.pnlSidebar.Controls.Add(this.btn_home);
@@ -65,48 +65,6 @@
             this.pnlSidebar.Size = new System.Drawing.Size(200, 561);
             this.pnlSidebar.TabIndex = 4;
             // 
-            // btn_Logout
-            // 
-            this.btn_Logout.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_Logout.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.btn_Logout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_Logout.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Logout.ForeColor = System.Drawing.Color.White;
-            this.btn_Logout.Location = new System.Drawing.Point(0, 511);
-            this.btn_Logout.Name = "btn_Logout";
-            this.btn_Logout.Size = new System.Drawing.Size(200, 50);
-            this.btn_Logout.TabIndex = 0;
-            this.btn_Logout.Text = "Logout";
-            this.btn_Logout.Click += new System.EventHandler(this.btn_Logout_Click);
-            // 
-            // btn_contest
-            // 
-            this.btn_contest.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_contest.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btn_contest.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_contest.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_contest.ForeColor = System.Drawing.Color.White;
-            this.btn_contest.Location = new System.Drawing.Point(0, 100);
-            this.btn_contest.Name = "btn_contest";
-            this.btn_contest.Size = new System.Drawing.Size(200, 50);
-            this.btn_contest.TabIndex = 2;
-            this.btn_contest.Text = "  Join Contest";
-            this.btn_contest.Click += new System.EventHandler(this.btn_contest_Click);
-            // 
-            // btn_problems
-            // 
-            this.btn_problems.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_problems.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btn_problems.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_problems.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_problems.ForeColor = System.Drawing.Color.White;
-            this.btn_problems.Location = new System.Drawing.Point(0, 50);
-            this.btn_problems.Name = "btn_problems";
-            this.btn_problems.Size = new System.Drawing.Size(200, 50);
-            this.btn_problems.TabIndex = 3;
-            this.btn_problems.Text = "  Solve Problems";
-            this.btn_problems.Click += new System.EventHandler(this.btn_problems_Click);
-            // 
             // pnlHeader
             // 
             this.pnlHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
@@ -115,13 +73,13 @@
             this.pnlHeader.ForeColor = System.Drawing.Color.White;
             this.pnlHeader.Location = new System.Drawing.Point(200, 0);
             this.pnlHeader.Name = "pnlHeader";
-            this.pnlHeader.Size = new System.Drawing.Size(804, 60);
+            this.pnlHeader.Size = new System.Drawing.Size(804, 50);
             this.pnlHeader.TabIndex = 3;
             // 
             // lblWelcome
             // 
             this.lblWelcome.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold);
-            this.lblWelcome.Location = new System.Drawing.Point(20, 8);
+            this.lblWelcome.Location = new System.Drawing.Point(20, 3);
             this.lblWelcome.Name = "lblWelcome";
             this.lblWelcome.Size = new System.Drawing.Size(500, 45);
             this.lblWelcome.TabIndex = 0;
@@ -132,7 +90,7 @@
             this.pnlStatsContainer.BackColor = System.Drawing.Color.White;
             this.pnlStatsContainer.Controls.Add(this.tlpnlStudentDashboard);
             this.pnlStatsContainer.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlStatsContainer.Location = new System.Drawing.Point(200, 60);
+            this.pnlStatsContainer.Location = new System.Drawing.Point(200, 50);
             this.pnlStatsContainer.Name = "pnlStatsContainer";
             this.pnlStatsContainer.Size = new System.Drawing.Size(804, 180);
             this.pnlStatsContainer.TabIndex = 2;
@@ -305,23 +263,23 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvLeaderboard.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvLeaderboard.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvLeaderboard.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvLeaderboard.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvLeaderboard.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvLeaderboard.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvLeaderboard.Location = new System.Drawing.Point(220, 291);
             this.dgvLeaderboard.Name = "dgvLeaderboard";
             this.dgvLeaderboard.RowHeadersVisible = false;
@@ -340,45 +298,129 @@
             // 
             // btnReport
             // 
-            this.btnReport.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnReport.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnReport.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReport.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnReport.ForeColor = System.Drawing.Color.White;
-            this.btnReport.Location = new System.Drawing.Point(0, 150);
+            this.btnReport.IconChar = FontAwesome.Sharp.IconChar.RankingStar;
+            this.btnReport.IconColor = System.Drawing.Color.White;
+            this.btnReport.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnReport.IconSize = 24;
+            this.btnReport.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnReport.Location = new System.Drawing.Point(0, 153);
             this.btnReport.Name = "btnReport";
-            this.btnReport.Size = new System.Drawing.Size(200, 50);
-            this.btnReport.TabIndex = 5;
+            this.btnReport.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.btnReport.Size = new System.Drawing.Size(200, 51);
+            this.btnReport.TabIndex = 24;
             this.btnReport.Text = "Generate Report";
+            this.btnReport.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnReport.UseVisualStyleBackColor = true;
             this.btnReport.Click += new System.EventHandler(this.btnReport_Click);
             // 
-            // btn_settings
+            // btn_contest
             // 
-            this.btn_settings.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_settings.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.btn_settings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_settings.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_settings.ForeColor = System.Drawing.Color.White;
-            this.btn_settings.Location = new System.Drawing.Point(0, 461);
-            this.btn_settings.Name = "btn_settings";
-            this.btn_settings.Size = new System.Drawing.Size(200, 50);
-            this.btn_settings.TabIndex = 6;
-            this.btn_settings.Text = "Settings";
-            this.btn_settings.Click += new System.EventHandler(this.btn_settings_Click);
+            this.btn_contest.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btn_contest.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_contest.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_contest.ForeColor = System.Drawing.Color.White;
+            this.btn_contest.IconChar = FontAwesome.Sharp.IconChar.RankingStar;
+            this.btn_contest.IconColor = System.Drawing.Color.White;
+            this.btn_contest.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btn_contest.IconSize = 24;
+            this.btn_contest.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_contest.Location = new System.Drawing.Point(0, 102);
+            this.btn_contest.Name = "btn_contest";
+            this.btn_contest.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.btn_contest.Size = new System.Drawing.Size(200, 51);
+            this.btn_contest.TabIndex = 25;
+            this.btn_contest.Text = "Join Contest";
+            this.btn_contest.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btn_contest.UseVisualStyleBackColor = true;
+            this.btn_contest.Click += new System.EventHandler(this.btn_contest_Click);
+            // 
+            // btn_problems
+            // 
+            this.btn_problems.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btn_problems.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_problems.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_problems.ForeColor = System.Drawing.Color.White;
+            this.btn_problems.IconChar = FontAwesome.Sharp.IconChar.RankingStar;
+            this.btn_problems.IconColor = System.Drawing.Color.White;
+            this.btn_problems.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btn_problems.IconSize = 24;
+            this.btn_problems.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_problems.Location = new System.Drawing.Point(0, 51);
+            this.btn_problems.Name = "btn_problems";
+            this.btn_problems.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.btn_problems.Size = new System.Drawing.Size(200, 51);
+            this.btn_problems.TabIndex = 26;
+            this.btn_problems.Text = "Solve Problems";
+            this.btn_problems.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btn_problems.UseVisualStyleBackColor = true;
+            this.btn_problems.Click += new System.EventHandler(this.btn_problems_Click);
             // 
             // btn_home
             // 
-            this.btn_home.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_home.Dock = System.Windows.Forms.DockStyle.Top;
             this.btn_home.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_home.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_home.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_home.ForeColor = System.Drawing.Color.White;
+            this.btn_home.IconChar = FontAwesome.Sharp.IconChar.HomeLg;
+            this.btn_home.IconColor = System.Drawing.Color.White;
+            this.btn_home.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btn_home.IconSize = 24;
+            this.btn_home.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btn_home.Location = new System.Drawing.Point(0, 0);
             this.btn_home.Name = "btn_home";
-            this.btn_home.Size = new System.Drawing.Size(200, 50);
-            this.btn_home.TabIndex = 1;
+            this.btn_home.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.btn_home.Size = new System.Drawing.Size(200, 51);
+            this.btn_home.TabIndex = 27;
             this.btn_home.Text = "Home";
+            this.btn_home.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btn_home.UseVisualStyleBackColor = true;
             this.btn_home.Click += new System.EventHandler(this.btn_home_Click);
+            // 
+            // btn_settings
+            // 
+            this.btn_settings.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.btn_settings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_settings.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_settings.ForeColor = System.Drawing.Color.White;
+            this.btn_settings.IconChar = FontAwesome.Sharp.IconChar.Gears;
+            this.btn_settings.IconColor = System.Drawing.Color.White;
+            this.btn_settings.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btn_settings.IconSize = 24;
+            this.btn_settings.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_settings.Location = new System.Drawing.Point(0, 459);
+            this.btn_settings.Name = "btn_settings";
+            this.btn_settings.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.btn_settings.Size = new System.Drawing.Size(200, 51);
+            this.btn_settings.TabIndex = 28;
+            this.btn_settings.Text = "Settings";
+            this.btn_settings.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btn_settings.UseVisualStyleBackColor = true;
+            this.btn_settings.Click += new System.EventHandler(this.btn_settings_Click);
+            // 
+            // btn_Logout
+            // 
+            this.btn_Logout.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.btn_Logout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_Logout.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_Logout.ForeColor = System.Drawing.Color.White;
+            this.btn_Logout.IconChar = FontAwesome.Sharp.IconChar.RightFromBracket;
+            this.btn_Logout.IconColor = System.Drawing.Color.White;
+            this.btn_Logout.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btn_Logout.IconSize = 24;
+            this.btn_Logout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_Logout.Location = new System.Drawing.Point(0, 510);
+            this.btn_Logout.Name = "btn_Logout";
+            this.btn_Logout.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.btn_Logout.Size = new System.Drawing.Size(200, 51);
+            this.btn_Logout.TabIndex = 29;
+            this.btn_Logout.Text = "Logout";
+            this.btn_Logout.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btn_Logout.UseVisualStyleBackColor = true;
+            this.btn_Logout.Click += new System.EventHandler(this.btn_Logout_Click);
             // 
             // StudentDashboardUI
             // 
@@ -411,9 +453,6 @@
 
         // Declarations
         private System.Windows.Forms.Panel pnlSidebar;
-        private System.Windows.Forms.Button btn_problems;
-        private System.Windows.Forms.Button btn_contest;
-        private System.Windows.Forms.Button btn_Logout;
         private System.Windows.Forms.Panel pnlHeader;
         private System.Windows.Forms.Label lblWelcome;
         private System.Windows.Forms.Panel pnlStatsContainer;
@@ -432,8 +471,11 @@
         private System.Windows.Forms.Panel pnlSkillLevel;
         private System.Windows.Forms.Label lblSkillValue;
         private System.Windows.Forms.Label lblSkillLevel;
-        private System.Windows.Forms.Button btnReport;
-        private System.Windows.Forms.Button btn_settings;
-        private System.Windows.Forms.Button btn_home;
+        private FontAwesome.Sharp.IconButton btnReport;
+        private FontAwesome.Sharp.IconButton btn_contest;
+        private FontAwesome.Sharp.IconButton btn_problems;
+        private FontAwesome.Sharp.IconButton btn_home;
+        private FontAwesome.Sharp.IconButton btn_settings;
+        private FontAwesome.Sharp.IconButton btn_Logout;
     }
 }

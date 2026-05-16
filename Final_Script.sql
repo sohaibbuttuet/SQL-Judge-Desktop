@@ -258,50 +258,20 @@
 	-- =====================================
 
 	-- ===================================== (1) =====================================
-	CREATE VIEW vw_UserStudents
+	CREATE OR REPLACE VIEW vw_users
 	AS
 	SELECT
 		u.UserID,
 		u.FullName,
 		u.Email,
+        r.RoleName,
 		u.IsActive,
 		u.CreatedAt
 	FROM Users u
 	JOIN UserRoles ur ON u.UserID = ur.UserID
-	JOIN Roles r ON ur.RoleID = r.RoleID
-	WHERE r.RoleName = 'Student';
+	JOIN Roles r ON ur.RoleID = r.RoleID;
 
 	-- ===================================== (2) =====================================
-	CREATE OR REPLACE VIEW vw_UserAdmins
-	AS
-	SELECT
-		u.UserID,
-		u.FullName,
-		u.Email,
-        u.Password,
-		u.IsActive,
-		u.CreatedAt
-	FROM Users u
-	JOIN UserRoles ur ON u.UserID = ur.UserID
-	JOIN Roles r ON ur.RoleID = r.RoleID
-	WHERE r.RoleName = 'Admin';
-	
-    -- ===================================== (3) =====================================
-	CREATE OR REPLACE VIEW vw_SuperAdmins
-	AS
-	SELECT
-		u.UserID,
-		u.FullName,
-		u.Email,
-        u.Password,
-		u.IsActive,
-		u.CreatedAt
-	FROM Users u
-	JOIN UserRoles ur ON u.UserID = ur.UserID
-	JOIN Roles r ON ur.RoleID = r.RoleID
-	WHERE r.RoleName = 'SuperAdmin';
-
-	-- ===================================== (4) =====================================
 	CREATE VIEW vw_StudentsForAdmin
 	AS
 	SELECT
@@ -318,7 +288,7 @@
 	JOIN SkillLevels sk ON s.SkillLevelID = sk.SkillLevelID
 	JOIN vw_UserStudents u ON s.UserID = u.UserID;
 
-	-- ===================================== (5) =====================================
+	-- ===================================== (3) =====================================
 	CREATE VIEW vw_StudentsLeaderboard	
 	AS
 	SELECT
@@ -333,7 +303,7 @@
 	JOIN Users u ON s.UserID = u.UserID
 	JOIN SkillLevels sk ON s.SkillLevelID = sk.SkillLevelID;
     
-    -- ===================================== (6) =====================================
+    -- ===================================== (4) =====================================
     CREATE VIEW vw_problems
 	AS
 	SELECT p.ProblemID, 
@@ -346,7 +316,7 @@
 	FROM problems p 
     JOIN problemdifficulties d ON p.DifficultyID = d.DifficultyID;
     
-    -- ===================================== (7) =====================================
+    -- ===================================== (5) =====================================
     CREATE OR REPLACE VIEW vw_Contests AS
 	SELECT
 		c.ContestID,
@@ -364,7 +334,7 @@
     LEFT JOIN contestparticipants cp ON c.ContestID = cp.ContestID
     GROUP BY c.ContestID, c.Title, c.StartDate, c.EndDate, c.CreatedBy, ContestStatus;
     
-    -- ===================================== (8) =====================================
+    -- ===================================== (6) =====================================
     CREATE OR REPLACE VIEW vw_testcases
     AS
     SELECT

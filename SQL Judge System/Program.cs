@@ -13,7 +13,7 @@ namespace SQL_Judge_System
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new SQL_Judge_System.UI.AdminDashboardUI());
+            Application.Run(new SQL_Judge_System.UI.AuthForm());
         }
     }
 }

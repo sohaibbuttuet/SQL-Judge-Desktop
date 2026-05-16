@@ -18,6 +18,12 @@ namespace SQL_Judge_System.UI
             InitializeComponent();
         }
 
+       
+        private void StudentDashboard_Load(object sender, EventArgs e)
+        {
+            LoadleaderBoard();
+            LoadStudentData();
+        }
         private void LoadleaderBoard()
         {
             dgvLeaderboard.DataSource = StudentLeaderboardBL.GetLeaderboard();
@@ -60,12 +66,6 @@ namespace SQL_Judge_System.UI
                 MessageBox.Show("Student data not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private void StudentDashboard_Load(object sender, EventArgs e)
-        {
-            LoadleaderBoard();
-            LoadStudentData();
-        }
-
 
         private void btn_home_Click(object sender, EventArgs e)
         {
@@ -95,7 +95,5 @@ namespace SQL_Judge_System.UI
                 this.Close();
             }
         }
-
-       
     }
 }

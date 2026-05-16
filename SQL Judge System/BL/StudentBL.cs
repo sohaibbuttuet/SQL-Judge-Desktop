@@ -50,9 +50,5 @@ namespace SQL_Judge_System.BL
             return StudentDL.GetStudentByUserID(userId);
         }
 
-        public static DataTable GetStudent(int id)
-        {
-            return StudentDL.GetStudent(id);
-        }
     }
 }

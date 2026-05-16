@@ -74,11 +74,6 @@ namespace SQL_Judge_System.DL
 
             return list;
         }
-        public static DataTable GetStudent(int userId)
-        {
-            string query = $"SELECT * FROM vw_studentsforadmin WHERE UserID = {userId};";
-            return DatabaseHelper.Instance.GetDataTable(query);          
-        }
 
         // Helping Function
         private static Student MapDataRowToStudent(DataRow row)
@@ -104,22 +99,22 @@ namespace SQL_Judge_System.DL
         // --- For AdminDashboard ---
         public static int TotalStudents()
         {
-            string query = "SELECT COUNT(*) FROM vw_userstudents;";
+            string query = "SELECT COUNT(*) FROM vw_users WHERE RoleName = 'Student';";
             return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
         }
         public static int ActiveStudents()
         {
-            string query = "SELECT COUNT(*) FROM vw_userstudents WHERE IsActive = 1;";
+            string query = "SELECT COUNT(*) FROM vw_users WHERE RoleName = 'Student' AND IsActive = 1;";
             return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
         }
         public static int InactiveStudents()
         {
-            string query = "SELECT COUNT(*) FROM vw_userstudents WHERE IsActive = 0;";
+            string query = "SELECT COUNT(*) FROM vw_users WHERE RoleName = 'Student' AND IsActive = 0;";
             return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
         }
         public static DataTable GetStudentsForAdmin()
         {
-            string query = "SELECT * FROM vw_studentsforadmin;";
+            string query = "SELECT * FROM vw_studentsforadmin ORDER BY StudentID;";
             return DatabaseHelper.Instance.GetDataTable(query);
         }
     }

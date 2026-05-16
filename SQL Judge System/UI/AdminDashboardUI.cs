@@ -1,4 +1,7 @@
-﻿using SQL_Judge_System.BL;
+﻿using FontAwesome.Sharp;
+using SQL_Judge_System.BL;
+using SQL_Judge_System.DL;
+using SQL_Judge_System.Models;
 using System;
 using System.Windows.Forms;
 
@@ -6,14 +9,22 @@ namespace SQL_Judge_System.UI
 {
     public partial class AdminDashboardUI : Form
     {
-        public AdminDashboardUI()
+        User user = null;
+
+        public AdminDashboardUI(int userID)
         {
             InitializeComponent();
-            ShowPanel(pnlSuperAdmin, "Admin Dashboard");
+            user = UserBL.GetUserById(userID);
+            if (!UserBL.IsUserSuperAdmin(userID))
+            {
+                btn_Admin.Visible = false;
+            }
+            ShowPanel(pnlHome, "Home");
         }
 
         private void AdminDashboard_Load(object sender, EventArgs e)
         {
+            LoadHomeData();
             LoadAdminData();
             LoadStudentData();
             LoadProblemData();
@@ -21,6 +32,45 @@ namespace SQL_Judge_System.UI
             LoadTestCaseData();
             LoadSubmissionData();
             ToolTip();        
+        }
+
+        // --- HOME PANEL ---
+        private void LoadHomeData()
+        {
+            LoadHome();
+            LoadHomeDashboard();
+        }
+        private void LoadHome()
+        {
+            try
+            {
+                dgv_Users.DataSource = UserBL.GetUsers();
+
+                dgv_Users.Columns["UserID"].FillWeight = 20;
+                dgv_Users.Columns["FullName"].FillWeight = 70;
+                dgv_Users.Columns["Email"].FillWeight = 40;
+                dgv_Users.Columns["RoleName"].FillWeight = 50;
+                dgv_Users.Columns["IsActive"].FillWeight = 20;
+                dgv_Users.Columns["CreatedAt"].FillWeight = 50;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to load home data: " + ex.Message);
+            }
+        }
+        private void LoadHomeDashboard()
+        {
+            try
+            {
+                lblMainTitle.Text = $"Welcome, {user.FullName}!";
+                lblTotalUsersValue.Text = UserBL.TotalUsers().ToString();
+                lblActiveUsersValue.Text = UserBL.ActiveUsers().ToString();
+                lblInactiveUsersValue.Text = UserBL.InactiveUsers().ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to load home dashboard data: " + ex.Message);
+            }
         }
 
         // --- SUPER ADMIN PANEL ---
@@ -31,60 +81,99 @@ namespace SQL_Judge_System.UI
         }
         private void LoadAdmin()
         {
-            dgvAdmins.DataSource = UserBL.GetAdminList();          
+            try
+            {
+                dgvAdmins.DataSource = UserBL.GetAdminList();
 
-            dgvAdmins.Columns["UserID"].FillWeight = 20;
-            dgvAdmins.Columns["FullName"].FillWeight = 80;
-            dgvAdmins.Columns["Email"].FillWeight = 40;
-            dgvAdmins.Columns["IsActive"].FillWeight = 20;
-            dgvAdmins.Columns["CreatedAt"].FillWeight = 50;
+                dgvAdmins.Columns["UserID"].FillWeight = 20;
+                dgvAdmins.Columns["FullName"].FillWeight = 80;
+                dgvAdmins.Columns["Email"].FillWeight = 40;
+                dgvAdmins.Columns["IsActive"].FillWeight = 20;
+                dgvAdmins.Columns["CreatedAt"].FillWeight = 50;
+                dgvAdmins.Columns["RoleName"].Visible = false;
 
-            dgvAdmins.Columns["UserID"].HeaderText = "ID";
-            dgvAdmins.Columns["FullName"].HeaderText = "Admin Name";
-            dgvAdmins.Columns["Email"].HeaderText = "Email";
-            dgvAdmins.Columns["IsActive"].HeaderText = "Status";
-            dgvAdmins.Columns["CreatedAt"].HeaderText = "Created At";
+                dgvAdmins.Columns["UserID"].HeaderText = "ID";
+                dgvAdmins.Columns["FullName"].HeaderText = "Admin Name";
+                dgvAdmins.Columns["Email"].HeaderText = "Email";
+                dgvAdmins.Columns["RoleName"].HeaderText = "Role Name";
+                dgvAdmins.Columns["IsActive"].HeaderText = "Status";
+                dgvAdmins.Columns["CreatedAt"].HeaderText = "Created At";
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Failed to load admin data: " + ex.Message);
+            }
         }
         public void LoadAdminDashboard()
         {
-            lblStdValue.Text = StudentBL.TotalStudents().ToString();
-            lbladminValue.Text = UserBL.TotalAdmins().ToString();
-            lblContestValue.Text = ContestBL.TotalContests().ToString();
-            lblProblemValue.Text = ProblemBL.TotalProblems().ToString();            
+            try
+            {                
+                lblsuperAdminValue.Text = UserBL.TotalSuperAdmins().ToString();
+                lbladminValue.Text = UserBL.TotalAdmins().ToString();
+                lblinActAdminsValue.Text = UserBL.InactiveAdmins().ToString();
+                lblActAdminsValue.Text = UserBL.ActiveAdmins().ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to load dashboard data: " + ex.Message);
+            }
         }
         private void btnAddAdmin_Click(object sender, EventArgs e)
         {
+            try
+            {
+                //AddAdminUI addAdminForm = new AddAdminUI();
+                //if (addAdminForm.ShowDialog() == DialogResult.OK)
+                //{
+                //    RefreshData();
+                //}
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to add admin: " + ex.Message);
 
+            }
         }
         private void btnUpdateAdmin_Click(object sender, EventArgs e)
         {
-
+            try { }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to update admin: " + ex.Message);
+            }
         }
         private void btnToggleAdmin_Click(object sender, EventArgs e)
         {
-            if (dgvStudents.SelectedRows.Count > 0)
+            try
             {
-                int adminID = Convert.ToInt32(dgvAdmins.SelectedRows[0].Cells["UserID"].Value);
-                bool isActive = Convert.ToBoolean(dgvAdmins.SelectedRows[0].Cells["IsActive"].Value);
-                if (isActive)
+                if (dgvAdmins.SelectedRows.Count > 0)
                 {
-                    DialogResult confirm = MessageBox.Show("Are you sure you want to deactivate this admin?", "Confirm Deactivation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                    if (confirm == DialogResult.Yes)
+                    int adminID = Convert.ToInt32(dgvAdmins.SelectedRows[0].Cells["UserID"].Value);
+                    bool isActive = Convert.ToBoolean(dgvAdmins.SelectedRows[0].Cells["IsActive"].Value);
+                    if (isActive)
                     {
-                        UserBL.DeactivateUser(adminID);
-                        MessageBox.Show("Admin deactivated successfully.");
+                        DialogResult confirm = MessageBox.Show("Are you sure you want to deactivate this admin?", "Confirm Deactivation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                        if (confirm == DialogResult.Yes)
+                        {
+                            UserBL.DeactivateUser(adminID);
+                            MessageBox.Show("Admin deactivated successfully.");
+                        }
                     }
+                    else
+                    {
+                        UserBL.ActivateUser(adminID);
+                        MessageBox.Show("Admin activated successfully.");
+                    }
+                    RefreshData();
                 }
                 else
                 {
-                    UserBL.ActivateUser(adminID);
-                    MessageBox.Show("Admin activated successfully.");
+                    MessageBox.Show("Please select an admin");
                 }
-                RefreshData();
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Please select an admin");
+                MessageBox.Show("Failed to toggle admin status: " + ex.Message);
             }
         }
 
@@ -96,62 +185,83 @@ namespace SQL_Judge_System.UI
         }
         private void LoadStudents()
         {
-            dgvStudents.DataSource = StudentBL.GetStudentsForAdmin();
+            try
+            {
+                dgvStudents.DataSource = StudentBL.GetStudentsForAdmin();
 
-            // Set specific weight to columns 
-            dgvStudents.Columns["StudentID"].FillWeight = 20;
-            dgvStudents.Columns["UserID"].FillWeight = 30;
-            dgvStudents.Columns["FullName"].FillWeight = 70;
-            dgvStudents.Columns["RegistrationNumber"].FillWeight = 50;
-            dgvStudents.Columns["LevelName"].FillWeight = 50;
-            dgvStudents.Columns["ProblemsSolved"].FillWeight = 50;
-            dgvStudents.Columns["TotalScore"].FillWeight = 50;
-            dgvStudents.Columns["IsActive"].FillWeight = 20;
-            dgvStudents.Columns["CreatedAt"].FillWeight = 50;
+                // Set specific weight to columns 
+                dgvStudents.Columns["StudentID"].FillWeight = 20;
+                dgvStudents.Columns["UserID"].FillWeight = 30;
+                dgvStudents.Columns["FullName"].FillWeight = 70;
+                dgvStudents.Columns["RegistrationNumber"].FillWeight = 50;
+                dgvStudents.Columns["LevelName"].FillWeight = 50;
+                dgvStudents.Columns["ProblemsSolved"].FillWeight = 50;
+                dgvStudents.Columns["TotalScore"].FillWeight = 50;
+                dgvStudents.Columns["IsActive"].FillWeight = 20;
+                dgvStudents.Columns["CreatedAt"].FillWeight = 50;
 
-            // Set the header text for each column
-            dgvStudents.Columns["StudentID"].HeaderText = "ID";
-            dgvStudents.Columns["UserID"].HeaderText = "User ID";
-            dgvStudents.Columns["FullName"].HeaderText = "Student Name";
-            dgvStudents.Columns["RegistrationNumber"].HeaderText = "Reg No.";
-            dgvStudents.Columns["LevelName"].HeaderText = "Skill Level";
-            dgvStudents.Columns["ProblemsSolved"].HeaderText = "Problems Solved";
-            dgvStudents.Columns["TotalScore"].HeaderText = "Total Score";
-            dgvStudents.Columns["IsActive"].HeaderText = "Status";
-            dgvStudents.Columns["CreatedAt"].HeaderText = "Created At";
+                // Set the header text for each column
+                dgvStudents.Columns["StudentID"].HeaderText = "ID";
+                dgvStudents.Columns["UserID"].HeaderText = "User ID";
+                dgvStudents.Columns["FullName"].HeaderText = "Student Name";
+                dgvStudents.Columns["RegistrationNumber"].HeaderText = "Reg No.";
+                dgvStudents.Columns["LevelName"].HeaderText = "Skill Level";
+                dgvStudents.Columns["ProblemsSolved"].HeaderText = "Problems Solved";
+                dgvStudents.Columns["TotalScore"].HeaderText = "Total Score";
+                dgvStudents.Columns["IsActive"].HeaderText = "Status";
+                dgvStudents.Columns["CreatedAt"].HeaderText = "Created At";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to load student data: " + ex.Message);
+            }
         }
         private void LoadStudentDashboard()
         {
-            lbl_stdValue.Text = StudentBL.TotalStudents().ToString();
-            lblactstdValue.Text = StudentBL.ActiveStudents().ToString();
-            lblinactstdValue.Text = StudentBL.InactiveStudents().ToString();
+            try
+            {
+                lbl_stdValue.Text = StudentBL.TotalStudents().ToString();
+                lblactstdValue.Text = StudentBL.ActiveStudents().ToString();
+                lblinactstdValue.Text = StudentBL.InactiveStudents().ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to load student dashboard data: " + ex.Message);
+            }
         }
         private void btntoggleStd_Click(object sender, EventArgs e)
         {
-            if (dgvStudents.SelectedRows.Count > 0)
+            try
             {
-                int studentID = Convert.ToInt32(dgvStudents.SelectedRows[0].Cells["StudentID"].Value);
-                bool isActive = Convert.ToBoolean(dgvStudents.SelectedRows[0].Cells["IsActive"].Value);
-
-                if (isActive)
+                if (dgvStudents.SelectedRows.Count > 0)
                 {
-                    DialogResult confirm = MessageBox.Show("Are you sure you want to deactivate this student?", "Confirm Deactivation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                    if (confirm == DialogResult.Yes)
+                    int userID = Convert.ToInt32(dgvStudents.SelectedRows[0].Cells["UserID"].Value);
+                    bool isActive = Convert.ToBoolean(dgvStudents.SelectedRows[0].Cells["IsActive"].Value);
+
+                    if (isActive)
                     {
-                        UserBL.DeactivateUser(studentID);
-                        MessageBox.Show("Student deactivated successfully.");
+                        DialogResult confirm = MessageBox.Show("Are you sure you want to deactivate this student?", "Confirm Deactivation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                        if (confirm == DialogResult.Yes)
+                        {
+                            UserBL.DeactivateUser(userID);
+                            MessageBox.Show("Student deactivated successfully.");
+                        }
                     }
+                    else
+                    {
+                        UserBL.ActivateUser(userID);
+                        MessageBox.Show("Student activated successfully.");
+                    }
+                    RefreshData();
                 }
                 else
                 {
-                    UserBL.ActivateUser(studentID);
-                    MessageBox.Show("Student activated successfully.");
+                    MessageBox.Show("Please select a student");
                 }
-                RefreshData();
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Please select a student");
+                MessageBox.Show("Failed to toggle student status: " + ex.Message);
             }
         }
 
@@ -163,61 +273,90 @@ namespace SQL_Judge_System.UI
         }
         private void LoadProblem()
         {
-            dgvProblems.DataSource = ProblemBL.ProblemsList();
-            dgvProblems.Columns["ProblemID"].FillWeight = 20;
-            dgvProblems.Columns["Title"].FillWeight = 100;
-            dgvProblems.Columns["DifficultyName"].FillWeight = 30;
-            dgvProblems.Columns["Points"].FillWeight = 20;
-            dgvProblems.Columns["CreatedAt"].FillWeight = 50;
-            dgvProblems.Columns["IsActive"].FillWeight = 20;
+            try
+            {
+                dgvProblems.DataSource = ProblemBL.ProblemsList();
+                dgvProblems.Columns["ProblemID"].FillWeight = 20;
+                dgvProblems.Columns["Title"].FillWeight = 100;
+                dgvProblems.Columns["DifficultyName"].FillWeight = 30;
+                dgvProblems.Columns["Points"].FillWeight = 20;
+                dgvProblems.Columns["CreatedAt"].FillWeight = 50;
+                dgvProblems.Columns["IsActive"].FillWeight = 20;
 
-            dgvProblems.Columns["ProblemID"].HeaderText = "ID";
-            dgvProblems.Columns["Title"].HeaderText = "Title";
-            dgvProblems.Columns["DifficultyName"].HeaderText = "Difficulty Level";
-            dgvProblems.Columns["Points"].HeaderText = "Points";
-            dgvProblems.Columns["CreatedAt"].HeaderText = "Created At";
-            dgvProblems.Columns["IsActive"].HeaderText = "Status";
+                dgvProblems.Columns["ProblemID"].HeaderText = "ID";
+                dgvProblems.Columns["Title"].HeaderText = "Title";
+                dgvProblems.Columns["DifficultyName"].HeaderText = "Difficulty Level";
+                dgvProblems.Columns["Points"].HeaderText = "Points";
+                dgvProblems.Columns["CreatedAt"].HeaderText = "Created At";
+                dgvProblems.Columns["IsActive"].HeaderText = "Status";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to load problem data: " + ex.Message);
+            }
         }
         private void LoadProblemDashboard()
         {
-            lblTotalProbValue.Text = ProblemBL.TotalProblems().ToString();
-            lblActProbValue.Text = ProblemBL.ActiveProblems().ToString();
-            lblInActProbValue.Text = ProblemBL.InactiveProblems().ToString();
+            try
+            {
+                lblTotalProbValue.Text = ProblemBL.TotalProblems().ToString();
+                lblActProbValue.Text = ProblemBL.ActiveProblems().ToString();
+                lblInActProbValue.Text = ProblemBL.InactiveProblems().ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to load problem dashboard data: " + ex.Message);
+            }
         }
         private void btnAddProb_Click(object sender, EventArgs e)
         {
-
+            try { }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to update admin: " + ex.Message);
+            }
         }
         private void btnUpdateProb_Click(object sender, EventArgs e)
         {
-
+            try { }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to update admin: " + ex.Message);
+            }
         }
         private void btnToggleProb_Click(object sender, EventArgs e)
         {
-            if(dgvProblems.SelectedRows.Count > 0)
+            try
             {
-                int problemID = Convert.ToInt32(dgvProblems.SelectedRows[0].Cells["ProblemID"].Value);
-                bool isActive = Convert.ToBoolean(dgvProblems.SelectedRows[0].Cells["IsActive"].Value);
-
-                if (isActive)
+                if (dgvProblems.SelectedRows.Count > 0)
                 {
-                    DialogResult confirm = MessageBox.Show("Are you sure you want to deactivate this problem?", "Confirm Deactivation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                    if (confirm == DialogResult.Yes)
+                    int problemID = Convert.ToInt32(dgvProblems.SelectedRows[0].Cells["ProblemID"].Value);
+                    bool isActive = Convert.ToBoolean(dgvProblems.SelectedRows[0].Cells["IsActive"].Value);
+
+                    if (isActive)
                     {
-                        ProblemBL.DeactivateProblem(problemID);
-                        MessageBox.Show("Problem deactivated successfully.");
+                        DialogResult confirm = MessageBox.Show("Are you sure you want to deactivate this problem?", "Confirm Deactivation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                        if (confirm == DialogResult.Yes)
+                        {
+                            ProblemBL.DeactivateProblem(problemID);
+                            MessageBox.Show("Problem deactivated successfully.");
+                        }
                     }
+                    else
+                    {
+                        ProblemBL.ActivateProblem(problemID);
+                        MessageBox.Show("Problem activated successfully.");
+                    }
+                    RefreshData();
                 }
                 else
                 {
-                    ProblemBL.ActivateProblem(problemID);
-                    MessageBox.Show("Problem activated successfully.");
+                    MessageBox.Show("Please select a problem");
                 }
-                RefreshData();
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Please select a problem");
+                MessageBox.Show("Failed to toggle problem status: " + ex.Message);
             }
         }
 
@@ -229,37 +368,59 @@ namespace SQL_Judge_System.UI
         }
         private void LoadContest()
         {
-            dgvContest.DataSource = ContestBL.GetContests();
-            dgvContest.Columns["ContestID"].FillWeight = 20;
-            dgvContest.Columns["Title"].FillWeight = 100;
-            dgvContest.Columns["StartDate"].FillWeight = 50;
-            dgvContest.Columns["EndDate"].FillWeight = 50;
-            dgvContest.Columns["CreatedBy"].FillWeight = 30;
-            dgvContest.Columns["TotalParticipants"].FillWeight = 30;
-            dgvContest.Columns["ContestStatus"].FillWeight = 50;
+            try
+            {
+                dgvContest.DataSource = ContestBL.GetContests();
+                dgvContest.Columns["ContestID"].FillWeight = 20;
+                dgvContest.Columns["Title"].FillWeight = 100;
+                dgvContest.Columns["StartDate"].FillWeight = 50;
+                dgvContest.Columns["EndDate"].FillWeight = 50;
+                dgvContest.Columns["CreatedBy"].FillWeight = 30;
+                dgvContest.Columns["TotalParticipants"].FillWeight = 30;
+                dgvContest.Columns["ContestStatus"].FillWeight = 50;
 
-            dgvContest.Columns["ContestID"].HeaderText = "ID";
-            dgvContest.Columns["Title"].HeaderText = "Title";
-            dgvContest.Columns["StartDate"].HeaderText = "Start Date";
-            dgvContest.Columns["EndDate"].HeaderText = "End Date";
-            dgvContest.Columns["CreatedBy"].HeaderText = "Created By";
-            dgvContest.Columns["TotalParticipants"].HeaderText = "Participants";
-            dgvContest.Columns["ContestStatus"].HeaderText = "Status";
+                dgvContest.Columns["ContestID"].HeaderText = "ID";
+                dgvContest.Columns["Title"].HeaderText = "Title";
+                dgvContest.Columns["StartDate"].HeaderText = "Start Date";
+                dgvContest.Columns["EndDate"].HeaderText = "End Date";
+                dgvContest.Columns["CreatedBy"].HeaderText = "Created By";
+                dgvContest.Columns["TotalParticipants"].HeaderText = "Participants";
+                dgvContest.Columns["ContestStatus"].HeaderText = "Status";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to load contest data: " + ex.Message);
+            }
         }
         private void LoadContestDashboard()
         {
-            lblTotalContestValue.Text = ContestBL.TotalContests().ToString();
-            lblActContestValue.Text = ContestBL.ActiveContests().ToString();
-            lblInActcontestValue.Text = ContestBL.InactiveContests().ToString();
-            lblUpcommingContestValue.Text = ContestBL.UpcomingContests().ToString();
+            try
+            {
+                lblTotalContestValue.Text = ContestBL.TotalContests().ToString();
+                lblActContestValue.Text = ContestBL.ActiveContests().ToString();
+                lblInActcontestValue.Text = ContestBL.InactiveContests().ToString();
+                lblUpcommingContestValue.Text = ContestBL.UpcomingContests().ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to load contest dashboard data: " + ex.Message);
+            }
         }
         private void btnAddContest_Click(object sender, EventArgs e)
         {
-
+            try { }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to update admin: " + ex.Message);
+            }
         }
         private void btnUpdContest_Click(object sender, EventArgs e)
         {
-
+            try { }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to update admin: " + ex.Message);
+            }
         }
 
         // --- Test Cases Panel ---
@@ -270,62 +431,91 @@ namespace SQL_Judge_System.UI
         }
         private void LoadTestCases()
         {
-            dgvTestCases.DataSource = TestCaseBL.GetTestCasesForAdmin();
-            dgvTestCases.Columns["TestCaseID"].FillWeight = 20;
-            dgvTestCases.Columns["ProblemID"].FillWeight = 20;
-            dgvTestCases.Columns["Title"].FillWeight = 50;
-            dgvTestCases.Columns["SetupSQL"].FillWeight = 100;
-            dgvTestCases.Columns["ExpectedOutput"].FillWeight = 100;
-            dgvTestCases.Columns["CreatedAt"].FillWeight = 50;
-            dgvTestCases.Columns["IsActive"].FillWeight = 20;
+            try
+            {
+                dgvTestCases.DataSource = TestCaseBL.GetTestCasesForAdmin();
+                dgvTestCases.Columns["TestCaseID"].FillWeight = 20;
+                dgvTestCases.Columns["ProblemID"].FillWeight = 20;
+                dgvTestCases.Columns["Title"].FillWeight = 50;
+                dgvTestCases.Columns["SetupSQL"].FillWeight = 100;
+                dgvTestCases.Columns["ExpectedOutput"].FillWeight = 100;
+                dgvTestCases.Columns["CreatedAt"].FillWeight = 50;
+                dgvTestCases.Columns["IsActive"].FillWeight = 20;
 
-            dgvTestCases.Columns["TestCaseID"].HeaderText = "ID";
-            dgvTestCases.Columns["ProblemID"].HeaderText = "Problem ID";
-            dgvTestCases.Columns["Title"].HeaderText = "Problem Title";
-            dgvTestCases.Columns["SetupSQL"].HeaderText = "Setup SQL";
-            dgvTestCases.Columns["ExpectedOutput"].HeaderText = "Expected Output";
-            dgvTestCases.Columns["IsActive"].HeaderText = "Status";
-            dgvTestCases.Columns["CreatedAt"].HeaderText = "Created At";
+                dgvTestCases.Columns["TestCaseID"].HeaderText = "ID";
+                dgvTestCases.Columns["ProblemID"].HeaderText = "Problem ID";
+                dgvTestCases.Columns["Title"].HeaderText = "Problem Title";
+                dgvTestCases.Columns["SetupSQL"].HeaderText = "Setup SQL";
+                dgvTestCases.Columns["ExpectedOutput"].HeaderText = "Expected Output";
+                dgvTestCases.Columns["IsActive"].HeaderText = "Status";
+                dgvTestCases.Columns["CreatedAt"].HeaderText = "Created At";
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Failed to load test case data: " + ex.Message);
+            }
         }
         private void LoadTestCaseDashboard()
         {
-            lbltotalTestCases.Text = TestCaseBL.TotalTestCases().ToString();
-            lblActTestCases.Text = TestCaseBL.ActiveTestCases().ToString();
-            lblInActiveTestCases.Text = TestCaseBL.InactiveTestCases().ToString();
+            try
+            {
+                lbltotalTestCases.Text = TestCaseBL.TotalTestCases().ToString();
+                lblActTestCases.Text = TestCaseBL.ActiveTestCases().ToString();
+                lblInActiveTestCases.Text = TestCaseBL.InactiveTestCases().ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to load test case dashboard data: " + ex.Message);
+            }
         }
         private void btnAddTestCase_Click(object sender, EventArgs e)
         {
-
+            try { }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to update admin: " + ex.Message);
+            }
         }
         private void btnUpdateTestCase_Click(object sender, EventArgs e)
         {
-
+            try { }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to update admin: " + ex.Message);
+            }
         }
         private void btnToggleTestCase_Click(object sender, EventArgs e)
         {
-            if(dgvTestCases.SelectedRows.Count > 0)
+            try
             {
-                int testCaseID = Convert.ToInt32(dgvTestCases.SelectedRows[0].Cells["TestCaseID"].Value);
-                bool isActive = Convert.ToBoolean(dgvTestCases.SelectedRows[0].Cells["IsActive"].Value);
-                if (isActive)
+                if (dgvTestCases.SelectedRows.Count > 0)
                 {
-                    DialogResult confirm = MessageBox.Show("Are you sure you want to deactivate this test case?", "Confirm Deactivation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                    if (confirm == DialogResult.Yes)
+                    int testCaseID = Convert.ToInt32(dgvTestCases.SelectedRows[0].Cells["TestCaseID"].Value);
+                    bool isActive = Convert.ToBoolean(dgvTestCases.SelectedRows[0].Cells["IsActive"].Value);
+                    if (isActive)
                     {
-                        TestCaseBL.DeactivateTestCase(testCaseID);
-                        MessageBox.Show("Test case deactivated successfully.");
+                        DialogResult confirm = MessageBox.Show("Are you sure you want to deactivate this test case?", "Confirm Deactivation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                        if (confirm == DialogResult.Yes)
+                        {
+                            TestCaseBL.DeactivateTestCase(testCaseID);
+                            MessageBox.Show("Test case deactivated successfully.");
+                        }
                     }
+                    else
+                    {
+                        TestCaseBL.ActivateTestCase(testCaseID);
+                        MessageBox.Show("Test case activated successfully.");
+                    }
+                    RefreshData();
                 }
                 else
                 {
-                    TestCaseBL.ActivateTestCase(testCaseID);
-                    MessageBox.Show("Test case activated successfully.");
+                    MessageBox.Show("Please select a test case");
                 }
-                RefreshData();
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Please select a test case");
+                MessageBox.Show("Failed to toggle test case status: " + ex.Message);
             }
         }
 
@@ -337,35 +527,51 @@ namespace SQL_Judge_System.UI
         }
         private void LoadSubmissions()
         {
-            dgvSubmissions.DataSource = SubmissionBL.GetSubmissionsForAdmin();
-            dgvSubmissions.Columns["SubmissionID"].FillWeight = 20;
-            dgvSubmissions.Columns["StudentName"].FillWeight = 100;
-            dgvSubmissions.Columns["ProblemTitle"].FillWeight = 100;
-            dgvSubmissions.Columns["SubmittedAt"].FillWeight = 50;
-            dgvSubmissions.Columns["Status"].FillWeight = 30;
-            dgvSubmissions.Columns["Score"].FillWeight = 20;
-            dgvSubmissions.Columns["SubmissionID"].HeaderText = "ID";
-            dgvSubmissions.Columns["StudentName"].HeaderText = "Student Name";
-            dgvSubmissions.Columns["ProblemTitle"].HeaderText = "Problem Title";
-            dgvSubmissions.Columns["SubmittedAt"].HeaderText = "Submitted At";
-            dgvSubmissions.Columns["Status"].HeaderText = "Status";
-            dgvSubmissions.Columns["Score"].HeaderText = "Score";
+            try {
+                dgvSubmissions.DataSource = SubmissionBL.GetSubmissionsForAdmin();
+                dgvSubmissions.Columns["SubmissionID"].FillWeight = 20;
+                dgvSubmissions.Columns["StudentID"].FillWeight = 50;
+                dgvSubmissions.Columns["ProblemID"].FillWeight = 50;
+                dgvSubmissions.Columns["StatusName"].FillWeight = 60;
+                dgvSubmissions.Columns["AttemptNumber"].FillWeight = 40;
+                dgvSubmissions.Columns["TotalScore"].FillWeight = 50;
+                dgvSubmissions.Columns["SubmittedAt"].FillWeight = 50;
+
+
+                dgvSubmissions.Columns["SubmissionID"].HeaderText = "ID";
+                dgvSubmissions.Columns["StudentID"].HeaderText = "Student ID";
+                dgvSubmissions.Columns["ProblemID"].HeaderText = "Problem ID";
+                dgvSubmissions.Columns["StatusName"].HeaderText = "Status";
+                dgvSubmissions.Columns["AttemptNumber"].HeaderText = "Attempt #";
+                dgvSubmissions.Columns["TotalScore"].HeaderText = "Total Score";
+                dgvSubmissions.Columns["SubmittedAt"].HeaderText = "Submitted At";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to load submission data: " + ex.Message);
+            }
         }
         private void LoadSubmissionDashboard()
         {
-            totalsubValue.Text = SubmissionBL.TotalSubmissions().ToString();
-            AccSubValue.Text = SubmissionBL.AcceptedSubmissions().ToString();
-            RegSubValue.Text = SubmissionBL.RejectedSubmissions().ToString();
+            try
+            {
+                totalsubValue.Text = SubmissionBL.TotalSubmissions().ToString();
+                AccSubValue.Text = SubmissionBL.AcceptedSubmissions().ToString();
+                RegSubValue.Text = SubmissionBL.RejectedSubmissions().ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to load submission dashboard data: " + ex.Message);
+            }
         }
-
 
 
         // Slide Bar Menu Buttons
         private void btnHome_Click(object sender, EventArgs e)
         {
-            ShowPanel(pnlSuperAdmin, "Admin Dashboard");
+          ShowPanel(pnlHome, "Home");
         }
-        private void btnAdmin_Click(object sender, EventArgs e)
+        private void btn_Admin_Click(object sender, EventArgs e)
         {
             ShowPanel(pnlSuperAdmin, "Admin Dashboard");
         }
@@ -413,7 +619,30 @@ namespace SQL_Judge_System.UI
         // --- Utility Methods ---
         private void RefreshData()
         {
-            
+            try
+            {
+                // --- Reload Admin Section ---
+                LoadAdminData();
+
+                // --- Reload Student Section ---
+                LoadStudentData();
+
+                // --- Reload Problem Section ---
+                LoadProblemData();
+
+                // --- Reload Contest Section ---
+                LoadContestData();
+
+                // --- Reload Test Cases Section ---
+                LoadTestCaseData();
+
+                // --- Reload Submissions Section ---
+                LoadSubmissionData();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Refresh failed: " + ex.Message);
+            }
         }
         private void ShowPanel(Panel targetPanel, string headerText)
         {
@@ -421,6 +650,9 @@ namespace SQL_Judge_System.UI
             pnlSuperAdmin.Visible = false;
             pnlProblems.Visible = false;
             pnlStudent.Visible = false;
+            pnlContest.Visible = false;
+            pnlsubmissions.Visible = false;
+            pnlTestCases.Visible = false;
 
             // 2. Show the target panel
             targetPanel.Visible = true;
@@ -430,7 +662,7 @@ namespace SQL_Judge_System.UI
             targetPanel.BringToFront();
 
             // 4. Update the header label
-            lblMainTitle.Text = headerText;
+            lblSuperAdmin.Text = headerText;
         }
         private void ToolTip()
         {
@@ -439,6 +671,6 @@ namespace SQL_Judge_System.UI
             tip.SetToolTip(btnToggleTestCase, "Active/Inactive");
             tip.SetToolTip(btnToggleProb, "Active/Inactive");
             tip.SetToolTip(btnToggleAdmin, "Active/Inactive");
-        }      
+        }
     }
 }

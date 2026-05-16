@@ -137,13 +137,9 @@ namespace SQL_Judge_System.UI
                     User user = new User(email, password);
                     if (UserBL.SignIn(user))
                     {
-                        if (UserBL.IsUserSuperAdmin(user.UserID))
+                        if (UserBL.IsUserSuperAdmin(user.UserID) || UserBL.IsUserAdmin(user.UserID))
                         {
-                            new AdminDashboardUI().Show();
-                        }
-                        else if (UserBL.IsUserAdmin(user.UserID))
-                        {
-                            new AdminDashboardUI().Show();
+                            new AdminDashboardUI(user.UserID).Show();
                         }
                         else
                         {

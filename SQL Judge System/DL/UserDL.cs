@@ -20,7 +20,6 @@ namespace SQL_Judge_System.DL
 
             return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
         }
-
         public static void ActivateUser(int userId)
         {
             string query = $"UPDATE Users SET IsActive = 1 WHERE UserID = {userId};";
@@ -31,7 +30,6 @@ namespace SQL_Judge_System.DL
             string query = $"UPDATE Users SET IsActive = 0 WHERE UserID = {userId};";
             DatabaseHelper.Instance.Update(query);
         }
-
         public static bool ValidateUserCredentials(User user)
         {
             string query = $"SELECT COUNT(*) FROM Users WHERE Email = '{user.Email}' AND Password = '{user.Password}' AND IsActive = 1;";
@@ -41,8 +39,7 @@ namespace SQL_Judge_System.DL
         {
             string query = $"SELECT UserID FROM Users WHERE Email = '{email}' AND Password = '{password}';";
             return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
-        }
-        
+        }        
         public static bool IsEmailRegistered(string email)
         {
             string query = $"SELECT COUNT(*) FROM Users WHERE Email = '{email}';";
@@ -51,17 +48,17 @@ namespace SQL_Judge_System.DL
         }
         public static bool IsUserExists(int userId)
         {
-            string query = $"SELECT COUNT(*) FROM Users WHERE UserID = {userId} AND IsActive = 1;";
+            string query = $"SELECT COUNT(*) FROM Users WHERE UserID = {userId};";
             return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query)) > 0;
         }
         public static bool IsUserAdmin(int userId)
         {
-            string query = $"SELECT COUNT(*) FROM vw_useradmins WHERE UserID = {userId};";
+            string query = $"SELECT COUNT(*) FROM vw_users WHERE RoleName = 'Admin' AND UserID = {userId};";
             return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query)) > 0;
         }
         public static bool IsUserSuperAdmin(int userId)
         {
-            string query = $"SELECT COUNT(*) FROM vw_SuperAdmins WHERE UserID = {userId};";
+            string query = $"SELECT COUNT(*) FROM vw_users WHERE RoleName = 'SuperAdmin' AND UserID = {userId};";
             return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query)) > 0;
         }
         public static void UpdateUser(User user, string previousEmail)
@@ -69,7 +66,6 @@ namespace SQL_Judge_System.DL
             string query = $"UPDATE Users SET Email = '{user.Email}', Password = '{user.Password}' WHERE Email = '{previousEmail}';";
             DatabaseHelper.Instance.Update(query);
         }
-
         public static User GetUserByID(int userId)
         {
             string query = $"SELECT * FROM Users WHERE UserID = {userId};";
@@ -82,12 +78,47 @@ namespace SQL_Judge_System.DL
         // --- For Admin DashboardBL ---
         public static DataTable GetAdminList()
         {
-            string query = "SELECT * FROM vw_UserAdmins;";
+            string query = "SELECT * FROM vw_users WHERE RoleName = 'Admin' ORDER BY UserID;";
+            return DatabaseHelper.Instance.GetDataTable(query);
+        }
+        public static DataTable GetUsers()
+        {
+            string query = "SELECT * FROM vw_users ORDER BY UserID;";
             return DatabaseHelper.Instance.GetDataTable(query);
         }
         public static int TotalAdmins()
         {
-            string query = "SELECT COUNT(*) FROM vw_UserAdmins;";
+            string query = "SELECT COUNT(*) FROM vw_users WHERE RoleName = 'Admin';";
+            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
+        }
+        public static int TotalSuperAdmins()
+        {
+            string query = "SELECT COUNT(*) FROM vw_users WHERE RoleName = 'SuperAdmin';";
+            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
+        }
+        public static int ActiveAdmins()
+        {
+            string query = "SELECT COUNT(*) FROM vw_users WHERE RoleName = 'Admin' AND IsActive = 1;";
+            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
+        }
+        public static int InactiveAdmins()
+        {
+            string query = "SELECT COUNT(*) FROM vw_users WHERE RoleName = 'Admin' AND IsActive = 0;";
+            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
+        }
+        public static int TotalUsers()
+        {
+            string query = "SELECT COUNT(*) FROM vw_users;";
+            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
+        }
+        public static int ActiveUsers()
+        {
+            string query = "SELECT COUNT(*) FROM vw_users WHERE IsActive = 1;";
+            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
+        }
+        public static int InactiveUsers()
+        {
+            string query = "SELECT COUNT(*) FROM vw_users WHERE IsActive = 0;";
             return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
         }
 
