@@ -94,21 +94,36 @@
 	-- =====================================
 
 	CREATE TABLE Problems (
-		ProblemID INT AUTO_INCREMENT PRIMARY KEY,
-		Title VARCHAR(150) NOT NULL,
-		Description TEXT NOT NULL,
-		DifficultyID INT,
-		CreatedBy INT NOT NULL,
-		Points INT DEFAULT 10,
-		CreatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
-		IsActive BOOLEAN DEFAULT TRUE,
+    ProblemID INT AUTO_INCREMENT PRIMARY KEY,
 
-		FOREIGN KEY (DifficultyID) REFERENCES ProblemDifficulties(DifficultyID) ON DELETE RESTRICT,
-		FOREIGN KEY (CreatedBy) REFERENCES Users(UserID),
-        
-		CONSTRAINT chk_problem_points CHECK (Points > 0)
-	);
+    Title VARCHAR(150) UNIQUE NOT NULL,
+    Description TEXT NOT NULL,
 
+    DifficultyID INT NOT NULL,
+
+    Points INT DEFAULT 10,
+
+    CreatedBy INT NOT NULL,
+    CreatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+
+    UpdatedBy INT NOT NULL,
+    UpdatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+
+    IsActive BOOLEAN DEFAULT TRUE,
+
+    FOREIGN KEY (DifficultyID)
+        REFERENCES ProblemDifficulties(DifficultyID)
+        ON DELETE RESTRICT,
+
+    FOREIGN KEY (CreatedBy)
+        REFERENCES Users(UserID),
+
+    FOREIGN KEY (UpdatedBy)
+        REFERENCES Users(UserID),
+
+    CONSTRAINT chk_problem_points
+        CHECK (Points > 0)
+);
 	CREATE INDEX idx_problems_difficulty ON Problems(DifficultyID);
 	CREATE INDEX idx_problems_created ON Problems(CreatedAt);
 
@@ -132,15 +147,31 @@
 	-- =====================================
 
 	CREATE TABLE TestCases (
-		TestCaseID INT AUTO_INCREMENT PRIMARY KEY,
-		ProblemID INT NOT NULL,
-		SetupSQL TEXT NOT NULL,
-	    SolutionQuery TEXT NOT NULL,
-		IsActive BOOLEAN DEFAULT TRUE,
-		CreatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
-        SolutionQuery TEXT NOT NULL,
-		FOREIGN KEY (ProblemID)	REFERENCES Problems(ProblemID) ON DELETE CASCADE
-	);
+    TestCaseID INT AUTO_INCREMENT PRIMARY KEY,
+    ProblemID INT NOT NULL,
+    TestCaseName VARCHAR(100),
+
+    SetupSQL TEXT NOT NULL,
+    SolutionQuery TEXT NOT NULL,
+
+    IsActive BOOLEAN DEFAULT TRUE,
+
+    CreatedBy INT NOT NULL,
+    CreatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+
+    UpdatedBy INT NOT NULL,
+    UpdatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (ProblemID)
+        REFERENCES Problems(ProblemID)
+        ON DELETE CASCADE,
+
+    FOREIGN KEY (CreatedBy)
+        REFERENCES Users(UserID),
+
+    FOREIGN KEY (UpdatedBy)
+        REFERENCES Users(UserID)
+);
 	CREATE INDEX idx_testcases_problem ON TestCases(ProblemID);
 
 	-- =====================================
@@ -203,18 +234,29 @@
 	-- =====================================
 
 	CREATE TABLE Contests (
-		ContestID INT AUTO_INCREMENT PRIMARY KEY,
-		Title VARCHAR(150) NOT NULL,
-		Description TEXT,
-		StartDate DATETIME NOT NULL,
-		EndDate DATETIME NOT NULL,
-		CreatedBy INT NOT NULL,
-        
-		FOREIGN KEY (CreatedBy) REFERENCES Users(UserID),
-        
-		CONSTRAINT chk_contest_dates CHECK (EndDate > StartDate)
-	);
+    ContestID INT AUTO_INCREMENT PRIMARY KEY,
 
+    Title VARCHAR(150) UNIQUE NOT NULL,
+    Description TEXT,
+
+    StartDate DATETIME NOT NULL,
+    EndDate DATETIME NOT NULL,
+
+    CreatedBy INT NOT NULL,
+    CreatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+
+    UpdatedBy INT NOT NULL,
+    UpdatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (CreatedBy)
+        REFERENCES Users(UserID),
+
+    FOREIGN KEY (UpdatedBy)
+        REFERENCES Users(UserID),
+
+    CONSTRAINT chk_contest_dates
+        CHECK (EndDate > StartDate)
+);
 	CREATE INDEX idx_contests_time ON Contests(StartDate, EndDate);
 
 	-- =====================================
@@ -284,7 +326,7 @@
 		u.IsActive,
 		u.CreatedAt
 	FROM Students s
-	JOIN SkillLevels sk ON s.SkillLevelID = sk.SkillLevelID
+	LEFT JOIN SkillLevels sk ON s.SkillLevelID = sk.SkillLevelID
 	JOIN vw_Users u ON s.UserID = u.UserID;
 
 	-- ===================================== (3) =====================================
@@ -309,8 +351,10 @@
 		   p.Title, 
            d.DifficultyName, 
            p.CreatedBy, 
-           p.Points, 
            p.CreatedAt, 
+           p.UpdatedBy,
+		   p.UpdatedAt,
+           p.Points,            
            p.IsActive
 	FROM problems p 
     JOIN problemdifficulties d ON p.DifficultyID = d.DifficultyID;
@@ -323,6 +367,9 @@
 		c.StartDate,
 		c.EndDate,
 		c.CreatedBy,
+        c.CreatedAt,
+		c.UpdatedBy,
+        c.UpdatedAt,
         COUNT(cp.StudentID) TotalParticipants,
 		CASE
 			WHEN NOW() < c.StartDate THEN 'Upcoming'
@@ -331,32 +378,34 @@
 		END AS ContestStatus
 	FROM Contests c 
     LEFT JOIN contestparticipants cp ON c.ContestID = cp.ContestID
-    GROUP BY c.ContestID, c.Title, c.StartDate, c.EndDate, c.CreatedBy, ContestStatus;
+    GROUP BY c.ContestID, c.Title, c.StartDate, c.EndDate, c.CreatedBy,  c.CreatedAt, c.UpdatedBy, c.UpdatedAt, ContestStatus;
     
     -- ===================================== (6) =====================================
-    CREATE OR REPLACE VIEW vw_testcases
-    AS
-    SELECT
-    t.TestCaseID,
-    t.ProblemID,
-    p.Title,
+   CREATE OR REPLACE VIEW vw_testcases AS
+   SELECT
+		t.TestCaseID,
+		t.ProblemID,
+		p.Title,
+		
+		CASE
+			WHEN t.SetupSQL IS NULL THEN ''
+			WHEN LENGTH(t.SetupSQL) > 50
+				THEN CONCAT(LEFT(t.SetupSQL, 50), '...')
+			ELSE t.SetupSQL
+		END AS SetupSQLPreview,
 
-    CASE
-        WHEN t.SetupSQL IS NULL THEN ''
-        WHEN LENGTH(t.SetupSQL) > 50
-        THEN CONCAT(LEFT(t.SetupSQL, 50), '...')
-        ELSE t.SetupSQL
-    END AS SetupSQL,
+		CASE
+			WHEN t.SolutionQuery IS NULL THEN ''
+			WHEN LENGTH(t.SolutionQuery) > 50
+				THEN CONCAT(LEFT(t.SolutionQuery, 50), '...')
+			ELSE t.SolutionQuery
+		END AS SolutionQueryPreview,
 
-    CASE
-        WHEN t.ExpectedOutput IS NULL THEN ''
-        WHEN LENGTH(t.ExpectedOutput) > 50
-        THEN CONCAT(LEFT(t.ExpectedOutput, 50), '...')
-        ELSE t.ExpectedOutput
-    END AS ExpectedOutput,
-
-	t.CreatedAt,
-    t.IsActive
+		t.CreatedBy,
+		t.CreatedAt,
+        t.UpdatedBy,
+        t.UpdatedAt,
+		t.IsActive
 	FROM testcases t
 	JOIN Problems p ON t.ProblemID = p.ProblemID;
 
@@ -444,3 +493,179 @@
 		1,
 		3
 	);
+    
+    
+    -- RAW DATA -- 
+    -- =====================================
+-- SAMPLE USERS
+-- =====================================
+
+INSERT INTO Users (FullName, Email, Password)
+VALUES 
+('Admin One', 'admin1@sqljudge.com', 'admin123'),
+('Admin Two', 'admin2@sqljudge.com', 'admin123'),
+('Ali Khan', 'ali@student.com', '12345'),
+('Sara Ahmed', 'sara@student.com', '12345'),
+('Usman Tariq', 'usman@student.com', '12345'),
+('Ayesha Malik', 'ayesha@student.com', '12345'),
+('Hassan Raza', 'hassan@student.com', '12345');
+-- =====================================
+-- USER ROLES
+-- =====================================
+
+-- Admins
+INSERT INTO UserRoles VALUES (2,2), (3,2);
+
+-- Students
+INSERT INTO UserRoles VALUES 
+(4,1),(5,1),(6,1),(7,1),(8,1);
+
+-- =====================================
+-- STUDENTS
+-- =====================================
+
+INSERT INTO Students (UserID, RegistrationNumber, SkillLevelID, TotalScore, ProblemsSolved)
+VALUES
+(4,'REG-001',1,50,2),
+(5,'REG-002',2,120,5),
+(6,'REG-003',3,200,8),
+(7,'REG-004',1,30,1),
+(8,'REG-005',2,90,4);
+
+-- =====================================
+-- PROBLEMS
+-- =====================================
+
+INSERT INTO Problems 
+(Title, Description, DifficultyID, Points, CreatedBy, UpdatedBy)
+VALUES
+('SELECT Basics',
+ 'Fetch all records from a table',
+ 1,10,1,1),
+
+('WHERE Filtering',
+ 'Filter students with marks > 50',
+ 1,10,1,1),
+
+('INNER JOIN Practice',
+ 'Join students and courses',
+ 2,20,1,1),
+
+('LEFT JOIN Analysis',
+ 'Return all students even without courses',
+ 2,20,1,1),
+
+('GROUP BY Aggregation',
+ 'Count students per department',
+ 2,25,1,1),
+
+('Complex Subquery',
+ 'Find second highest salary',
+ 3,40,1,1);
+
+-- =====================================
+-- PROBLEM TAG MAP
+-- =====================================
+
+INSERT INTO ProblemTagMap VALUES
+(1,1),(1,11),
+(2,10),
+(3,1),(3,6),
+(4,2),
+(5,9),
+(6,6);
+-- =====================================
+-- TEST CASES
+-- =====================================
+
+INSERT INTO TestCases 
+(ProblemID, TestCaseName, SetupSQL, SolutionQuery, CreatedBy, UpdatedBy)
+VALUES
+
+(1,'TC1',
+ 'CREATE TABLE T(Name VARCHAR(50)); INSERT INTO T VALUES ("Ali"),("Sara");',
+ 'SELECT * FROM T;',
+ 1,1),
+
+(2,'TC2',
+ 'CREATE TABLE S(Name VARCHAR(50), Marks INT); INSERT INTO S VALUES ("Ali",60),("Sara",40);',
+ 'SELECT * FROM S WHERE Marks > 50;',
+ 1,1),
+
+(3,'TC3',
+ 'CREATE TABLE Stu(ID INT,Name VARCHAR(50)); CREATE TABLE Course(ID INT,StuID INT);',
+ 'SELECT * FROM Stu INNER JOIN Course ON Stu.ID = Course.StuID;',
+ 1,1),
+
+(4,'TC4',
+ 'CREATE TABLE Stu(ID INT,Name VARCHAR(50)); CREATE TABLE Course(StuID INT,CourseName VARCHAR(50));',
+ 'SELECT * FROM Stu LEFT JOIN Course ON Stu.ID = Course.StuID;',
+ 1,1),
+
+(5,'TC5',
+ 'CREATE TABLE Dept(ID INT); CREATE TABLE Emp(DeptID INT);',
+ 'SELECT DeptID, COUNT(*) FROM Emp GROUP BY DeptID;',
+ 1,1),
+
+(6,'TC6',
+ 'CREATE TABLE Emp(Salary INT);',
+ 'SELECT MAX(Salary) FROM Emp;',
+ 1,1);
+-- =====================================
+-- CONTESTS
+-- =====================================
+
+INSERT INTO Contests 
+(Title, Description, StartDate, EndDate, CreatedBy, UpdatedBy)
+VALUES
+('SQL Beginner Contest','Basics of SQL','2026-06-01 10:00:00','2026-06-01 18:00:00',1,1),
+('SQL Advanced Contest','Subqueries & Joins','2026-06-10 10:00:00','2026-06-10 18:00:00',1,1);
+-- =====================================
+-- CONTEST PARTICIPANTS
+-- =====================================
+
+INSERT INTO ContestParticipants (ContestID, StudentID)
+VALUES
+(1,1),
+(1,2),
+(1,3),
+(1,4),
+(1,5);
+
+-- =====================================
+-- CONTEST PROBLEMS
+-- =====================================
+
+INSERT INTO ContestProblems VALUES
+(1,1,1),
+(1,2,2),
+(1,3,3),
+(2,4,1),
+(2,5,2),
+(2,6,3);
+-- =====================================
+-- SUBMISSIONS
+-- =====================================
+
+INSERT INTO Submissions 
+(StudentID, ProblemID, QueryText, StatusID, AttemptNumber, TotalScore)
+VALUES
+
+(1,1,'SELECT * FROM T;',1,1,10),
+(2,2,'SELECT * FROM S WHERE Marks > 50;',1,1,10),
+(3,3,'SELECT * FROM Stu INNER JOIN Course ON Stu.ID=Course.StuID;',2,1,0),
+(4,4,'SELECT * FROM Stu LEFT JOIN Course ON Stu.ID=Course.StuID;',1,1,20),
+(5,5,'SELECT DeptID, COUNT(*) FROM Emp GROUP BY DeptID;',3,1,0);
+-- =====================================
+-- SUBMISSION RESULTS
+-- =====================================
+
+INSERT INTO SubmissionResults
+(SubmissionID, TestCaseID, ActualOutput, IsPassed, ErrorMessage)
+VALUES
+
+(1,1,'Ali,Sara',TRUE,NULL),
+(2,2,'Ali',TRUE,NULL),
+(3,3,NULL,FALSE,'JOIN condition mismatch'),
+(4,4,'All Students Returned',TRUE,NULL),
+(5,5,NULL,FALSE,'GROUP BY missing column');

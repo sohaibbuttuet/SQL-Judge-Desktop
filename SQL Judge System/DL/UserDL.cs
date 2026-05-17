@@ -20,6 +20,11 @@ namespace SQL_Judge_System.DL
 
             return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
         }
+        public static void UpdateUser(User user)
+        {
+            string query = $"UPDATE Users SET FullName = '{user.FullName}', Email = '{user.Email}', Password = '{user.Password}' WHERE UserID = {user.UserID};";
+            DatabaseHelper.Instance.Update(query);
+        }
         public static void ActivateUser(int userId)
         {
             string query = $"UPDATE Users SET IsActive = 1 WHERE UserID = {userId};";
@@ -43,8 +48,12 @@ namespace SQL_Judge_System.DL
         public static bool IsEmailRegistered(string email)
         {
             string query = $"SELECT COUNT(*) FROM Users WHERE Email = '{email}';";
-            int count = Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
-            return count > 0;
+            return DatabaseHelper.Instance.ExecuteScalar(query) > 0;
+        }
+        public static bool IsEmailRegistered(int userID, string email)
+        {
+            string query = $"SELECT COUNT(*) FROM Users WHERE UserID <> {userID} AND Email = '{email}';";
+            return DatabaseHelper.Instance.ExecuteScalar(query) > 0;
         }
         public static bool IsUserExists(int userId)
         {
@@ -56,16 +65,16 @@ namespace SQL_Judge_System.DL
             string query = $"SELECT COUNT(*) FROM vw_users WHERE RoleName = 'Admin' AND UserID = {userId};";
             return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query)) > 0;
         }
+        public static bool IsUserAdmin(string email)
+        {
+            string query = $"SELECT COUNT(*) FROM vw_users WHERE RoleName = 'Admin' AND Email = {email};";
+            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query)) > 0;
+        }
         public static bool IsUserSuperAdmin(int userId)
         {
             string query = $"SELECT COUNT(*) FROM vw_users WHERE RoleName = 'SuperAdmin' AND UserID = {userId};";
             return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query)) > 0;
-        }
-        public static void UpdateUser(User user, string previousEmail)
-        {
-            string query = $"UPDATE Users SET Email = '{user.Email}', Password = '{user.Password}' WHERE Email = '{previousEmail}';";
-            DatabaseHelper.Instance.Update(query);
-        }
+        }        
         public static User GetUserByID(int userId)
         {
             string query = $"SELECT * FROM Users WHERE UserID = {userId};";

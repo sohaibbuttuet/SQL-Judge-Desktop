@@ -33,6 +33,16 @@ namespace SQL_Judge_System.DL
                 return null;
 
             return MapDataRowToContest(dt.Rows[0]);
+        }       
+        public static bool IsContestExists(string Title)
+        {
+            string query = $"SELECT COUNT(*) FROM Contests WHERE Title = '{Title}';";
+            return DatabaseHelper.Instance.ExecuteScalar(query) > 0;
+        }
+        public static bool IsContestExists(int contestID, string Title)
+        {
+            string query = $"SELECT COUNT(*) FROM Contests WHERE ContestID <> {contestID} AND Title = '{Title}'";
+            return DatabaseHelper.Instance.ExecuteScalar(query) > 0;
         }
         private static Contest MapDataRowToContest(DataRow row)
         {

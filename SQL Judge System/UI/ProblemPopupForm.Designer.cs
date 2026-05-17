@@ -23,14 +23,11 @@
 
         // ================= UPDATE =================
         private System.Windows.Forms.Label lblUpdateTitle;
-        private System.Windows.Forms.Label lblProblemId;
         private System.Windows.Forms.Label lblUTitle;
         private System.Windows.Forms.Label lblUDescription;
         private System.Windows.Forms.Label lblUDifficulty;
         private System.Windows.Forms.Label lblUPoints;
         private System.Windows.Forms.Label lblUTags;
-
-        private System.Windows.Forms.TextBox txtProblemId;
         private System.Windows.Forms.TextBox txtUTitle;
         private System.Windows.Forms.TextBox txtUDescription;
         private System.Windows.Forms.ComboBox cmbUDifficulty;
@@ -65,8 +62,6 @@
             this.btnUpdate = new System.Windows.Forms.Button();
             this.btnUClear = new System.Windows.Forms.Button();
             this.lblUpdateTitle = new System.Windows.Forms.Label();
-            this.lblProblemId = new System.Windows.Forms.Label();
-            this.txtProblemId = new System.Windows.Forms.TextBox();
             this.lblUTitle = new System.Windows.Forms.Label();
             this.txtUTitle = new System.Windows.Forms.TextBox();
             this.lblUDescription = new System.Windows.Forms.Label();
@@ -77,8 +72,6 @@
             this.txtUPoints = new System.Windows.Forms.TextBox();
             this.lblUTags = new System.Windows.Forms.Label();
             this.clbUpdateTags = new System.Windows.Forms.CheckedListBox();
-            this.btnShowAdd = new System.Windows.Forms.Button();
-            this.btnShowUpdate = new System.Windows.Forms.Button();
             this.addPanel.SuspendLayout();
             this.updatePanel.SuspendLayout();
             this.SuspendLayout();
@@ -98,7 +91,7 @@
             this.addPanel.Controls.Add(this.txtPoints);
             this.addPanel.Controls.Add(this.lblTags);
             this.addPanel.Controls.Add(this.clbAddTags);
-            this.addPanel.Location = new System.Drawing.Point(30, 60);
+            this.addPanel.Location = new System.Drawing.Point(32, 40);
             this.addPanel.Name = "addPanel";
             this.addPanel.Size = new System.Drawing.Size(520, 430);
             this.addPanel.TabIndex = 2;
@@ -115,6 +108,7 @@
             this.btnAdd.TabIndex = 13;
             this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = false;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnAddClear
             // 
@@ -128,6 +122,7 @@
             this.btnAddClear.TabIndex = 14;
             this.btnAddClear.Text = "Clear";
             this.btnAddClear.UseVisualStyleBackColor = false;
+            this.btnAddClear.Click += new System.EventHandler(this.btnAddClear_Click);
             // 
             // lblAddTitle
             // 
@@ -140,9 +135,9 @@
             // 
             // lblTitle
             // 
-            this.lblTitle.Location = new System.Drawing.Point(20, 50);
+            this.lblTitle.Location = new System.Drawing.Point(20, 52);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(100, 23);
+            this.lblTitle.Size = new System.Drawing.Size(100, 20);
             this.lblTitle.TabIndex = 1;
             this.lblTitle.Text = "Title";
             // 
@@ -155,9 +150,9 @@
             // 
             // lblDescription
             // 
-            this.lblDescription.Location = new System.Drawing.Point(20, 100);
+            this.lblDescription.Location = new System.Drawing.Point(20, 104);
             this.lblDescription.Name = "lblDescription";
-            this.lblDescription.Size = new System.Drawing.Size(100, 23);
+            this.lblDescription.Size = new System.Drawing.Size(100, 18);
             this.lblDescription.TabIndex = 3;
             this.lblDescription.Text = "Description";
             // 
@@ -171,19 +166,15 @@
             // 
             // lblDifficulty
             // 
-            this.lblDifficulty.Location = new System.Drawing.Point(20, 190);
+            this.lblDifficulty.Location = new System.Drawing.Point(20, 193);
             this.lblDifficulty.Name = "lblDifficulty";
-            this.lblDifficulty.Size = new System.Drawing.Size(100, 23);
+            this.lblDifficulty.Size = new System.Drawing.Size(100, 20);
             this.lblDifficulty.TabIndex = 5;
             this.lblDifficulty.Text = "Difficulty";
             // 
             // cmbDifficulty
             // 
             this.cmbDifficulty.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbDifficulty.Items.AddRange(new object[] {
-            "Easy",
-            "Medium",
-            "Hard"});
             this.cmbDifficulty.Location = new System.Drawing.Point(20, 213);
             this.cmbDifficulty.Name = "cmbDifficulty";
             this.cmbDifficulty.Size = new System.Drawing.Size(150, 21);
@@ -191,9 +182,9 @@
             // 
             // lblPoints
             // 
-            this.lblPoints.Location = new System.Drawing.Point(200, 190);
+            this.lblPoints.Location = new System.Drawing.Point(200, 194);
             this.lblPoints.Name = "lblPoints";
-            this.lblPoints.Size = new System.Drawing.Size(100, 23);
+            this.lblPoints.Size = new System.Drawing.Size(100, 16);
             this.lblPoints.TabIndex = 7;
             this.lblPoints.Text = "Points";
             // 
@@ -206,15 +197,15 @@
             // 
             // lblTags
             // 
-            this.lblTags.Location = new System.Drawing.Point(20, 240);
+            this.lblTags.Location = new System.Drawing.Point(20, 244);
             this.lblTags.Name = "lblTags";
-            this.lblTags.Size = new System.Drawing.Size(100, 23);
+            this.lblTags.Size = new System.Drawing.Size(100, 20);
             this.lblTags.TabIndex = 9;
             this.lblTags.Text = "Tags";
             // 
             // clbAddTags
             // 
-            this.clbAddTags.Location = new System.Drawing.Point(20, 263);
+            this.clbAddTags.Location = new System.Drawing.Point(20, 265);
             this.clbAddTags.Name = "clbAddTags";
             this.clbAddTags.Size = new System.Drawing.Size(450, 79);
             this.clbAddTags.TabIndex = 10;
@@ -224,8 +215,6 @@
             this.updatePanel.Controls.Add(this.btnUpdate);
             this.updatePanel.Controls.Add(this.btnUClear);
             this.updatePanel.Controls.Add(this.lblUpdateTitle);
-            this.updatePanel.Controls.Add(this.lblProblemId);
-            this.updatePanel.Controls.Add(this.txtProblemId);
             this.updatePanel.Controls.Add(this.lblUTitle);
             this.updatePanel.Controls.Add(this.txtUTitle);
             this.updatePanel.Controls.Add(this.lblUDescription);
@@ -236,7 +225,7 @@
             this.updatePanel.Controls.Add(this.txtUPoints);
             this.updatePanel.Controls.Add(this.lblUTags);
             this.updatePanel.Controls.Add(this.clbUpdateTags);
-            this.updatePanel.Location = new System.Drawing.Point(30, 60);
+            this.updatePanel.Location = new System.Drawing.Point(32, 40);
             this.updatePanel.Name = "updatePanel";
             this.updatePanel.Size = new System.Drawing.Size(520, 430);
             this.updatePanel.TabIndex = 3;
@@ -248,12 +237,13 @@
             this.btnUpdate.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnUpdate.ForeColor = System.Drawing.Color.White;
-            this.btnUpdate.Location = new System.Drawing.Point(20, 392);
+            this.btnUpdate.Location = new System.Drawing.Point(20, 368);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(75, 23);
             this.btnUpdate.TabIndex = 15;
             this.btnUpdate.Text = "Update";
             this.btnUpdate.UseVisualStyleBackColor = false;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // btnUClear
             // 
@@ -261,12 +251,13 @@
             this.btnUClear.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnUClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnUClear.ForeColor = System.Drawing.Color.White;
-            this.btnUClear.Location = new System.Drawing.Point(120, 392);
+            this.btnUClear.Location = new System.Drawing.Point(120, 368);
             this.btnUClear.Name = "btnUClear";
             this.btnUClear.Size = new System.Drawing.Size(75, 23);
             this.btnUClear.TabIndex = 16;
             this.btnUClear.Text = "Clear";
             this.btnUClear.UseVisualStyleBackColor = false;
+            this.btnUClear.Click += new System.EventHandler(this.btnUClear_Click);
             // 
             // lblUpdateTitle
             // 
@@ -277,39 +268,24 @@
             this.lblUpdateTitle.TabIndex = 0;
             this.lblUpdateTitle.Text = "Update Problem";
             // 
-            // lblProblemId
-            // 
-            this.lblProblemId.Location = new System.Drawing.Point(20, 36);
-            this.lblProblemId.Name = "lblProblemId";
-            this.lblProblemId.Size = new System.Drawing.Size(100, 23);
-            this.lblProblemId.TabIndex = 1;
-            this.lblProblemId.Text = "Problem ID";
-            // 
-            // txtProblemId
-            // 
-            this.txtProblemId.Location = new System.Drawing.Point(20, 59);
-            this.txtProblemId.Name = "txtProblemId";
-            this.txtProblemId.Size = new System.Drawing.Size(450, 20);
-            this.txtProblemId.TabIndex = 2;
-            // 
             // lblUTitle
             // 
-            this.lblUTitle.Location = new System.Drawing.Point(20, 86);
+            this.lblUTitle.Location = new System.Drawing.Point(20, 52);
             this.lblUTitle.Name = "lblUTitle";
             this.lblUTitle.Size = new System.Drawing.Size(100, 23);
             this.lblUTitle.TabIndex = 3;
-            this.lblUTitle.Text = "Title";
+            this.lblUTitle.Text = "New Title";
             // 
             // txtUTitle
             // 
-            this.txtUTitle.Location = new System.Drawing.Point(20, 109);
+            this.txtUTitle.Location = new System.Drawing.Point(20, 75);
             this.txtUTitle.Name = "txtUTitle";
             this.txtUTitle.Size = new System.Drawing.Size(450, 20);
             this.txtUTitle.TabIndex = 4;
             // 
             // lblUDescription
             // 
-            this.lblUDescription.Location = new System.Drawing.Point(20, 136);
+            this.lblUDescription.Location = new System.Drawing.Point(20, 102);
             this.lblUDescription.Name = "lblUDescription";
             this.lblUDescription.Size = new System.Drawing.Size(100, 23);
             this.lblUDescription.TabIndex = 5;
@@ -317,7 +293,7 @@
             // 
             // txtUDescription
             // 
-            this.txtUDescription.Location = new System.Drawing.Point(20, 159);
+            this.txtUDescription.Location = new System.Drawing.Point(20, 125);
             this.txtUDescription.Multiline = true;
             this.txtUDescription.Name = "txtUDescription";
             this.txtUDescription.Size = new System.Drawing.Size(450, 60);
@@ -325,7 +301,7 @@
             // 
             // lblUDifficulty
             // 
-            this.lblUDifficulty.Location = new System.Drawing.Point(20, 226);
+            this.lblUDifficulty.Location = new System.Drawing.Point(20, 192);
             this.lblUDifficulty.Name = "lblUDifficulty";
             this.lblUDifficulty.Size = new System.Drawing.Size(100, 23);
             this.lblUDifficulty.TabIndex = 7;
@@ -334,18 +310,14 @@
             // cmbUDifficulty
             // 
             this.cmbUDifficulty.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbUDifficulty.Items.AddRange(new object[] {
-            "Easy",
-            "Medium",
-            "Hard"});
-            this.cmbUDifficulty.Location = new System.Drawing.Point(20, 249);
+            this.cmbUDifficulty.Location = new System.Drawing.Point(20, 215);
             this.cmbUDifficulty.Name = "cmbUDifficulty";
             this.cmbUDifficulty.Size = new System.Drawing.Size(150, 21);
             this.cmbUDifficulty.TabIndex = 8;
             // 
             // lblUPoints
             // 
-            this.lblUPoints.Location = new System.Drawing.Point(200, 226);
+            this.lblUPoints.Location = new System.Drawing.Point(200, 192);
             this.lblUPoints.Name = "lblUPoints";
             this.lblUPoints.Size = new System.Drawing.Size(100, 23);
             this.lblUPoints.TabIndex = 9;
@@ -353,14 +325,14 @@
             // 
             // txtUPoints
             // 
-            this.txtUPoints.Location = new System.Drawing.Point(200, 249);
+            this.txtUPoints.Location = new System.Drawing.Point(200, 215);
             this.txtUPoints.Name = "txtUPoints";
             this.txtUPoints.Size = new System.Drawing.Size(100, 20);
             this.txtUPoints.TabIndex = 10;
             // 
             // lblUTags
             // 
-            this.lblUTags.Location = new System.Drawing.Point(20, 276);
+            this.lblUTags.Location = new System.Drawing.Point(20, 242);
             this.lblUTags.Name = "lblUTags";
             this.lblUTags.Size = new System.Drawing.Size(100, 23);
             this.lblUTags.TabIndex = 11;
@@ -368,44 +340,14 @@
             // 
             // clbUpdateTags
             // 
-            this.clbUpdateTags.Location = new System.Drawing.Point(20, 299);
+            this.clbUpdateTags.Location = new System.Drawing.Point(20, 265);
             this.clbUpdateTags.Name = "clbUpdateTags";
             this.clbUpdateTags.Size = new System.Drawing.Size(450, 79);
             this.clbUpdateTags.TabIndex = 12;
             // 
-            // btnShowAdd
-            // 
-            this.btnShowAdd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
-            this.btnShowAdd.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnShowAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnShowAdd.ForeColor = System.Drawing.Color.White;
-            this.btnShowAdd.Location = new System.Drawing.Point(30, 21);
-            this.btnShowAdd.Name = "btnShowAdd";
-            this.btnShowAdd.Size = new System.Drawing.Size(95, 23);
-            this.btnShowAdd.TabIndex = 4;
-            this.btnShowAdd.Text = "Add Problem";
-            this.btnShowAdd.UseVisualStyleBackColor = false;
-            this.btnShowAdd.Click += new System.EventHandler(this.btnShowAdd_Click);
-            // 
-            // btnShowUpdate
-            // 
-            this.btnShowUpdate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
-            this.btnShowUpdate.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnShowUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnShowUpdate.ForeColor = System.Drawing.Color.White;
-            this.btnShowUpdate.Location = new System.Drawing.Point(150, 21);
-            this.btnShowUpdate.Name = "btnShowUpdate";
-            this.btnShowUpdate.Size = new System.Drawing.Size(95, 23);
-            this.btnShowUpdate.TabIndex = 5;
-            this.btnShowUpdate.Text = "Update Problem";
-            this.btnShowUpdate.UseVisualStyleBackColor = false;
-            this.btnShowUpdate.Click += new System.EventHandler(this.btnShowUpdate_Click);
-            // 
             // ProblemPopupForm
             // 
             this.ClientSize = new System.Drawing.Size(584, 511);
-            this.Controls.Add(this.btnShowAdd);
-            this.Controls.Add(this.btnShowUpdate);
             this.Controls.Add(this.updatePanel);
             this.Controls.Add(this.addPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -420,9 +362,6 @@
             this.ResumeLayout(false);
 
         }
-
-        private System.Windows.Forms.Button btnShowAdd;
-        private System.Windows.Forms.Button btnShowUpdate;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnAddClear;
         private System.Windows.Forms.Button btnUpdate;

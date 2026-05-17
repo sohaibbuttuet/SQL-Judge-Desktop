@@ -31,5 +31,14 @@ namespace SQL_Judge_System.Models
             IsActive = true;
             CreatedAt = DateTime.Now;
         }
+        public User(int userId, string fullName, string email, string password)
+        {
+            UserID = userId;
+            FullName = fullName;
+            Email = email;
+            Password = password;
+            IsActive = true;
+            CreatedAt = DateTime.Now;
+        }
     }
 }

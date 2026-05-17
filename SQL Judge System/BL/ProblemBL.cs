@@ -27,11 +27,10 @@ namespace SQL_Judge_System.BL
             }
             ProblemDL.UpdateProblem(problem);
         }
-        public static void UpdateProblemStatus(int problemID, bool isActive)
+        public static bool IsProblemExists(string title, int difficultyID)
         {
-            ProblemDL.UpdateProblemStatus(problemID, isActive);
+            return ProblemDL.IsProblemExists(title, difficultyID);
         }
-
         public static void ActivateProblem(int problemId)
         {
             if (problemId < 0)

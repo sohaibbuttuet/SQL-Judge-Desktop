@@ -125,8 +125,6 @@ namespace SQL_Judge_System.UI
             try
             {
                 AdminPopupForm form = new AdminPopupForm();
-
-                form.ShowAddPanel();   // show ADD panel
                 form.ShowDialog();
             }
             catch (Exception ex)
@@ -134,20 +132,29 @@ namespace SQL_Judge_System.UI
                 MessageBox.Show("Failed to add admin: " + ex.Message);
 
             }
+            LoadAdminData();
         }
         private void btnUpdateAdmin_Click(object sender, EventArgs e)
         {
             try 
             {
-                AdminPopupForm form = new AdminPopupForm();
+                if (dgvAdmins.SelectedRows.Count > 0)
+                {
+                    int userID = Convert.ToInt32(dgvAdmins.SelectedRows[0].Cells["UserID"].Value);
 
-                form.ShowEditPanel();  // show EDIT panel
-                form.ShowDialog();
+                    AdminPopupForm form = new AdminPopupForm(userID);
+                    form.ShowDialog();
+                }
+                else
+                {
+                    MessageBox.Show("Please select a Contest to update.");
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Failed to update admin: " + ex.Message);
             }
+            LoadAdminData();
         }
         private void btnToggleAdmin_Click(object sender, EventArgs e)
         {
@@ -171,7 +178,6 @@ namespace SQL_Judge_System.UI
                         UserBL.ActivateUser(adminID);
                         MessageBox.Show("Admin activated successfully.");
                     }
-                    RefreshData();
                 }
                 else
                 {
@@ -182,6 +188,7 @@ namespace SQL_Judge_System.UI
             {
                 MessageBox.Show("Failed to toggle admin status: " + ex.Message);
             }
+            LoadAdminData();
         }
 
         // --- STUDENT PANEL ---
@@ -259,7 +266,6 @@ namespace SQL_Judge_System.UI
                         UserBL.ActivateUser(userID);
                         MessageBox.Show("Student activated successfully.");
                     }
-                    RefreshData();
                 }
                 else
                 {
@@ -270,6 +276,7 @@ namespace SQL_Judge_System.UI
             {
                 MessageBox.Show("Failed to toggle student status: " + ex.Message);
             }
+            LoadStudentData();
         }
 
         // --- PROBLEM PANEL ---
@@ -319,27 +326,33 @@ namespace SQL_Judge_System.UI
         {
             try
             {
-                ProblemPopupForm form = new ProblemPopupForm();
-                form.ShowAddPanel();
+                ProblemPopupForm form = new ProblemPopupForm(user.UserID);
                 form.ShowDialog();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Failed to update admin: " + ex.Message);
             }
+            LoadProblemData();
         }
         private void btnUpdateProb_Click(object sender, EventArgs e)
         {
             try 
             {
-                ProblemPopupForm form = new ProblemPopupForm();
-                form.ShowUpdatePanel();
-                form.ShowDialog();
+                if (dgvProblems.SelectedRows.Count > 0)
+                {
+                    int problemID = Convert.ToInt32(dgvProblems.SelectedRows[0].Cells["ProblemID"].Value);
+                    int createdBy = Convert.ToInt32(dgvProblems.SelectedRows[0].Cells["CreatedBy"].Value);
+                    ProblemPopupForm form = new ProblemPopupForm(user.UserID, createdBy);
+                    form.ShowDialog();
+                }
+                    
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Failed to update admin: " + ex.Message);
             }
+            LoadProblemData();
         }
         private void btnToggleProb_Click(object sender, EventArgs e)
         {
@@ -364,7 +377,6 @@ namespace SQL_Judge_System.UI
                         ProblemBL.ActivateProblem(problemID);
                         MessageBox.Show("Problem activated successfully.");
                     }
-                    RefreshData();
                 }
                 else
                 {
@@ -375,6 +387,7 @@ namespace SQL_Judge_System.UI
             {
                 MessageBox.Show("Failed to toggle problem status: " + ex.Message);
             }
+            LoadProblemData();
         }
 
         // --- Contest Panel ---
@@ -427,27 +440,37 @@ namespace SQL_Judge_System.UI
         {
             try
             {
-                ContestPopupForm form = new ContestPopupForm();
-                form.ShowAddPanel();
+                ContestPopupForm form = new ContestPopupForm(user.UserID);
                 form.ShowDialog();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Failed to update admin: " + ex.Message);
             }
+            LoadContestData();
         }
         private void btnUpdContest_Click(object sender, EventArgs e)
         {
             try 
             {
-                ContestPopupForm form = new ContestPopupForm();
-                form.ShowUpdatePanel();
-                form.ShowDialog();
+                if (dgvContest.SelectedRows.Count > 0)
+                {
+                    int contestID = Convert.ToInt32(dgvContest.SelectedRows[0].Cells["ContestID"].Value);
+                    int createdBy = Convert.ToInt32(dgvContest.SelectedRows[0].Cells["CreatedBy"].Value);
+
+                    ContestPopupForm form = new ContestPopupForm(user.UserID, contestID, createdBy);
+                    form.ShowDialog();
+                }
+                else
+                {
+                    MessageBox.Show("Please select a Contest to update.");
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Failed to update admin: " + ex.Message);
             }
+            LoadContestData();
         }
 
         // --- Test Cases Panel ---
@@ -464,16 +487,16 @@ namespace SQL_Judge_System.UI
                 dgvTestCases.Columns["TestCaseID"].FillWeight = 20;
                 dgvTestCases.Columns["ProblemID"].FillWeight = 20;
                 dgvTestCases.Columns["Title"].FillWeight = 50;
-                dgvTestCases.Columns["SetupSQL"].FillWeight = 100;
-                dgvTestCases.Columns["ExpectedOutput"].FillWeight = 100;
+                dgvTestCases.Columns["SetupSQLPreview"].FillWeight = 80;
+                dgvTestCases.Columns["SolutionQueryPreview"].FillWeight = 80;
                 dgvTestCases.Columns["CreatedAt"].FillWeight = 50;
                 dgvTestCases.Columns["IsActive"].FillWeight = 20;
 
                 dgvTestCases.Columns["TestCaseID"].HeaderText = "ID";
                 dgvTestCases.Columns["ProblemID"].HeaderText = "Problem ID";
                 dgvTestCases.Columns["Title"].HeaderText = "Problem Title";
-                dgvTestCases.Columns["SetupSQL"].HeaderText = "Setup SQL";
-                dgvTestCases.Columns["ExpectedOutput"].HeaderText = "Expected Output";
+                dgvTestCases.Columns["SetupSQLPreview"].HeaderText = "Setup SQL Preview";
+                dgvTestCases.Columns["SolutionQueryPreview"].HeaderText = "Solution Query Preview";
                 dgvTestCases.Columns["IsActive"].HeaderText = "Status";
                 dgvTestCases.Columns["CreatedAt"].HeaderText = "Created At";
             }
@@ -507,6 +530,7 @@ namespace SQL_Judge_System.UI
             {
                 MessageBox.Show("Failed to update admin: " + ex.Message);
             }
+            LoadTestCaseData();
         }
         private void btnUpdateTestCase_Click(object sender, EventArgs e)
         {
@@ -520,6 +544,7 @@ namespace SQL_Judge_System.UI
             {
                 MessageBox.Show("Failed to update admin: " + ex.Message);
             }
+            LoadTestCaseData();
         }
         private void btnToggleTestCase_Click(object sender, EventArgs e)
         {
@@ -543,7 +568,6 @@ namespace SQL_Judge_System.UI
                         TestCaseBL.ActivateTestCase(testCaseID);
                         MessageBox.Show("Test case activated successfully.");
                     }
-                    RefreshData();
                 }
                 else
                 {
@@ -554,6 +578,7 @@ namespace SQL_Judge_System.UI
             {
                 MessageBox.Show("Failed to toggle test case status: " + ex.Message);
             }
+            LoadTestCaseData();
         }
 
         // --- Submissions Panel ---
@@ -654,33 +679,6 @@ namespace SQL_Judge_System.UI
         }
 
         // --- Utility Methods ---
-        private void RefreshData()
-        {
-            try
-            {
-                // --- Reload Admin Section ---
-                LoadAdminData();
-
-                // --- Reload Student Section ---
-                LoadStudentData();
-
-                // --- Reload Problem Section ---
-                LoadProblemData();
-
-                // --- Reload Contest Section ---
-                LoadContestData();
-
-                // --- Reload Test Cases Section ---
-                LoadTestCaseData();
-
-                // --- Reload Submissions Section ---
-                LoadSubmissionData();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Refresh failed: " + ex.Message);
-            }
-        }
         private void ShowPanel(Panel targetPanel, string headerText)
         {
             // 1. Hide all panels first

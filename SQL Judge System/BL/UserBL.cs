@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace SQL_Judge_System.BL
 {
@@ -54,7 +55,6 @@ namespace SQL_Judge_System.BL
             user.UserID = UserDL.GetUserIdByCredentials(user.Email, user.Password);
             return true;
         }
-
         public static User GetUserById(int userId)
         {
             if (userId < 0)
@@ -65,7 +65,7 @@ namespace SQL_Judge_System.BL
             return UserDL.GetUserByID(userId);
         }
 
-        // Students in AdminDashboard
+        // Students panel
         public static void ActivateUser(int userId)
         {
             if (userId < 0)
@@ -95,7 +95,7 @@ namespace SQL_Judge_System.BL
             UserDL.DeactivateUser(userId);
         }
 
-        // Admins in AdminDashboard
+        // Super Admin panel
         public static int TotalAdmins()
         {
             return UserDL.TotalAdmins();
@@ -112,7 +112,16 @@ namespace SQL_Judge_System.BL
         {
             return UserDL.InactiveAdmins();
         }
+        public static DataTable GetAdminList()
+        {
+            return UserDL.GetAdminList();
+        }
+        public static DataTable GetUsers()
+        {
+            return UserDL.GetUsers();
+        }
 
+        // Admins Dashboard
         public static int TotalUsers()
         {
             return UserDL.TotalUsers();
@@ -125,13 +134,29 @@ namespace SQL_Judge_System.BL
         {
             return UserDL.InactiveUsers();
         }
-        public static DataTable GetAdminList()
+      
+
+        // UserBL
+        public static void UpdateUser(User user)
         {
-            return UserDL.GetAdminList();
-        }
-        public static DataTable GetUsers()
-        {
-            return UserDL.GetUsers();
+            if (user == null)
+            {
+                throw new ArgumentNullException("");
+            }
+            if (!user.Email.Contains("@") || !user.Email.Contains("."))
+            {
+                throw new ArgumentException("Invalid email format.", nameof(user.Email));
+            }
+            if (UserDL.IsEmailRegistered(user.UserID, user.Email))
+            {
+                MessageBox.Show("Email already exists!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if (!UserDL.IsUserAdmin(user.Email))
+            {
+                throw new UnauthorizedAccessException("Selected user is not an admin.");
+            }
+            UserDL.UpdateUser(user);
         }
     }
 }

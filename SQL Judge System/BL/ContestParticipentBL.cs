@@ -10,7 +10,7 @@ namespace SQL_Judge_System.BL
 {
     internal class ContestParticipentBL
     {
-        public static void AddContestParticipent(ContestParticipent contestParticipent)
+        public static void AddContestParticipent(ContestParticipant contestParticipent)
         {
             if(contestParticipent == null)
             {

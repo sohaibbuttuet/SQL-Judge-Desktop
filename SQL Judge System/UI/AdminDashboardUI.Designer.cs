@@ -758,7 +758,7 @@ namespace SQL_Judge_System.UI
             this.btnUpdContest.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnUpdContest.IconSize = 18;
             this.btnUpdContest.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnUpdContest.Location = new System.Drawing.Point(184, 229);
+            this.btnUpdContest.Location = new System.Drawing.Point(184, 231);
             this.btnUpdContest.Name = "btnUpdContest";
             this.btnUpdContest.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.btnUpdContest.Size = new System.Drawing.Size(151, 41);
@@ -779,7 +779,7 @@ namespace SQL_Judge_System.UI
             this.btnAddContest.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnAddContest.IconSize = 20;
             this.btnAddContest.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAddContest.Location = new System.Drawing.Point(19, 227);
+            this.btnAddContest.Location = new System.Drawing.Point(19, 231);
             this.btnAddContest.Name = "btnAddContest";
             this.btnAddContest.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.btnAddContest.Size = new System.Drawing.Size(151, 41);
@@ -990,7 +990,6 @@ namespace SQL_Judge_System.UI
             this.dgvContest.ReadOnly = true;
             this.dgvContest.RowHeadersWidth = 35;
             this.dgvContest.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.dgvContest.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvContest.Size = new System.Drawing.Size(770, 255);
             this.dgvContest.TabIndex = 7;
             // 
@@ -1998,7 +1997,6 @@ namespace SQL_Judge_System.UI
             this.dgvStudents.ReadOnly = true;
             this.dgvStudents.RowHeadersWidth = 35;
             this.dgvStudents.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.dgvStudents.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvStudents.Size = new System.Drawing.Size(770, 266);
             this.dgvStudents.TabIndex = 11;
             // 
@@ -2040,7 +2038,7 @@ namespace SQL_Judge_System.UI
             this.label25.BackColor = System.Drawing.Color.Transparent;
             this.label25.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label25.ForeColor = System.Drawing.Color.Black;
-            this.label25.Location = new System.Drawing.Point(25, 261);
+            this.label25.Location = new System.Drawing.Point(25, 253);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(108, 25);
             this.label25.TabIndex = 13;
@@ -2205,14 +2203,14 @@ namespace SQL_Judge_System.UI
             dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.MenuText;
             dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgv_Users.DefaultCellStyle = dataGridViewCellStyle15;
-            this.dgv_Users.Location = new System.Drawing.Point(25, 298);
+            this.dgv_Users.Location = new System.Drawing.Point(25, 284);
             this.dgv_Users.MultiSelect = false;
             this.dgv_Users.Name = "dgv_Users";
             this.dgv_Users.ReadOnly = true;
             this.dgv_Users.RowHeadersVisible = false;
             this.dgv_Users.RowHeadersWidth = 35;
             this.dgv_Users.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgv_Users.Size = new System.Drawing.Size(754, 236);
+            this.dgv_Users.Size = new System.Drawing.Size(754, 255);
             this.dgv_Users.TabIndex = 7;
             // 
             // panel9
@@ -2240,13 +2238,13 @@ namespace SQL_Judge_System.UI
             // 
             this.ClientSize = new System.Drawing.Size(1004, 561);
             this.Controls.Add(this.pnlSidebar);
+            this.Controls.Add(this.pnlHome);
             this.Controls.Add(this.pnlSuperAdmin);
             this.Controls.Add(this.pnlContest);
             this.Controls.Add(this.pnlProblems);
             this.Controls.Add(this.pnlTestCases);
             this.Controls.Add(this.pnlsubmissions);
             this.Controls.Add(this.pnlStudent);
-            this.Controls.Add(this.pnlHome);
             this.Name = "AdminDashboardUI";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Admin Dashboard";

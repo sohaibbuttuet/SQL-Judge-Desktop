@@ -125,7 +125,7 @@ namespace SQL_Judge_System.UI
                     StudentBL.RegisterStudent(student);
 
                     // Assign Role to User
-                    int roleId = RoleDL.GetStudentRoleID();
+                    int roleId = RoleBL.GetStudentRoleID();
                     UserRole userRole = new UserRole(user.UserID, roleId);
                     UserRoleBL.AssignRoleToUser(userRole);
 

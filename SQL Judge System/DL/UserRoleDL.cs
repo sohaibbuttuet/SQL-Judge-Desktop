@@ -14,10 +14,5 @@ namespace SQL_Judge_System.DL
             string query = $"INSERT INTO UserRoles (UserID, RoleID) VALUES ({u.UserID}, {u.RoleID});";
             DatabaseHelper.Instance.Update(query);
         }
-        public static void ChangeUserRole(UserRole u)
-        {
-            string query = $"UPDATE UserRoles SET RoleID = {u.RoleID} WHERE UserID = {u.UserID};";
-            DatabaseHelper.Instance.Update(query);
-        }
     }
 }

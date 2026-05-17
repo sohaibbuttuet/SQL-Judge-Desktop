@@ -12,7 +12,7 @@ namespace SQL_Judge_System.LookupDL
     {
         public static DataTable GetAll()
         {
-            string query = "SELECT DifficultyID, DifficultyName FROM ProblemDifficulty";
+            string query = "SELECT DifficultyID, DifficultyName FROM ProblemDifficulties";
             return DatabaseHelper.Instance.GetDataTable(query);
         }
     }

@@ -24,5 +24,15 @@ namespace SQL_Judge_System.Models
             EndDate = endDate;
             CreatedBy = createdBy;
         }
+        public Contest(int contestId, string title, string description, DateTime startDate, DateTime endDate, int createdBy)
+        {
+            ContestID = contestId;
+            Title = title;
+            Description = description;
+            StartDate = startDate;
+            EndDate = endDate;
+            CreatedBy = createdBy;
+        }
+
     }
 }

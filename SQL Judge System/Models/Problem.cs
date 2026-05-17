@@ -34,5 +34,15 @@ namespace SQL_Judge_System.Models
             CreatedAt = DateTime.Now;   
             IsActive = true;
         }
+        public Problem(string title, string description, int difficultyID, int createdBy, int points)
+        {
+            Title = title;
+            Description = description;
+            DifficultyID = difficultyID;
+            CreatedBy = createdBy;
+            Points = points;
+            CreatedAt = DateTime.Now;
+            IsActive = true;
+        }
     }
 }

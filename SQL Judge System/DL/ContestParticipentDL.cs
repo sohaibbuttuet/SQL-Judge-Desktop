@@ -9,7 +9,7 @@ namespace SQL_Judge_System.DL
 {
     internal class ContestParticipentDL
     {
-        public static void AddContestParticipent(ContestParticipent contestParticipent)
+        public static void AddContestParticipent(ContestParticipant contestParticipent)
         {
             string query = $"INSERT INTO ContestParticipent (ContestId, UserId, JoinedAt) VALUES ({contestParticipent.ContestId}, {contestParticipent.StudentId}, '{contestParticipent.JoinedAt:yyyy-MM-dd HH:mm:ss}')";
             DatabaseHelper.Instance.Update(query);

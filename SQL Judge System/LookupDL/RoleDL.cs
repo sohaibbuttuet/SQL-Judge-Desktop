@@ -15,5 +15,10 @@ namespace SQL_Judge_System.LookupDL
             string query = "SELECT RoleID FROM Roles WHERE RoleName = 'Student';";
             return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
         }
+        public static int GetAdminRoleID()
+        {
+            string query = "SELECT RoleID FROM Roles WHERE RoleName = 'Admin';";
+            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
+        }
     }
 }

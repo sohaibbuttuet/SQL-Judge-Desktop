@@ -1,10 +1,11 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using SQL_Judge_System.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SQL_Judge_System.Models;
 
 namespace SQL_Judge_System.DL
 {
@@ -29,22 +30,16 @@ namespace SQL_Judge_System.DL
                            $"WHERE ProblemID = {problem.ProblemID};";
             DatabaseHelper.Instance.Update(query);
         }
+       
         public static void UpdateProblemStatus(int problemID, bool isActive)
         {
             string query = $"UPDATE Problems SET IsActive = {Convert.ToInt32(isActive)} WHERE ProblemID = {problemID};";
             DatabaseHelper.Instance.Update(query);
         }
-        public static List<Problem> GetAllProblems()
+        public static bool IsProblemExists(string title, int difficultyID)
         {
-            string query = "SELECT * FROM Problems;";
-            DataTable dt = DatabaseHelper.Instance.GetDataTable(query);
-
-            List<Problem> problems = new List<Problem>();
-            foreach (DataRow row in dt.Rows)
-            {
-                problems.Add(MapRowToProblem(row));
-            }
-            return problems;
+            string query = $"SELECT COUNT(*) FROM Problem WHERE Title = {title} AND DifficultyID = {difficultyID};";
+            return DatabaseHelper.Instance.ExecuteScalar(query) > 0;
         }
         public static Problem GetProblemByID(int problemID)
         {
