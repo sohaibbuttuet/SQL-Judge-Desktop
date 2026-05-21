@@ -17,6 +17,8 @@ namespace SQL_Judge_System.UI
     {
         private int userID;
         private int problemID;
+        private int createdBy;
+
         public ProblemPopupForm(int userID)
         {
             InitializeComponent();
@@ -25,12 +27,13 @@ namespace SQL_Judge_System.UI
             LoadData();
             ShowAddPanel();
         }
-        public ProblemPopupForm(int userID, int problemID)
+        public ProblemPopupForm(int userID, int problemID, int createdBy)
         {
             InitializeComponent();
 
             this.userID = userID;
             this.problemID = problemID;
+            this.createdBy = createdBy;
 
             LoadData();
             ShowUpdatePanel();            
@@ -51,13 +54,13 @@ namespace SQL_Judge_System.UI
         // Loading Data
         private void LoadCheckListBox(CheckedListBox box)
         {
-            box.DataSource = ProblemTagsBL.GetAllTags();
+            box.DataSource = ProblemBL.GetProblemTags();
             box.DisplayMember = "TagName";
             box.ValueMember = "TagID";
         }
         private void LoadComboBox(ComboBox comboBox)
         {
-            comboBox.DataSource = ProblemDifficultyBL.GetAll();
+            comboBox.DataSource = ProblemBL.GetProblemDifficulties();
             comboBox.DisplayMember = "DifficultyName";
             comboBox.ValueMember = "DifficultyID";
         }
@@ -109,7 +112,7 @@ namespace SQL_Judge_System.UI
 
                     int tagID = Convert.ToInt32(row["TagID"]);
 
-                    ProblemTagMapBL.MapProblemTag(new ProblemTagMap(problemID, tagID));
+                    ProblemBL.MapProblemTag(new ProblemTagMap(problemID, tagID));
                 }
 
                 MessageBox.Show("Problem created successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -169,7 +172,7 @@ namespace SQL_Judge_System.UI
                 ProblemBL.UpdateProblem(problem);
 
                 // remove old tags
-                ProblemTagMapBL.DeleteByProblemID(problemID);
+                ProblemBL.DeleteByProblemID(problemID);
 
                 // add new tags
                 foreach (var item in clbUpdateTags.CheckedItems)
@@ -180,7 +183,7 @@ namespace SQL_Judge_System.UI
 
                     ProblemTagMap map = new ProblemTagMap(problemID, tagID);
 
-                    ProblemTagMapBL.MapProblemTag(map);
+                    ProblemBL.MapProblemTag(map);
                 }
 
                 MessageBox.Show("Problem updated successfully.");
@@ -209,6 +212,5 @@ namespace SQL_Judge_System.UI
                 clbUpdateTags.SetItemChecked(i, false);
             }
         }
-
     }
     }

@@ -1,4 +1,5 @@
 ﻿using SQL_Judge_System.DL;
+using SQL_Judge_System.LookupDL;
 using SQL_Judge_System.Models;
 using System;
 using System.Collections.Generic;
@@ -157,6 +158,27 @@ namespace SQL_Judge_System.BL
                 throw new UnauthorizedAccessException("Selected user is not an admin.");
             }
             UserDL.UpdateUser(user);
+        }
+
+
+        // User Lookup Table (Roles)
+        public static int GetStudentRoleID()
+        {
+            return UserDL.GetStudentRoleID();
+        }
+        public static int GetAdminRoleID()
+        {
+            return UserDL.GetAdminRoleID();
+        }
+
+        // User Junction Table (UserRole)
+        public static void AssignRoleToUser(UserRole u)
+        {
+            if (u == null)
+            {
+                throw new ArgumentNullException(nameof(u), "UserRole cannot be null.");
+            }
+            UserDL.AssignRoleToUser(u);
         }
     }
 }

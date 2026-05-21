@@ -244,8 +244,9 @@ namespace SQL_Judge_System.UI
             // btn_Settings
             // 
             this.btn_Settings.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.btn_Settings.FlatAppearance.BorderSize = 0;
             this.btn_Settings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_Settings.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_Settings.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Settings.ForeColor = System.Drawing.Color.White;
             this.btn_Settings.IconChar = FontAwesome.Sharp.IconChar.Gears;
             this.btn_Settings.IconColor = System.Drawing.Color.White;
@@ -265,8 +266,9 @@ namespace SQL_Judge_System.UI
             // btnLogout
             // 
             this.btnLogout.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.btnLogout.FlatAppearance.BorderSize = 0;
             this.btnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLogout.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLogout.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogout.ForeColor = System.Drawing.Color.White;
             this.btnLogout.IconChar = FontAwesome.Sharp.IconChar.RightFromBracket;
             this.btnLogout.IconColor = System.Drawing.Color.White;
@@ -286,8 +288,9 @@ namespace SQL_Judge_System.UI
             // btnContestLeaderboard
             // 
             this.btnContestLeaderboard.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnContestLeaderboard.FlatAppearance.BorderSize = 0;
             this.btnContestLeaderboard.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnContestLeaderboard.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnContestLeaderboard.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnContestLeaderboard.ForeColor = System.Drawing.Color.White;
             this.btnContestLeaderboard.IconChar = FontAwesome.Sharp.IconChar.RankingStar;
             this.btnContestLeaderboard.IconColor = System.Drawing.Color.White;
@@ -307,8 +310,9 @@ namespace SQL_Judge_System.UI
             // btnReport
             // 
             this.btnReport.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnReport.FlatAppearance.BorderSize = 0;
             this.btnReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnReport.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReport.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnReport.ForeColor = System.Drawing.Color.White;
             this.btnReport.IconChar = FontAwesome.Sharp.IconChar.ChartColumn;
             this.btnReport.IconColor = System.Drawing.Color.White;
@@ -328,8 +332,9 @@ namespace SQL_Judge_System.UI
             // btnSubmissions
             // 
             this.btnSubmissions.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnSubmissions.FlatAppearance.BorderSize = 0;
             this.btnSubmissions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSubmissions.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSubmissions.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSubmissions.ForeColor = System.Drawing.Color.White;
             this.btnSubmissions.IconChar = FontAwesome.Sharp.IconChar.Code;
             this.btnSubmissions.IconColor = System.Drawing.Color.White;
@@ -349,8 +354,9 @@ namespace SQL_Judge_System.UI
             // btn_contests
             // 
             this.btn_contests.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btn_contests.FlatAppearance.BorderSize = 0;
             this.btn_contests.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_contests.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_contests.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_contests.ForeColor = System.Drawing.Color.White;
             this.btn_contests.IconChar = FontAwesome.Sharp.IconChar.Trophy;
             this.btn_contests.IconColor = System.Drawing.Color.White;
@@ -370,8 +376,9 @@ namespace SQL_Judge_System.UI
             // btnTestCases
             // 
             this.btnTestCases.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnTestCases.FlatAppearance.BorderSize = 0;
             this.btnTestCases.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTestCases.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTestCases.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTestCases.ForeColor = System.Drawing.Color.White;
             this.btnTestCases.IconChar = FontAwesome.Sharp.IconChar.Flask;
             this.btnTestCases.IconColor = System.Drawing.Color.White;
@@ -391,8 +398,9 @@ namespace SQL_Judge_System.UI
             // btn_problems
             // 
             this.btn_problems.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btn_problems.FlatAppearance.BorderSize = 0;
             this.btn_problems.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_problems.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_problems.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_problems.ForeColor = System.Drawing.Color.White;
             this.btn_problems.IconChar = FontAwesome.Sharp.IconChar.Book;
             this.btn_problems.IconColor = System.Drawing.Color.White;
@@ -412,8 +420,9 @@ namespace SQL_Judge_System.UI
             // btn_students
             // 
             this.btn_students.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btn_students.FlatAppearance.BorderSize = 0;
             this.btn_students.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_students.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_students.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_students.ForeColor = System.Drawing.Color.White;
             this.btn_students.IconChar = FontAwesome.Sharp.IconChar.UserGraduate;
             this.btn_students.IconColor = System.Drawing.Color.White;
@@ -433,8 +442,9 @@ namespace SQL_Judge_System.UI
             // btn_Admin
             // 
             this.btn_Admin.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btn_Admin.FlatAppearance.BorderSize = 0;
             this.btn_Admin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_Admin.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_Admin.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Admin.ForeColor = System.Drawing.Color.White;
             this.btn_Admin.IconChar = FontAwesome.Sharp.IconChar.RankingStar;
             this.btn_Admin.IconColor = System.Drawing.Color.White;
@@ -454,8 +464,9 @@ namespace SQL_Judge_System.UI
             // btn_Home
             // 
             this.btn_Home.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btn_Home.FlatAppearance.BorderSize = 0;
             this.btn_Home.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_Home.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_Home.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Home.ForeColor = System.Drawing.Color.White;
             this.btn_Home.IconChar = FontAwesome.Sharp.IconChar.HomeLg;
             this.btn_Home.IconColor = System.Drawing.Color.White;
@@ -2215,7 +2226,7 @@ namespace SQL_Judge_System.UI
             // 
             // panel9
             // 
-            this.panel9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
+            this.panel9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(30)))), ((int)(((byte)(54)))));
             this.panel9.Controls.Add(this.lblMainTitle);
             this.panel9.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel9.Location = new System.Drawing.Point(0, 0);

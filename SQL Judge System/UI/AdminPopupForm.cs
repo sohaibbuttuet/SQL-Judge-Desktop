@@ -63,11 +63,11 @@ namespace SQL_Judge_System.UI
                 UserBL.SignUp(user);
 
                 // Get Admin RoleID
-                int AdminRoleID = RoleBL.GetAdminRoleID();
+                int AdminRoleID = UserBL.GetAdminRoleID();
 
                 // Assign Admin Role
                 UserRole userRole = new UserRole(user.UserID, AdminRoleID);
-                UserRoleBL.AssignRoleToUser(userRole);
+                UserBL.AssignRoleToUser(userRole);
 
                 MessageBox.Show("Admin added successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 ClearAddInputs();

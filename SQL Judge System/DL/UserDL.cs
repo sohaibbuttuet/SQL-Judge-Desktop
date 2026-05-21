@@ -146,5 +146,23 @@ namespace SQL_Judge_System.DL
             };
         }
 
+        // User Lookup Table (Roles)
+        public static int GetStudentRoleID()
+        {
+            string query = "SELECT RoleID FROM Roles WHERE RoleName = 'Student';";
+            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
+        }
+        public static int GetAdminRoleID()
+        {
+            string query = "SELECT RoleID FROM Roles WHERE RoleName = 'Admin';";
+            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
+        }
+
+        // User Junction Table (UserRoles)
+        public static void AssignRoleToUser(UserRole u)
+        {
+            string query = $"INSERT INTO UserRoles (UserID, RoleID) VALUES ({u.UserID}, {u.RoleID});";
+            DatabaseHelper.Instance.Update(query);
+        }
     }
 }

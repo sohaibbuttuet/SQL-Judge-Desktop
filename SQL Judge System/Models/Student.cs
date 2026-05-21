@@ -8,28 +8,114 @@ namespace SQL_Judge_System.Models
 {
     internal class Student
     {
-        public int StudentID { get; set; }
-        public int UserID { get; set; }   // FK → Users
-        public string RegistrationNumber { get; set; }   // must be unique
-        public int SkillLevelID { get; set; }   // FK → SkillLevels
-        public int TotalScore { get; set; } = 0;
-        public int ProblemsSolved { get; set; } = 0;
+        private int studentID;
+        private int userID;
+        private string registrationNumber;
+        private int skillLevelID;
+        private int totalScore;
+        private int problemsSolved;
+
+        // Aggregation (Navigation Property)
+        private SkillLevel skillLevel;
+
+        public int StudentID
+        {
+            get { return studentID; }
+            set
+            {
+                if (value <= 0)
+                    throw new Exception("Invalid Student ID.");
+
+                studentID = value;
+            }
+        }
+        public int UserID
+        {
+            get { return userID; }
+            set
+            {
+                if (value <= 0)
+                    throw new Exception("Invalid User ID.");
+
+                userID = value;
+            }
+        }
+        public string RegistrationNumber
+        {
+            get { return registrationNumber; }
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                    throw new Exception("Registration number cannot be empty.");
+
+                registrationNumber = value;
+            }
+        }
+        public int SkillLevelID
+        {
+            get { return skillLevelID; }
+            private set
+            {
+                if (value <= 0)
+                    throw new Exception("Invalid Skill Level ID.");
+
+                skillLevelID = value;
+            }
+        }
+        public int TotalScore
+        {
+            get { return totalScore; }
+            set
+            {
+                if (value < 0)
+                    throw new Exception("Total score cannot be negative.");
+
+                totalScore = value;
+            }
+        }
+        public int ProblemsSolved
+        {
+            get { return problemsSolved; }
+            set
+            {
+                if (value < 0)
+                    throw new Exception("Problems solved cannot be negative.");
+
+                problemsSolved = value;
+            }
+        }
+
+        // Aggregation Property
+        public SkillLevel SkillLevel
+        {
+            get { return skillLevel; }
+            set
+            {
+                if(value == null)
+                    throw new Exception("Skill level cannot be null.");
+
+                skillLevel = value;           
+                SkillLevelID = value.SkillLevelID;
+            }
+        }
 
         public Student() { }
-        public Student(int userID, string registrationNumber, int skillLevelID)
+        public Student(int userID, string registrationNumber, SkillLevel skillLevel)
         {
             UserID = userID;
             RegistrationNumber = registrationNumber;
-            SkillLevelID = skillLevelID;
+            SkillLevel = skillLevel;
+            TotalScore = 0;
+            ProblemsSolved = 0;
         }
-        public Student(int studentID, int userID, string fullName, string registrationNumber, int skillLevelID, int totalScore, int problemsSolved)
+        public Student(int studentID, int userID, string registrationNumber, int totalScore, int problemsSolved, SkillLevel skillLevel)
         {
             StudentID = studentID;
             UserID = userID;
-            RegistrationNumber = registrationNumber;
-            SkillLevelID = skillLevelID;
+            RegistrationNumber = registrationNumber;            
             TotalScore = totalScore;
             ProblemsSolved = problemsSolved;
+            SkillLevel = skillLevel;
         }
     }
 }

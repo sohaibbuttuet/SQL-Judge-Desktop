@@ -104,5 +104,30 @@ namespace SQL_Judge_System.DL
             string query = $"UPDATE Problems SET IsActive = 0 WHERE ProblemID = {problemId};";
             DatabaseHelper.Instance.Update(query);
         }
+
+        // Problem Lookup Tables
+        public static DataTable GetProblemDifficulties()
+        {
+            string query = "SELECT DifficultyID, DifficultyName FROM ProblemDifficulties";
+            return DatabaseHelper.Instance.GetDataTable(query);
+        }
+        public static DataTable GetProblemTags()
+        {
+            string query = "SELECT TagID, TagName FROM ProblemTags ORDER BY TagID;";
+            return DatabaseHelper.Instance.GetDataTable(query);
+        }
+
+        // Problem Junction Tables
+        public static void MapProblemTag(ProblemTagMap pt)
+        {
+            string query = $"INSERT INTO problemtagmap(ProblemID, TagID) VALUES ({pt.ProblemID},{pt.TagID});";
+            DatabaseHelper.Instance.ExecuteScalar(query);
+        }
+        public static void DeleteByProblemID(int problemID)
+        {
+            string query = $"DELETE FROM problemtagmap WHERE ProblemID = {problemID};";
+            DatabaseHelper.Instance.Update(query);
+        }
+
     }
 }

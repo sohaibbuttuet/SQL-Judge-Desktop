@@ -8,10 +8,43 @@ namespace SQL_Judge_System.Models
 {
     internal class ContestProblem
     {
-        // Primary key is composite: (ContestID, ProblemID)
-        public int ContestID { get; set; }
-        public int ProblemID { get; set; }
-        public int OrderNumber { get; set; }   // Controls display order in the contest
+        private int contestID;
+        private int problemID;
+        private int orderNumber;
+
+        public int ContestID
+        {
+            get { return contestID; }
+            set
+            {
+                if (value <= 0)
+                    throw new Exception("Invalid Contest ID.");
+
+                contestID = value;
+            }
+        }
+        public int ProblemID
+        {
+            get { return problemID; }
+            set
+            {
+                if (value <= 0)
+                    throw new Exception("Invalid Problem ID.");
+
+                problemID = value;
+            }
+        }
+        public int OrderNumber
+        {
+            get { return orderNumber; }
+            set
+            {
+                if (value <= 0)
+                    throw new Exception("Order Number must be greater than 0.");
+
+                orderNumber = value;
+            }
+        }
 
         public ContestProblem() { }
         public ContestProblem(int contestID, int problemID, int orderNumber)

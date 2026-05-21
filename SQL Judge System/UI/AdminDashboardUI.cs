@@ -343,14 +343,18 @@ namespace SQL_Judge_System.UI
                 {
                     int problemID = Convert.ToInt32(dgvProblems.SelectedRows[0].Cells["ProblemID"].Value);
                     int createdBy = Convert.ToInt32(dgvProblems.SelectedRows[0].Cells["CreatedBy"].Value);
-                    ProblemPopupForm form = new ProblemPopupForm(user.UserID, createdBy);
+
+                    ProblemPopupForm form = new ProblemPopupForm(user.UserID, problemID, createdBy);
                     form.ShowDialog();
                 }
-                    
+                else
+                {
+                    MessageBox.Show("Please select a Problem to update.");
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Failed to update admin: " + ex.Message);
+                MessageBox.Show("Failed to update Problem: " + ex.Message);
             }
             LoadProblemData();
         }

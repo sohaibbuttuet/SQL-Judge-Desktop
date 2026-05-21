@@ -148,19 +148,19 @@
 
 	CREATE TABLE TestCases (
     TestCaseID INT AUTO_INCREMENT PRIMARY KEY,
-    ProblemID INT NOT NULL,
     TestCaseName VARCHAR(100),
+    ProblemID INT NOT NULL,    
 
     SetupSQL TEXT NOT NULL,
     SolutionQuery TEXT NOT NULL,
-
-    IsActive BOOLEAN DEFAULT TRUE,
 
     CreatedBy INT NOT NULL,
     CreatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
 
     UpdatedBy INT NOT NULL,
     UpdatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+    
+     IsActive BOOLEAN DEFAULT TRUE,
 
     FOREIGN KEY (ProblemID)
         REFERENCES Problems(ProblemID)

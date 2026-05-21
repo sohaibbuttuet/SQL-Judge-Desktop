@@ -70,6 +70,46 @@ namespace SQL_Judge_System.BL
         public static DataTable ProblemsList()
         {
             return ProblemDL.ProblemsList();
-        }    
+        }
+
+
+        // For Problem lookups
+        public static DataTable GetProblemDifficulties()
+        {
+            return ProblemDL.GetProblemDifficulties();
+        }
+        public static DataTable GetProblemTags()
+        {
+            return ProblemDL.GetProblemTags();
+        }
+
+        // For Problem Junction Tables
+        public static void MapProblemTag(ProblemTagMap pt)
+        {
+            if (pt == null)
+            {
+                throw new ArgumentNullException(nameof(pt), "ProblemTagMap object cannot be null.");
+            }
+
+            if (pt.ProblemID <= 0)
+            {
+                throw new ArgumentException("Invalid Problem ID.");
+            }
+
+            if (pt.TagID <= 0)
+            {
+                throw new ArgumentException("Invalid Tag ID.");
+            }
+
+            ProblemDL.MapProblemTag(pt);
+        }
+        public static void DeleteByProblemID(int problemID)
+        {
+            if (problemID <= 0)
+            {
+                throw new ArgumentException("Invalid Problem ID.");
+            }
+            ProblemDL.DeleteByProblemID(problemID);
+        }
     }
 }

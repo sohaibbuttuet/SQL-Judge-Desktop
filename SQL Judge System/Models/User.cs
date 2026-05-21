@@ -8,37 +8,153 @@ namespace SQL_Judge_System.Models
 {
     internal class User
     {
-        public int UserID { get; set; }
-        public string FullName { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }   
-        public bool IsActive { get; set; } = true;
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
+        private int userID;
+        private string fullName;
+        private string email;
+        private string password;
+        private bool isActive;
+        private DateTime createdAt;
 
+
+        // =======================================
+        // Composition (many-to-many relationship) 
+        // =======================================
+        private List<Role> roles = new List<Role>();
+
+        public int UserID
+        {
+            get { return userID; }
+            set
+            {
+                if (value <= 0)
+                    throw new Exception("Invalid User ID.");
+
+                userID = value;
+            }
+        }
+        public string FullName
+        {
+            get { return fullName; }
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                    throw new Exception("Full name cannot be empty.");
+
+                fullName = value;
+            }
+        }
+        public string Email
+        {
+            get { return email; }
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value) || !value.Contains("@") || !value.Contains("."))
+                    throw new Exception("Invalid email format.");
+
+                email = value;
+            }
+        }
+        public string Password
+        {
+            get { return password; }
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value) || value.Length < 6)
+                    throw new Exception("Password too weak.");
+
+                password = value;
+            }
+        }
+        public bool IsActive
+        {
+            get { return isActive; }
+            private set { isActive = value; }
+        }
+        public DateTime CreatedAt
+        {
+            get { return createdAt; }
+            private set { createdAt = value; }
+        }
+
+        // =========================
+        // Safe Composition Exposure
+        // =========================
+        public IReadOnlyList<Role> Roles
+        {
+            get { return roles.AsReadOnly(); }
+        }
+
+
+        // =========================
+        // Constructers
+        // =========================
+
+        // Default Constructor
         public User()
         {
+            IsActive = true;
+            CreatedAt = DateTime.Now;
         }
+
+        // Login Constructor
         public User(string email, string password)
         {
             Email = email;
             Password = password;
         }
+
+        // Registration Constructor
         public User(string fullName, string email, string password)
         {
             FullName = fullName;  
             Email = email;
             Password = password;
+
             IsActive = true;
             CreatedAt = DateTime.Now;
         }
+
+        // Constructor for updating user
         public User(int userId, string fullName, string email, string password)
         {
             UserID = userId;
             FullName = fullName;
             Email = email;
             Password = password;
+        }
+
+        // =========================
+        // Composition Management
+        // =========================
+        public void AddRole(Role role)
+        {
+            if (role == null)
+                throw new Exception("Role cannot be null.");
+
+            roles.Add(role);
+        }
+        public void RemoveRole(Role role)
+        {
+            if (role == null)
+                throw new Exception("Role cannot be null.");
+
+            roles.Remove(role);
+        }
+        public void ClearRoles()
+        {
+            roles.Clear();
+        }
+
+        // =========================
+        // Account Management
+        // =========================
+        public void Deactivate()
+        {
+            IsActive = false;
+        }
+        public void Activate()
+        {
             IsActive = true;
-            CreatedAt = DateTime.Now;
         }
     }
 }

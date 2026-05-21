@@ -8,8 +8,11 @@ namespace SQL_Judge_System.Models
 {
     internal class UserRole
     {
-        public int UserID { get; set; }
-        public int RoleID { get; set; } 
+        private int UserID;
+        private int RoleID;
+
+        public int GetUserID() { return UserID; }
+        public int GetRoleID() { return RoleID; }
 
         public UserRole() { }
         public UserRole(int userID, int roleID)
