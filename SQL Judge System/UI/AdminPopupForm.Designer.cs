@@ -44,15 +44,15 @@
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnAddClear = new System.Windows.Forms.Button();
             this.editPanel = new System.Windows.Forms.Panel();
-            this.lblEditTitle = new System.Windows.Forms.Label();
-            this.btnUpdate = new System.Windows.Forms.Button();
-            this.btnEditClear = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.txtEditName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.txtEditEmail = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.txtEditPassword = new System.Windows.Forms.TextBox();
+            this.lblEditTitle = new System.Windows.Forms.Label();
+            this.btnUpdate = new System.Windows.Forms.Button();
+            this.btnEditClear = new System.Windows.Forms.Button();
             this.addPanel.SuspendLayout();
             this.editPanel.SuspendLayout();
             this.SuspendLayout();
@@ -173,43 +173,6 @@
             this.editPanel.TabIndex = 3;
             this.editPanel.Visible = false;
             // 
-            // lblEditTitle
-            // 
-            this.lblEditTitle.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.lblEditTitle.Location = new System.Drawing.Point(135, 13);
-            this.lblEditTitle.Name = "lblEditTitle";
-            this.lblEditTitle.Size = new System.Drawing.Size(100, 23);
-            this.lblEditTitle.TabIndex = 0;
-            this.lblEditTitle.Text = "Edit Admin";
-            // 
-            // btnUpdate
-            // 
-            this.btnUpdate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
-            this.btnUpdate.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnUpdate.ForeColor = System.Drawing.Color.White;
-            this.btnUpdate.Location = new System.Drawing.Point(24, 228);
-            this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(75, 23);
-            this.btnUpdate.TabIndex = 7;
-            this.btnUpdate.Text = "Update";
-            this.btnUpdate.UseVisualStyleBackColor = false;
-            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
-            // 
-            // btnEditClear
-            // 
-            this.btnEditClear.BackColor = System.Drawing.Color.IndianRed;
-            this.btnEditClear.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnEditClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEditClear.ForeColor = System.Drawing.Color.White;
-            this.btnEditClear.Location = new System.Drawing.Point(124, 228);
-            this.btnEditClear.Name = "btnEditClear";
-            this.btnEditClear.Size = new System.Drawing.Size(75, 23);
-            this.btnEditClear.TabIndex = 8;
-            this.btnEditClear.Text = "Clear";
-            this.btnEditClear.UseVisualStyleBackColor = false;
-            this.btnEditClear.Click += new System.EventHandler(this.btnEditClear_Click);
-            // 
             // label1
             // 
             this.label1.Location = new System.Drawing.Point(21, 63);
@@ -255,6 +218,43 @@
             this.txtEditPassword.PasswordChar = '*';
             this.txtEditPassword.Size = new System.Drawing.Size(300, 20);
             this.txtEditPassword.TabIndex = 14;
+            // 
+            // lblEditTitle
+            // 
+            this.lblEditTitle.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.lblEditTitle.Location = new System.Drawing.Point(135, 13);
+            this.lblEditTitle.Name = "lblEditTitle";
+            this.lblEditTitle.Size = new System.Drawing.Size(100, 23);
+            this.lblEditTitle.TabIndex = 0;
+            this.lblEditTitle.Text = "Edit Admin";
+            // 
+            // btnUpdate
+            // 
+            this.btnUpdate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
+            this.btnUpdate.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUpdate.ForeColor = System.Drawing.Color.White;
+            this.btnUpdate.Location = new System.Drawing.Point(24, 228);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(75, 23);
+            this.btnUpdate.TabIndex = 7;
+            this.btnUpdate.Text = "Update";
+            this.btnUpdate.UseVisualStyleBackColor = false;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+            // 
+            // btnEditClear
+            // 
+            this.btnEditClear.BackColor = System.Drawing.Color.IndianRed;
+            this.btnEditClear.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnEditClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEditClear.ForeColor = System.Drawing.Color.White;
+            this.btnEditClear.Location = new System.Drawing.Point(124, 228);
+            this.btnEditClear.Name = "btnEditClear";
+            this.btnEditClear.Size = new System.Drawing.Size(75, 23);
+            this.btnEditClear.TabIndex = 8;
+            this.btnEditClear.Text = "Clear";
+            this.btnEditClear.UseVisualStyleBackColor = false;
+            this.btnEditClear.Click += new System.EventHandler(this.btnEditClear_Click);
             // 
             // AdminPopupForm
             // 

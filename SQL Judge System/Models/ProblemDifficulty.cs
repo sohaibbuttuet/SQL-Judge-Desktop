@@ -6,35 +6,15 @@ using System.Threading.Tasks;
 
 namespace SQL_Judge_System.Models
 {
-    internal class ProblemDifficulty
+    internal class ProblemDifficulty : LookupBase
     {
-        private int difficultyID;
-        private string name;
-        public int DifficultyID
+        public ProblemDifficulty(int id): base(id)
         {
-            get { return difficultyID; }
-            set
-            {
-                if (value <= 0)
-                    throw new Exception("Invalid Difficulty ID.");
-                difficultyID = value;
-            }
+
         }
-        public string Name
+        public ProblemDifficulty(int id, string name) : base(id, name)
         {
-            get { return name; }
-            set
-            {
-                if (string.IsNullOrWhiteSpace(value))
-                    throw new Exception("Difficulty Name cannot be empty.");
-                name = value;
-            }
-        }
-        public ProblemDifficulty() { }
-        public ProblemDifficulty(int difficultyID, string name)
-        {
-            DifficultyID = difficultyID;
-            Name = name;
+
         }
     }
 }

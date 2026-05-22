@@ -1,4 +1,5 @@
 ﻿using SQL_Judge_System.DL;
+using SQL_Judge_System.LookupDL;
 using SQL_Judge_System.Models;
 using System;
 using System.Collections.Generic;
@@ -55,6 +56,19 @@ namespace SQL_Judge_System.BL
             }
             ProblemDL.DeactivateProblem(problemId);
         }
+
+        // Problem Panel in Admin Dashboard
+        public static DataTable ProblemsList()
+        {
+            return ProblemDL.ProblemsList();
+        }
+        public static Problem GetProblemByID(int problemId)
+        {
+            if (problemId <= 0)
+                throw new ArgumentOutOfRangeException(nameof(problemId), "Problem ID must be greater than 0.");
+
+            return ProblemDL.GetProblemByID(problemId);
+        }
         public static int TotalProblems()
         {
             return ProblemDL.TotalProblems();
@@ -66,21 +80,23 @@ namespace SQL_Judge_System.BL
         public static int InactiveProblems()
         {
             return ProblemDL.InactiveProblems();
-        }
-        public static DataTable ProblemsList()
-        {
-            return ProblemDL.ProblemsList();
-        }
-
+        }        
 
         // For Problem lookups
-        public static DataTable GetProblemDifficulties()
+        public static List<ProblemDifficulty> GetProblemDifficulties()
         {
-            return ProblemDL.GetProblemDifficulties();
+            return ProblemDifficultiesDL.GetProblemDifficulties();
         }
-        public static DataTable GetProblemTags()
+        public static List<ProblemTag> GetProblemTags()
         {
-            return ProblemDL.GetProblemTags();
+            return ProblemTagsDL.GetProblemTags();
+        }
+        public static List<int> GetProblemTagIDs(int problemId)
+        {
+            if (problemId <= 0)
+                throw new ArgumentOutOfRangeException(nameof(problemId), "Invalid Problem ID");
+
+            return ProblemTagMapDL.GetTagIDs(problemId);
         }
 
         // For Problem Junction Tables

@@ -19,17 +19,9 @@ namespace SQL_Judge_System.BL
             {
                 throw new ArgumentNullException(nameof(contest), "Contest cannot be null.");
             }
-            if (string.IsNullOrWhiteSpace(contest.Title))
-            {
-                throw new ArgumentException("Contest title cannot be empty.");
-            }
             if (contest.StartDate >= contest.EndDate)
             {
                 throw new ArgumentException("Contest start date must be before end date.");
-            }
-            if (contest.CreatedBy <= 0)
-            {
-                throw new ArgumentException("Invalid creator ID.");
             }
             if (contest.Description.Length > 1000)
             {
@@ -48,17 +40,9 @@ namespace SQL_Judge_System.BL
             {
                 throw new ArgumentNullException(nameof(contest), "Contest cannot be null.");
             }
-            if (contest.ContestID <= 0)
+            if (IsContestExists(contest.ContestID, contest.Title))
             {
-                throw new ArgumentException("Invalid Contest ID.");
-            }
-            if (contest.CreatedBy <= 0)
-            {
-                throw new ArgumentException("Invalid creator ID.");
-            }
-            if (contest.CreatedBy != currentUserID)
-            {
-                throw new UnauthorizedAccessException("You are not allowed to update this contest.");
+                throw new ArgumentException("Contest title already exists.");
             }
             if (contest.EndDate <= contest.StartDate)
             {
@@ -68,10 +52,11 @@ namespace SQL_Judge_System.BL
             {
                 throw new ArgumentException("Contest description cannot exceed 1000 characters.");
             }
-            if (IsContestExists(contest.ContestID, contest.Title))
+            if (contest.CreatedBy != currentUserID)
             {
-                throw new ArgumentException("Contest title already exists.");
+                throw new UnauthorizedAccessException("You are not allowed to update this contest.");
             }
+
             ContestDL.UpdateContest(contest);
         }
         public static bool IsContestExists(string Title)
@@ -82,6 +67,8 @@ namespace SQL_Judge_System.BL
         {
             return ContestDL.IsContestExists(contestID, Title);
         }
+
+        // For Contest Panel in Admin Dashboard
         public static DataTable GetContests()
         {
             return ContestDL.GetAllContests();

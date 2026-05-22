@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace SQL_Judge_System.Models
 {
-    internal class Problem
+    internal class Problem : AuditableEntity
     {
         private int problemID;
         private string title;
         private string description;
         private int points;
-        private int createdBy;
-        private DateTime createdAt;
-        private int updatedBy;
-        private DateTime updatedAt;
         private bool isActive;
+
+        // Display fields (from JOIN)
+        public string CreatedByName { get; set; }
+        public string UpdatedByName { get; set; }
 
         // ====================================
         // Composition (1-to-many relationship) 
@@ -76,38 +76,6 @@ namespace SQL_Judge_System.Models
                 points = value;
             }
         }
-        public int CreatedBy
-        {
-            get { return createdBy; }
-            set
-            {
-                if (value <= 0)
-                    throw new Exception("Invalid CreatedBy ID.");
-
-                createdBy = value;
-            }
-        }
-        public DateTime CreatedAt
-        {
-            get { return createdAt; }
-            private set { createdAt = value; }
-        }
-        public int UpdatedBy
-        {
-            get { return updatedBy; }
-            set
-            {
-                if (value <= 0)
-                    throw new Exception("Invalid UpdatedBy ID.");
-
-                updatedBy = value;
-            }
-        }
-        public DateTime UpdatedAt
-        {
-            get { return updatedAt; }
-            private set { updatedAt = value; }
-        }
         public bool IsActive
         {
             get { return isActive; }
@@ -146,35 +114,46 @@ namespace SQL_Judge_System.Models
         // =========================
         public Problem()
         {
-            CreatedAt = DateTime.Now;
             Points = 10;
             IsActive = true;
         }
-        public Problem(string title, string description, ProblemDifficulty difficulty, int createdBy, int points)
+
+        // Constructor For Creating New Problem (without ID, CreatedBy)
+        public Problem(string title, string description, ProblemDifficulty difficulty, int points, int createdBy)
         {
             Title = title;
             Description = description;
             ProblemDifficulty = difficulty;
-            CreatedBy = createdBy;
             Points = points;
 
-            CreatedAt = DateTime.Now;
-            UpdatedAt = DateTime.Now;
             IsActive = true;
+
+            MarkCreated(createdBy);
         }
-        public Problem(int problemID, string title, string description, ProblemDifficulty difficulty, int createdBy, int updatedBy, int points, DateTime createdAt, DateTime updatedAt, bool isActive)
+
+        // Constructor For Updating Existing Problem (with ID, UpdatedBy)
+        public Problem(int problemID, string title, string description, ProblemDifficulty difficulty, int points, int updatedBy)
         {
             ProblemID = problemID;
             Title = title;
             Description = description;
             ProblemDifficulty = difficulty;
-            CreatedBy = createdBy;
-            UpdatedBy = updatedBy;
             Points = points;
 
-            CreatedAt = createdAt;
-            UpdatedAt = updatedAt;
+            MarkUpdated(updatedBy);
+        }
+
+        // Full Constructer For Database Load
+        public Problem(int problemID, string title, string description, ProblemDifficulty difficulty, int points, bool isActive, int createdBy, DateTime createdAt, int updatedBy, DateTime updatedAt)
+        {
+            ProblemID = problemID;
+            Title = title;
+            Description = description;
+            ProblemDifficulty = difficulty;
+            Points = points;
             IsActive = isActive;
+
+            LoadAuditData(createdBy, createdAt, updatedBy, updatedAt);
         }
 
         // =========================
@@ -217,16 +196,6 @@ namespace SQL_Judge_System.Models
         public void ClearTags()
         {
             problemTags.Clear();
-        }
-
-
-        // =========================
-        // Audit Management
-        // =========================
-        public void MarkUpdated(int updatedBy)
-        {
-            UpdatedBy = updatedBy;
-            UpdatedAt = DateTime.Now;
         }
     }
 }

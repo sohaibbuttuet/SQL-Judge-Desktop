@@ -19,13 +19,15 @@
 	-- 2. USERS
 	-- =====================================
 
-	CREATE TABLE Users (
-    UserID INT AUTO_INCREMENT PRIMARY KEY,    
+CREATE TABLE Users (
+    UserID INT AUTO_INCREMENT PRIMARY KEY,
     FullName VARCHAR(100) NOT NULL,
     Email VARCHAR(100) UNIQUE NOT NULL,
     Password VARCHAR(255) NOT NULL,
     IsActive BOOLEAN DEFAULT TRUE,
-    CreatedAt DATETIME DEFAULT CURRENT_TIMESTAMP
+    CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UpdatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP 
+        ON UPDATE CURRENT_TIMESTAMP
 );
 
 	-- =====================================
@@ -107,7 +109,8 @@
     CreatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
 
     UpdatedBy INT NOT NULL,
-    UpdatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+    UpdatedAt DATETIME DEFAULT CURRENT_TIMESTAMP
+			  ON UPDATE CURRENT_TIMESTAMP,
 
     IsActive BOOLEAN DEFAULT TRUE,
 
@@ -158,7 +161,8 @@
     CreatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
 
     UpdatedBy INT NOT NULL,
-    UpdatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+    UpdatedAt DATETIME DEFAULT CURRENT_TIMESTAMP 
+			  ON UPDATE CURRENT_TIMESTAMP,
     
      IsActive BOOLEAN DEFAULT TRUE,
 
@@ -246,7 +250,8 @@
     CreatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
 
     UpdatedBy INT NOT NULL,
-    UpdatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+    UpdatedAt DATETIME DEFAULT CURRENT_TIMESTAMP
+			  ON UPDATE CURRENT_TIMESTAMP,
 
     FOREIGN KEY (CreatedBy)
         REFERENCES Users(UserID),
@@ -345,42 +350,43 @@
 	JOIN SkillLevels sk ON s.SkillLevelID = sk.SkillLevelID;
     
     -- ===================================== (4) =====================================
-    CREATE VIEW vw_problems
+    CREATE OR REPLACE VIEW vw_problems
 	AS
 	SELECT p.ProblemID, 
 		   p.Title, 
            d.DifficultyName, 
-           p.CreatedBy, 
+            p.Points,            
+           p.IsActive,
+           u1.FullName AS CreatedBy, 
            p.CreatedAt, 
-           p.UpdatedBy,
-		   p.UpdatedAt,
-           p.Points,            
-           p.IsActive
+           u2.FullName AS UpdatedBy,
+		   p.UpdatedAt
 	FROM problems p 
-    JOIN problemdifficulties d ON p.DifficultyID = d.DifficultyID;
+    LEFT JOIN problemdifficulties d ON p.DifficultyID = d.DifficultyID
+    LEFT JOIN Users u1 ON p.CreatedBy = u1.UserID
+    LEFT JOIN Users u2 ON p.UpdatedBy = u2.UserID;
     
     -- ===================================== (5) =====================================
-    CREATE OR REPLACE VIEW vw_Contests AS
-	SELECT
-		c.ContestID,
-		c.Title,
-		c.StartDate,
-		c.EndDate,
-		c.CreatedBy,
-        c.CreatedAt,
-		c.UpdatedBy,
-        c.UpdatedAt,
-        COUNT(cp.StudentID) TotalParticipants,
-		CASE
-			WHEN NOW() < c.StartDate THEN 'Upcoming'
-			WHEN NOW() BETWEEN c.StartDate AND EndDate THEN 'Active'
-			ELSE 'Ended'
-		END AS ContestStatus
-	FROM Contests c 
-    LEFT JOIN contestparticipants cp ON c.ContestID = cp.ContestID
-    GROUP BY c.ContestID, c.Title, c.StartDate, c.EndDate, c.CreatedBy,  c.CreatedAt, c.UpdatedBy, c.UpdatedAt, ContestStatus;
     
-    -- ===================================== (6) =====================================
+ CREATE OR REPLACE VIEW vw_contests
+	AS
+	SELECT c.ContestID, 
+		   c.Title,           
+           c.StartDate,
+		   c.EndDate,
+           COUNT(cp.StudentID) AS TotalParticipants,
+           u1.FullName AS CreatedBy, 
+           DATE(c.CreatedAt) AS CreatedAt, 
+           u2.FullName AS UpdatedBy,
+		   DATE(c.UpdatedAt) AS UpdatedAt
+	FROM contests c 
+    LEFT JOIN contestparticipants cp ON c.ContestID = cp.ContestID
+    LEFT JOIN Users u1 ON c.CreatedBy = u1.UserID
+    LEFT JOIN Users u2 ON c.UpdatedBy = u2.UserID
+    GROUP BY c.ContestID, c.Title;
+    
+    
+       -- ===================================== (6) =====================================
    CREATE OR REPLACE VIEW vw_testcases AS
    SELECT
 		t.TestCaseID,
@@ -389,25 +395,27 @@
 		
 		CASE
 			WHEN t.SetupSQL IS NULL THEN ''
-			WHEN LENGTH(t.SetupSQL) > 50
-				THEN CONCAT(LEFT(t.SetupSQL, 50), '...')
+			WHEN LENGTH(t.SetupSQL) > 30
+				THEN CONCAT(LEFT(t.SetupSQL, 30), '...')
 			ELSE t.SetupSQL
 		END AS SetupSQLPreview,
 
 		CASE
 			WHEN t.SolutionQuery IS NULL THEN ''
-			WHEN LENGTH(t.SolutionQuery) > 50
-				THEN CONCAT(LEFT(t.SolutionQuery, 50), '...')
+			WHEN LENGTH(t.SolutionQuery) > 30
+				THEN CONCAT(LEFT(t.SolutionQuery, 30), '...')
 			ELSE t.SolutionQuery
 		END AS SolutionQueryPreview,
 
-		t.CreatedBy,
+		u1.FullName AS CreatedBy,
 		t.CreatedAt,
-        t.UpdatedBy,
+        u2.FullName UpdatedBy,
         t.UpdatedAt,
 		t.IsActive
 	FROM testcases t
-	JOIN Problems p ON t.ProblemID = p.ProblemID;
+	LEFT JOIN Problems p ON t.ProblemID = p.ProblemID
+    LEFT JOIN Users u1 ON p.CreatedBy = u1.UserID
+    LEFT JOIN Users u2 ON p.UpdatedBy = u2.UserID;
 
   -- ===================================== (7) =====================================
 	CREATE OR REPLACE VIEW vw_Submissions

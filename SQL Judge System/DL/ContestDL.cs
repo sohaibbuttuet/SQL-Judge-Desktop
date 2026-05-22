@@ -12,16 +12,16 @@ namespace SQL_Judge_System.DL
     {
         public static int CreateContest(Contest c)
         {
-            string query = $"INSERT INTO Contests (Title, Description, StartDate, EndDate, CreatedBy) " +
-                           $"VALUES ('{c.Title}', '{c.Description}', '{c.StartDate:yyyy-MM-dd HH:mm:ss}', '{c.EndDate:yyyy-MM-dd HH:mm:ss}', {c.CreatedBy}); " +
+            string query = $"INSERT INTO Contests (Title, Description, StartDate, EndDate, CreatedBy, CreatedAt, UpdatedBy, UpdatedAt) " +
+                           $"VALUES ('{c.Title}', '{c.Description}', '{c.StartDate:yyyy-MM-dd HH:mm:ss}', '{c.EndDate:yyyy-MM-dd HH:mm:ss}', {c.CreatedBy}, '{c.CreatedAt:yyyy-MM-dd HH:mm:ss}', {c.CreatedBy}, '{c.CreatedAt:yyyy-MM-dd HH:mm:ss}'); " +
                            $"SELECT LAST_INSERT_ID();";
 
-            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
+            return DatabaseHelper.Instance.ExecuteScalar(query);
         }
         public static void UpdateContest(Contest c)
         {
             string query = $"UPDATE Contests SET Title = '{c.Title}', Description = '{c.Description}', StartDate = '{c.StartDate:yyyy-MM-dd HH:mm:ss}', " +
-                           $"EndDate = '{c.EndDate:yyyy-MM-dd HH:mm:ss}' WHERE ContestID = {c.ContestID};";
+                           $"EndDate = '{c.EndDate:yyyy-MM-dd HH:mm:ss}', UpdatedBy = {c.UpdatedBy}, UpdatedAt = '{c.UpdatedAt:yyyy-MM-dd HH:mm:ss}' WHERE ContestID = {c.ContestID};";
             DatabaseHelper.Instance.Update(query);
         }
         public static Contest GetContestByID(int contestid)
@@ -29,11 +29,35 @@ namespace SQL_Judge_System.DL
             string query = $"SELECT * FROM Contests WHERE ContestID = {contestid};";
             DataTable dt = DatabaseHelper.Instance.GetDataTable(query);
 
-            if (dt.Rows.Count < 0)
+            if (dt.Rows.Count == 0)
                 return null;
 
             return MapDataRowToContest(dt.Rows[0]);
         }       
+
+        public static DataTable GetAllContests()
+        {
+            string query = "SELECT * FROM vw_contests;";
+            return DatabaseHelper.Instance.GetDataTable(query);
+        }
+
+        // Helping Function
+        private static Contest MapDataRowToContest(DataRow row)
+        {
+            return new Contest(
+                Convert.ToInt32(row["ContestID"]),
+                row["Title"].ToString(),
+                row["Description"].ToString(),
+                Convert.ToDateTime(row["StartDate"]),
+                Convert.ToDateTime(row["EndDate"]),
+                Convert.ToInt32(row["CreatedBy"]),
+                Convert.ToDateTime(row["CreatedAt"]),
+                Convert.ToInt32(row["UpdatedBy"]),
+                Convert.ToDateTime(row["UpdatedAt"])
+            );
+        }
+
+        // Validation Function
         public static bool IsContestExists(string Title)
         {
             string query = $"SELECT COUNT(*) FROM Contests WHERE Title = '{Title}';";
@@ -44,43 +68,26 @@ namespace SQL_Judge_System.DL
             string query = $"SELECT COUNT(*) FROM Contests WHERE ContestID <> {contestID} AND Title = '{Title}'";
             return DatabaseHelper.Instance.ExecuteScalar(query) > 0;
         }
-        private static Contest MapDataRowToContest(DataRow row)
-        {
-            return new Contest
-            {
-                ContestID = Convert.ToInt32(row["ContestID"]),
-                Title = row["Title"].ToString(),
-                Description = row["Description"].ToString(),
-                StartDate = Convert.ToDateTime(row["StartDate"]),
-                EndDate = Convert.ToDateTime(row["EndDate"]),
-                CreatedBy = Convert.ToInt32(row["CreatedBy"])
-            };
-        }
 
         // Contests in Admin Dashboard
-        public static DataTable GetAllContests()
-        {
-            string query = "SELECT * FROM vw_contests;";
-            return DatabaseHelper.Instance.GetDataTable(query);
-        }
         public static int TotalContests()
         {
-            string query = "SELECT COUNT(*) FROM vw_contests;";
+            string query = "SELECT COUNT(*) FROM Contests;";
             return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
         }
         public static int ActiveContests()
         {
-            string query = "SELECT COUNT(*) FROM vw_contests WHERE ContestStatus = 'Active';";
+            string query = "SELECT COUNT(*) FROM Contests WHERE NOW() BETWEEN StartDate AND EndDate;";
             return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
         }
         public static int InactiveContests()
         {
-            string query = "SELECT COUNT(*) FROM vw_contests WHERE ContestStatus = 'Ended';";
+            string query = "SELECT COUNT(*) FROM Contests WHERE NOW() > EndDate;";
             return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
         }
         public static int UpcomingContests()
         {
-            string query = "SELECT COUNT(*) FROM vw_contests WHERE ContestStatus = 'Upcoming';";
+            string query = "SELECT COUNT(*) FROM Contests WHERE NOW() < StartDate; ";
             return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
         }
     }

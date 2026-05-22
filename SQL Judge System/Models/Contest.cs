@@ -3,19 +3,13 @@ using System.Collections.Generic;
 
 namespace SQL_Judge_System.Models
 {
-    internal class Contest
+    internal class Contest : AuditableEntity
     {
         private int contestID;
         private string title;
         private string description;
         private DateTime startDate;
         private DateTime endDate;
-
-        private int createdBy;
-        private DateTime createdAt;
-
-        private int updatedBy;
-        private DateTime updatedAt;
 
         // =====================================
         // Composition (1-to-many relationship) 
@@ -59,67 +53,15 @@ namespace SQL_Judge_System.Models
         public DateTime StartDate
         {
             get { return startDate; }
-            set
-            {
-                if (EndDate != default && value >= EndDate)
-                    throw new Exception("Start Date must be before End Date.");
-
-                startDate = value;
-            }
+            set { startDate = value; }
         }
         public DateTime EndDate
         {
             get { return endDate; }
-            set
-            {
-                if (StartDate != default && value <= StartDate)
-                    throw new Exception("End Date must be after Start Date.");
-
-                endDate = value;
-            }
-        }
-        public int CreatedBy
-        {
-            get { return createdBy; }
-            set
-            {
-                if (value <= 0)
-                    throw new Exception("Invalid CreatedBy ID.");
-
-                createdBy = value;
-            }
-        }
-        public DateTime CreatedAt
-        {
-            get { return createdAt; }
-            private set
-            {
-                createdAt = value;
-            }
-        }
-        public int UpdatedBy
-        {
-            get { return updatedBy; }
-            set
-            {
-                if (value <= 0)
-                    throw new Exception("Invalid UpdatedBy ID.");
-
-                updatedBy = value;
-            }
-        }
-        public DateTime UpdatedAt
-        {
-            get { return updatedAt; }
-            private set
-            {
-                updatedAt = value;
-            }
+            set {  endDate = value; }
         }
 
-        // =========================
         // Computed Property
-        // =========================
         public string Status
         {
             get
@@ -149,23 +91,23 @@ namespace SQL_Judge_System.Models
         // =========================
         // Constructors
         // =========================
-        public Contest()
-        {
-            CreatedAt = DateTime.Now;
-            UpdatedAt = DateTime.Now;
-        }
+
+        // Default Constructer
+        public Contest() { }
+
+        // Constructer For Creating Contest
         public Contest(string title, string description, DateTime startDate, DateTime endDate, int createdBy)
         {
             Title = title;
             Description = description;
             StartDate = startDate;
             EndDate = endDate;
-            CreatedBy = createdBy;
 
-            CreatedAt = DateTime.Now;
-            UpdatedAt = DateTime.Now;
+            MarkCreated(createdBy);
         }
-        public Contest(int contestID, string title, string description, DateTime startDate, DateTime endDate, int createdBy, DateTime createdAt, int updatedBy, DateTime updatedAt)
+
+        // Constructer For Updating Contest
+        public Contest(int contestID, string title, string description, DateTime startDate, DateTime endDate, int updatedBy)
         {
             ContestID = contestID;
             Title = title;
@@ -173,11 +115,19 @@ namespace SQL_Judge_System.Models
             StartDate = startDate;
             EndDate = endDate;
 
-            CreatedBy = createdBy;
-            CreatedAt = createdAt;
+            MarkUpdated(updatedBy);
+        }
 
-            UpdatedBy = updatedBy;
-            UpdatedAt = updatedAt;
+        // Full Constructer For DB Load
+        public Contest(int contestID,string title, string description, DateTime startDate, DateTime endDate, int createdBy, DateTime createdAt, int updatedBy, DateTime updatedAt)
+        {
+            ContestID = contestID;
+            Title = title;
+            Description = description;
+            StartDate = startDate;
+            EndDate = endDate;
+
+            LoadAuditData(createdBy, createdAt, updatedBy, updatedAt);
         }
 
         // =========================
@@ -220,15 +170,6 @@ namespace SQL_Judge_System.Models
         public void ClearParticipants()
         {
             participants.Clear();
-        }
-
-        // =========================
-        // Audit Management
-        // =========================
-        public void MarkUpdated(int updatedBy)
-        {
-            UpdatedBy = updatedBy;
-            UpdatedAt = DateTime.Now;
         }
     }
 }

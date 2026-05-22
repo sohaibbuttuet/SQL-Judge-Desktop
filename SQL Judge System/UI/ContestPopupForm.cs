@@ -16,7 +16,6 @@ namespace SQL_Judge_System.UI
     {
         private int userID;
         private int contestID;
-        private int createdBy;
 
         public ContestPopupForm(int userID)
         {
@@ -27,13 +26,12 @@ namespace SQL_Judge_System.UI
             // Default View
             ShowAddPanel();
         }
-        public ContestPopupForm(int userID, int contestID, int createdBy)
+        public ContestPopupForm(int userID, int contestID)
         {
             InitializeComponent();
 
             this.userID = userID;
             this.contestID = contestID;
-            this.createdBy = createdBy;
 
             // Default View
             ShowUpdatePanel();
@@ -95,7 +93,7 @@ namespace SQL_Judge_System.UI
                     return;
                 }                  
 
-                Contest contest = new Contest(contestID, title, description, startDate, endDate, createdBy);
+                Contest contest = new Contest(contestID, title, description, startDate, endDate, userID);
                 ContestBL.UpdateContest(contest, userID);
 
                 MessageBox.Show("Contest updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);

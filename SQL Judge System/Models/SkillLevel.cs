@@ -6,41 +6,11 @@ using System.Threading.Tasks;
 
 namespace SQL_Judge_System.Models
 {
-    internal class SkillLevel
+    internal class SkillLevel : LookupBase
     {
-        private int skillLevelID;
-        private string skillName;
+        public SkillLevel(int id, string name) : base(id,name)
+        {
 
-        public int SkillLevelID
-        {
-            get { return skillLevelID; }
-            set
-            {
-                if (value <= 0)
-                {
-                    throw new ArgumentException("SkillLevelID must be a positive integer.");
-                }
-                skillLevelID = value;
-            }
-        }
-        public string SkillName
-        {
-            get { return skillName; }
-            set
-            {
-                if (string.IsNullOrWhiteSpace(value))
-                {
-                    throw new ArgumentException("SkillName cannot be null or empty.");
-                }
-                skillName = value;
-            }
-        }
-
-        public SkillLevel() { }
-        public SkillLevel(int skillLevelID, string skillName)
-        {
-            SkillLevelID = skillLevelID;
-            SkillName = skillName;
         }
     }
 }

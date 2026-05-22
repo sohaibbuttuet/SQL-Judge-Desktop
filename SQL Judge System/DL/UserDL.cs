@@ -1,4 +1,5 @@
-﻿using SQL_Judge_System.Models;
+﻿using SQL_Judge_System.BL;
+using SQL_Judge_System.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -11,7 +12,6 @@ namespace SQL_Judge_System.DL
 {
     internal class UserDL
     {
-        // --- For User BL ---
         public static int SignUp(User user)
         {
             string query = $"INSERT INTO Users (FullName, Email, Password, IsActive, CreatedAt) " +
@@ -25,6 +25,17 @@ namespace SQL_Judge_System.DL
             string query = $"UPDATE Users SET FullName = '{user.FullName}', Email = '{user.Email}', Password = '{user.Password}' WHERE UserID = {user.UserID};";
             DatabaseHelper.Instance.Update(query);
         }
+        public static User SignIn(string email, string password)
+        {
+            string query = $"SELECT * FROM Users WHERE Email = '{email}' AND Password = '{password}' AND IsActive = 1;";
+            DataTable dt = DatabaseHelper.Instance.GetDataTable(query);
+
+            if(dt.Rows.Count == 0 )
+                return null;
+
+            return MapDataRowToUser(dt.Rows[0]);
+        }
+    
         public static void ActivateUser(int userId)
         {
             string query = $"UPDATE Users SET IsActive = 1 WHERE UserID = {userId};";
@@ -35,16 +46,7 @@ namespace SQL_Judge_System.DL
             string query = $"UPDATE Users SET IsActive = 0 WHERE UserID = {userId};";
             DatabaseHelper.Instance.Update(query);
         }
-        public static bool ValidateUserCredentials(User user)
-        {
-            string query = $"SELECT COUNT(*) FROM Users WHERE Email = '{user.Email}' AND Password = '{user.Password}' AND IsActive = 1;";
-            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query)) > 0;
-        }
-        public static int GetUserIdByCredentials(string email, string password)
-        {
-            string query = $"SELECT UserID FROM Users WHERE Email = '{email}' AND Password = '{password}';";
-            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
-        }        
+
         public static bool IsEmailRegistered(string email)
         {
             string query = $"SELECT COUNT(*) FROM Users WHERE Email = '{email}';";
@@ -55,19 +57,16 @@ namespace SQL_Judge_System.DL
             string query = $"SELECT COUNT(*) FROM Users WHERE UserID <> {userID} AND Email = '{email}';";
             return DatabaseHelper.Instance.ExecuteScalar(query) > 0;
         }
+
         public static bool IsUserExists(int userId)
         {
             string query = $"SELECT COUNT(*) FROM Users WHERE UserID = {userId};";
             return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query)) > 0;
         }
+
         public static bool IsUserAdmin(int userId)
         {
             string query = $"SELECT COUNT(*) FROM vw_users WHERE RoleName = 'Admin' AND UserID = {userId};";
-            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query)) > 0;
-        }
-        public static bool IsUserAdmin(string email)
-        {
-            string query = $"SELECT COUNT(*) FROM vw_users WHERE RoleName = 'Admin' AND Email = {email};";
             return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query)) > 0;
         }
         public static bool IsUserSuperAdmin(int userId)
@@ -75,6 +74,7 @@ namespace SQL_Judge_System.DL
             string query = $"SELECT COUNT(*) FROM vw_users WHERE RoleName = 'SuperAdmin' AND UserID = {userId};";
             return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query)) > 0;
         }        
+
         public static User GetUserByID(int userId)
         {
             string query = $"SELECT * FROM Users WHERE UserID = {userId};";
@@ -85,17 +85,20 @@ namespace SQL_Judge_System.DL
             return MapDataRowToUser(dt.Rows[0]);
         }
 
-        // --- For Admin DashboardBL ---
+
+        // Helper Function
+        private static User MapDataRowToUser(DataRow row)
+        {
+            return new User(Convert.ToInt32(row["UserID"]), row["FullName"].ToString(), row["Email"].ToString(), row["Password"].ToString(), Convert.ToBoolean(row["IsActive"]), Convert.ToDateTime(row["CreatedAt"]), Convert.ToDateTime(row["UpdatedAt"]));
+        }
+
+        // ----------------------------------------------------------------------- //
+        // SuperAdmin Panel
         public static DataTable GetAdminList()
         {
             string query = "SELECT * FROM vw_users WHERE RoleName = 'Admin' ORDER BY UserID;";
             return DatabaseHelper.Instance.GetDataTable(query);
-        }
-        public static DataTable GetUsers()
-        {
-            string query = "SELECT * FROM vw_users ORDER BY UserID;";
-            return DatabaseHelper.Instance.GetDataTable(query);
-        }
+        }      
         public static int TotalAdmins()
         {
             string query = "SELECT COUNT(*) FROM vw_users WHERE RoleName = 'Admin';";
@@ -116,6 +119,13 @@ namespace SQL_Judge_System.DL
             string query = "SELECT COUNT(*) FROM vw_users WHERE RoleName = 'Admin' AND IsActive = 0;";
             return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
         }
+
+        // Admin Home Panel
+        public static DataTable GetUsers()
+        {
+            string query = "SELECT * FROM vw_users ORDER BY UserID;";
+            return DatabaseHelper.Instance.GetDataTable(query);
+        }
         public static int TotalUsers()
         {
             string query = "SELECT COUNT(*) FROM vw_users;";
@@ -131,38 +141,8 @@ namespace SQL_Judge_System.DL
             string query = "SELECT COUNT(*) FROM vw_users WHERE IsActive = 0;";
             return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
         }
+        // ----------------------------------------------------------------------- //
 
-        // Helper Function
-        private static User MapDataRowToUser(DataRow row)
-        {
-            return new User
-            {
-                UserID = Convert.ToInt32(row["UserID"]),
-                FullName = row["FullName"].ToString(),
-                Email = row["Email"].ToString(),
-                Password = row["Password"].ToString(),
-                IsActive = Convert.ToBoolean(row["IsActive"]),
-                CreatedAt = Convert.ToDateTime(row["CreatedAt"])
-            };
-        }
 
-        // User Lookup Table (Roles)
-        public static int GetStudentRoleID()
-        {
-            string query = "SELECT RoleID FROM Roles WHERE RoleName = 'Student';";
-            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
-        }
-        public static int GetAdminRoleID()
-        {
-            string query = "SELECT RoleID FROM Roles WHERE RoleName = 'Admin';";
-            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
-        }
-
-        // User Junction Table (UserRoles)
-        public static void AssignRoleToUser(UserRole u)
-        {
-            string query = $"INSERT INTO UserRoles (UserID, RoleID) VALUES ({u.UserID}, {u.RoleID});";
-            DatabaseHelper.Instance.Update(query);
-        }
     }
 }

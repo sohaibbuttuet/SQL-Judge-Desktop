@@ -38,35 +38,75 @@ namespace SQL_Judge_System.BL
             }
             user.UserID = UserDL.SignUp(user);
         }
-        public static bool SignIn(User user)
+        public static void UpdateUser(User user)
         {
             if (user == null)
             {
-                throw new ArgumentNullException(nameof(user), "User cannot be null.");
+                throw new ArgumentNullException("user can not null");
             }
             if (!user.Email.Contains("@") || !user.Email.Contains("."))
             {
                 throw new ArgumentException("Invalid email format.", nameof(user.Email));
             }
-            if (!UserDL.ValidateUserCredentials(user))
+            if (UserDL.IsEmailRegistered(user.UserID, user.Email))
             {
-                throw new InvalidOperationException("Invalid email or password.");
+                MessageBox.Show("Email already exists!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
-
-            user.UserID = UserDL.GetUserIdByCredentials(user.Email, user.Password);
-            return true;
+            UserDL.UpdateUser(user);
         }
-        public static User GetUserById(int userId)
+        public static User SignIn(string email, string password)
         {
-            if (userId < 0)
-            {
-                throw new ArgumentOutOfRangeException(nameof(userId), "User ID must be a non-negative integer.");
-            }
+            User user = UserDL.SignIn(email, password);
 
-            return UserDL.GetUserByID(userId);
+            if (user == null)
+                throw new InvalidOperationException("Invalid email or password.");
+
+            return user;
         }
 
-        // Students panel
+        // Admin Home Panel
+        public static DataTable GetUsers()
+        {
+            return UserDL.GetUsers();
+        }
+        public static int TotalUsers()
+        {
+            return UserDL.TotalUsers();
+        }
+        public static int ActiveUsers()
+        {
+            return UserDL.ActiveUsers();
+        }
+        public static int InactiveUsers()
+        {
+            return UserDL.InactiveUsers();
+        }
+
+        // Super Admin panel
+        public static DataTable GetAdminList()
+        {
+            return UserDL.GetAdminList();
+        }
+        public static int TotalAdmins()
+        {
+            return UserDL.TotalAdmins();
+        }
+        public static int TotalSuperAdmins()
+        {
+            return UserDL.TotalSuperAdmins();
+        }
+        public static int ActiveAdmins()
+        {
+            return UserDL.ActiveAdmins();
+        }
+        public static int InactiveAdmins()
+        {
+            return UserDL.InactiveAdmins();
+        }
+
+
+        // Students panel and SuperAdmin Panel
         public static void ActivateUser(int userId)
         {
             if (userId < 0)
@@ -96,79 +136,26 @@ namespace SQL_Judge_System.BL
             UserDL.DeactivateUser(userId);
         }
 
-        // Super Admin panel
-        public static int TotalAdmins()
+        // Important       
+        public static User GetUserById(int userId)
         {
-            return UserDL.TotalAdmins();
-        }
-        public static int TotalSuperAdmins()
-        {
-            return UserDL.TotalSuperAdmins();
-        }
-        public static int ActiveAdmins()
-        {
-            return UserDL.ActiveAdmins();
-        }
-        public static int InactiveAdmins()
-        {
-            return UserDL.InactiveAdmins();
-        }
-        public static DataTable GetAdminList()
-        {
-            return UserDL.GetAdminList();
-        }
-        public static DataTable GetUsers()
-        {
-            return UserDL.GetUsers();
-        }
+            if (userId < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(userId), "User ID must be a non-negative integer.");
+            }
 
-        // Admins Dashboard
-        public static int TotalUsers()
-        {
-            return UserDL.TotalUsers();
-        }
-        public static int ActiveUsers()
-        {
-            return UserDL.ActiveUsers();
-        }
-        public static int InactiveUsers()
-        {
-            return UserDL.InactiveUsers();
-        }
-      
-
-        // UserBL
-        public static void UpdateUser(User user)
-        {
-            if (user == null)
-            {
-                throw new ArgumentNullException("");
-            }
-            if (!user.Email.Contains("@") || !user.Email.Contains("."))
-            {
-                throw new ArgumentException("Invalid email format.", nameof(user.Email));
-            }
-            if (UserDL.IsEmailRegistered(user.UserID, user.Email))
-            {
-                MessageBox.Show("Email already exists!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-            if (!UserDL.IsUserAdmin(user.Email))
-            {
-                throw new UnauthorizedAccessException("Selected user is not an admin.");
-            }
-            UserDL.UpdateUser(user);
+            return UserDL.GetUserByID(userId);
         }
 
 
         // User Lookup Table (Roles)
         public static int GetStudentRoleID()
         {
-            return UserDL.GetStudentRoleID();
+            return RoleDL.GetStudentRoleID();
         }
         public static int GetAdminRoleID()
         {
-            return UserDL.GetAdminRoleID();
+            return RoleDL.GetAdminRoleID();
         }
 
         // User Junction Table (UserRole)
@@ -178,7 +165,7 @@ namespace SQL_Judge_System.BL
             {
                 throw new ArgumentNullException(nameof(u), "UserRole cannot be null.");
             }
-            UserDL.AssignRoleToUser(u);
+            UserRoleDL.AssignRoleToUser(u);
         }
     }
 }

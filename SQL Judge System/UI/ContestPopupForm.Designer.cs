@@ -298,8 +298,8 @@
             // ContestPopupForm
             // 
             this.ClientSize = new System.Drawing.Size(484, 411);
-            this.Controls.Add(this.updatePanel);
             this.Controls.Add(this.addPanel);
+            this.Controls.Add(this.updatePanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.Name = "ContestPopupForm";

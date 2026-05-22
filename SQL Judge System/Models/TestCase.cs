@@ -6,17 +6,13 @@ using System.Threading.Tasks;
 
 namespace SQL_Judge_System.Models
 {
-    internal class TestCase
+    internal class TestCase : AuditableEntity
     {
         private int testCaseID;
         private string testCaseName;
         private int problemID;
         private string setupSQL;
         private string solutionQuery;
-        private int createdBy;
-        private DateTime createdAt;
-        private int updatedBy;
-        private DateTime updatedAt;
         private bool isActive;
 
 
@@ -72,46 +68,6 @@ namespace SQL_Judge_System.Models
                 solutionQuery = value;
             }
         }
-        public int CreatedBy
-        {
-            get { return createdBy; }
-            set
-            {
-                if (value <= 0)
-                    throw new Exception("Invalid creator ID.");
-                createdBy = value;
-            }
-        }
-        public DateTime CreatedAt
-        {
-            get { return createdAt; }
-            private set
-            {
-                if (value > DateTime.Now)
-                    throw new Exception("Creation date cannot be in the future.");
-                createdAt = value;
-            }
-        }
-        public int UpdatedBy
-        {
-            get { return updatedBy; }
-            set
-            {
-                if (value <= 0)
-                    throw new Exception("Invalid updater ID.");
-                updatedBy = value;
-            }
-        }
-        public DateTime UpdatedAt
-        {
-            get { return updatedAt; }
-            private set
-            {
-                if (value > DateTime.Now)
-                    throw new Exception("Update date cannot be in the future.");
-                updatedAt = value;
-            }
-        }
         public bool IsActive
         {
             get { return isActive; }
@@ -131,10 +87,10 @@ namespace SQL_Judge_System.Models
             ProblemID = problemID;
             SetupSQL = setupSQL;
             SolutionQuery = solutionQuery;
-            CreatedBy = createdBy;
 
-            CreatedAt = DateTime.Now;
             IsActive = true;
+
+            MarkCreated(createdBy);
         }
 
         // Constructor For Updating Existing Test Case (with ID, UpdatedBy)
@@ -145,10 +101,10 @@ namespace SQL_Judge_System.Models
             ProblemID = problemID;
             SetupSQL = setupSQL;
             SolutionQuery = solutionQuery;
-            UpdatedBy = updatedBy;
 
-            UpdatedAt = DateTime.Now;
             IsActive = true;
+
+            MarkUpdated(updatedBy);
         }
     }
 }

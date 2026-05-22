@@ -17,25 +17,25 @@ namespace SQL_Judge_System.UI
     {
         private int userID;
         private int problemID;
-        private int createdBy;
 
         public ProblemPopupForm(int userID)
         {
             InitializeComponent();
+
             this.userID = userID;
 
             LoadData();
             ShowAddPanel();
         }
-        public ProblemPopupForm(int userID, int problemID, int createdBy)
+        public ProblemPopupForm(int userID, int problemID)
         {
             InitializeComponent();
 
             this.userID = userID;
             this.problemID = problemID;
-            this.createdBy = createdBy;
 
             LoadData();
+            LoadProblem(problemID);
             ShowUpdatePanel();            
         }
 
@@ -71,6 +71,31 @@ namespace SQL_Judge_System.UI
             LoadComboBox(cmbDifficulty);
             LoadComboBox(cmbUDifficulty);
         }
+        private void LoadProblem(int problemID)
+        {
+            Problem problem = ProblemBL.GetProblemByID(problemID);
+
+            if (problem == null)
+            {
+                MessageBox.Show("Problem not found.");
+                return;
+            }
+
+            txtUTitle.Text = problem.Title;
+            txtUDescription.Text = problem.Description;
+            txtUPoints.Text = problem.Points.ToString();
+
+            cmbUDifficulty.SelectedValue = problem.ProblemDifficulty.Id;
+
+            List<int> tagIDs = ProblemBL.GetProblemTagIDs(problemID);
+
+            for (int i = 0; i < clbUpdateTags.Items.Count; i++)
+            {
+                ProblemTag tag = (ProblemTag)clbUpdateTags.Items[i];
+
+                clbUpdateTags.SetItemChecked(i, tagIDs.Contains(tag.Id));
+            }
+        }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
@@ -79,7 +104,11 @@ namespace SQL_Judge_System.UI
                 string title = txtTitle.Text.Trim();
                 string description = txtDescription.Text.Trim();
 
-                int difficultyID = Convert.ToInt32(cmbDifficulty.SelectedValue);
+                if (string.IsNullOrWhiteSpace(title) || string.IsNullOrWhiteSpace(description))
+                {
+                    MessageBox.Show("Please fill all required fields.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
 
                 int points;
                 if (!int.TryParse(txtPoints.Text.Trim(), out points))
@@ -87,32 +116,36 @@ namespace SQL_Judge_System.UI
                     MessageBox.Show("Please enter valid points.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
-                if (string.IsNullOrWhiteSpace(title) || string.IsNullOrWhiteSpace(description))
+
+                if (cmbDifficulty.SelectedItem == null)
                 {
-                    MessageBox.Show("Please fill all required fields.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Please select difficulty.");
                     return;
                 }
+
                 if (clbAddTags.CheckedItems.Count == 0)
                 {
-                    MessageBox.Show("Please select at least one tag.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Please select at least one tag.");
                     return;
                 }
-                if (ProblemBL.IsProblemExists(title, difficultyID))
+
+                ProblemDifficulty difficulty = (ProblemDifficulty)cmbDifficulty.SelectedItem;
+
+                if (ProblemBL.IsProblemExists(title, difficulty.Id))
                 {
                     MessageBox.Show("Problem already exists.");
                     return;
                 }
 
-                Problem problem = new Problem(title, description, difficultyID, points, userID);
+                Problem problem = new Problem(title, description, difficulty, points, userID);
                 ProblemBL.AddProblem(problem);
 
-                foreach (var item in clbAddTags.CheckedItems)
+                // INSERT TAG MAPPINGS
+                foreach (ProblemTag tag in clbAddTags.CheckedItems)
                 {
-                    DataRowView row = (DataRowView)item;
+                    ProblemTagMap map = new ProblemTagMap(problem.ProblemID, tag.Id);
 
-                    int tagID = Convert.ToInt32(row["TagID"]);
-
-                    ProblemBL.MapProblemTag(new ProblemTagMap(problemID, tagID));
+                    ProblemBL.MapProblemTag(map);
                 }
 
                 MessageBox.Show("Problem created successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -149,7 +182,11 @@ namespace SQL_Judge_System.UI
                 string title = txtUTitle.Text.Trim();
                 string description = txtUDescription.Text.Trim();
 
-                int difficultyID = Convert.ToInt32(cmbUDifficulty.SelectedValue);
+                if (string.IsNullOrWhiteSpace(title) || string.IsNullOrWhiteSpace(description))
+                {
+                    MessageBox.Show("Please fill all required fields.");
+                    return;
+                }
 
                 int points;
                 if (!int.TryParse(txtUPoints.Text.Trim(), out points))
@@ -157,36 +194,38 @@ namespace SQL_Judge_System.UI
                     MessageBox.Show("Please enter valid points.");
                     return;
                 }
-                if (string.IsNullOrWhiteSpace(title) || string.IsNullOrWhiteSpace(description))
+
+                if (cmbUDifficulty.SelectedItem == null)
                 {
-                    MessageBox.Show("Please fill all required fields.");
+                    MessageBox.Show("Please select difficulty.");
                     return;
                 }
+
                 if (clbUpdateTags.CheckedItems.Count == 0)
                 {
                     MessageBox.Show("Please select at least one tag.");
                     return;
                 }
 
-                Problem problem = new Problem(problemID, title, description, difficultyID, points, userID);
+                ProblemDifficulty difficulty = (ProblemDifficulty)cmbDifficulty.SelectedItem;
+
+                Problem problem = new Problem(problemID, title, description, difficulty, points, userID);
+
+                // UPDATE PROBLEM
                 ProblemBL.UpdateProblem(problem);
 
-                // remove old tags
+                // DELETE OLD TAGS
                 ProblemBL.DeleteByProblemID(problemID);
 
-                // add new tags
-                foreach (var item in clbUpdateTags.CheckedItems)
+                // ADD NEW TAGS
+                foreach (ProblemTag tag in clbUpdateTags.CheckedItems)
                 {
-                    DataRowView row = (DataRowView)item;
-
-                    int tagID = Convert.ToInt32(row["TagID"]);
-
-                    ProblemTagMap map = new ProblemTagMap(problemID, tagID);
+                    ProblemTagMap map = new ProblemTagMap(problemID, tag.Id);
 
                     ProblemBL.MapProblemTag(map);
                 }
 
-                MessageBox.Show("Problem updated successfully.");
+                MessageBox.Show("Problem updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 this.DialogResult = DialogResult.OK;
                 this.Close();
@@ -204,6 +243,7 @@ namespace SQL_Judge_System.UI
         {
             txtUTitle.Clear();
             txtUDescription.Clear();
+            txtUPoints.Clear();
 
             cmbUDifficulty.SelectedIndex = -1;
 

@@ -49,6 +49,5 @@ namespace SQL_Judge_System.BL
             }
             return StudentDL.GetStudentByUserID(userId);
         }
-
     }
 }

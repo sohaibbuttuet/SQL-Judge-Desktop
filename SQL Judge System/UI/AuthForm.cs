@@ -3,14 +3,9 @@ using SQL_Judge_System.LookupDL;
 using SQL_Judge_System.Models;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Linq;
 
 namespace SQL_Judge_System.UI
 {
@@ -29,12 +24,12 @@ namespace SQL_Judge_System.UI
         {
             try
             {
-                DataTable dt = SkillLevelDL.GetAll();
+                List<SkillLevel> levels = SkillLevelDL.GetAll();
 
                 cmbSkillLevel.DataSource = null;
                 cmbSkillLevel.Items.Clear();
 
-                cmbSkillLevel.DataSource = dt;
+                cmbSkillLevel.DataSource = levels;
                 cmbSkillLevel.DisplayMember = "LevelName";
                 cmbSkillLevel.ValueMember = "SkillLevelID";
 
@@ -104,15 +99,31 @@ namespace SQL_Judge_System.UI
                     MessageBox.Show("Please fill in all required fields.");
                     return;
                 }
+                if (string.IsNullOrWhiteSpace(email) || !email.Contains("@") || !email.Contains("."))
+                {
+                    MessageBox.Show("Invalid email format.");
+                    return;
+                }
+                    
 
+                // =========================
+                // SIGN UP
+                // =========================
                 if (isSignUpMode)
                 {                    
                     string regNo = txtRegNo.Text.Trim();
-                    int skillId = Convert.ToInt32(cmbSkillLevel.SelectedValue);
 
-                    if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(regNo))
+                    if (cmbSkillLevel.SelectedItem == null)
                     {
-                        MessageBox.Show("Please fill in all student details.");
+                        MessageBox.Show("Please select skill level.");
+                        return;
+                    }
+
+                    SkillLevel skillLevel = (SkillLevel)cmbSkillLevel.SelectedItem;
+
+                    if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(regNo))
+                    {
+                        MessageBox.Show("Please fill all student details.");
                         return;
                     }
 
@@ -121,7 +132,7 @@ namespace SQL_Judge_System.UI
                     UserBL.SignUp(user);
 
                     // Create Student object
-                    Student student = new Student(user.UserID, regNo, skillId);
+                    Student student = new Student(user.UserID, regNo, skillLevel);
                     StudentBL.RegisterStudent(student);
 
                     // Assign Role to User
@@ -132,10 +143,15 @@ namespace SQL_Judge_System.UI
                     MessageBox.Show("Student registered successfully!");
                     SetSignInMode();
                 }
+
+                // =========================
+                // LOGIN
+                // =========================
                 else
                 {
-                    User user = new User(email, password);
-                    if (UserBL.SignIn(user))
+                    User user = UserBL.SignIn(email, password);
+
+                    if (user != null)
                     {
                         if (UserBL.IsUserSuperAdmin(user.UserID) || UserBL.IsUserAdmin(user.UserID))
                         {
@@ -145,7 +161,12 @@ namespace SQL_Judge_System.UI
                         {
                             new StudentDashboardUI(user.UserID).Show();
                         }
+
                         this.Hide();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Invalid email or password.");
                     }
                 }
             }
@@ -160,8 +181,7 @@ namespace SQL_Judge_System.UI
             txtPassword.Clear();
             txtName.Clear();
             txtRegNo.Clear();
-            if (cmbSkillLevel.Items.Count > 0) 
-                cmbSkillLevel.SelectedIndex = -1;
+            cmbSkillLevel.SelectedIndex = -1;
         }
     } 
 }

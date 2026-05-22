@@ -113,10 +113,15 @@
     <Compile Include="DL\ContestDL.cs" />
     <Compile Include="DL\ContestParticipentDL.cs" />
     <Compile Include="DL\ProblemDL.cs" />
+    <Compile Include="DL\ProblemTagMapDL.cs" />
+    <Compile Include="LookupDL\ProblemDifficultiesDL.cs" />
+    <Compile Include="LookupDL\ProblemTagsDL.cs" />
     <Compile Include="DL\StudentLeaderboardDL.cs" />
     <Compile Include="DL\SubmissionDL.cs" />
     <Compile Include="DL\TestCasesDL.cs" />
     <Compile Include="DL\DatabaseHelper.cs" />
+    <Compile Include="DL\UserRoleDL.cs" />
+    <Compile Include="LookupDL\RoleDL.cs" />
     <Compile Include="LookupDL\SkillLevelDL.cs" />
     <Compile Include="DL\StudentDL.cs" />
     <Compile Include="LookupDL\SubmissionStatusDL.cs" />
@@ -127,9 +132,11 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\AuditableEntity.cs" />
     <Compile Include="Models\Contest.cs" />
     <Compile Include="Models\ContestParticipant.cs" />
     <Compile Include="Models\ContestProblem.cs" />
+    <Compile Include="Models\LookupBase.cs" />
     <Compile Include="Models\Problem.cs" />
     <Compile Include="Models\ProblemDifficulty.cs" />
     <Compile Include="Models\ProblemTag.cs" />

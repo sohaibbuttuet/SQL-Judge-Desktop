@@ -14,6 +14,7 @@ namespace SQL_Judge_System.Models
         private string password;
         private bool isActive;
         private DateTime createdAt;
+        private DateTime updatedAt;
 
 
         // =======================================
@@ -75,6 +76,11 @@ namespace SQL_Judge_System.Models
             get { return createdAt; }
             private set { createdAt = value; }
         }
+        public DateTime UpdatedAt
+        {
+            get { return updatedAt; }
+            private set { updatedAt = value; }
+        }
 
         // =========================
         // Safe Composition Exposure
@@ -88,22 +94,13 @@ namespace SQL_Judge_System.Models
         // =========================
         // Constructers
         // =========================
-
-        // Default Constructor
         public User()
         {
             IsActive = true;
             CreatedAt = DateTime.Now;
         }
 
-        // Login Constructor
-        public User(string email, string password)
-        {
-            Email = email;
-            Password = password;
-        }
-
-        // Registration Constructor
+        // For Add User
         public User(string fullName, string email, string password)
         {
             FullName = fullName;  
@@ -114,13 +111,27 @@ namespace SQL_Judge_System.Models
             CreatedAt = DateTime.Now;
         }
 
-        // Constructor for updating user
+        // For Update User
         public User(int userId, string fullName, string email, string password)
         {
             UserID = userId;
             FullName = fullName;
             Email = email;
             Password = password;
+
+            IsActive = true;
+        }
+
+        // Full Constructer for DB load
+        public User(int userId, string fullName, string email, string password, bool isActive, DateTime createdAt, DateTime UpdatedAt)
+        {
+            UserID = userId;
+            FullName = fullName;
+            Email = email;
+            Password = password;
+            IsActive = isActive;
+            CreatedAt = createdAt;
+            UpdatedAt = updatedAt;
         }
 
         // =========================
@@ -143,18 +154,6 @@ namespace SQL_Judge_System.Models
         public void ClearRoles()
         {
             roles.Clear();
-        }
-
-        // =========================
-        // Account Management
-        // =========================
-        public void Deactivate()
-        {
-            IsActive = false;
-        }
-        public void Activate()
-        {
-            IsActive = true;
         }
     }
 }

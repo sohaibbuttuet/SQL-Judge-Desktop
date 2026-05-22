@@ -30,6 +30,7 @@ namespace SQL_Judge_System.DL
             string query = $"UPDATE Students SET TotalScore = {score}, ProblemsSolved = {solved} WHERE StudentID = {studentId}";
             DatabaseHelper.Instance.Update(query);
         }
+
         public static Student GetStudentByUserID(int userID)
         {
             string query = $"SELECT * FROM Students WHERE UserID = {userID};";
@@ -50,6 +51,7 @@ namespace SQL_Judge_System.DL
 
             return MapDataRowToStudent(dt.Rows[0]);
         }
+
         public static List<Student> GetAllStudents()
         {
             string query = "SELECT * FROM Students;";
@@ -99,17 +101,17 @@ namespace SQL_Judge_System.DL
         // --- For AdminDashboard ---
         public static int TotalStudents()
         {
-            string query = "SELECT COUNT(*) FROM vw_users WHERE RoleName = 'Student';";
+            string query = "SELECT COUNT(*) FROM vw_studentsforadmin;";
             return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
         }
         public static int ActiveStudents()
         {
-            string query = "SELECT COUNT(*) FROM vw_users WHERE RoleName = 'Student' AND IsActive = 1;";
+            string query = "SELECT COUNT(*) FROM vw_studentsforadmin WHERE IsActive = 1;";
             return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
         }
         public static int InactiveStudents()
         {
-            string query = "SELECT COUNT(*) FROM vw_users WHERE RoleName = 'Student' AND IsActive = 0;";
+            string query = "SELECT COUNT(*) FROM vw_studentsforadmin WHERE IsActive = 0;";
             return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
         }
         public static DataTable GetStudentsForAdmin()

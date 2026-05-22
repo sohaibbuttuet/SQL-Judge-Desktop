@@ -11,12 +11,13 @@ namespace SQL_Judge_System.Models
         private int studentID;
         private int userID;
         private string registrationNumber;
-        private int skillLevelID;
         private int totalScore;
         private int problemsSolved;
 
-        // Aggregation (Navigation Property)
-        private SkillLevel skillLevel;
+        // ===================================
+        // Aggregation: (1-to-1 relationship)
+        // ===================================
+        private SkillLevel skillLevel; 
 
         public int StudentID
         {
@@ -85,7 +86,9 @@ namespace SQL_Judge_System.Models
             }
         }
 
+        // =========================
         // Aggregation Property
+        // =========================
         public SkillLevel SkillLevel
         {
             get { return skillLevel; }
@@ -95,10 +98,12 @@ namespace SQL_Judge_System.Models
                     throw new Exception("Skill level cannot be null.");
 
                 skillLevel = value;           
-                SkillLevelID = value.SkillLevelID;
             }
         }
 
+        // =========================
+        // Constructers
+        // =========================
         public Student() { }
         public Student(int userID, string registrationNumber, SkillLevel skillLevel)
         {
