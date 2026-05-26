@@ -112,8 +112,10 @@
     <Compile Include="BL\UserBL.cs" />
     <Compile Include="DL\ContestDL.cs" />
     <Compile Include="DL\ContestParticipentDL.cs" />
+    <Compile Include="DL\ContestProblemDL.cs" />
     <Compile Include="DL\ProblemDL.cs" />
     <Compile Include="DL\ProblemTagMapDL.cs" />
+    <Compile Include="DL\SubmissionResult.cs" />
     <Compile Include="LookupDL\ProblemDifficultiesDL.cs" />
     <Compile Include="LookupDL\ProblemTagsDL.cs" />
     <Compile Include="DL\StudentLeaderboardDL.cs" />
@@ -176,11 +178,23 @@
     <Compile Include="UI\ContestPopupForm.Designer.cs">
       <DependentUpon>ContestPopupForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\ContestUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\ContestUI.Designer.cs">
+      <DependentUpon>ContestUI.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\ProblemPopupForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI\ProblemPopupForm.Designer.cs">
       <DependentUpon>ProblemPopupForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\SolveProblemUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\SolveProblemUI.Designer.cs">
+      <DependentUpon>SolveProblemUI.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\StudentDashboardUI.cs">
       <SubType>Form</SubType>
@@ -202,6 +216,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="UI\AdminDashboardUI.resx">
       <DependentUpon>AdminDashboardUI.cs</DependentUpon>
@@ -215,8 +230,14 @@
     <EmbeddedResource Include="UI\ContestPopupForm.resx">
       <DependentUpon>ContestPopupForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\ContestUI.resx">
+      <DependentUpon>ContestUI.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\ProblemPopupForm.resx">
       <DependentUpon>ProblemPopupForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\SolveProblemUI.resx">
+      <DependentUpon>SolveProblemUI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\StudentDashboardUI.resx">
       <DependentUpon>StudentDashboardUI.cs</DependentUpon>

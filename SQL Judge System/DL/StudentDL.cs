@@ -51,10 +51,10 @@ namespace SQL_Judge_System.DL
 
             return MapDataRowToStudent(dt.Rows[0]);
         }
-
         public static List<Student> GetAllStudents()
         {
             string query = "SELECT * FROM Students;";
+
             DataTable dt = DatabaseHelper.Instance.GetDataTable(query);
 
             List<Student> students = new List<Student>();
@@ -67,6 +67,7 @@ namespace SQL_Judge_System.DL
         public static List<Student> GetTopStudents(int limit)
         {
             string query = $"SELECT * FROM Students ORDER BY TotalScore DESC LIMIT {limit};";
+
             DataTable dt = DatabaseHelper.Instance.GetDataTable(query);
 
             List<Student> list = new List<Student>();
@@ -80,15 +81,14 @@ namespace SQL_Judge_System.DL
         // Helping Function
         private static Student MapDataRowToStudent(DataRow row)
         {
-            return new Student
-            {
-                StudentID = Convert.ToInt32(row["StudentID"]),
-                UserID = Convert.ToInt32(row["UserID"]),
-                RegistrationNumber = row["RegistrationNumber"].ToString(),
-                SkillLevelID = Convert.ToInt32(row["SkillLevelID"]),
-                TotalScore = Convert.ToInt32(row["TotalScore"]),
-                ProblemsSolved = Convert.ToInt32(row["ProblemsSolved"])
-            };
+            return new Student(
+                Convert.ToInt32(row["StudentID"]),
+                Convert.ToInt32(row["UserID"]),
+                row["RegistrationNumber"].ToString(),
+                Convert.ToInt32(row["SkillLevelID"]),
+                Convert.ToInt32(row["TotalScore"]),
+                Convert.ToInt32(row["ProblemsSolved"])                
+            );
         }
 
         // Validation Function
@@ -101,22 +101,22 @@ namespace SQL_Judge_System.DL
         // --- For AdminDashboard ---
         public static int TotalStudents()
         {
-            string query = "SELECT COUNT(*) FROM vw_studentsforadmin;";
+            string query = "SELECT COUNT(*) FROM vw_students;";
             return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
         }
         public static int ActiveStudents()
         {
-            string query = "SELECT COUNT(*) FROM vw_studentsforadmin WHERE IsActive = 1;";
+            string query = "SELECT COUNT(*) FROM vw_students WHERE IsActive = 1;";
             return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
         }
         public static int InactiveStudents()
         {
-            string query = "SELECT COUNT(*) FROM vw_studentsforadmin WHERE IsActive = 0;";
+            string query = "SELECT COUNT(*) FROM vw_students WHERE IsActive = 0;";
             return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
         }
         public static DataTable GetStudentsForAdmin()
         {
-            string query = "SELECT * FROM vw_studentsforadmin ORDER BY StudentID;";
+            string query = "SELECT * FROM vw_students ORDER BY StudentID;";
             return DatabaseHelper.Instance.GetDataTable(query);
         }
     }

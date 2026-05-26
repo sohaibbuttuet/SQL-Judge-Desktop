@@ -25,6 +25,7 @@ CREATE TABLE Users (
     Email VARCHAR(100) UNIQUE NOT NULL,
     Password VARCHAR(255) NOT NULL,
     IsActive BOOLEAN DEFAULT TRUE,
+    
     CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     UpdatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP 
         ON UPDATE CURRENT_TIMESTAMP
@@ -287,14 +288,11 @@ CREATE TABLE Users (
 	CREATE TABLE ContestProblems (
 		ContestID INT,
 		ProblemID INT,
-		OrderNumber INT NOT NULL,
         
 		PRIMARY KEY (ContestID, ProblemID),
-		UNIQUE (ContestID, OrderNumber),
-		FOREIGN KEY (ContestID)	REFERENCES Contests(ContestID) ON DELETE CASCADE,
-		FOREIGN KEY (ProblemID)	REFERENCES Problems(ProblemID) ON DELETE CASCADE,
 
-		CONSTRAINT chk_order_number	CHECK (OrderNumber > 0)
+		FOREIGN KEY (ContestID)	REFERENCES Contests(ContestID) ON DELETE CASCADE,
+		FOREIGN KEY (ProblemID)	REFERENCES Problems(ProblemID) ON DELETE CASCADE
 	);
 
 	CREATE INDEX idx_cp_problem	ON ContestProblems(ProblemID);
@@ -312,13 +310,13 @@ CREATE TABLE Users (
 		u.Email,
         r.RoleName,
 		u.IsActive,
-		u.CreatedAt
+		DATE(u.CreatedAt) CreatedAt
 	FROM Users u
 	JOIN UserRoles ur ON u.UserID = ur.UserID
 	JOIN Roles r ON ur.RoleID = r.RoleID;
 
 	-- ===================================== (2) =====================================
-	CREATE OR REPLACE VIEW vw_StudentsForAdmin
+	CREATE OR REPLACE VIEW vw_Students
 	AS
 	SELECT
 		s.StudentID,
@@ -329,7 +327,7 @@ CREATE TABLE Users (
 		s.ProblemsSolved,
 		s.TotalScore,
 		u.IsActive,
-		u.CreatedAt
+		DATE(u.CreatedAt) CreatedAt
 	FROM Students s
 	LEFT JOIN SkillLevels sk ON s.SkillLevelID = sk.SkillLevelID
 	JOIN vw_Users u ON s.UserID = u.UserID;
@@ -355,12 +353,12 @@ CREATE TABLE Users (
 	SELECT p.ProblemID, 
 		   p.Title, 
            d.DifficultyName, 
-            p.Points,            
+		   p.Points,            
            p.IsActive,
            u1.FullName AS CreatedBy, 
-           p.CreatedAt, 
+           DATE(p.CreatedAt) AS CreatedAt, 
            u2.FullName AS UpdatedBy,
-		   p.UpdatedAt
+		   DATE(p.UpdatedAt) AS UpdatedAt
 	FROM problems p 
     LEFT JOIN problemdifficulties d ON p.DifficultyID = d.DifficultyID
     LEFT JOIN Users u1 ON p.CreatedBy = u1.UserID
@@ -372,27 +370,31 @@ CREATE TABLE Users (
 	AS
 	SELECT c.ContestID, 
 		   c.Title,           
-           c.StartDate,
-		   c.EndDate,
+           DATE(c.StartDate) AS StartDate,
+		   DATE(c.EndDate) AS EndDate,
            COUNT(cp.StudentID) AS TotalParticipants,
            u1.FullName AS CreatedBy, 
            DATE(c.CreatedAt) AS CreatedAt, 
            u2.FullName AS UpdatedBy,
-		   DATE(c.UpdatedAt) AS UpdatedAt
+		   DATE(c.UpdatedAt) AS UpdatedAt,
+           CASE 
+			  WHEN NOW() < StartDate THEN 'Upcoming'
+			  WHEN NOW() > EndDate THEN 'Ended'
+			 ELSE 'Running'
+		  END AS ContestStatus
 	FROM contests c 
     LEFT JOIN contestparticipants cp ON c.ContestID = cp.ContestID
     LEFT JOIN Users u1 ON c.CreatedBy = u1.UserID
     LEFT JOIN Users u2 ON c.UpdatedBy = u2.UserID
     GROUP BY c.ContestID, c.Title;
     
-    
        -- ===================================== (6) =====================================
    CREATE OR REPLACE VIEW vw_testcases AS
    SELECT
 		t.TestCaseID,
 		t.ProblemID,
-		p.Title,
-		
+		p.Title AS ProblemTitle,
+
 		CASE
 			WHEN t.SetupSQL IS NULL THEN ''
 			WHEN LENGTH(t.SetupSQL) > 30
@@ -408,27 +410,32 @@ CREATE TABLE Users (
 		END AS SolutionQueryPreview,
 
 		u1.FullName AS CreatedBy,
-		t.CreatedAt,
-        u2.FullName UpdatedBy,
-        t.UpdatedAt,
+		DATE(t.CreatedAt) AS CreatedAt,
+		u2.FullName AS UpdatedBy,
+		Date(t.UpdatedAt) AS UpdatedAt,
 		t.IsActive
 	FROM testcases t
 	LEFT JOIN Problems p ON t.ProblemID = p.ProblemID
-    LEFT JOIN Users u1 ON p.CreatedBy = u1.UserID
-    LEFT JOIN Users u2 ON p.UpdatedBy = u2.UserID;
+	LEFT JOIN Users u1 ON t.CreatedBy = u1.UserID
+	LEFT JOIN Users u2 ON t.UpdatedBy = u2.UserID;
 
   -- ===================================== (7) =====================================
-	CREATE OR REPLACE VIEW vw_Submissions
-	AS
-	SELECT s.SubmissionID,
-		   s.StudentID,
-		   s.ProblemID,
-		   ss.StatusName,
-		   s.AttemptNumber,
-           s.TotalScore,
-          s.SubmittedAt
-    FROM submissions s
-    JOIN submissionstatuses ss ON s.StatusID = ss.StatusID;
+CREATE OR REPLACE VIEW vw_Submissions AS
+SELECT 
+    s.SubmissionID,
+    s.StudentID,
+    u.FullName AS StudentName,
+    s.ProblemID,
+    p.Title AS ProblemTitle,
+    s.TotalScore,
+    s.AttemptNumber,
+    DATE(s.SubmittedAt) AS SubmittedAt,
+    ss.StatusName AS Status
+FROM submissions s
+LEFT JOIN submissionstatuses ss ON s.StatusID = ss.StatusID
+LEFT JOIN Students st ON st.StudentID = s.StudentID
+LEFT JOIN Users u ON u.UserID = st.UserID
+LEFT JOIN Problems p ON p.ProblemID = s.ProblemID;
 
 	-- =====================================
 	-- LOOKUP DATA
@@ -645,12 +652,12 @@ VALUES
 -- =====================================
 
 INSERT INTO ContestProblems VALUES
-(1,1,1),
-(1,2,2),
-(1,3,3),
-(2,4,1),
-(2,5,2),
-(2,6,3);
+(1,1),
+(1,2),
+(1,3),
+(2,4),
+(2,5),
+(2,6);
 -- =====================================
 -- SUBMISSIONS
 -- =====================================

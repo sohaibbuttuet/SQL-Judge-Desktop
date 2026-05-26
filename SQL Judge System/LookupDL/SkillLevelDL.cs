@@ -10,7 +10,7 @@ namespace SQL_Judge_System.LookupDL
     {
         public static List<SkillLevel> GetAll()
         {         
-            string query = "SELECT * FROM SkillLevels;";
+            string query = "SELECT * FROM SkillLevels ORDER BY SkillLevelID;";
             DataTable dt = DatabaseHelper.Instance.GetDataTable(query);
 
             List<SkillLevel> list = new List<SkillLevel>();
@@ -22,6 +22,4 @@ namespace SQL_Judge_System.LookupDL
             return list;
         }
     }
-}
-
-           
+}          

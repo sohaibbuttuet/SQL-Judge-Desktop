@@ -11,7 +11,6 @@ namespace SQL_Judge_System.Models
         public int Id { get; private set; }
         public string Name { get; private set; }
 
-        public LookupBase(int id) {  Id = id; }
         public LookupBase(int id, string name)
         {
             Id = id;

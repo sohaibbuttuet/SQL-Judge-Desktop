@@ -11,12 +11,6 @@ namespace SQL_Judge_System.Models
         private DateTime startDate;
         private DateTime endDate;
 
-        // =====================================
-        // Composition (1-to-many relationship) 
-        // =====================================
-        private List<ContestProblem> problems = new List<ContestProblem>();
-        private List<ContestParticipant> participants = new List<ContestParticipant>();
-
         // =========================
         // Properties
         // =========================
@@ -61,33 +55,6 @@ namespace SQL_Judge_System.Models
             set {  endDate = value; }
         }
 
-        // Computed Property
-        public string Status
-        {
-            get
-            {
-                if (DateTime.Now < StartDate)
-                    return "Upcoming";
-
-                if (DateTime.Now > EndDate)
-                    return "Ended";
-
-                return "Running";
-            }
-        }
-
-        // =========================
-        // Safe Composition Exposure
-        // =========================
-        public IReadOnlyList<ContestProblem> Problems
-        {
-            get { return problems.AsReadOnly(); }
-        }
-        public IReadOnlyList<ContestParticipant> Participants
-        {
-            get { return participants.AsReadOnly(); }
-        }
-
         // =========================
         // Constructors
         // =========================
@@ -128,48 +95,6 @@ namespace SQL_Judge_System.Models
             EndDate = endDate;
 
             LoadAuditData(createdBy, createdAt, updatedBy, updatedAt);
-        }
-
-        // =========================
-        // Composition Management
-        // =========================
-        public void AddProblem(ContestProblem problem)
-        {
-            if (problem == null)
-                throw new ArgumentNullException(nameof(problem));
-
-            problems.Add(problem);
-        }
-        public void RemoveProblem(ContestProblem problem)
-        {
-            if (problem == null)
-                throw new ArgumentNullException(nameof(problem));
-
-            problems.Remove(problem);
-        }
-
-        public void AddParticipant(ContestParticipant participant)
-        {
-            if (participant == null)
-                throw new ArgumentNullException(nameof(participant));
-
-            participants.Add(participant);
-        }
-        public void RemoveParticipant(ContestParticipant participant)
-        {
-            if (participant == null)
-                throw new ArgumentNullException(nameof(participant));
-
-            participants.Remove(participant);
-        }
-
-        public void ClearProblems()
-        {
-            problems.Clear();
-        }
-        public void ClearParticipants()
-        {
-            participants.Clear();
         }
     }
 }

@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.addPanel = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.clbAProblem = new System.Windows.Forms.CheckedListBox();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnAddClear = new System.Windows.Forms.Button();
             this.lblAddTitle = new System.Windows.Forms.Label();
@@ -41,6 +43,8 @@
             this.lblEndDate = new System.Windows.Forms.Label();
             this.dtEndDate = new System.Windows.Forms.DateTimePicker();
             this.updatePanel = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.clbUProblem = new System.Windows.Forms.CheckedListBox();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.btnUClear = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -58,6 +62,8 @@
             // 
             // addPanel
             // 
+            this.addPanel.Controls.Add(this.label3);
+            this.addPanel.Controls.Add(this.clbAProblem);
             this.addPanel.Controls.Add(this.btnAdd);
             this.addPanel.Controls.Add(this.btnAddClear);
             this.addPanel.Controls.Add(this.lblAddTitle);
@@ -71,8 +77,23 @@
             this.addPanel.Controls.Add(this.dtEndDate);
             this.addPanel.Location = new System.Drawing.Point(30, 40);
             this.addPanel.Name = "addPanel";
-            this.addPanel.Size = new System.Drawing.Size(420, 330);
+            this.addPanel.Size = new System.Drawing.Size(520, 430);
             this.addPanel.TabIndex = 2;
+            // 
+            // label3
+            // 
+            this.label3.Location = new System.Drawing.Point(17, 235);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(100, 20);
+            this.label3.TabIndex = 14;
+            this.label3.Text = "Problems";
+            // 
+            // clbAProblem
+            // 
+            this.clbAProblem.Location = new System.Drawing.Point(20, 256);
+            this.clbAProblem.Name = "clbAProblem";
+            this.clbAProblem.Size = new System.Drawing.Size(462, 109);
+            this.clbAProblem.TabIndex = 13;
             // 
             // btnAdd
             // 
@@ -80,7 +101,7 @@
             this.btnAdd.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAdd.ForeColor = System.Drawing.Color.White;
-            this.btnAdd.Location = new System.Drawing.Point(20, 260);
+            this.btnAdd.Location = new System.Drawing.Point(20, 379);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(75, 23);
             this.btnAdd.TabIndex = 11;
@@ -94,7 +115,7 @@
             this.btnAddClear.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnAddClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddClear.ForeColor = System.Drawing.Color.White;
-            this.btnAddClear.Location = new System.Drawing.Point(120, 260);
+            this.btnAddClear.Location = new System.Drawing.Point(120, 379);
             this.btnAddClear.Name = "btnAddClear";
             this.btnAddClear.Size = new System.Drawing.Size(75, 23);
             this.btnAddClear.TabIndex = 12;
@@ -105,7 +126,7 @@
             // lblAddTitle
             // 
             this.lblAddTitle.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.lblAddTitle.Location = new System.Drawing.Point(156, 10);
+            this.lblAddTitle.Location = new System.Drawing.Point(206, 14);
             this.lblAddTitle.Name = "lblAddTitle";
             this.lblAddTitle.Size = new System.Drawing.Size(109, 23);
             this.lblAddTitle.TabIndex = 0;
@@ -123,7 +144,7 @@
             // 
             this.txtTitle.Location = new System.Drawing.Point(20, 73);
             this.txtTitle.Name = "txtTitle";
-            this.txtTitle.Size = new System.Drawing.Size(350, 20);
+            this.txtTitle.Size = new System.Drawing.Size(462, 20);
             this.txtTitle.TabIndex = 2;
             // 
             // lblDescription
@@ -139,7 +160,7 @@
             this.txtDescription.Location = new System.Drawing.Point(20, 123);
             this.txtDescription.Multiline = true;
             this.txtDescription.Name = "txtDescription";
-            this.txtDescription.Size = new System.Drawing.Size(350, 50);
+            this.txtDescription.Size = new System.Drawing.Size(462, 50);
             this.txtDescription.TabIndex = 4;
             // 
             // lblStartDate
@@ -156,12 +177,12 @@
             this.dtStartDate.Cursor = System.Windows.Forms.Cursors.Hand;
             this.dtStartDate.Location = new System.Drawing.Point(20, 203);
             this.dtStartDate.Name = "dtStartDate";
-            this.dtStartDate.Size = new System.Drawing.Size(150, 20);
+            this.dtStartDate.Size = new System.Drawing.Size(200, 20);
             this.dtStartDate.TabIndex = 6;
             // 
             // lblEndDate
             // 
-            this.lblEndDate.Location = new System.Drawing.Point(200, 183);
+            this.lblEndDate.Location = new System.Drawing.Point(280, 183);
             this.lblEndDate.Name = "lblEndDate";
             this.lblEndDate.Size = new System.Drawing.Size(100, 17);
             this.lblEndDate.TabIndex = 7;
@@ -171,13 +192,15 @@
             // 
             this.dtEndDate.Checked = false;
             this.dtEndDate.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.dtEndDate.Location = new System.Drawing.Point(200, 203);
+            this.dtEndDate.Location = new System.Drawing.Point(280, 203);
             this.dtEndDate.Name = "dtEndDate";
-            this.dtEndDate.Size = new System.Drawing.Size(170, 20);
+            this.dtEndDate.Size = new System.Drawing.Size(202, 20);
             this.dtEndDate.TabIndex = 8;
             // 
             // updatePanel
             // 
+            this.updatePanel.Controls.Add(this.label4);
+            this.updatePanel.Controls.Add(this.clbUProblem);
             this.updatePanel.Controls.Add(this.btnUpdate);
             this.updatePanel.Controls.Add(this.btnUClear);
             this.updatePanel.Controls.Add(this.label1);
@@ -191,9 +214,24 @@
             this.updatePanel.Controls.Add(this.txtUDescription);
             this.updatePanel.Location = new System.Drawing.Point(32, 40);
             this.updatePanel.Name = "updatePanel";
-            this.updatePanel.Size = new System.Drawing.Size(420, 330);
+            this.updatePanel.Size = new System.Drawing.Size(520, 430);
             this.updatePanel.TabIndex = 4;
             this.updatePanel.Visible = false;
+            // 
+            // label4
+            // 
+            this.label4.Location = new System.Drawing.Point(18, 237);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(100, 20);
+            this.label4.TabIndex = 20;
+            this.label4.Text = "Problems";
+            // 
+            // clbUProblem
+            // 
+            this.clbUProblem.Location = new System.Drawing.Point(21, 258);
+            this.clbUProblem.Name = "clbUProblem";
+            this.clbUProblem.Size = new System.Drawing.Size(462, 109);
+            this.clbUProblem.TabIndex = 19;
             // 
             // btnUpdate
             // 
@@ -201,7 +239,7 @@
             this.btnUpdate.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnUpdate.ForeColor = System.Drawing.Color.White;
-            this.btnUpdate.Location = new System.Drawing.Point(20, 269);
+            this.btnUpdate.Location = new System.Drawing.Point(20, 383);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(75, 23);
             this.btnUpdate.TabIndex = 17;
@@ -215,7 +253,7 @@
             this.btnUClear.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnUClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnUClear.ForeColor = System.Drawing.Color.White;
-            this.btnUClear.Location = new System.Drawing.Point(120, 269);
+            this.btnUClear.Location = new System.Drawing.Point(120, 383);
             this.btnUClear.Name = "btnUClear";
             this.btnUClear.Size = new System.Drawing.Size(75, 23);
             this.btnUClear.TabIndex = 18;
@@ -225,7 +263,7 @@
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(20, 191);
+            this.label1.Location = new System.Drawing.Point(20, 185);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(100, 20);
             this.label1.TabIndex = 13;
@@ -234,14 +272,14 @@
             // dtp_UStartDate
             // 
             this.dtp_UStartDate.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.dtp_UStartDate.Location = new System.Drawing.Point(20, 212);
+            this.dtp_UStartDate.Location = new System.Drawing.Point(20, 206);
             this.dtp_UStartDate.Name = "dtp_UStartDate";
-            this.dtp_UStartDate.Size = new System.Drawing.Size(157, 20);
+            this.dtp_UStartDate.Size = new System.Drawing.Size(198, 20);
             this.dtp_UStartDate.TabIndex = 14;
             // 
             // label2
             // 
-            this.label2.Location = new System.Drawing.Point(203, 191);
+            this.label2.Location = new System.Drawing.Point(279, 185);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(100, 17);
             this.label2.TabIndex = 15;
@@ -250,15 +288,15 @@
             // dtp_UEndDate
             // 
             this.dtp_UEndDate.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.dtp_UEndDate.Location = new System.Drawing.Point(201, 211);
+            this.dtp_UEndDate.Location = new System.Drawing.Point(281, 205);
             this.dtp_UEndDate.Name = "dtp_UEndDate";
-            this.dtp_UEndDate.Size = new System.Drawing.Size(169, 20);
+            this.dtp_UEndDate.Size = new System.Drawing.Size(199, 20);
             this.dtp_UEndDate.TabIndex = 16;
             // 
             // lblUpdateTitle
             // 
             this.lblUpdateTitle.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.lblUpdateTitle.Location = new System.Drawing.Point(145, 10);
+            this.lblUpdateTitle.Location = new System.Drawing.Point(195, 14);
             this.lblUpdateTitle.Name = "lblUpdateTitle";
             this.lblUpdateTitle.Size = new System.Drawing.Size(131, 23);
             this.lblUpdateTitle.TabIndex = 0;
@@ -266,7 +304,7 @@
             // 
             // lblUTitle
             // 
-            this.lblUTitle.Location = new System.Drawing.Point(20, 55);
+            this.lblUTitle.Location = new System.Drawing.Point(20, 49);
             this.lblUTitle.Name = "lblUTitle";
             this.lblUTitle.Size = new System.Drawing.Size(100, 23);
             this.lblUTitle.TabIndex = 3;
@@ -274,14 +312,14 @@
             // 
             // txtUTitle
             // 
-            this.txtUTitle.Location = new System.Drawing.Point(20, 78);
+            this.txtUTitle.Location = new System.Drawing.Point(20, 72);
             this.txtUTitle.Name = "txtUTitle";
-            this.txtUTitle.Size = new System.Drawing.Size(350, 20);
+            this.txtUTitle.Size = new System.Drawing.Size(460, 20);
             this.txtUTitle.TabIndex = 4;
             // 
             // lblUDescription
             // 
-            this.lblUDescription.Location = new System.Drawing.Point(20, 108);
+            this.lblUDescription.Location = new System.Drawing.Point(20, 102);
             this.lblUDescription.Name = "lblUDescription";
             this.lblUDescription.Size = new System.Drawing.Size(100, 23);
             this.lblUDescription.TabIndex = 5;
@@ -289,17 +327,17 @@
             // 
             // txtUDescription
             // 
-            this.txtUDescription.Location = new System.Drawing.Point(20, 131);
+            this.txtUDescription.Location = new System.Drawing.Point(20, 125);
             this.txtUDescription.Multiline = true;
             this.txtUDescription.Name = "txtUDescription";
-            this.txtUDescription.Size = new System.Drawing.Size(350, 50);
+            this.txtUDescription.Size = new System.Drawing.Size(460, 50);
             this.txtUDescription.TabIndex = 6;
             // 
             // ContestPopupForm
             // 
-            this.ClientSize = new System.Drawing.Size(484, 411);
-            this.Controls.Add(this.addPanel);
+            this.ClientSize = new System.Drawing.Size(584, 511);
             this.Controls.Add(this.updatePanel);
+            this.Controls.Add(this.addPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.Name = "ContestPopupForm";
@@ -326,5 +364,9 @@
         private System.Windows.Forms.TextBox txtUTitle;
         private System.Windows.Forms.Label lblUDescription;
         private System.Windows.Forms.TextBox txtUDescription;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.CheckedListBox clbAProblem;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.CheckedListBox clbUProblem;
     }
 }

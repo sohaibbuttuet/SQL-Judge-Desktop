@@ -13,38 +13,20 @@ namespace SQL_Judge_System.BL
     {
         public static void AddTestCase(TestCase testCase)
         {
-            if(testCase == null)
-            {
-                throw new ArgumentNullException(nameof(testCase));
-            }
-            if(testCase.ProblemID <= 0)
-            {
-                throw new ArgumentException("ProblemID must be greater than zero.");
-            }
-            if(string.IsNullOrWhiteSpace(testCase.SetupSQL) || string.IsNullOrWhiteSpace(testCase.ExpectedOutput))
-            {
-                throw new ArgumentException("SetupSQL and ExpectedOutput cannot be null or empty.");
-            }
+            ValidateTestCase(testCase);
+
+            if (TestCasesDL.IsTestCaseExists(testCase.ProblemID, testCase.TestCaseName))
+                throw new ArgumentException("Test Case already exists for this Problem.");
+
             testCase.TestCaseID = TestCasesDL.AddTestCase(testCase);
         }
         public static void UpdateTestCase(TestCase testCase)
         {
-            if (testCase == null)
-            {
-                throw new ArgumentNullException(nameof(testCase));
-            }
-            if (testCase.TestCaseID <= 0)
-            {
-                throw new ArgumentException("TestCaseID must be greater than zero.");
-            }
-            if (testCase.ProblemID <= 0)
-            {
-                throw new ArgumentException("ProblemID must be greater than zero.");
-            }
-            if (string.IsNullOrWhiteSpace(testCase.SetupSQL) || string.IsNullOrWhiteSpace(testCase.ExpectedOutput))
-            {
-                throw new ArgumentException("SetupSQL and ExpectedOutput cannot be null or empty.");
-            }
+            ValidateTestCase(testCase);
+
+            if (TestCasesDL.IsTestCaseExists(testCase.ProblemID, testCase.TestCaseID, testCase.TestCaseName))
+                throw new ArgumentException("Test Case already exists for this Problem.");
+
             TestCasesDL.UpdateTestCase(testCase);
         }
         public static void ActivateTestCase(int testCaseID)
@@ -63,11 +45,57 @@ namespace SQL_Judge_System.BL
             }
             TestCasesDL.DeactivateTestCase(testCaseID);
         }
-        public static DataTable GetTestCasesForAdmin()
+
+        // Helping Function
+        public static void ValidateTestCase(TestCase testCase)
         {
-            return TestCasesDL.GetTestCasesForAdmin();
+            if (testCase == null)
+                throw new ArgumentNullException(nameof(testCase));
+
+            // Problem validation
+            if (testCase.ProblemID <= 0)
+                throw new ArgumentException("ProblemID must be greater than zero.");
+
+            // Test case name
+            if (string.IsNullOrWhiteSpace(testCase.TestCaseName))
+                throw new ArgumentException("Test case name is required.");
+
+            // Setup SQL validation
+            if (string.IsNullOrWhiteSpace(testCase.SetupSQL))
+                throw new ArgumentException("Setup SQL cannot be empty.");
+
+            string setupSql = testCase.SetupSQL.Trim().ToLower();
+
+            if (!(setupSql.StartsWith("create") || setupSql.StartsWith("insert")))
+                throw new ArgumentException("Setup SQL must start with CREATE or INSERT.");
+
+            string[] blockedKeywords = { "drop", "alter", "delete", "truncate", "update" };
+
+            if (blockedKeywords.Any(k => setupSql.Contains(k)))
+                throw new ArgumentException("Setup SQL contains restricted operations.");
+
+            // Solution Query validation
+            if (string.IsNullOrWhiteSpace(testCase.SolutionQuery))
+                throw new ArgumentException("Solution Query cannot be empty.");
+
+            string solutionSql = testCase.SolutionQuery.Trim().ToLower();
+
+            if (!solutionSql.StartsWith("select"))
+                throw new ArgumentException("Solution Query must start with SELECT.");
+
+            if (blockedKeywords.Any(k => solutionSql.Contains(k)))
+                throw new ArgumentException("Solution Query contains restricted operations.");
+
+            // Name length safety
+            if (testCase.TestCaseName.Length > 100)
+                throw new ArgumentException("Test case name is too long.");
         }
 
+        // Test Cases Panel for Admin Dashboard
+        public static DataTable GetTestCases()
+        {
+            return TestCasesDL.GetTestCases();
+        }
         public static int TotalTestCases()
         {
             return TestCasesDL.TotalTestCases();

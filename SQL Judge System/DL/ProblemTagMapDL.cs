@@ -14,26 +14,25 @@ namespace SQL_Judge_System.DL
         public static void MapProblemTag(ProblemTagMap pt)
         {
             string query = $"INSERT INTO problemtagmap(ProblemID, TagID) VALUES ({pt.ProblemID},{pt.TagID});";
-            DatabaseHelper.Instance.ExecuteScalar(query);
+            DatabaseHelper.Instance.Update(query);
         }
         public static void DeleteByProblemID(int problemID)
         {
             string query = $"DELETE FROM problemtagmap WHERE ProblemID = {problemID};";
             DatabaseHelper.Instance.Update(query);
         }
-        public static List<int> GetTagIDs(int problemId)
+        public static List<ProblemTagMap> GetProblemTags(int problemID)
         {
-            string query = $"SELECT TagId FROM ProblemTagMap WHERE ProblemID = {problemId};";
+            string query = $"SELECT * FROM ProblemTagMap WHERE ProblemID = {problemID};";
             DataTable dt = DatabaseHelper.Instance.GetDataTable(query);
 
-            List<int> tagIDs = new List<int>();
-
-            foreach (DataRow row in dt.Rows)
+            List<ProblemTagMap> tags = new List<ProblemTagMap>();
+            foreach (DataRow dr in dt.Rows)
             {
-                tagIDs.Add(Convert.ToInt32(row["TagID"]));
+                ProblemTagMap tag = new ProblemTagMap((int)dr["ProblemID"], (int)dr["TagID"]);
+                tags.Add(tag);
             }
-
-            return tagIDs;
+            return tags;
         }
     }
 }

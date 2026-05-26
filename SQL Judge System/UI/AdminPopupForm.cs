@@ -19,8 +19,6 @@ namespace SQL_Judge_System.UI
         public AdminPopupForm()
         {
             InitializeComponent();
-
-            // default state 
             ShowAddPanel();
         }
         public AdminPopupForm(int userID)
@@ -28,9 +26,8 @@ namespace SQL_Judge_System.UI
             InitializeComponent();
 
             this.userId = userID;
-            LoadUserData(userID);
 
-            // default state 
+            LoadUserData(userID);
             ShowEditPanel();
         }
 

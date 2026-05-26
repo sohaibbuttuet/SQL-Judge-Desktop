@@ -18,6 +18,9 @@ namespace SQL_Judge_System.DL
             return DatabaseHelper.Instance.ExecuteScalar(query);
         }
 
+
+
+        // Submission Panel in Admin Dashboard
         public static DataTable GetSubmissionsForAdmin()
         {
             string query = "SELECT * FROM vw_Submissions;";
@@ -25,7 +28,7 @@ namespace SQL_Judge_System.DL
         }
         public static int TotalSubmissions()
         {
-            string query = $"SELECT COUNT(*) FROM vw_Submissions;";
+            string query = $"SELECT COUNT(*) FROM Submissions;";
             return DatabaseHelper.Instance.ExecuteScalar(query);
         }
         public static int AcceptedSubmissions()

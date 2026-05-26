@@ -24,14 +24,9 @@ namespace SQL_Judge_System.UI
         {
             try
             {
-                List<SkillLevel> levels = SkillLevelDL.GetAll();
-
-                cmbSkillLevel.DataSource = null;
-                cmbSkillLevel.Items.Clear();
-
-                cmbSkillLevel.DataSource = levels;
-                cmbSkillLevel.DisplayMember = "LevelName";
-                cmbSkillLevel.ValueMember = "SkillLevelID";
+                cmbSkillLevel.DataSource = SkillLevelDL.GetAll();
+                cmbSkillLevel.DisplayMember = "Name";
+                cmbSkillLevel.ValueMember = "Id";
 
                 cmbSkillLevel.SelectedIndex = -1;
             }
@@ -90,22 +85,22 @@ namespace SQL_Judge_System.UI
         {
             try
             {
-                string email = txtEmail.Text.Trim();
-                string password = txtPassword.Text;
                 string name = txtName.Text.Trim();
+                string email = txtEmail.Text.Trim();
+                string password = txtPassword.Text;                
 
                 if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
                 {
                     MessageBox.Show("Please fill in all required fields.");
                     return;
                 }
+
                 if (string.IsNullOrWhiteSpace(email) || !email.Contains("@") || !email.Contains("."))
                 {
                     MessageBox.Show("Invalid email format.");
                     return;
                 }
                     
-
                 // =========================
                 // SIGN UP
                 // =========================
@@ -113,30 +108,31 @@ namespace SQL_Judge_System.UI
                 {                    
                     string regNo = txtRegNo.Text.Trim();
 
-                    if (cmbSkillLevel.SelectedItem == null)
-                    {
-                        MessageBox.Show("Please select skill level.");
-                        return;
-                    }
-
-                    SkillLevel skillLevel = (SkillLevel)cmbSkillLevel.SelectedItem;
-
                     if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(regNo))
                     {
                         MessageBox.Show("Please fill all student details.");
                         return;
                     }
 
+                    if (cmbSkillLevel.SelectedValue == null)
+                    {
+                        MessageBox.Show("Please select skill level.");
+                        return;
+                    }
+
+                    int skillLevelID = Convert.ToInt32(cmbSkillLevel.SelectedValue);
+
                     // Create User object
                     User user = new User(name, email, password);
                     UserBL.SignUp(user);
 
                     // Create Student object
-                    Student student = new Student(user.UserID, regNo, skillLevel);
+                    Student student = new Student(user.UserID, regNo, skillLevelID);
                     StudentBL.RegisterStudent(student);
 
                     // Assign Role to User
                     int roleId = UserBL.GetStudentRoleID();
+
                     UserRole userRole = new UserRole(user.UserID, roleId);
                     UserBL.AssignRoleToUser(userRole);
 

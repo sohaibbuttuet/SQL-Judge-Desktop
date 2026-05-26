@@ -16,12 +16,6 @@ namespace SQL_Judge_System.Models
         private DateTime createdAt;
         private DateTime updatedAt;
 
-
-        // =======================================
-        // Composition (many-to-many relationship) 
-        // =======================================
-        private List<Role> roles = new List<Role>();
-
         public int UserID
         {
             get { return userID; }
@@ -82,22 +76,10 @@ namespace SQL_Judge_System.Models
             private set { updatedAt = value; }
         }
 
-        // =========================
-        // Safe Composition Exposure
-        // =========================
-        public IReadOnlyList<Role> Roles
-        {
-            get { return roles.AsReadOnly(); }
-        }
-
-
-        // =========================
-        // Constructers
-        // =========================
+        // Default Constructer
         public User()
         {
             IsActive = true;
-            CreatedAt = DateTime.Now;
         }
 
         // For Add User
@@ -109,6 +91,7 @@ namespace SQL_Judge_System.Models
 
             IsActive = true;
             CreatedAt = DateTime.Now;
+            UpdatedAt = DateTime.Now;
         }
 
         // For Update User
@@ -119,11 +102,12 @@ namespace SQL_Judge_System.Models
             Email = email;
             Password = password;
 
+            UpdatedAt = DateTime.Now;
             IsActive = true;
         }
 
         // Full Constructer for DB load
-        public User(int userId, string fullName, string email, string password, bool isActive, DateTime createdAt, DateTime UpdatedAt)
+        public User(int userId, string fullName, string email, string password, bool isActive, DateTime createdAt, DateTime updatedAt)
         {
             UserID = userId;
             FullName = fullName;
@@ -132,28 +116,6 @@ namespace SQL_Judge_System.Models
             IsActive = isActive;
             CreatedAt = createdAt;
             UpdatedAt = updatedAt;
-        }
-
-        // =========================
-        // Composition Management
-        // =========================
-        public void AddRole(Role role)
-        {
-            if (role == null)
-                throw new Exception("Role cannot be null.");
-
-            roles.Add(role);
-        }
-        public void RemoveRole(Role role)
-        {
-            if (role == null)
-                throw new Exception("Role cannot be null.");
-
-            roles.Remove(role);
-        }
-        public void ClearRoles()
-        {
-            roles.Clear();
         }
     }
 }

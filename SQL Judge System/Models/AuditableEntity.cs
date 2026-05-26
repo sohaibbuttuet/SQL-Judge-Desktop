@@ -21,6 +21,9 @@ namespace SQL_Judge_System.Models
 
             CreatedBy = userId;
             CreatedAt = DateTime.Now;
+
+            UpdatedBy = userId;
+            UpdatedAt = CreatedAt;
         }
         public void MarkUpdated(int userId)
         {

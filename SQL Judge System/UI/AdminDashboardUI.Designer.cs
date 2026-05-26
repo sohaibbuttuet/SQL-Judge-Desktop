@@ -35,6 +35,10 @@ namespace SQL_Judge_System.UI
             this.btn_students = new FontAwesome.Sharp.IconButton();
             this.btn_Admin = new FontAwesome.Sharp.IconButton();
             this.btn_Home = new FontAwesome.Sharp.IconButton();
+            this.pnlSidebarLogo = new System.Windows.Forms.Panel();
+            this.picLogo = new System.Windows.Forms.PictureBox();
+            this.lblAppSub = new System.Windows.Forms.Label();
+            this.lblAppName = new System.Windows.Forms.Label();
             this.pnlProblems = new System.Windows.Forms.Panel();
             this.btnToggleProb = new FontAwesome.Sharp.IconButton();
             this.btnUpdateProb = new FontAwesome.Sharp.IconButton();
@@ -145,7 +149,7 @@ namespace SQL_Judge_System.UI
             this.panel3 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.pnlHome = new System.Windows.Forms.Panel();
-            this.label25 = new System.Windows.Forms.Label();
+            this.lblGridTitle = new System.Windows.Forms.Label();
             this.pnlHomeCards = new System.Windows.Forms.Panel();
             this.tlpnlHomeCards = new System.Windows.Forms.TableLayoutPanel();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -161,6 +165,8 @@ namespace SQL_Judge_System.UI
             this.panel9 = new System.Windows.Forms.Panel();
             this.lblMainTitle = new System.Windows.Forms.Label();
             this.pnlSidebar.SuspendLayout();
+            this.pnlSidebarLogo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             this.pnlProblems.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProblems)).BeginInit();
             this.ProblemCards.SuspendLayout();
@@ -223,7 +229,7 @@ namespace SQL_Judge_System.UI
             // 
             // pnlSidebar
             // 
-            this.pnlSidebar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(30)))), ((int)(((byte)(54)))));
+            this.pnlSidebar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(29)))), ((int)(((byte)(56)))));
             this.pnlSidebar.Controls.Add(this.btn_Settings);
             this.pnlSidebar.Controls.Add(this.btnLogout);
             this.pnlSidebar.Controls.Add(this.btnContestLeaderboard);
@@ -235,28 +241,29 @@ namespace SQL_Judge_System.UI
             this.pnlSidebar.Controls.Add(this.btn_students);
             this.pnlSidebar.Controls.Add(this.btn_Admin);
             this.pnlSidebar.Controls.Add(this.btn_Home);
-            this.pnlSidebar.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlSidebar.Controls.Add(this.pnlSidebarLogo);
             this.pnlSidebar.Location = new System.Drawing.Point(0, 0);
             this.pnlSidebar.Name = "pnlSidebar";
-            this.pnlSidebar.Size = new System.Drawing.Size(200, 561);
+            this.pnlSidebar.Size = new System.Drawing.Size(200, 600);
             this.pnlSidebar.TabIndex = 1;
             // 
             // btn_Settings
             // 
+            this.btn_Settings.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_Settings.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.btn_Settings.FlatAppearance.BorderSize = 0;
             this.btn_Settings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_Settings.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Settings.ForeColor = System.Drawing.Color.White;
+            this.btn_Settings.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_Settings.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
             this.btn_Settings.IconChar = FontAwesome.Sharp.IconChar.Gears;
-            this.btn_Settings.IconColor = System.Drawing.Color.White;
+            this.btn_Settings.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
             this.btn_Settings.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btn_Settings.IconSize = 24;
             this.btn_Settings.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_Settings.Location = new System.Drawing.Point(0, 459);
+            this.btn_Settings.Location = new System.Drawing.Point(0, 504);
             this.btn_Settings.Name = "btn_Settings";
-            this.btn_Settings.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btn_Settings.Size = new System.Drawing.Size(200, 51);
+            this.btn_Settings.Padding = new System.Windows.Forms.Padding(14, 0, 0, 0);
+            this.btn_Settings.Size = new System.Drawing.Size(200, 48);
             this.btn_Settings.TabIndex = 24;
             this.btn_Settings.Text = "Settings";
             this.btn_Settings.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -265,20 +272,21 @@ namespace SQL_Judge_System.UI
             // 
             // btnLogout
             // 
+            this.btnLogout.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnLogout.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.btnLogout.FlatAppearance.BorderSize = 0;
             this.btnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLogout.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLogout.ForeColor = System.Drawing.Color.White;
+            this.btnLogout.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLogout.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
             this.btnLogout.IconChar = FontAwesome.Sharp.IconChar.RightFromBracket;
-            this.btnLogout.IconColor = System.Drawing.Color.White;
+            this.btnLogout.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
             this.btnLogout.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnLogout.IconSize = 24;
             this.btnLogout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnLogout.Location = new System.Drawing.Point(0, 510);
+            this.btnLogout.Location = new System.Drawing.Point(0, 552);
             this.btnLogout.Name = "btnLogout";
-            this.btnLogout.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btnLogout.Size = new System.Drawing.Size(200, 51);
+            this.btnLogout.Padding = new System.Windows.Forms.Padding(14, 0, 0, 0);
+            this.btnLogout.Size = new System.Drawing.Size(200, 48);
             this.btnLogout.TabIndex = 25;
             this.btnLogout.Text = "Logout";
             this.btnLogout.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -290,17 +298,17 @@ namespace SQL_Judge_System.UI
             this.btnContestLeaderboard.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnContestLeaderboard.FlatAppearance.BorderSize = 0;
             this.btnContestLeaderboard.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnContestLeaderboard.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnContestLeaderboard.ForeColor = System.Drawing.Color.White;
+            this.btnContestLeaderboard.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnContestLeaderboard.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
             this.btnContestLeaderboard.IconChar = FontAwesome.Sharp.IconChar.RankingStar;
-            this.btnContestLeaderboard.IconColor = System.Drawing.Color.White;
+            this.btnContestLeaderboard.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
             this.btnContestLeaderboard.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnContestLeaderboard.IconSize = 24;
             this.btnContestLeaderboard.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnContestLeaderboard.Location = new System.Drawing.Point(0, 408);
+            this.btnContestLeaderboard.Location = new System.Drawing.Point(0, 454);
             this.btnContestLeaderboard.Name = "btnContestLeaderboard";
-            this.btnContestLeaderboard.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btnContestLeaderboard.Size = new System.Drawing.Size(200, 51);
+            this.btnContestLeaderboard.Padding = new System.Windows.Forms.Padding(14, 0, 0, 0);
+            this.btnContestLeaderboard.Size = new System.Drawing.Size(200, 48);
             this.btnContestLeaderboard.TabIndex = 23;
             this.btnContestLeaderboard.Text = "Leaderboard";
             this.btnContestLeaderboard.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -309,20 +317,21 @@ namespace SQL_Judge_System.UI
             // 
             // btnReport
             // 
+            this.btnReport.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnReport.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnReport.FlatAppearance.BorderSize = 0;
             this.btnReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnReport.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnReport.ForeColor = System.Drawing.Color.White;
+            this.btnReport.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReport.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
             this.btnReport.IconChar = FontAwesome.Sharp.IconChar.ChartColumn;
-            this.btnReport.IconColor = System.Drawing.Color.White;
+            this.btnReport.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
             this.btnReport.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnReport.IconSize = 24;
             this.btnReport.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnReport.Location = new System.Drawing.Point(0, 357);
+            this.btnReport.Location = new System.Drawing.Point(0, 406);
             this.btnReport.Name = "btnReport";
-            this.btnReport.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btnReport.Size = new System.Drawing.Size(200, 51);
+            this.btnReport.Padding = new System.Windows.Forms.Padding(14, 0, 0, 0);
+            this.btnReport.Size = new System.Drawing.Size(200, 48);
             this.btnReport.TabIndex = 22;
             this.btnReport.Text = "Reports";
             this.btnReport.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -331,20 +340,21 @@ namespace SQL_Judge_System.UI
             // 
             // btnSubmissions
             // 
+            this.btnSubmissions.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSubmissions.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnSubmissions.FlatAppearance.BorderSize = 0;
             this.btnSubmissions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSubmissions.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSubmissions.ForeColor = System.Drawing.Color.White;
+            this.btnSubmissions.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSubmissions.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
             this.btnSubmissions.IconChar = FontAwesome.Sharp.IconChar.Code;
-            this.btnSubmissions.IconColor = System.Drawing.Color.White;
+            this.btnSubmissions.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
             this.btnSubmissions.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnSubmissions.IconSize = 24;
             this.btnSubmissions.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSubmissions.Location = new System.Drawing.Point(0, 306);
+            this.btnSubmissions.Location = new System.Drawing.Point(0, 358);
             this.btnSubmissions.Name = "btnSubmissions";
-            this.btnSubmissions.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btnSubmissions.Size = new System.Drawing.Size(200, 51);
+            this.btnSubmissions.Padding = new System.Windows.Forms.Padding(14, 0, 0, 0);
+            this.btnSubmissions.Size = new System.Drawing.Size(200, 48);
             this.btnSubmissions.TabIndex = 21;
             this.btnSubmissions.Text = "Submissions";
             this.btnSubmissions.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -353,20 +363,21 @@ namespace SQL_Judge_System.UI
             // 
             // btn_contests
             // 
+            this.btn_contests.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_contests.Dock = System.Windows.Forms.DockStyle.Top;
             this.btn_contests.FlatAppearance.BorderSize = 0;
             this.btn_contests.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_contests.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_contests.ForeColor = System.Drawing.Color.White;
+            this.btn_contests.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_contests.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
             this.btn_contests.IconChar = FontAwesome.Sharp.IconChar.Trophy;
-            this.btn_contests.IconColor = System.Drawing.Color.White;
+            this.btn_contests.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
             this.btn_contests.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btn_contests.IconSize = 24;
             this.btn_contests.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_contests.Location = new System.Drawing.Point(0, 255);
+            this.btn_contests.Location = new System.Drawing.Point(0, 310);
             this.btn_contests.Name = "btn_contests";
-            this.btn_contests.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btn_contests.Size = new System.Drawing.Size(200, 51);
+            this.btn_contests.Padding = new System.Windows.Forms.Padding(14, 0, 0, 0);
+            this.btn_contests.Size = new System.Drawing.Size(200, 48);
             this.btn_contests.TabIndex = 19;
             this.btn_contests.Text = "Manage Contests";
             this.btn_contests.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -375,20 +386,21 @@ namespace SQL_Judge_System.UI
             // 
             // btnTestCases
             // 
+            this.btnTestCases.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnTestCases.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnTestCases.FlatAppearance.BorderSize = 0;
             this.btnTestCases.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTestCases.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTestCases.ForeColor = System.Drawing.Color.White;
+            this.btnTestCases.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTestCases.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
             this.btnTestCases.IconChar = FontAwesome.Sharp.IconChar.Flask;
-            this.btnTestCases.IconColor = System.Drawing.Color.White;
+            this.btnTestCases.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
             this.btnTestCases.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnTestCases.IconSize = 24;
             this.btnTestCases.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnTestCases.Location = new System.Drawing.Point(0, 204);
+            this.btnTestCases.Location = new System.Drawing.Point(0, 262);
             this.btnTestCases.Name = "btnTestCases";
-            this.btnTestCases.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btnTestCases.Size = new System.Drawing.Size(200, 51);
+            this.btnTestCases.Padding = new System.Windows.Forms.Padding(14, 0, 0, 0);
+            this.btnTestCases.Size = new System.Drawing.Size(200, 48);
             this.btnTestCases.TabIndex = 20;
             this.btnTestCases.Text = "Manage Test Cases";
             this.btnTestCases.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -397,20 +409,21 @@ namespace SQL_Judge_System.UI
             // 
             // btn_problems
             // 
+            this.btn_problems.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_problems.Dock = System.Windows.Forms.DockStyle.Top;
             this.btn_problems.FlatAppearance.BorderSize = 0;
             this.btn_problems.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_problems.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_problems.ForeColor = System.Drawing.Color.White;
+            this.btn_problems.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_problems.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
             this.btn_problems.IconChar = FontAwesome.Sharp.IconChar.Book;
-            this.btn_problems.IconColor = System.Drawing.Color.White;
+            this.btn_problems.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
             this.btn_problems.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btn_problems.IconSize = 24;
             this.btn_problems.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_problems.Location = new System.Drawing.Point(0, 153);
+            this.btn_problems.Location = new System.Drawing.Point(0, 214);
             this.btn_problems.Name = "btn_problems";
-            this.btn_problems.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btn_problems.Size = new System.Drawing.Size(200, 51);
+            this.btn_problems.Padding = new System.Windows.Forms.Padding(14, 0, 0, 0);
+            this.btn_problems.Size = new System.Drawing.Size(200, 48);
             this.btn_problems.TabIndex = 18;
             this.btn_problems.Text = "Manage Problems";
             this.btn_problems.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -419,20 +432,21 @@ namespace SQL_Judge_System.UI
             // 
             // btn_students
             // 
+            this.btn_students.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_students.Dock = System.Windows.Forms.DockStyle.Top;
             this.btn_students.FlatAppearance.BorderSize = 0;
             this.btn_students.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_students.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_students.ForeColor = System.Drawing.Color.White;
+            this.btn_students.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_students.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
             this.btn_students.IconChar = FontAwesome.Sharp.IconChar.UserGraduate;
-            this.btn_students.IconColor = System.Drawing.Color.White;
+            this.btn_students.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
             this.btn_students.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btn_students.IconSize = 24;
             this.btn_students.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_students.Location = new System.Drawing.Point(0, 102);
+            this.btn_students.Location = new System.Drawing.Point(0, 166);
             this.btn_students.Name = "btn_students";
-            this.btn_students.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btn_students.Size = new System.Drawing.Size(200, 51);
+            this.btn_students.Padding = new System.Windows.Forms.Padding(14, 0, 0, 0);
+            this.btn_students.Size = new System.Drawing.Size(200, 48);
             this.btn_students.TabIndex = 17;
             this.btn_students.Text = "Manage Students";
             this.btn_students.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -441,20 +455,21 @@ namespace SQL_Judge_System.UI
             // 
             // btn_Admin
             // 
+            this.btn_Admin.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_Admin.Dock = System.Windows.Forms.DockStyle.Top;
             this.btn_Admin.FlatAppearance.BorderSize = 0;
             this.btn_Admin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_Admin.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Admin.ForeColor = System.Drawing.Color.White;
+            this.btn_Admin.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_Admin.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
             this.btn_Admin.IconChar = FontAwesome.Sharp.IconChar.RankingStar;
-            this.btn_Admin.IconColor = System.Drawing.Color.White;
+            this.btn_Admin.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
             this.btn_Admin.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btn_Admin.IconSize = 24;
             this.btn_Admin.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_Admin.Location = new System.Drawing.Point(0, 51);
+            this.btn_Admin.Location = new System.Drawing.Point(0, 118);
             this.btn_Admin.Name = "btn_Admin";
-            this.btn_Admin.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btn_Admin.Size = new System.Drawing.Size(200, 51);
+            this.btn_Admin.Padding = new System.Windows.Forms.Padding(14, 0, 0, 0);
+            this.btn_Admin.Size = new System.Drawing.Size(200, 48);
             this.btn_Admin.TabIndex = 26;
             this.btn_Admin.Text = "Manage Admins";
             this.btn_Admin.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -463,28 +478,74 @@ namespace SQL_Judge_System.UI
             // 
             // btn_Home
             // 
+            this.btn_Home.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_Home.Dock = System.Windows.Forms.DockStyle.Top;
             this.btn_Home.FlatAppearance.BorderSize = 0;
             this.btn_Home.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_Home.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Home.ForeColor = System.Drawing.Color.White;
+            this.btn_Home.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_Home.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
             this.btn_Home.IconChar = FontAwesome.Sharp.IconChar.HomeLg;
-            this.btn_Home.IconColor = System.Drawing.Color.White;
+            this.btn_Home.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
             this.btn_Home.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btn_Home.IconSize = 24;
             this.btn_Home.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_Home.Location = new System.Drawing.Point(0, 0);
+            this.btn_Home.Location = new System.Drawing.Point(0, 70);
             this.btn_Home.Name = "btn_Home";
-            this.btn_Home.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btn_Home.Size = new System.Drawing.Size(200, 51);
+            this.btn_Home.Padding = new System.Windows.Forms.Padding(14, 0, 0, 0);
+            this.btn_Home.Size = new System.Drawing.Size(200, 48);
             this.btn_Home.TabIndex = 16;
             this.btn_Home.Text = "Home";
             this.btn_Home.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btn_Home.UseVisualStyleBackColor = true;
             this.btn_Home.Click += new System.EventHandler(this.btnHome_Click);
             // 
+            // pnlSidebarLogo
+            // 
+            this.pnlSidebarLogo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(29)))), ((int)(((byte)(56)))));
+            this.pnlSidebarLogo.Controls.Add(this.picLogo);
+            this.pnlSidebarLogo.Controls.Add(this.lblAppSub);
+            this.pnlSidebarLogo.Controls.Add(this.lblAppName);
+            this.pnlSidebarLogo.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlSidebarLogo.Location = new System.Drawing.Point(0, 0);
+            this.pnlSidebarLogo.Name = "pnlSidebarLogo";
+            this.pnlSidebarLogo.Size = new System.Drawing.Size(200, 70);
+            this.pnlSidebarLogo.TabIndex = 27;
+            // 
+            // picLogo
+            // 
+            this.picLogo.BackColor = System.Drawing.Color.Transparent;
+            this.picLogo.Location = new System.Drawing.Point(8, 13);
+            this.picLogo.Name = "picLogo";
+            this.picLogo.Size = new System.Drawing.Size(44, 44);
+            this.picLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picLogo.TabIndex = 3;
+            this.picLogo.TabStop = false;
+            // 
+            // lblAppSub
+            // 
+            this.lblAppSub.AutoSize = true;
+            this.lblAppSub.Font = new System.Drawing.Font("Segoe UI", 8.5F);
+            this.lblAppSub.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
+            this.lblAppSub.Location = new System.Drawing.Point(72, 41);
+            this.lblAppSub.Name = "lblAppSub";
+            this.lblAppSub.Size = new System.Drawing.Size(77, 15);
+            this.lblAppSub.TabIndex = 1;
+            this.lblAppSub.Text = "Admin Portal";
+            // 
+            // lblAppName
+            // 
+            this.lblAppName.AutoSize = true;
+            this.lblAppName.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold);
+            this.lblAppName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(111)))), ((int)(((byte)(255)))));
+            this.lblAppName.Location = new System.Drawing.Point(65, 12);
+            this.lblAppName.Name = "lblAppName";
+            this.lblAppName.Size = new System.Drawing.Size(110, 28);
+            this.lblAppName.TabIndex = 0;
+            this.lblAppName.Text = "SQL Judge";
+            // 
             // pnlProblems
             // 
+            this.pnlProblems.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(29)))), ((int)(((byte)(56)))));
             this.pnlProblems.Controls.Add(this.btnToggleProb);
             this.pnlProblems.Controls.Add(this.btnUpdateProb);
             this.pnlProblems.Controls.Add(this.btnAddProb);
@@ -493,12 +554,14 @@ namespace SQL_Judge_System.UI
             this.pnlProblems.Controls.Add(this.panel5);
             this.pnlProblems.Location = new System.Drawing.Point(199, 2);
             this.pnlProblems.Name = "pnlProblems";
-            this.pnlProblems.Size = new System.Drawing.Size(805, 557);
+            this.pnlProblems.Size = new System.Drawing.Size(805, 599);
             this.pnlProblems.TabIndex = 4;
             // 
             // btnToggleProb
             // 
             this.btnToggleProb.BackColor = System.Drawing.Color.IndianRed;
+            this.btnToggleProb.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnToggleProb.FlatAppearance.BorderSize = 0;
             this.btnToggleProb.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnToggleProb.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnToggleProb.ForeColor = System.Drawing.Color.White;
@@ -507,7 +570,7 @@ namespace SQL_Judge_System.UI
             this.btnToggleProb.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnToggleProb.IconSize = 18;
             this.btnToggleProb.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnToggleProb.Location = new System.Drawing.Point(348, 237);
+            this.btnToggleProb.Location = new System.Drawing.Point(339, 237);
             this.btnToggleProb.Name = "btnToggleProb";
             this.btnToggleProb.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.btnToggleProb.Size = new System.Drawing.Size(136, 41);
@@ -519,16 +582,18 @@ namespace SQL_Judge_System.UI
             // 
             // btnUpdateProb
             // 
-            this.btnUpdateProb.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
+            this.btnUpdateProb.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(52)))), ((int)(((byte)(88)))));
+            this.btnUpdateProb.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnUpdateProb.FlatAppearance.BorderSize = 0;
             this.btnUpdateProb.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnUpdateProb.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUpdateProb.ForeColor = System.Drawing.Color.White;
+            this.btnUpdateProb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
             this.btnUpdateProb.IconChar = FontAwesome.Sharp.IconChar.PenAlt;
-            this.btnUpdateProb.IconColor = System.Drawing.Color.White;
+            this.btnUpdateProb.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
             this.btnUpdateProb.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnUpdateProb.IconSize = 18;
             this.btnUpdateProb.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnUpdateProb.Location = new System.Drawing.Point(179, 237);
+            this.btnUpdateProb.Location = new System.Drawing.Point(170, 237);
             this.btnUpdateProb.Name = "btnUpdateProb";
             this.btnUpdateProb.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.btnUpdateProb.Size = new System.Drawing.Size(151, 41);
@@ -540,16 +605,18 @@ namespace SQL_Judge_System.UI
             // 
             // btnAddProb
             // 
-            this.btnAddProb.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
+            this.btnAddProb.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(52)))), ((int)(((byte)(88)))));
+            this.btnAddProb.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAddProb.FlatAppearance.BorderSize = 0;
             this.btnAddProb.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddProb.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddProb.ForeColor = System.Drawing.Color.White;
+            this.btnAddProb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
             this.btnAddProb.IconChar = FontAwesome.Sharp.IconChar.PlusSquare;
-            this.btnAddProb.IconColor = System.Drawing.Color.White;
+            this.btnAddProb.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
             this.btnAddProb.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnAddProb.IconSize = 20;
             this.btnAddProb.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAddProb.Location = new System.Drawing.Point(25, 237);
+            this.btnAddProb.Location = new System.Drawing.Point(16, 237);
             this.btnAddProb.Name = "btnAddProb";
             this.btnAddProb.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.btnAddProb.Size = new System.Drawing.Size(136, 41);
@@ -567,7 +634,8 @@ namespace SQL_Judge_System.UI
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvProblems.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvProblems.BackgroundColor = System.Drawing.Color.White;
+            this.dgvProblems.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
+            this.dgvProblems.BorderStyle = System.Windows.Forms.BorderStyle.None;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -585,25 +653,27 @@ namespace SQL_Judge_System.UI
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.MenuText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvProblems.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvProblems.Location = new System.Drawing.Point(25, 292);
+            this.dgvProblems.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(52)))), ((int)(((byte)(88)))));
+            this.dgvProblems.Location = new System.Drawing.Point(14, 292);
             this.dgvProblems.Name = "dgvProblems";
             this.dgvProblems.RowHeadersWidth = 35;
             this.dgvProblems.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.dgvProblems.Size = new System.Drawing.Size(754, 248);
+            this.dgvProblems.Size = new System.Drawing.Size(776, 290);
             this.dgvProblems.TabIndex = 12;
             // 
             // ProblemCards
             // 
-            this.ProblemCards.BackColor = System.Drawing.Color.White;
+            this.ProblemCards.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(29)))), ((int)(((byte)(56)))));
             this.ProblemCards.Controls.Add(this.tableLayoutPanel1);
-            this.ProblemCards.Dock = System.Windows.Forms.DockStyle.Top;
             this.ProblemCards.Location = new System.Drawing.Point(0, 50);
             this.ProblemCards.Name = "ProblemCards";
-            this.ProblemCards.Size = new System.Drawing.Size(805, 164);
+            this.ProblemCards.Padding = new System.Windows.Forms.Padding(12, 12, 12, 0);
+            this.ProblemCards.Size = new System.Drawing.Size(804, 165);
             this.ProblemCards.TabIndex = 6;
             // 
             // tableLayoutPanel1
             // 
+            this.tableLayoutPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(29)))), ((int)(((byte)(56)))));
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
@@ -612,34 +682,35 @@ namespace SQL_Judge_System.UI
             this.tableLayoutPanel1.Controls.Add(this.pnlActProb, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.pnlTotalProb, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 12);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.Padding = new System.Windows.Forms.Padding(3);
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(805, 164);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(780, 153);
             this.tableLayoutPanel1.TabIndex = 3;
             // 
             // pnlinActProb
             // 
-            this.pnlinActProb.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.pnlinActProb.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
             this.pnlinActProb.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlinActProb.Controls.Add(this.lblInActProbValue);
             this.pnlinActProb.Controls.Add(this.lblInActProb);
             this.pnlinActProb.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlinActProb.Location = new System.Drawing.Point(545, 13);
-            this.pnlinActProb.Margin = new System.Windows.Forms.Padding(10);
+            this.pnlinActProb.Location = new System.Drawing.Point(526, 6);
+            this.pnlinActProb.Margin = new System.Windows.Forms.Padding(6);
             this.pnlinActProb.Name = "pnlinActProb";
-            this.pnlinActProb.Size = new System.Drawing.Size(247, 138);
+            this.pnlinActProb.Padding = new System.Windows.Forms.Padding(8);
+            this.pnlinActProb.Size = new System.Drawing.Size(248, 141);
             this.pnlinActProb.TabIndex = 4;
             // 
             // lblInActProbValue
             // 
             this.lblInActProbValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblInActProbValue.Font = new System.Drawing.Font("Segoe UI", 28F, System.Drawing.FontStyle.Bold);
-            this.lblInActProbValue.Location = new System.Drawing.Point(0, 23);
+            this.lblInActProbValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(207)))), ((int)(((byte)(142)))));
+            this.lblInActProbValue.Location = new System.Drawing.Point(8, 31);
             this.lblInActProbValue.Name = "lblInActProbValue";
-            this.lblInActProbValue.Size = new System.Drawing.Size(245, 113);
+            this.lblInActProbValue.Size = new System.Drawing.Size(230, 100);
             this.lblInActProbValue.TabIndex = 0;
             this.lblInActProbValue.Text = "0";
             this.lblInActProbValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -647,34 +718,37 @@ namespace SQL_Judge_System.UI
             // lblInActProb
             // 
             this.lblInActProb.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblInActProb.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.lblInActProb.Location = new System.Drawing.Point(0, 0);
+            this.lblInActProb.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInActProb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
+            this.lblInActProb.Location = new System.Drawing.Point(8, 8);
             this.lblInActProb.Name = "lblInActProb";
-            this.lblInActProb.Size = new System.Drawing.Size(245, 23);
+            this.lblInActProb.Size = new System.Drawing.Size(230, 23);
             this.lblInActProb.TabIndex = 1;
-            this.lblInActProb.Text = "Inactive Problems";
-            this.lblInActProb.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lblInActProb.Text = "INACTIVE PROBLEMS";
+            this.lblInActProb.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pnlActProb
             // 
-            this.pnlActProb.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.pnlActProb.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
             this.pnlActProb.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlActProb.Controls.Add(this.lblActProbValue);
             this.pnlActProb.Controls.Add(this.lblActProb);
             this.pnlActProb.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlActProb.Location = new System.Drawing.Point(279, 13);
-            this.pnlActProb.Margin = new System.Windows.Forms.Padding(10);
+            this.pnlActProb.Location = new System.Drawing.Point(266, 6);
+            this.pnlActProb.Margin = new System.Windows.Forms.Padding(6);
             this.pnlActProb.Name = "pnlActProb";
-            this.pnlActProb.Size = new System.Drawing.Size(246, 138);
+            this.pnlActProb.Padding = new System.Windows.Forms.Padding(8);
+            this.pnlActProb.Size = new System.Drawing.Size(248, 141);
             this.pnlActProb.TabIndex = 3;
             // 
             // lblActProbValue
             // 
             this.lblActProbValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblActProbValue.Font = new System.Drawing.Font("Segoe UI", 28F, System.Drawing.FontStyle.Bold);
-            this.lblActProbValue.Location = new System.Drawing.Point(0, 23);
+            this.lblActProbValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(182)))), ((int)(((byte)(255)))));
+            this.lblActProbValue.Location = new System.Drawing.Point(8, 31);
             this.lblActProbValue.Name = "lblActProbValue";
-            this.lblActProbValue.Size = new System.Drawing.Size(244, 113);
+            this.lblActProbValue.Size = new System.Drawing.Size(230, 100);
             this.lblActProbValue.TabIndex = 0;
             this.lblActProbValue.Text = "0";
             this.lblActProbValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -682,34 +756,37 @@ namespace SQL_Judge_System.UI
             // lblActProb
             // 
             this.lblActProb.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblActProb.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.lblActProb.Location = new System.Drawing.Point(0, 0);
+            this.lblActProb.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblActProb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
+            this.lblActProb.Location = new System.Drawing.Point(8, 8);
             this.lblActProb.Name = "lblActProb";
-            this.lblActProb.Size = new System.Drawing.Size(244, 23);
+            this.lblActProb.Size = new System.Drawing.Size(230, 23);
             this.lblActProb.TabIndex = 1;
-            this.lblActProb.Text = "Active Problems";
-            this.lblActProb.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lblActProb.Text = "ACTIVE PROBLEMS";
+            this.lblActProb.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pnlTotalProb
             // 
-            this.pnlTotalProb.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.pnlTotalProb.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
             this.pnlTotalProb.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlTotalProb.Controls.Add(this.lblTotalProbValue);
             this.pnlTotalProb.Controls.Add(this.lblTotalProb);
             this.pnlTotalProb.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlTotalProb.Location = new System.Drawing.Point(13, 13);
-            this.pnlTotalProb.Margin = new System.Windows.Forms.Padding(10);
+            this.pnlTotalProb.Location = new System.Drawing.Point(6, 6);
+            this.pnlTotalProb.Margin = new System.Windows.Forms.Padding(6);
             this.pnlTotalProb.Name = "pnlTotalProb";
-            this.pnlTotalProb.Size = new System.Drawing.Size(246, 138);
+            this.pnlTotalProb.Padding = new System.Windows.Forms.Padding(8);
+            this.pnlTotalProb.Size = new System.Drawing.Size(248, 141);
             this.pnlTotalProb.TabIndex = 1;
             // 
             // lblTotalProbValue
             // 
             this.lblTotalProbValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblTotalProbValue.Font = new System.Drawing.Font("Segoe UI", 28F, System.Drawing.FontStyle.Bold);
-            this.lblTotalProbValue.Location = new System.Drawing.Point(0, 23);
+            this.lblTotalProbValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(111)))), ((int)(((byte)(255)))));
+            this.lblTotalProbValue.Location = new System.Drawing.Point(8, 31);
             this.lblTotalProbValue.Name = "lblTotalProbValue";
-            this.lblTotalProbValue.Size = new System.Drawing.Size(244, 113);
+            this.lblTotalProbValue.Size = new System.Drawing.Size(230, 100);
             this.lblTotalProbValue.TabIndex = 0;
             this.lblTotalProbValue.Text = "0";
             this.lblTotalProbValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -717,17 +794,18 @@ namespace SQL_Judge_System.UI
             // lblTotalProb
             // 
             this.lblTotalProb.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblTotalProb.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.lblTotalProb.Location = new System.Drawing.Point(0, 0);
+            this.lblTotalProb.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalProb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
+            this.lblTotalProb.Location = new System.Drawing.Point(8, 8);
             this.lblTotalProb.Name = "lblTotalProb";
-            this.lblTotalProb.Size = new System.Drawing.Size(244, 23);
+            this.lblTotalProb.Size = new System.Drawing.Size(230, 23);
             this.lblTotalProb.TabIndex = 1;
-            this.lblTotalProb.Text = "Total Problems";
-            this.lblTotalProb.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lblTotalProb.Text = "TOTAL PROBLEMS";
+            this.lblTotalProb.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panel5
             // 
-            this.panel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
+            this.panel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
             this.panel5.Controls.Add(this.label7);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel5.Location = new System.Drawing.Point(0, 0);
@@ -739,7 +817,7 @@ namespace SQL_Judge_System.UI
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
-            this.label7.ForeColor = System.Drawing.Color.White;
+            this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
             this.label7.Location = new System.Drawing.Point(12, 13);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(173, 25);
@@ -748,6 +826,7 @@ namespace SQL_Judge_System.UI
             // 
             // pnlContest
             // 
+            this.pnlContest.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(31)))), ((int)(((byte)(58)))));
             this.pnlContest.Controls.Add(this.btnUpdContest);
             this.pnlContest.Controls.Add(this.btnAddContest);
             this.pnlContest.Controls.Add(this.ContestCards);
@@ -755,17 +834,19 @@ namespace SQL_Judge_System.UI
             this.pnlContest.Controls.Add(this.panel11);
             this.pnlContest.Location = new System.Drawing.Point(199, 2);
             this.pnlContest.Name = "pnlContest";
-            this.pnlContest.Size = new System.Drawing.Size(805, 557);
+            this.pnlContest.Size = new System.Drawing.Size(805, 599);
             this.pnlContest.TabIndex = 6;
             // 
             // btnUpdContest
             // 
-            this.btnUpdContest.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
+            this.btnUpdContest.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(52)))), ((int)(((byte)(88)))));
+            this.btnUpdContest.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnUpdContest.FlatAppearance.BorderSize = 0;
             this.btnUpdContest.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnUpdContest.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUpdContest.ForeColor = System.Drawing.Color.White;
+            this.btnUpdContest.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
             this.btnUpdContest.IconChar = FontAwesome.Sharp.IconChar.PenAlt;
-            this.btnUpdContest.IconColor = System.Drawing.Color.White;
+            this.btnUpdContest.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
             this.btnUpdContest.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnUpdContest.IconSize = 18;
             this.btnUpdContest.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -781,12 +862,14 @@ namespace SQL_Judge_System.UI
             // 
             // btnAddContest
             // 
-            this.btnAddContest.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
+            this.btnAddContest.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(52)))), ((int)(((byte)(88)))));
+            this.btnAddContest.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAddContest.FlatAppearance.BorderSize = 0;
             this.btnAddContest.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddContest.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddContest.ForeColor = System.Drawing.Color.White;
+            this.btnAddContest.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
             this.btnAddContest.IconChar = FontAwesome.Sharp.IconChar.PlusSquare;
-            this.btnAddContest.IconColor = System.Drawing.Color.White;
+            this.btnAddContest.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
             this.btnAddContest.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnAddContest.IconSize = 20;
             this.btnAddContest.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -802,12 +885,12 @@ namespace SQL_Judge_System.UI
             // 
             // ContestCards
             // 
-            this.ContestCards.BackColor = System.Drawing.Color.White;
+            this.ContestCards.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(31)))), ((int)(((byte)(58)))));
             this.ContestCards.Controls.Add(this.tlpContest);
-            this.ContestCards.Dock = System.Windows.Forms.DockStyle.Top;
             this.ContestCards.Location = new System.Drawing.Point(0, 50);
             this.ContestCards.Name = "ContestCards";
-            this.ContestCards.Size = new System.Drawing.Size(805, 164);
+            this.ContestCards.Padding = new System.Windows.Forms.Padding(12, 12, 12, 0);
+            this.ContestCards.Size = new System.Drawing.Size(804, 165);
             this.ContestCards.TabIndex = 13;
             // 
             // tlpContest
@@ -822,33 +905,35 @@ namespace SQL_Judge_System.UI
             this.tlpContest.Controls.Add(this.pnlactContest, 1, 0);
             this.tlpContest.Controls.Add(this.pnlUpcommingContest, 3, 0);
             this.tlpContest.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlpContest.Location = new System.Drawing.Point(0, 0);
+            this.tlpContest.Location = new System.Drawing.Point(12, 12);
             this.tlpContest.Name = "tlpContest";
             this.tlpContest.RowCount = 1;
             this.tlpContest.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpContest.Size = new System.Drawing.Size(805, 164);
+            this.tlpContest.Size = new System.Drawing.Size(780, 153);
             this.tlpContest.TabIndex = 20;
             // 
             // pnlinactContest
             // 
-            this.pnlinactContest.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.pnlinactContest.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
             this.pnlinactContest.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlinactContest.Controls.Add(this.lblInActcontestValue);
             this.pnlinactContest.Controls.Add(this.label3);
             this.pnlinactContest.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlinactContest.Location = new System.Drawing.Point(412, 10);
-            this.pnlinactContest.Margin = new System.Windows.Forms.Padding(10);
+            this.pnlinactContest.Location = new System.Drawing.Point(396, 6);
+            this.pnlinactContest.Margin = new System.Windows.Forms.Padding(6);
             this.pnlinactContest.Name = "pnlinactContest";
-            this.pnlinactContest.Size = new System.Drawing.Size(181, 144);
+            this.pnlinactContest.Padding = new System.Windows.Forms.Padding(8);
+            this.pnlinactContest.Size = new System.Drawing.Size(183, 141);
             this.pnlinactContest.TabIndex = 23;
             // 
             // lblInActcontestValue
             // 
             this.lblInActcontestValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblInActcontestValue.Font = new System.Drawing.Font("Segoe UI", 28F, System.Drawing.FontStyle.Bold);
-            this.lblInActcontestValue.Location = new System.Drawing.Point(0, 23);
+            this.lblInActcontestValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(182)))), ((int)(((byte)(255)))));
+            this.lblInActcontestValue.Location = new System.Drawing.Point(8, 31);
             this.lblInActcontestValue.Name = "lblInActcontestValue";
-            this.lblInActcontestValue.Size = new System.Drawing.Size(179, 119);
+            this.lblInActcontestValue.Size = new System.Drawing.Size(165, 100);
             this.lblInActcontestValue.TabIndex = 0;
             this.lblInActcontestValue.Text = "0";
             this.lblInActcontestValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -856,34 +941,37 @@ namespace SQL_Judge_System.UI
             // label3
             // 
             this.label3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.label3.Location = new System.Drawing.Point(0, 0);
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
+            this.label3.Location = new System.Drawing.Point(8, 8);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(179, 23);
+            this.label3.Size = new System.Drawing.Size(165, 23);
             this.label3.TabIndex = 1;
-            this.label3.Text = "Inactive Contests";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.label3.Text = "INACTIVE CONTESTS";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pnlTotalContest
             // 
-            this.pnlTotalContest.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.pnlTotalContest.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
             this.pnlTotalContest.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlTotalContest.Controls.Add(this.lblTotalContestValue);
             this.pnlTotalContest.Controls.Add(this.label8);
             this.pnlTotalContest.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlTotalContest.Location = new System.Drawing.Point(10, 10);
-            this.pnlTotalContest.Margin = new System.Windows.Forms.Padding(10);
+            this.pnlTotalContest.Location = new System.Drawing.Point(6, 6);
+            this.pnlTotalContest.Margin = new System.Windows.Forms.Padding(6);
             this.pnlTotalContest.Name = "pnlTotalContest";
-            this.pnlTotalContest.Size = new System.Drawing.Size(181, 144);
+            this.pnlTotalContest.Padding = new System.Windows.Forms.Padding(8);
+            this.pnlTotalContest.Size = new System.Drawing.Size(183, 141);
             this.pnlTotalContest.TabIndex = 22;
             // 
             // lblTotalContestValue
             // 
             this.lblTotalContestValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblTotalContestValue.Font = new System.Drawing.Font("Segoe UI", 28F, System.Drawing.FontStyle.Bold);
-            this.lblTotalContestValue.Location = new System.Drawing.Point(0, 23);
+            this.lblTotalContestValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(158)))), ((int)(((byte)(66)))));
+            this.lblTotalContestValue.Location = new System.Drawing.Point(8, 31);
             this.lblTotalContestValue.Name = "lblTotalContestValue";
-            this.lblTotalContestValue.Size = new System.Drawing.Size(179, 119);
+            this.lblTotalContestValue.Size = new System.Drawing.Size(165, 100);
             this.lblTotalContestValue.TabIndex = 0;
             this.lblTotalContestValue.Text = "0";
             this.lblTotalContestValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -891,34 +979,37 @@ namespace SQL_Judge_System.UI
             // label8
             // 
             this.label8.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label8.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.label8.Location = new System.Drawing.Point(0, 0);
+            this.label8.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
+            this.label8.Location = new System.Drawing.Point(8, 8);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(179, 23);
+            this.label8.Size = new System.Drawing.Size(165, 23);
             this.label8.TabIndex = 1;
-            this.label8.Text = "Total Contests";
-            this.label8.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.label8.Text = "TOTAL CONTESTS";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pnlactContest
             // 
-            this.pnlactContest.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.pnlactContest.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
             this.pnlactContest.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlactContest.Controls.Add(this.lblActContestValue);
             this.pnlactContest.Controls.Add(this.label5);
             this.pnlactContest.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlactContest.Location = new System.Drawing.Point(211, 10);
-            this.pnlactContest.Margin = new System.Windows.Forms.Padding(10);
+            this.pnlactContest.Location = new System.Drawing.Point(201, 6);
+            this.pnlactContest.Margin = new System.Windows.Forms.Padding(6);
             this.pnlactContest.Name = "pnlactContest";
-            this.pnlactContest.Size = new System.Drawing.Size(181, 144);
+            this.pnlactContest.Padding = new System.Windows.Forms.Padding(8);
+            this.pnlactContest.Size = new System.Drawing.Size(183, 141);
             this.pnlactContest.TabIndex = 21;
             // 
             // lblActContestValue
             // 
             this.lblActContestValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblActContestValue.Font = new System.Drawing.Font("Segoe UI", 28F, System.Drawing.FontStyle.Bold);
-            this.lblActContestValue.Location = new System.Drawing.Point(0, 23);
+            this.lblActContestValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(111)))), ((int)(((byte)(255)))));
+            this.lblActContestValue.Location = new System.Drawing.Point(8, 31);
             this.lblActContestValue.Name = "lblActContestValue";
-            this.lblActContestValue.Size = new System.Drawing.Size(179, 119);
+            this.lblActContestValue.Size = new System.Drawing.Size(165, 100);
             this.lblActContestValue.TabIndex = 0;
             this.lblActContestValue.Text = "0";
             this.lblActContestValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -926,34 +1017,37 @@ namespace SQL_Judge_System.UI
             // label5
             // 
             this.label5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.label5.Location = new System.Drawing.Point(0, 0);
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
+            this.label5.Location = new System.Drawing.Point(8, 8);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(179, 23);
+            this.label5.Size = new System.Drawing.Size(165, 23);
             this.label5.TabIndex = 1;
-            this.label5.Text = "Active Contests";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.label5.Text = "ACTIVE CONTESTS";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pnlUpcommingContest
             // 
-            this.pnlUpcommingContest.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.pnlUpcommingContest.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
             this.pnlUpcommingContest.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlUpcommingContest.Controls.Add(this.lblUpcommingContestValue);
             this.pnlUpcommingContest.Controls.Add(this.label4);
             this.pnlUpcommingContest.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlUpcommingContest.Location = new System.Drawing.Point(613, 10);
-            this.pnlUpcommingContest.Margin = new System.Windows.Forms.Padding(10);
+            this.pnlUpcommingContest.Location = new System.Drawing.Point(591, 6);
+            this.pnlUpcommingContest.Margin = new System.Windows.Forms.Padding(6);
             this.pnlUpcommingContest.Name = "pnlUpcommingContest";
-            this.pnlUpcommingContest.Size = new System.Drawing.Size(182, 144);
+            this.pnlUpcommingContest.Padding = new System.Windows.Forms.Padding(8);
+            this.pnlUpcommingContest.Size = new System.Drawing.Size(183, 141);
             this.pnlUpcommingContest.TabIndex = 20;
             // 
             // lblUpcommingContestValue
             // 
             this.lblUpcommingContestValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblUpcommingContestValue.Font = new System.Drawing.Font("Segoe UI", 28F, System.Drawing.FontStyle.Bold);
-            this.lblUpcommingContestValue.Location = new System.Drawing.Point(0, 23);
+            this.lblUpcommingContestValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(207)))), ((int)(((byte)(142)))));
+            this.lblUpcommingContestValue.Location = new System.Drawing.Point(8, 31);
             this.lblUpcommingContestValue.Name = "lblUpcommingContestValue";
-            this.lblUpcommingContestValue.Size = new System.Drawing.Size(180, 119);
+            this.lblUpcommingContestValue.Size = new System.Drawing.Size(165, 100);
             this.lblUpcommingContestValue.TabIndex = 0;
             this.lblUpcommingContestValue.Text = "0";
             this.lblUpcommingContestValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -961,13 +1055,14 @@ namespace SQL_Judge_System.UI
             // label4
             // 
             this.label4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(0, 0);
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
+            this.label4.Location = new System.Drawing.Point(8, 8);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(180, 23);
+            this.label4.Size = new System.Drawing.Size(165, 23);
             this.label4.TabIndex = 1;
-            this.label4.Text = "Upcomming Contests";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.label4.Text = "UPCOMMING CONTESTS";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // dgvContest
             // 
@@ -977,7 +1072,8 @@ namespace SQL_Judge_System.UI
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvContest.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvContest.BackgroundColor = System.Drawing.Color.White;
+            this.dgvContest.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
+            this.dgvContest.BorderStyle = System.Windows.Forms.BorderStyle.None;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -995,18 +1091,19 @@ namespace SQL_Judge_System.UI
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.MenuText;
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvContest.DefaultCellStyle = dataGridViewCellStyle4;
+            this.dgvContest.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(52)))), ((int)(((byte)(88)))));
             this.dgvContest.Location = new System.Drawing.Point(17, 285);
             this.dgvContest.MultiSelect = false;
             this.dgvContest.Name = "dgvContest";
             this.dgvContest.ReadOnly = true;
             this.dgvContest.RowHeadersWidth = 35;
             this.dgvContest.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.dgvContest.Size = new System.Drawing.Size(770, 255);
+            this.dgvContest.Size = new System.Drawing.Size(770, 297);
             this.dgvContest.TabIndex = 7;
             // 
             // panel11
             // 
-            this.panel11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
+            this.panel11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
             this.panel11.Controls.Add(this.label9);
             this.panel11.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel11.Location = new System.Drawing.Point(0, 0);
@@ -1018,7 +1115,7 @@ namespace SQL_Judge_System.UI
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
-            this.label9.ForeColor = System.Drawing.Color.White;
+            this.label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
             this.label9.Location = new System.Drawing.Point(12, 13);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(165, 25);
@@ -1027,6 +1124,7 @@ namespace SQL_Judge_System.UI
             // 
             // pnlsubmissions
             // 
+            this.pnlsubmissions.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(31)))), ((int)(((byte)(58)))));
             this.pnlsubmissions.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlsubmissions.Controls.Add(this.label1);
             this.pnlsubmissions.Controls.Add(this.pnlsubmissionsCards);
@@ -1034,29 +1132,30 @@ namespace SQL_Judge_System.UI
             this.pnlsubmissions.Controls.Add(this.panel13);
             this.pnlsubmissions.Location = new System.Drawing.Point(199, 2);
             this.pnlsubmissions.Name = "pnlsubmissions";
-            this.pnlsubmissions.Size = new System.Drawing.Size(805, 557);
+            this.pnlsubmissions.Size = new System.Drawing.Size(805, 599);
             this.pnlsubmissions.TabIndex = 11;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(24, 247);
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
+            this.label1.Location = new System.Drawing.Point(22, 246);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(170, 25);
+            this.label1.Size = new System.Drawing.Size(130, 17);
             this.label1.TabIndex = 12;
-            this.label1.Text = "Submissions View";
+            this.label1.Text = "SUBMISSIONS VIEW";
             // 
             // pnlsubmissionsCards
             // 
             this.pnlsubmissionsCards.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlsubmissionsCards.BackColor = System.Drawing.Color.White;
+            this.pnlsubmissionsCards.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(31)))), ((int)(((byte)(58)))));
             this.pnlsubmissionsCards.Controls.Add(this.tlpnlSubmission);
             this.pnlsubmissionsCards.Location = new System.Drawing.Point(0, 50);
             this.pnlsubmissionsCards.Name = "pnlsubmissionsCards";
+            this.pnlsubmissionsCards.Padding = new System.Windows.Forms.Padding(12, 12, 12, 0);
             this.pnlsubmissionsCards.Size = new System.Drawing.Size(805, 180);
             this.pnlsubmissionsCards.TabIndex = 11;
             // 
@@ -1070,35 +1169,37 @@ namespace SQL_Judge_System.UI
             this.tlpnlSubmission.Controls.Add(this.pnlRegSub, 2, 0);
             this.tlpnlSubmission.Controls.Add(this.pnlTotalSub, 0, 0);
             this.tlpnlSubmission.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlpnlSubmission.Location = new System.Drawing.Point(0, 0);
+            this.tlpnlSubmission.Location = new System.Drawing.Point(12, 12);
             this.tlpnlSubmission.Name = "tlpnlSubmission";
             this.tlpnlSubmission.RowCount = 1;
             this.tlpnlSubmission.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpnlSubmission.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlpnlSubmission.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpnlSubmission.Size = new System.Drawing.Size(805, 180);
+            this.tlpnlSubmission.Size = new System.Drawing.Size(781, 168);
             this.tlpnlSubmission.TabIndex = 5;
             // 
             // pnlAccSub
             // 
-            this.pnlAccSub.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.pnlAccSub.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
             this.pnlAccSub.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlAccSub.Controls.Add(this.AccSubValue);
             this.pnlAccSub.Controls.Add(this.label15);
             this.pnlAccSub.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlAccSub.Location = new System.Drawing.Point(278, 10);
-            this.pnlAccSub.Margin = new System.Windows.Forms.Padding(10);
+            this.pnlAccSub.Location = new System.Drawing.Point(266, 6);
+            this.pnlAccSub.Margin = new System.Windows.Forms.Padding(6);
             this.pnlAccSub.Name = "pnlAccSub";
-            this.pnlAccSub.Size = new System.Drawing.Size(248, 160);
+            this.pnlAccSub.Padding = new System.Windows.Forms.Padding(8);
+            this.pnlAccSub.Size = new System.Drawing.Size(248, 156);
             this.pnlAccSub.TabIndex = 7;
             // 
             // AccSubValue
             // 
             this.AccSubValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.AccSubValue.Font = new System.Drawing.Font("Segoe UI", 28F, System.Drawing.FontStyle.Bold);
-            this.AccSubValue.Location = new System.Drawing.Point(0, 30);
+            this.AccSubValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(182)))), ((int)(((byte)(255)))));
+            this.AccSubValue.Location = new System.Drawing.Point(8, 38);
             this.AccSubValue.Name = "AccSubValue";
-            this.AccSubValue.Size = new System.Drawing.Size(246, 128);
+            this.AccSubValue.Size = new System.Drawing.Size(230, 108);
             this.AccSubValue.TabIndex = 0;
             this.AccSubValue.Text = "3";
             this.AccSubValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1106,34 +1207,37 @@ namespace SQL_Judge_System.UI
             // label15
             // 
             this.label15.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label15.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.label15.Location = new System.Drawing.Point(0, 0);
+            this.label15.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
+            this.label15.Location = new System.Drawing.Point(8, 8);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(246, 30);
+            this.label15.Size = new System.Drawing.Size(230, 30);
             this.label15.TabIndex = 1;
-            this.label15.Text = "Accepted Submissions";
-            this.label15.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.label15.Text = "ACCEPTED SUBMISSIONS";
+            this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pnlRegSub
             // 
-            this.pnlRegSub.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.pnlRegSub.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
             this.pnlRegSub.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlRegSub.Controls.Add(this.RegSubValue);
             this.pnlRegSub.Controls.Add(this.label11);
             this.pnlRegSub.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlRegSub.Location = new System.Drawing.Point(546, 10);
-            this.pnlRegSub.Margin = new System.Windows.Forms.Padding(10);
+            this.pnlRegSub.Location = new System.Drawing.Point(526, 6);
+            this.pnlRegSub.Margin = new System.Windows.Forms.Padding(6);
             this.pnlRegSub.Name = "pnlRegSub";
-            this.pnlRegSub.Size = new System.Drawing.Size(249, 160);
+            this.pnlRegSub.Padding = new System.Windows.Forms.Padding(8);
+            this.pnlRegSub.Size = new System.Drawing.Size(249, 156);
             this.pnlRegSub.TabIndex = 6;
             // 
             // RegSubValue
             // 
             this.RegSubValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.RegSubValue.Font = new System.Drawing.Font("Segoe UI", 28F, System.Drawing.FontStyle.Bold);
-            this.RegSubValue.Location = new System.Drawing.Point(0, 30);
+            this.RegSubValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(207)))), ((int)(((byte)(142)))));
+            this.RegSubValue.Location = new System.Drawing.Point(8, 38);
             this.RegSubValue.Name = "RegSubValue";
-            this.RegSubValue.Size = new System.Drawing.Size(247, 128);
+            this.RegSubValue.Size = new System.Drawing.Size(231, 108);
             this.RegSubValue.TabIndex = 0;
             this.RegSubValue.Text = "215";
             this.RegSubValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1141,34 +1245,37 @@ namespace SQL_Judge_System.UI
             // label11
             // 
             this.label11.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label11.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.label11.Location = new System.Drawing.Point(0, 0);
+            this.label11.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
+            this.label11.Location = new System.Drawing.Point(8, 8);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(247, 30);
+            this.label11.Size = new System.Drawing.Size(231, 30);
             this.label11.TabIndex = 1;
-            this.label11.Text = "Rejected Submissions";
-            this.label11.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.label11.Text = "REJECTED SUBMISSIONS";
+            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pnlTotalSub
             // 
-            this.pnlTotalSub.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.pnlTotalSub.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
             this.pnlTotalSub.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlTotalSub.Controls.Add(this.totalsubValue);
             this.pnlTotalSub.Controls.Add(this.lblSubmissions);
             this.pnlTotalSub.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlTotalSub.Location = new System.Drawing.Point(10, 10);
-            this.pnlTotalSub.Margin = new System.Windows.Forms.Padding(10);
+            this.pnlTotalSub.Location = new System.Drawing.Point(6, 6);
+            this.pnlTotalSub.Margin = new System.Windows.Forms.Padding(6);
             this.pnlTotalSub.Name = "pnlTotalSub";
-            this.pnlTotalSub.Size = new System.Drawing.Size(248, 160);
+            this.pnlTotalSub.Padding = new System.Windows.Forms.Padding(8);
+            this.pnlTotalSub.Size = new System.Drawing.Size(248, 156);
             this.pnlTotalSub.TabIndex = 5;
             // 
             // totalsubValue
             // 
             this.totalsubValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.totalsubValue.Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.totalsubValue.Location = new System.Drawing.Point(0, 30);
+            this.totalsubValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(111)))), ((int)(((byte)(255)))));
+            this.totalsubValue.Location = new System.Drawing.Point(8, 38);
             this.totalsubValue.Name = "totalsubValue";
-            this.totalsubValue.Size = new System.Drawing.Size(246, 128);
+            this.totalsubValue.Size = new System.Drawing.Size(230, 108);
             this.totalsubValue.TabIndex = 0;
             this.totalsubValue.Text = "5";
             this.totalsubValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1176,13 +1283,14 @@ namespace SQL_Judge_System.UI
             // lblSubmissions
             // 
             this.lblSubmissions.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblSubmissions.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.lblSubmissions.Location = new System.Drawing.Point(0, 0);
+            this.lblSubmissions.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSubmissions.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
+            this.lblSubmissions.Location = new System.Drawing.Point(8, 8);
             this.lblSubmissions.Name = "lblSubmissions";
-            this.lblSubmissions.Size = new System.Drawing.Size(246, 30);
+            this.lblSubmissions.Size = new System.Drawing.Size(230, 30);
             this.lblSubmissions.TabIndex = 1;
-            this.lblSubmissions.Text = "Total Submissions";
-            this.lblSubmissions.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lblSubmissions.Text = "TOTAL SUBMISSIONS";
+            this.lblSubmissions.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // dgvSubmissions
             // 
@@ -1192,7 +1300,8 @@ namespace SQL_Judge_System.UI
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvSubmissions.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvSubmissions.BackgroundColor = System.Drawing.Color.White;
+            this.dgvSubmissions.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
+            this.dgvSubmissions.BorderStyle = System.Windows.Forms.BorderStyle.None;
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1210,7 +1319,8 @@ namespace SQL_Judge_System.UI
             dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.MenuText;
             dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvSubmissions.DefaultCellStyle = dataGridViewCellStyle6;
-            this.dgvSubmissions.Location = new System.Drawing.Point(25, 285);
+            this.dgvSubmissions.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(52)))), ((int)(((byte)(88)))));
+            this.dgvSubmissions.Location = new System.Drawing.Point(19, 273);
             this.dgvSubmissions.Name = "dgvSubmissions";
             this.dgvSubmissions.ReadOnly = true;
             dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
@@ -1223,12 +1333,12 @@ namespace SQL_Judge_System.UI
             this.dgvSubmissions.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.dgvSubmissions.RowHeadersWidth = 35;
             this.dgvSubmissions.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.dgvSubmissions.Size = new System.Drawing.Size(752, 247);
+            this.dgvSubmissions.Size = new System.Drawing.Size(764, 313);
             this.dgvSubmissions.TabIndex = 7;
             // 
             // panel13
             // 
-            this.panel13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
+            this.panel13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
             this.panel13.Controls.Add(this.label17);
             this.panel13.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel13.Location = new System.Drawing.Point(0, 0);
@@ -1240,7 +1350,7 @@ namespace SQL_Judge_System.UI
             // 
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold);
-            this.label17.ForeColor = System.Drawing.Color.White;
+            this.label17.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
             this.label17.Location = new System.Drawing.Point(21, 13);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(235, 24);
@@ -1249,6 +1359,7 @@ namespace SQL_Judge_System.UI
             // 
             // pnlTestCases
             // 
+            this.pnlTestCases.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(29)))), ((int)(((byte)(56)))));
             this.pnlTestCases.Controls.Add(this.btnToggleTestCase);
             this.pnlTestCases.Controls.Add(this.btnUpdateTestCase);
             this.pnlTestCases.Controls.Add(this.btnAddTestCase);
@@ -1263,6 +1374,8 @@ namespace SQL_Judge_System.UI
             // btnToggleTestCase
             // 
             this.btnToggleTestCase.BackColor = System.Drawing.Color.IndianRed;
+            this.btnToggleTestCase.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnToggleTestCase.FlatAppearance.BorderSize = 0;
             this.btnToggleTestCase.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnToggleTestCase.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnToggleTestCase.ForeColor = System.Drawing.Color.White;
@@ -1271,7 +1384,7 @@ namespace SQL_Judge_System.UI
             this.btnToggleTestCase.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnToggleTestCase.IconSize = 18;
             this.btnToggleTestCase.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnToggleTestCase.Location = new System.Drawing.Point(349, 248);
+            this.btnToggleTestCase.Location = new System.Drawing.Point(340, 248);
             this.btnToggleTestCase.Name = "btnToggleTestCase";
             this.btnToggleTestCase.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.btnToggleTestCase.Size = new System.Drawing.Size(136, 41);
@@ -1283,16 +1396,18 @@ namespace SQL_Judge_System.UI
             // 
             // btnUpdateTestCase
             // 
-            this.btnUpdateTestCase.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
+            this.btnUpdateTestCase.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(52)))), ((int)(((byte)(88)))));
+            this.btnUpdateTestCase.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnUpdateTestCase.FlatAppearance.BorderSize = 0;
             this.btnUpdateTestCase.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnUpdateTestCase.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUpdateTestCase.ForeColor = System.Drawing.Color.White;
+            this.btnUpdateTestCase.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
             this.btnUpdateTestCase.IconChar = FontAwesome.Sharp.IconChar.PenAlt;
-            this.btnUpdateTestCase.IconColor = System.Drawing.Color.White;
+            this.btnUpdateTestCase.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
             this.btnUpdateTestCase.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnUpdateTestCase.IconSize = 18;
             this.btnUpdateTestCase.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnUpdateTestCase.Location = new System.Drawing.Point(180, 248);
+            this.btnUpdateTestCase.Location = new System.Drawing.Point(171, 248);
             this.btnUpdateTestCase.Name = "btnUpdateTestCase";
             this.btnUpdateTestCase.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.btnUpdateTestCase.Size = new System.Drawing.Size(151, 41);
@@ -1304,16 +1419,18 @@ namespace SQL_Judge_System.UI
             // 
             // btnAddTestCase
             // 
-            this.btnAddTestCase.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
+            this.btnAddTestCase.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(52)))), ((int)(((byte)(88)))));
+            this.btnAddTestCase.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAddTestCase.FlatAppearance.BorderSize = 0;
             this.btnAddTestCase.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddTestCase.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddTestCase.ForeColor = System.Drawing.Color.White;
+            this.btnAddTestCase.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
             this.btnAddTestCase.IconChar = FontAwesome.Sharp.IconChar.PlusSquare;
-            this.btnAddTestCase.IconColor = System.Drawing.Color.White;
+            this.btnAddTestCase.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
             this.btnAddTestCase.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnAddTestCase.IconSize = 20;
             this.btnAddTestCase.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAddTestCase.Location = new System.Drawing.Point(26, 248);
+            this.btnAddTestCase.Location = new System.Drawing.Point(17, 248);
             this.btnAddTestCase.Name = "btnAddTestCase";
             this.btnAddTestCase.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.btnAddTestCase.Size = new System.Drawing.Size(136, 41);
@@ -1325,11 +1442,12 @@ namespace SQL_Judge_System.UI
             // 
             // pnlTestCaseCards
             // 
-            this.pnlTestCaseCards.BackColor = System.Drawing.Color.White;
+            this.pnlTestCaseCards.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(31)))), ((int)(((byte)(58)))));
             this.pnlTestCaseCards.Controls.Add(this.tableLayoutPanel2);
             this.pnlTestCaseCards.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlTestCaseCards.Location = new System.Drawing.Point(0, 50);
             this.pnlTestCaseCards.Name = "pnlTestCaseCards";
+            this.pnlTestCaseCards.Padding = new System.Windows.Forms.Padding(12, 12, 12, 0);
             this.pnlTestCaseCards.Size = new System.Drawing.Size(805, 180);
             this.pnlTestCaseCards.TabIndex = 11;
             // 
@@ -1343,33 +1461,35 @@ namespace SQL_Judge_System.UI
             this.tableLayoutPanel2.Controls.Add(this.pnlActTestCases, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.pnlTotalTestCase, 0, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(12, 12);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(805, 180);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(781, 168);
             this.tableLayoutPanel2.TabIndex = 5;
             // 
             // pnlInActTestCases
             // 
-            this.pnlInActTestCases.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.pnlInActTestCases.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
             this.pnlInActTestCases.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlInActTestCases.Controls.Add(this.lblInActiveTestCases);
             this.pnlInActTestCases.Controls.Add(this.label13);
             this.pnlInActTestCases.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlInActTestCases.Location = new System.Drawing.Point(546, 10);
-            this.pnlInActTestCases.Margin = new System.Windows.Forms.Padding(10);
+            this.pnlInActTestCases.Location = new System.Drawing.Point(526, 6);
+            this.pnlInActTestCases.Margin = new System.Windows.Forms.Padding(6);
             this.pnlInActTestCases.Name = "pnlInActTestCases";
-            this.pnlInActTestCases.Size = new System.Drawing.Size(249, 160);
+            this.pnlInActTestCases.Padding = new System.Windows.Forms.Padding(8);
+            this.pnlInActTestCases.Size = new System.Drawing.Size(249, 156);
             this.pnlInActTestCases.TabIndex = 7;
             // 
             // lblInActiveTestCases
             // 
             this.lblInActiveTestCases.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblInActiveTestCases.Font = new System.Drawing.Font("Segoe UI", 28F, System.Drawing.FontStyle.Bold);
-            this.lblInActiveTestCases.Location = new System.Drawing.Point(0, 30);
+            this.lblInActiveTestCases.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(207)))), ((int)(((byte)(142)))));
+            this.lblInActiveTestCases.Location = new System.Drawing.Point(8, 38);
             this.lblInActiveTestCases.Name = "lblInActiveTestCases";
-            this.lblInActiveTestCases.Size = new System.Drawing.Size(247, 128);
+            this.lblInActiveTestCases.Size = new System.Drawing.Size(231, 108);
             this.lblInActiveTestCases.TabIndex = 0;
             this.lblInActiveTestCases.Text = "215";
             this.lblInActiveTestCases.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1377,34 +1497,37 @@ namespace SQL_Judge_System.UI
             // label13
             // 
             this.label13.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label13.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.label13.Location = new System.Drawing.Point(0, 0);
+            this.label13.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
+            this.label13.Location = new System.Drawing.Point(8, 8);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(247, 30);
+            this.label13.Size = new System.Drawing.Size(231, 30);
             this.label13.TabIndex = 1;
-            this.label13.Text = "Inactive Test Cases";
-            this.label13.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.label13.Text = "INACTIVE TEST CASES";
+            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pnlActTestCases
             // 
-            this.pnlActTestCases.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.pnlActTestCases.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
             this.pnlActTestCases.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlActTestCases.Controls.Add(this.lblActTestCases);
             this.pnlActTestCases.Controls.Add(this.label19);
             this.pnlActTestCases.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlActTestCases.Location = new System.Drawing.Point(278, 10);
-            this.pnlActTestCases.Margin = new System.Windows.Forms.Padding(10);
+            this.pnlActTestCases.Location = new System.Drawing.Point(266, 6);
+            this.pnlActTestCases.Margin = new System.Windows.Forms.Padding(6);
             this.pnlActTestCases.Name = "pnlActTestCases";
-            this.pnlActTestCases.Size = new System.Drawing.Size(248, 160);
+            this.pnlActTestCases.Padding = new System.Windows.Forms.Padding(8);
+            this.pnlActTestCases.Size = new System.Drawing.Size(248, 156);
             this.pnlActTestCases.TabIndex = 6;
             // 
             // lblActTestCases
             // 
             this.lblActTestCases.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblActTestCases.Font = new System.Drawing.Font("Segoe UI", 28F, System.Drawing.FontStyle.Bold);
-            this.lblActTestCases.Location = new System.Drawing.Point(0, 30);
+            this.lblActTestCases.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(182)))), ((int)(((byte)(255)))));
+            this.lblActTestCases.Location = new System.Drawing.Point(8, 38);
             this.lblActTestCases.Name = "lblActTestCases";
-            this.lblActTestCases.Size = new System.Drawing.Size(246, 128);
+            this.lblActTestCases.Size = new System.Drawing.Size(230, 108);
             this.lblActTestCases.TabIndex = 0;
             this.lblActTestCases.Text = "3";
             this.lblActTestCases.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1412,34 +1535,37 @@ namespace SQL_Judge_System.UI
             // label19
             // 
             this.label19.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label19.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.label19.Location = new System.Drawing.Point(0, 0);
+            this.label19.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label19.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
+            this.label19.Location = new System.Drawing.Point(8, 8);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(246, 30);
+            this.label19.Size = new System.Drawing.Size(230, 30);
             this.label19.TabIndex = 1;
-            this.label19.Text = "Active Test Cases";
-            this.label19.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.label19.Text = "ACTIVE TEST CASES";
+            this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pnlTotalTestCase
             // 
-            this.pnlTotalTestCase.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.pnlTotalTestCase.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
             this.pnlTotalTestCase.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlTotalTestCase.Controls.Add(this.lbltotalTestCases);
             this.pnlTotalTestCase.Controls.Add(this.label10);
             this.pnlTotalTestCase.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlTotalTestCase.Location = new System.Drawing.Point(10, 10);
-            this.pnlTotalTestCase.Margin = new System.Windows.Forms.Padding(10);
+            this.pnlTotalTestCase.Location = new System.Drawing.Point(6, 6);
+            this.pnlTotalTestCase.Margin = new System.Windows.Forms.Padding(6);
             this.pnlTotalTestCase.Name = "pnlTotalTestCase";
-            this.pnlTotalTestCase.Size = new System.Drawing.Size(248, 160);
+            this.pnlTotalTestCase.Padding = new System.Windows.Forms.Padding(8);
+            this.pnlTotalTestCase.Size = new System.Drawing.Size(248, 156);
             this.pnlTotalTestCase.TabIndex = 5;
             // 
             // lbltotalTestCases
             // 
             this.lbltotalTestCases.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbltotalTestCases.Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbltotalTestCases.Location = new System.Drawing.Point(0, 30);
+            this.lbltotalTestCases.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(111)))), ((int)(((byte)(255)))));
+            this.lbltotalTestCases.Location = new System.Drawing.Point(8, 38);
             this.lbltotalTestCases.Name = "lbltotalTestCases";
-            this.lbltotalTestCases.Size = new System.Drawing.Size(246, 128);
+            this.lbltotalTestCases.Size = new System.Drawing.Size(230, 108);
             this.lbltotalTestCases.TabIndex = 0;
             this.lbltotalTestCases.Text = "5";
             this.lbltotalTestCases.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1447,13 +1573,14 @@ namespace SQL_Judge_System.UI
             // label10
             // 
             this.label10.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label10.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.label10.Location = new System.Drawing.Point(0, 0);
+            this.label10.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
+            this.label10.Location = new System.Drawing.Point(8, 8);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(246, 30);
+            this.label10.Size = new System.Drawing.Size(230, 30);
             this.label10.TabIndex = 1;
-            this.label10.Text = "Total Test Cases";
-            this.label10.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.label10.Text = "TOTAL TEST CASES";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // dgvTestCases
             // 
@@ -1463,7 +1590,8 @@ namespace SQL_Judge_System.UI
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvTestCases.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvTestCases.BackgroundColor = System.Drawing.Color.White;
+            this.dgvTestCases.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
+            this.dgvTestCases.BorderStyle = System.Windows.Forms.BorderStyle.None;
             dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
             dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1481,17 +1609,18 @@ namespace SQL_Judge_System.UI
             dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.MenuText;
             dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvTestCases.DefaultCellStyle = dataGridViewCellStyle9;
-            this.dgvTestCases.Location = new System.Drawing.Point(25, 298);
+            this.dgvTestCases.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(52)))), ((int)(((byte)(88)))));
+            this.dgvTestCases.Location = new System.Drawing.Point(16, 298);
             this.dgvTestCases.Name = "dgvTestCases";
             this.dgvTestCases.ReadOnly = true;
             this.dgvTestCases.RowHeadersWidth = 35;
             this.dgvTestCases.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.dgvTestCases.Size = new System.Drawing.Size(754, 238);
+            this.dgvTestCases.Size = new System.Drawing.Size(772, 238);
             this.dgvTestCases.TabIndex = 7;
             // 
             // panel17
             // 
-            this.panel17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
+            this.panel17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
             this.panel17.Controls.Add(this.label20);
             this.panel17.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel17.Location = new System.Drawing.Point(0, 0);
@@ -1503,7 +1632,7 @@ namespace SQL_Judge_System.UI
             // 
             this.label20.AutoSize = true;
             this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold);
-            this.label20.ForeColor = System.Drawing.Color.White;
+            this.label20.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
             this.label20.Location = new System.Drawing.Point(21, 13);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(220, 24);
@@ -1512,7 +1641,7 @@ namespace SQL_Judge_System.UI
             // 
             // pnlHeader
             // 
-            this.pnlHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
+            this.pnlHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
             this.pnlHeader.Controls.Add(this.lblSuperAdmin);
             this.pnlHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlHeader.Location = new System.Drawing.Point(0, 0);
@@ -1523,7 +1652,7 @@ namespace SQL_Judge_System.UI
             // lblSuperAdmin
             // 
             this.lblSuperAdmin.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSuperAdmin.ForeColor = System.Drawing.Color.White;
+            this.lblSuperAdmin.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
             this.lblSuperAdmin.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
             this.lblSuperAdmin.Location = new System.Drawing.Point(21, 12);
             this.lblSuperAdmin.Name = "lblSuperAdmin";
@@ -1539,7 +1668,8 @@ namespace SQL_Judge_System.UI
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvAdmins.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvAdmins.BackgroundColor = System.Drawing.Color.White;
+            this.dgvAdmins.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
+            this.dgvAdmins.BorderStyle = System.Windows.Forms.BorderStyle.None;
             dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
             dataGridViewCellStyle10.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1557,27 +1687,29 @@ namespace SQL_Judge_System.UI
             dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.MenuText;
             dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvAdmins.DefaultCellStyle = dataGridViewCellStyle11;
-            this.dgvAdmins.Location = new System.Drawing.Point(25, 298);
+            this.dgvAdmins.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(52)))), ((int)(((byte)(88)))));
+            this.dgvAdmins.Location = new System.Drawing.Point(20, 278);
             this.dgvAdmins.MultiSelect = false;
             this.dgvAdmins.Name = "dgvAdmins";
             this.dgvAdmins.ReadOnly = true;
             this.dgvAdmins.RowHeadersWidth = 35;
             this.dgvAdmins.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvAdmins.Size = new System.Drawing.Size(754, 236);
+            this.dgvAdmins.Size = new System.Drawing.Size(765, 309);
             this.dgvAdmins.TabIndex = 7;
             // 
             // pnladmin
             // 
-            this.pnladmin.BackColor = System.Drawing.Color.White;
+            this.pnladmin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(31)))), ((int)(((byte)(58)))));
             this.pnladmin.Controls.Add(this.tlpnlAdmin);
-            this.pnladmin.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnladmin.Location = new System.Drawing.Point(0, 48);
             this.pnladmin.Name = "pnladmin";
-            this.pnladmin.Size = new System.Drawing.Size(805, 180);
+            this.pnladmin.Padding = new System.Windows.Forms.Padding(12, 12, 12, 0);
+            this.pnladmin.Size = new System.Drawing.Size(801, 153);
             this.pnladmin.TabIndex = 11;
             // 
             // tlpnlAdmin
             // 
+            this.tlpnlAdmin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(31)))), ((int)(((byte)(58)))));
             this.tlpnlAdmin.ColumnCount = 4;
             this.tlpnlAdmin.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tlpnlAdmin.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
@@ -1588,68 +1720,73 @@ namespace SQL_Judge_System.UI
             this.tlpnlAdmin.Controls.Add(this.pnlinActiveAdmins, 3, 0);
             this.tlpnlAdmin.Controls.Add(this.pnlTotalSuperAdmins, 1, 0);
             this.tlpnlAdmin.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlpnlAdmin.Location = new System.Drawing.Point(0, 0);
+            this.tlpnlAdmin.Location = new System.Drawing.Point(12, 12);
             this.tlpnlAdmin.Name = "tlpnlAdmin";
             this.tlpnlAdmin.RowCount = 1;
             this.tlpnlAdmin.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpnlAdmin.Size = new System.Drawing.Size(805, 180);
+            this.tlpnlAdmin.Size = new System.Drawing.Size(777, 141);
             this.tlpnlAdmin.TabIndex = 1;
             // 
             // pnlTotalAdmins
             // 
-            this.pnlTotalAdmins.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.pnlTotalAdmins.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
             this.pnlTotalAdmins.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlTotalAdmins.Controls.Add(this.lbladminValue);
             this.pnlTotalAdmins.Controls.Add(this.lblTotalAdmins);
             this.pnlTotalAdmins.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlTotalAdmins.Location = new System.Drawing.Point(10, 10);
-            this.pnlTotalAdmins.Margin = new System.Windows.Forms.Padding(10);
+            this.pnlTotalAdmins.Location = new System.Drawing.Point(6, 6);
+            this.pnlTotalAdmins.Margin = new System.Windows.Forms.Padding(6);
             this.pnlTotalAdmins.Name = "pnlTotalAdmins";
-            this.pnlTotalAdmins.Size = new System.Drawing.Size(181, 160);
+            this.pnlTotalAdmins.Padding = new System.Windows.Forms.Padding(8);
+            this.pnlTotalAdmins.Size = new System.Drawing.Size(182, 129);
             this.pnlTotalAdmins.TabIndex = 4;
             // 
             // lbladminValue
             // 
             this.lbladminValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbladminValue.Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbladminValue.Location = new System.Drawing.Point(0, 30);
+            this.lbladminValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(158)))), ((int)(((byte)(66)))));
+            this.lbladminValue.Location = new System.Drawing.Point(8, 38);
             this.lbladminValue.Name = "lbladminValue";
-            this.lbladminValue.Size = new System.Drawing.Size(179, 128);
+            this.lbladminValue.Size = new System.Drawing.Size(164, 81);
             this.lbladminValue.TabIndex = 0;
-            this.lbladminValue.Text = "5";
+            this.lbladminValue.Text = "__";
             this.lbladminValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblTotalAdmins
             // 
             this.lblTotalAdmins.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblTotalAdmins.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.lblTotalAdmins.Location = new System.Drawing.Point(0, 0);
+            this.lblTotalAdmins.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalAdmins.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
+            this.lblTotalAdmins.Location = new System.Drawing.Point(8, 8);
             this.lblTotalAdmins.Name = "lblTotalAdmins";
-            this.lblTotalAdmins.Size = new System.Drawing.Size(179, 30);
+            this.lblTotalAdmins.Size = new System.Drawing.Size(164, 30);
             this.lblTotalAdmins.TabIndex = 1;
-            this.lblTotalAdmins.Text = "Total Admins";
-            this.lblTotalAdmins.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lblTotalAdmins.Text = "TOTAL ADMINS";
+            this.lblTotalAdmins.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pnlActiveAdmins
             // 
-            this.pnlActiveAdmins.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.pnlActiveAdmins.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
             this.pnlActiveAdmins.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlActiveAdmins.Controls.Add(this.lblActAdminsValue);
             this.pnlActiveAdmins.Controls.Add(this.lblActAdmins);
             this.pnlActiveAdmins.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlActiveAdmins.Location = new System.Drawing.Point(412, 10);
-            this.pnlActiveAdmins.Margin = new System.Windows.Forms.Padding(10);
+            this.pnlActiveAdmins.Location = new System.Drawing.Point(394, 6);
+            this.pnlActiveAdmins.Margin = new System.Windows.Forms.Padding(6);
             this.pnlActiveAdmins.Name = "pnlActiveAdmins";
-            this.pnlActiveAdmins.Size = new System.Drawing.Size(181, 160);
+            this.pnlActiveAdmins.Padding = new System.Windows.Forms.Padding(8);
+            this.pnlActiveAdmins.Size = new System.Drawing.Size(182, 129);
             this.pnlActiveAdmins.TabIndex = 0;
             // 
             // lblActAdminsValue
             // 
             this.lblActAdminsValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblActAdminsValue.Font = new System.Drawing.Font("Segoe UI", 28F, System.Drawing.FontStyle.Bold);
-            this.lblActAdminsValue.Location = new System.Drawing.Point(0, 30);
+            this.lblActAdminsValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(182)))), ((int)(((byte)(255)))));
+            this.lblActAdminsValue.Location = new System.Drawing.Point(8, 38);
             this.lblActAdminsValue.Name = "lblActAdminsValue";
-            this.lblActAdminsValue.Size = new System.Drawing.Size(179, 128);
+            this.lblActAdminsValue.Size = new System.Drawing.Size(164, 81);
             this.lblActAdminsValue.TabIndex = 0;
             this.lblActAdminsValue.Text = "215";
             this.lblActAdminsValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1657,34 +1794,37 @@ namespace SQL_Judge_System.UI
             // lblActAdmins
             // 
             this.lblActAdmins.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblActAdmins.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.lblActAdmins.Location = new System.Drawing.Point(0, 0);
+            this.lblActAdmins.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblActAdmins.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
+            this.lblActAdmins.Location = new System.Drawing.Point(8, 8);
             this.lblActAdmins.Name = "lblActAdmins";
-            this.lblActAdmins.Size = new System.Drawing.Size(179, 30);
+            this.lblActAdmins.Size = new System.Drawing.Size(164, 30);
             this.lblActAdmins.TabIndex = 1;
-            this.lblActAdmins.Text = "Active Admins";
-            this.lblActAdmins.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lblActAdmins.Text = "ACTIVE ADMINS";
+            this.lblActAdmins.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pnlinActiveAdmins
             // 
-            this.pnlinActiveAdmins.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.pnlinActiveAdmins.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
             this.pnlinActiveAdmins.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlinActiveAdmins.Controls.Add(this.lblinActAdminsValue);
             this.pnlinActiveAdmins.Controls.Add(this.lblinActAdmins);
             this.pnlinActiveAdmins.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlinActiveAdmins.Location = new System.Drawing.Point(613, 10);
-            this.pnlinActiveAdmins.Margin = new System.Windows.Forms.Padding(10);
+            this.pnlinActiveAdmins.Location = new System.Drawing.Point(588, 6);
+            this.pnlinActiveAdmins.Margin = new System.Windows.Forms.Padding(6);
             this.pnlinActiveAdmins.Name = "pnlinActiveAdmins";
-            this.pnlinActiveAdmins.Size = new System.Drawing.Size(182, 160);
+            this.pnlinActiveAdmins.Padding = new System.Windows.Forms.Padding(8);
+            this.pnlinActiveAdmins.Size = new System.Drawing.Size(183, 129);
             this.pnlinActiveAdmins.TabIndex = 1;
             // 
             // lblinActAdminsValue
             // 
             this.lblinActAdminsValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblinActAdminsValue.Font = new System.Drawing.Font("Segoe UI", 28F, System.Drawing.FontStyle.Bold);
-            this.lblinActAdminsValue.Location = new System.Drawing.Point(0, 30);
+            this.lblinActAdminsValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(207)))), ((int)(((byte)(142)))));
+            this.lblinActAdminsValue.Location = new System.Drawing.Point(8, 38);
             this.lblinActAdminsValue.Name = "lblinActAdminsValue";
-            this.lblinActAdminsValue.Size = new System.Drawing.Size(180, 128);
+            this.lblinActAdminsValue.Size = new System.Drawing.Size(165, 81);
             this.lblinActAdminsValue.TabIndex = 0;
             this.lblinActAdminsValue.Text = "1,250";
             this.lblinActAdminsValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1692,34 +1832,37 @@ namespace SQL_Judge_System.UI
             // lblinActAdmins
             // 
             this.lblinActAdmins.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblinActAdmins.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.lblinActAdmins.Location = new System.Drawing.Point(0, 0);
+            this.lblinActAdmins.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblinActAdmins.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
+            this.lblinActAdmins.Location = new System.Drawing.Point(8, 8);
             this.lblinActAdmins.Name = "lblinActAdmins";
-            this.lblinActAdmins.Size = new System.Drawing.Size(180, 30);
+            this.lblinActAdmins.Size = new System.Drawing.Size(165, 30);
             this.lblinActAdmins.TabIndex = 1;
-            this.lblinActAdmins.Text = "Inactive Admins";
-            this.lblinActAdmins.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lblinActAdmins.Text = "INACTIVE ADMINS";
+            this.lblinActAdmins.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pnlTotalSuperAdmins
             // 
-            this.pnlTotalSuperAdmins.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.pnlTotalSuperAdmins.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
             this.pnlTotalSuperAdmins.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlTotalSuperAdmins.Controls.Add(this.lblsuperAdminValue);
             this.pnlTotalSuperAdmins.Controls.Add(this.lblTotalSuperAdmin);
             this.pnlTotalSuperAdmins.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlTotalSuperAdmins.Location = new System.Drawing.Point(211, 10);
-            this.pnlTotalSuperAdmins.Margin = new System.Windows.Forms.Padding(10);
+            this.pnlTotalSuperAdmins.Location = new System.Drawing.Point(200, 6);
+            this.pnlTotalSuperAdmins.Margin = new System.Windows.Forms.Padding(6);
             this.pnlTotalSuperAdmins.Name = "pnlTotalSuperAdmins";
-            this.pnlTotalSuperAdmins.Size = new System.Drawing.Size(181, 160);
+            this.pnlTotalSuperAdmins.Padding = new System.Windows.Forms.Padding(8);
+            this.pnlTotalSuperAdmins.Size = new System.Drawing.Size(182, 129);
             this.pnlTotalSuperAdmins.TabIndex = 2;
             // 
             // lblsuperAdminValue
             // 
             this.lblsuperAdminValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblsuperAdminValue.Font = new System.Drawing.Font("Segoe UI", 28F, System.Drawing.FontStyle.Bold);
-            this.lblsuperAdminValue.Location = new System.Drawing.Point(0, 30);
+            this.lblsuperAdminValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(111)))), ((int)(((byte)(255)))));
+            this.lblsuperAdminValue.Location = new System.Drawing.Point(8, 38);
             this.lblsuperAdminValue.Name = "lblsuperAdminValue";
-            this.lblsuperAdminValue.Size = new System.Drawing.Size(179, 128);
+            this.lblsuperAdminValue.Size = new System.Drawing.Size(164, 81);
             this.lblsuperAdminValue.TabIndex = 0;
             this.lblsuperAdminValue.Text = "3";
             this.lblsuperAdminValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1727,16 +1870,18 @@ namespace SQL_Judge_System.UI
             // lblTotalSuperAdmin
             // 
             this.lblTotalSuperAdmin.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblTotalSuperAdmin.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.lblTotalSuperAdmin.Location = new System.Drawing.Point(0, 0);
+            this.lblTotalSuperAdmin.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalSuperAdmin.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
+            this.lblTotalSuperAdmin.Location = new System.Drawing.Point(8, 8);
             this.lblTotalSuperAdmin.Name = "lblTotalSuperAdmin";
-            this.lblTotalSuperAdmin.Size = new System.Drawing.Size(179, 30);
+            this.lblTotalSuperAdmin.Size = new System.Drawing.Size(164, 30);
             this.lblTotalSuperAdmin.TabIndex = 1;
-            this.lblTotalSuperAdmin.Text = "Super Admins";
-            this.lblTotalSuperAdmin.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lblTotalSuperAdmin.Text = "SUPER ADMINS";
+            this.lblTotalSuperAdmin.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pnlSuperAdmin
             // 
+            this.pnlSuperAdmin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(31)))), ((int)(((byte)(58)))));
             this.pnlSuperAdmin.Controls.Add(this.btnToggleAdmin);
             this.pnlSuperAdmin.Controls.Add(this.btnUpdateAdmin);
             this.pnlSuperAdmin.Controls.Add(this.btnAddAdmin);
@@ -1745,12 +1890,14 @@ namespace SQL_Judge_System.UI
             this.pnlSuperAdmin.Controls.Add(this.pnlHeader);
             this.pnlSuperAdmin.Location = new System.Drawing.Point(199, 2);
             this.pnlSuperAdmin.Name = "pnlSuperAdmin";
-            this.pnlSuperAdmin.Size = new System.Drawing.Size(805, 557);
+            this.pnlSuperAdmin.Size = new System.Drawing.Size(805, 599);
             this.pnlSuperAdmin.TabIndex = 9;
             // 
             // btnToggleAdmin
             // 
             this.btnToggleAdmin.BackColor = System.Drawing.Color.IndianRed;
+            this.btnToggleAdmin.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnToggleAdmin.FlatAppearance.BorderSize = 0;
             this.btnToggleAdmin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnToggleAdmin.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnToggleAdmin.ForeColor = System.Drawing.Color.White;
@@ -1759,7 +1906,7 @@ namespace SQL_Judge_System.UI
             this.btnToggleAdmin.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnToggleAdmin.IconSize = 18;
             this.btnToggleAdmin.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnToggleAdmin.Location = new System.Drawing.Point(339, 245);
+            this.btnToggleAdmin.Location = new System.Drawing.Point(336, 220);
             this.btnToggleAdmin.Name = "btnToggleAdmin";
             this.btnToggleAdmin.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.btnToggleAdmin.Size = new System.Drawing.Size(136, 41);
@@ -1771,16 +1918,18 @@ namespace SQL_Judge_System.UI
             // 
             // btnUpdateAdmin
             // 
-            this.btnUpdateAdmin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
+            this.btnUpdateAdmin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(52)))), ((int)(((byte)(88)))));
+            this.btnUpdateAdmin.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnUpdateAdmin.FlatAppearance.BorderSize = 0;
             this.btnUpdateAdmin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnUpdateAdmin.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUpdateAdmin.ForeColor = System.Drawing.Color.White;
+            this.btnUpdateAdmin.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
             this.btnUpdateAdmin.IconChar = FontAwesome.Sharp.IconChar.PenAlt;
-            this.btnUpdateAdmin.IconColor = System.Drawing.Color.White;
+            this.btnUpdateAdmin.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
             this.btnUpdateAdmin.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnUpdateAdmin.IconSize = 18;
             this.btnUpdateAdmin.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnUpdateAdmin.Location = new System.Drawing.Point(182, 245);
+            this.btnUpdateAdmin.Location = new System.Drawing.Point(179, 220);
             this.btnUpdateAdmin.Name = "btnUpdateAdmin";
             this.btnUpdateAdmin.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.btnUpdateAdmin.Size = new System.Drawing.Size(136, 41);
@@ -1792,16 +1941,18 @@ namespace SQL_Judge_System.UI
             // 
             // btnAddAdmin
             // 
-            this.btnAddAdmin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
+            this.btnAddAdmin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(52)))), ((int)(((byte)(88)))));
+            this.btnAddAdmin.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAddAdmin.FlatAppearance.BorderSize = 0;
             this.btnAddAdmin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddAdmin.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddAdmin.ForeColor = System.Drawing.Color.White;
+            this.btnAddAdmin.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
             this.btnAddAdmin.IconChar = FontAwesome.Sharp.IconChar.PlusSquare;
-            this.btnAddAdmin.IconColor = System.Drawing.Color.White;
+            this.btnAddAdmin.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
             this.btnAddAdmin.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnAddAdmin.IconSize = 20;
             this.btnAddAdmin.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAddAdmin.Location = new System.Drawing.Point(25, 245);
+            this.btnAddAdmin.Location = new System.Drawing.Point(22, 220);
             this.btnAddAdmin.Name = "btnAddAdmin";
             this.btnAddAdmin.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.btnAddAdmin.Size = new System.Drawing.Size(136, 41);
@@ -1813,18 +1964,21 @@ namespace SQL_Judge_System.UI
             // 
             // pnlStudent
             // 
+            this.pnlStudent.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(31)))), ((int)(((byte)(58)))));
             this.pnlStudent.Controls.Add(this.btntoggleStd);
             this.pnlStudent.Controls.Add(this.pnlstd);
             this.pnlStudent.Controls.Add(this.dgvStudents);
             this.pnlStudent.Controls.Add(this.panel3);
             this.pnlStudent.Location = new System.Drawing.Point(199, 2);
             this.pnlStudent.Name = "pnlStudent";
-            this.pnlStudent.Size = new System.Drawing.Size(805, 557);
+            this.pnlStudent.Size = new System.Drawing.Size(805, 598);
             this.pnlStudent.TabIndex = 13;
             // 
             // btntoggleStd
             // 
             this.btntoggleStd.BackColor = System.Drawing.Color.IndianRed;
+            this.btntoggleStd.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btntoggleStd.FlatAppearance.BorderSize = 0;
             this.btntoggleStd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btntoggleStd.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btntoggleStd.ForeColor = System.Drawing.Color.White;
@@ -1847,10 +2001,11 @@ namespace SQL_Judge_System.UI
             // 
             this.pnlstd.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlstd.BackColor = System.Drawing.Color.White;
+            this.pnlstd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(31)))), ((int)(((byte)(58)))));
             this.pnlstd.Controls.Add(this.tlpnlStudents);
             this.pnlstd.Location = new System.Drawing.Point(0, 50);
             this.pnlstd.Name = "pnlstd";
+            this.pnlstd.Padding = new System.Windows.Forms.Padding(12, 12, 12, 0);
             this.pnlstd.Size = new System.Drawing.Size(805, 164);
             this.pnlstd.TabIndex = 14;
             // 
@@ -1864,33 +2019,35 @@ namespace SQL_Judge_System.UI
             this.tlpnlStudents.Controls.Add(this.pnlTotalSudents, 0, 0);
             this.tlpnlStudents.Controls.Add(this.pnlnactiveStudents, 2, 0);
             this.tlpnlStudents.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlpnlStudents.Location = new System.Drawing.Point(0, 0);
+            this.tlpnlStudents.Location = new System.Drawing.Point(12, 12);
             this.tlpnlStudents.Name = "tlpnlStudents";
             this.tlpnlStudents.RowCount = 1;
             this.tlpnlStudents.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpnlStudents.Size = new System.Drawing.Size(805, 164);
+            this.tlpnlStudents.Size = new System.Drawing.Size(781, 152);
             this.tlpnlStudents.TabIndex = 0;
             // 
             // pnlActiveStudents
             // 
-            this.pnlActiveStudents.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.pnlActiveStudents.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
             this.pnlActiveStudents.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlActiveStudents.Controls.Add(this.lblactstdValue);
             this.pnlActiveStudents.Controls.Add(this.lblactstd);
             this.pnlActiveStudents.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlActiveStudents.Location = new System.Drawing.Point(278, 10);
-            this.pnlActiveStudents.Margin = new System.Windows.Forms.Padding(10);
+            this.pnlActiveStudents.Location = new System.Drawing.Point(266, 6);
+            this.pnlActiveStudents.Margin = new System.Windows.Forms.Padding(6);
             this.pnlActiveStudents.Name = "pnlActiveStudents";
-            this.pnlActiveStudents.Size = new System.Drawing.Size(248, 144);
+            this.pnlActiveStudents.Padding = new System.Windows.Forms.Padding(8);
+            this.pnlActiveStudents.Size = new System.Drawing.Size(248, 140);
             this.pnlActiveStudents.TabIndex = 2;
             // 
             // lblactstdValue
             // 
             this.lblactstdValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblactstdValue.Font = new System.Drawing.Font("Segoe UI", 28F, System.Drawing.FontStyle.Bold);
-            this.lblactstdValue.Location = new System.Drawing.Point(0, 30);
+            this.lblactstdValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(182)))), ((int)(((byte)(255)))));
+            this.lblactstdValue.Location = new System.Drawing.Point(8, 38);
             this.lblactstdValue.Name = "lblactstdValue";
-            this.lblactstdValue.Size = new System.Drawing.Size(246, 112);
+            this.lblactstdValue.Size = new System.Drawing.Size(230, 92);
             this.lblactstdValue.TabIndex = 0;
             this.lblactstdValue.Text = "3";
             this.lblactstdValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1898,34 +2055,37 @@ namespace SQL_Judge_System.UI
             // lblactstd
             // 
             this.lblactstd.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblactstd.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.lblactstd.Location = new System.Drawing.Point(0, 0);
+            this.lblactstd.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblactstd.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
+            this.lblactstd.Location = new System.Drawing.Point(8, 8);
             this.lblactstd.Name = "lblactstd";
-            this.lblactstd.Size = new System.Drawing.Size(246, 30);
+            this.lblactstd.Size = new System.Drawing.Size(230, 30);
             this.lblactstd.TabIndex = 1;
-            this.lblactstd.Text = "Active Students";
-            this.lblactstd.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lblactstd.Text = "ACTIVE STUDENTS";
+            this.lblactstd.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pnlTotalSudents
             // 
-            this.pnlTotalSudents.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.pnlTotalSudents.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
             this.pnlTotalSudents.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlTotalSudents.Controls.Add(this.lbl_stdValue);
             this.pnlTotalSudents.Controls.Add(this.lblstd);
             this.pnlTotalSudents.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlTotalSudents.Location = new System.Drawing.Point(10, 10);
-            this.pnlTotalSudents.Margin = new System.Windows.Forms.Padding(10);
+            this.pnlTotalSudents.Location = new System.Drawing.Point(6, 6);
+            this.pnlTotalSudents.Margin = new System.Windows.Forms.Padding(6);
             this.pnlTotalSudents.Name = "pnlTotalSudents";
-            this.pnlTotalSudents.Size = new System.Drawing.Size(248, 144);
+            this.pnlTotalSudents.Padding = new System.Windows.Forms.Padding(8);
+            this.pnlTotalSudents.Size = new System.Drawing.Size(248, 140);
             this.pnlTotalSudents.TabIndex = 4;
             // 
             // lbl_stdValue
             // 
             this.lbl_stdValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbl_stdValue.Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_stdValue.Location = new System.Drawing.Point(0, 30);
+            this.lbl_stdValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(111)))), ((int)(((byte)(255)))));
+            this.lbl_stdValue.Location = new System.Drawing.Point(8, 38);
             this.lbl_stdValue.Name = "lbl_stdValue";
-            this.lbl_stdValue.Size = new System.Drawing.Size(246, 112);
+            this.lbl_stdValue.Size = new System.Drawing.Size(230, 92);
             this.lbl_stdValue.TabIndex = 0;
             this.lbl_stdValue.Text = "5";
             this.lbl_stdValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1933,34 +2093,37 @@ namespace SQL_Judge_System.UI
             // lblstd
             // 
             this.lblstd.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblstd.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.lblstd.Location = new System.Drawing.Point(0, 0);
+            this.lblstd.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblstd.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
+            this.lblstd.Location = new System.Drawing.Point(8, 8);
             this.lblstd.Name = "lblstd";
-            this.lblstd.Size = new System.Drawing.Size(246, 30);
+            this.lblstd.Size = new System.Drawing.Size(230, 30);
             this.lblstd.TabIndex = 1;
-            this.lblstd.Text = "Total Students";
-            this.lblstd.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lblstd.Text = "TOTAL STUDENTS";
+            this.lblstd.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pnlnactiveStudents
             // 
-            this.pnlnactiveStudents.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.pnlnactiveStudents.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
             this.pnlnactiveStudents.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlnactiveStudents.Controls.Add(this.lblinactstdValue);
             this.pnlnactiveStudents.Controls.Add(this.lblinactstd);
             this.pnlnactiveStudents.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlnactiveStudents.Location = new System.Drawing.Point(546, 10);
-            this.pnlnactiveStudents.Margin = new System.Windows.Forms.Padding(10);
+            this.pnlnactiveStudents.Location = new System.Drawing.Point(526, 6);
+            this.pnlnactiveStudents.Margin = new System.Windows.Forms.Padding(6);
             this.pnlnactiveStudents.Name = "pnlnactiveStudents";
-            this.pnlnactiveStudents.Size = new System.Drawing.Size(249, 144);
+            this.pnlnactiveStudents.Padding = new System.Windows.Forms.Padding(8);
+            this.pnlnactiveStudents.Size = new System.Drawing.Size(249, 140);
             this.pnlnactiveStudents.TabIndex = 0;
             // 
             // lblinactstdValue
             // 
             this.lblinactstdValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblinactstdValue.Font = new System.Drawing.Font("Segoe UI", 28F, System.Drawing.FontStyle.Bold);
-            this.lblinactstdValue.Location = new System.Drawing.Point(0, 30);
+            this.lblinactstdValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(207)))), ((int)(((byte)(142)))));
+            this.lblinactstdValue.Location = new System.Drawing.Point(8, 38);
             this.lblinactstdValue.Name = "lblinactstdValue";
-            this.lblinactstdValue.Size = new System.Drawing.Size(247, 112);
+            this.lblinactstdValue.Size = new System.Drawing.Size(231, 92);
             this.lblinactstdValue.TabIndex = 0;
             this.lblinactstdValue.Text = "215";
             this.lblinactstdValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1968,13 +2131,14 @@ namespace SQL_Judge_System.UI
             // lblinactstd
             // 
             this.lblinactstd.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblinactstd.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.lblinactstd.Location = new System.Drawing.Point(0, 0);
+            this.lblinactstd.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblinactstd.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
+            this.lblinactstd.Location = new System.Drawing.Point(8, 8);
             this.lblinactstd.Name = "lblinactstd";
-            this.lblinactstd.Size = new System.Drawing.Size(247, 30);
+            this.lblinactstd.Size = new System.Drawing.Size(231, 30);
             this.lblinactstd.TabIndex = 1;
-            this.lblinactstd.Text = "Inactive Students";
-            this.lblinactstd.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lblinactstd.Text = "INACTIVE STUDENTS";
+            this.lblinactstd.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // dgvStudents
             // 
@@ -1984,7 +2148,8 @@ namespace SQL_Judge_System.UI
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvStudents.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvStudents.BackgroundColor = System.Drawing.Color.White;
+            this.dgvStudents.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
+            this.dgvStudents.BorderStyle = System.Windows.Forms.BorderStyle.None;
             dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
             dataGridViewCellStyle12.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -2002,18 +2167,19 @@ namespace SQL_Judge_System.UI
             dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.MenuText;
             dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvStudents.DefaultCellStyle = dataGridViewCellStyle13;
-            this.dgvStudents.Location = new System.Drawing.Point(19, 276);
+            this.dgvStudents.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(52)))), ((int)(((byte)(88)))));
+            this.dgvStudents.Location = new System.Drawing.Point(17, 276);
             this.dgvStudents.MultiSelect = false;
             this.dgvStudents.Name = "dgvStudents";
             this.dgvStudents.ReadOnly = true;
             this.dgvStudents.RowHeadersWidth = 35;
             this.dgvStudents.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.dgvStudents.Size = new System.Drawing.Size(770, 266);
+            this.dgvStudents.Size = new System.Drawing.Size(770, 307);
             this.dgvStudents.TabIndex = 11;
             // 
             // panel3
             // 
-            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
+            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
             this.panel3.Controls.Add(this.label2);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 0);
@@ -2025,7 +2191,7 @@ namespace SQL_Judge_System.UI
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
-            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
             this.label2.Location = new System.Drawing.Point(12, 13);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(168, 25);
@@ -2034,39 +2200,43 @@ namespace SQL_Judge_System.UI
             // 
             // pnlHome
             // 
-            this.pnlHome.Controls.Add(this.label25);
+            this.pnlHome.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(29)))), ((int)(((byte)(56)))));
+            this.pnlHome.Controls.Add(this.lblGridTitle);
             this.pnlHome.Controls.Add(this.pnlHomeCards);
             this.pnlHome.Controls.Add(this.dgv_Users);
             this.pnlHome.Controls.Add(this.panel9);
             this.pnlHome.Location = new System.Drawing.Point(199, 2);
             this.pnlHome.Name = "pnlHome";
-            this.pnlHome.Size = new System.Drawing.Size(805, 557);
+            this.pnlHome.Size = new System.Drawing.Size(805, 598);
             this.pnlHome.TabIndex = 14;
             // 
-            // label25
+            // lblGridTitle
             // 
-            this.label25.AutoSize = true;
-            this.label25.BackColor = System.Drawing.Color.Transparent;
-            this.label25.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label25.ForeColor = System.Drawing.Color.Black;
-            this.label25.Location = new System.Drawing.Point(25, 253);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(108, 25);
-            this.label25.TabIndex = 13;
-            this.label25.Text = "Users View";
+            this.lblGridTitle.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblGridTitle.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblGridTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
+            this.lblGridTitle.Location = new System.Drawing.Point(10, 219);
+            this.lblGridTitle.Name = "lblGridTitle";
+            this.lblGridTitle.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
+            this.lblGridTitle.Size = new System.Drawing.Size(90, 23);
+            this.lblGridTitle.TabIndex = 14;
+            this.lblGridTitle.Text = "USERS VIEW";
+            this.lblGridTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // pnlHomeCards
             // 
-            this.pnlHomeCards.BackColor = System.Drawing.Color.White;
+            this.pnlHomeCards.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(31)))), ((int)(((byte)(58)))));
             this.pnlHomeCards.Controls.Add(this.tlpnlHomeCards);
             this.pnlHomeCards.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlHomeCards.Location = new System.Drawing.Point(0, 48);
+            this.pnlHomeCards.Location = new System.Drawing.Point(0, 56);
             this.pnlHomeCards.Name = "pnlHomeCards";
-            this.pnlHomeCards.Size = new System.Drawing.Size(805, 180);
+            this.pnlHomeCards.Padding = new System.Windows.Forms.Padding(12, 12, 12, 0);
+            this.pnlHomeCards.Size = new System.Drawing.Size(805, 153);
             this.pnlHomeCards.TabIndex = 11;
             // 
             // tlpnlHomeCards
             // 
+            this.tlpnlHomeCards.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(31)))), ((int)(((byte)(58)))));
             this.tlpnlHomeCards.ColumnCount = 3;
             this.tlpnlHomeCards.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tlpnlHomeCards.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
@@ -2076,16 +2246,16 @@ namespace SQL_Judge_System.UI
             this.tlpnlHomeCards.Controls.Add(this.panel6, 2, 0);
             this.tlpnlHomeCards.Controls.Add(this.panel8, 1, 0);
             this.tlpnlHomeCards.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlpnlHomeCards.Location = new System.Drawing.Point(0, 0);
+            this.tlpnlHomeCards.Location = new System.Drawing.Point(12, 12);
             this.tlpnlHomeCards.Name = "tlpnlHomeCards";
             this.tlpnlHomeCards.RowCount = 1;
             this.tlpnlHomeCards.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpnlHomeCards.Size = new System.Drawing.Size(805, 180);
+            this.tlpnlHomeCards.Size = new System.Drawing.Size(781, 141);
             this.tlpnlHomeCards.TabIndex = 1;
             // 
             // panel4
             // 
-            this.panel4.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel4.Controls.Add(this.lblTotalUsersValue);
             this.panel4.Controls.Add(this.label12);
@@ -2093,100 +2263,106 @@ namespace SQL_Judge_System.UI
             this.panel4.Location = new System.Drawing.Point(10, 10);
             this.panel4.Margin = new System.Windows.Forms.Padding(10);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(248, 160);
+            this.panel4.Size = new System.Drawing.Size(240, 121);
             this.panel4.TabIndex = 4;
             // 
             // lblTotalUsersValue
             // 
             this.lblTotalUsersValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblTotalUsersValue.Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalUsersValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(111)))), ((int)(((byte)(255)))));
             this.lblTotalUsersValue.Location = new System.Drawing.Point(0, 30);
             this.lblTotalUsersValue.Name = "lblTotalUsersValue";
-            this.lblTotalUsersValue.Size = new System.Drawing.Size(246, 128);
+            this.lblTotalUsersValue.Size = new System.Drawing.Size(238, 89);
             this.lblTotalUsersValue.TabIndex = 0;
-            this.lblTotalUsersValue.Text = "5";
+            this.lblTotalUsersValue.Text = "—";
             this.lblTotalUsersValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label12
             // 
             this.label12.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label12.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.label12.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
             this.label12.Location = new System.Drawing.Point(0, 0);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(246, 30);
+            this.label12.Size = new System.Drawing.Size(238, 30);
             this.label12.TabIndex = 1;
-            this.label12.Text = "Total Users";
-            this.label12.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.label12.Text = "TOTAL USERS";
+            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panel6
             // 
-            this.panel6.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panel6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
             this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel6.Controls.Add(this.lblInactiveUsersValue);
             this.panel6.Controls.Add(this.label16);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel6.Location = new System.Drawing.Point(546, 10);
+            this.panel6.Location = new System.Drawing.Point(530, 10);
             this.panel6.Margin = new System.Windows.Forms.Padding(10);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(249, 160);
+            this.panel6.Size = new System.Drawing.Size(241, 121);
             this.panel6.TabIndex = 0;
             // 
             // lblInactiveUsersValue
             // 
             this.lblInactiveUsersValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblInactiveUsersValue.Font = new System.Drawing.Font("Segoe UI", 28F, System.Drawing.FontStyle.Bold);
+            this.lblInactiveUsersValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(207)))), ((int)(((byte)(142)))));
             this.lblInactiveUsersValue.Location = new System.Drawing.Point(0, 30);
             this.lblInactiveUsersValue.Name = "lblInactiveUsersValue";
-            this.lblInactiveUsersValue.Size = new System.Drawing.Size(247, 128);
+            this.lblInactiveUsersValue.Size = new System.Drawing.Size(239, 89);
             this.lblInactiveUsersValue.TabIndex = 0;
-            this.lblInactiveUsersValue.Text = "215";
+            this.lblInactiveUsersValue.Text = "—";
             this.lblInactiveUsersValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label16
             // 
             this.label16.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label16.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.label16.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
             this.label16.Location = new System.Drawing.Point(0, 0);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(247, 30);
+            this.label16.Size = new System.Drawing.Size(239, 30);
             this.label16.TabIndex = 1;
-            this.label16.Text = "Inactive Users";
-            this.label16.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.label16.Text = "INACTIVE USERS";
+            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panel8
             // 
-            this.panel8.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panel8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
             this.panel8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel8.Controls.Add(this.lblActiveUsersValue);
             this.panel8.Controls.Add(this.label23);
             this.panel8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel8.Location = new System.Drawing.Point(278, 10);
+            this.panel8.Location = new System.Drawing.Point(270, 10);
             this.panel8.Margin = new System.Windows.Forms.Padding(10);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(248, 160);
+            this.panel8.Size = new System.Drawing.Size(240, 121);
             this.panel8.TabIndex = 2;
             // 
             // lblActiveUsersValue
             // 
             this.lblActiveUsersValue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblActiveUsersValue.Font = new System.Drawing.Font("Segoe UI", 28F, System.Drawing.FontStyle.Bold);
+            this.lblActiveUsersValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(182)))), ((int)(((byte)(255)))));
             this.lblActiveUsersValue.Location = new System.Drawing.Point(0, 30);
             this.lblActiveUsersValue.Name = "lblActiveUsersValue";
-            this.lblActiveUsersValue.Size = new System.Drawing.Size(246, 128);
+            this.lblActiveUsersValue.Size = new System.Drawing.Size(238, 89);
             this.lblActiveUsersValue.TabIndex = 0;
-            this.lblActiveUsersValue.Text = "3";
+            this.lblActiveUsersValue.Text = "—";
             this.lblActiveUsersValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label23
             // 
             this.label23.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label23.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.label23.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label23.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
             this.label23.Location = new System.Drawing.Point(0, 0);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(246, 30);
+            this.label23.Size = new System.Drawing.Size(238, 30);
             this.label23.TabIndex = 1;
-            this.label23.Text = "Active Users";
-            this.label23.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.label23.Text = "ACTIVE USERS";
+            this.label23.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // dgv_Users
             // 
@@ -2196,7 +2372,8 @@ namespace SQL_Judge_System.UI
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgv_Users.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgv_Users.BackgroundColor = System.Drawing.Color.White;
+            this.dgv_Users.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
+            this.dgv_Users.BorderStyle = System.Windows.Forms.BorderStyle.None;
             dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
             dataGridViewCellStyle14.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -2214,30 +2391,31 @@ namespace SQL_Judge_System.UI
             dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.MenuText;
             dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgv_Users.DefaultCellStyle = dataGridViewCellStyle15;
-            this.dgv_Users.Location = new System.Drawing.Point(25, 284);
+            this.dgv_Users.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(52)))), ((int)(((byte)(88)))));
+            this.dgv_Users.Location = new System.Drawing.Point(9, 248);
             this.dgv_Users.MultiSelect = false;
             this.dgv_Users.Name = "dgv_Users";
             this.dgv_Users.ReadOnly = true;
             this.dgv_Users.RowHeadersVisible = false;
             this.dgv_Users.RowHeadersWidth = 35;
             this.dgv_Users.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgv_Users.Size = new System.Drawing.Size(754, 255);
+            this.dgv_Users.Size = new System.Drawing.Size(786, 337);
             this.dgv_Users.TabIndex = 7;
             // 
             // panel9
             // 
-            this.panel9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(30)))), ((int)(((byte)(54)))));
+            this.panel9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
             this.panel9.Controls.Add(this.lblMainTitle);
             this.panel9.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel9.Location = new System.Drawing.Point(0, 0);
             this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(805, 48);
+            this.panel9.Size = new System.Drawing.Size(805, 56);
             this.panel9.TabIndex = 6;
             // 
             // lblMainTitle
             // 
             this.lblMainTitle.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMainTitle.ForeColor = System.Drawing.Color.White;
+            this.lblMainTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
             this.lblMainTitle.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
             this.lblMainTitle.Location = new System.Drawing.Point(23, 7);
             this.lblMainTitle.Name = "lblMainTitle";
@@ -2247,20 +2425,23 @@ namespace SQL_Judge_System.UI
             // 
             // AdminDashboardUI
             // 
-            this.ClientSize = new System.Drawing.Size(1004, 561);
+            this.ClientSize = new System.Drawing.Size(1004, 601);
             this.Controls.Add(this.pnlSidebar);
-            this.Controls.Add(this.pnlHome);
-            this.Controls.Add(this.pnlSuperAdmin);
-            this.Controls.Add(this.pnlContest);
             this.Controls.Add(this.pnlProblems);
             this.Controls.Add(this.pnlTestCases);
             this.Controls.Add(this.pnlsubmissions);
             this.Controls.Add(this.pnlStudent);
+            this.Controls.Add(this.pnlHome);
+            this.Controls.Add(this.pnlSuperAdmin);
+            this.Controls.Add(this.pnlContest);
             this.Name = "AdminDashboardUI";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Admin Dashboard";
             this.Load += new System.EventHandler(this.AdminDashboard_Load);
             this.pnlSidebar.ResumeLayout(false);
+            this.pnlSidebarLogo.ResumeLayout(false);
+            this.pnlSidebarLogo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
             this.pnlProblems.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvProblems)).EndInit();
             this.ProblemCards.ResumeLayout(false);
@@ -2318,7 +2499,6 @@ namespace SQL_Judge_System.UI
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.pnlHome.ResumeLayout(false);
-            this.pnlHome.PerformLayout();
             this.pnlHomeCards.ResumeLayout(false);
             this.tlpnlHomeCards.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
@@ -2464,6 +2644,10 @@ namespace SQL_Judge_System.UI
         private Panel panel9;
         private Label lblMainTitle;
         private FontAwesome.Sharp.IconButton btn_Admin;
-        private Label label25;
+        private Panel pnlSidebarLogo;
+        private PictureBox picLogo;
+        private Label lblAppSub;
+        private Label lblAppName;
+        private Label lblGridTitle;
     }
 }

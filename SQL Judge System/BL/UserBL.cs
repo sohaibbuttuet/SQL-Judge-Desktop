@@ -105,7 +105,6 @@ namespace SQL_Judge_System.BL
             return UserDL.InactiveAdmins();
         }
 
-
         // Students panel and SuperAdmin Panel
         public static void ActivateUser(int userId)
         {
@@ -136,7 +135,7 @@ namespace SQL_Judge_System.BL
             UserDL.DeactivateUser(userId);
         }
 
-        // Important       
+        // AdminPopup Form       
         public static User GetUserById(int userId)
         {
             if (userId < 0)
@@ -146,7 +145,6 @@ namespace SQL_Judge_System.BL
 
             return UserDL.GetUserByID(userId);
         }
-
 
         // User Lookup Table (Roles)
         public static int GetStudentRoleID()

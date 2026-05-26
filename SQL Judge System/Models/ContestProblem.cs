@@ -10,7 +10,6 @@ namespace SQL_Judge_System.Models
     {
         private int contestID;
         private int problemID;
-        private int orderNumber;
 
         public int ContestID
         {
@@ -34,24 +33,12 @@ namespace SQL_Judge_System.Models
                 problemID = value;
             }
         }
-        public int OrderNumber
-        {
-            get { return orderNumber; }
-            set
-            {
-                if (value <= 0)
-                    throw new Exception("Order Number must be greater than 0.");
-
-                orderNumber = value;
-            }
-        }
 
         public ContestProblem() { }
-        public ContestProblem(int contestID, int problemID, int orderNumber)
+        public ContestProblem(int contestID, int problemID)
         {
             ContestID = contestID;
             ProblemID = problemID;
-            OrderNumber = orderNumber;
         }
     }
 }

@@ -10,14 +10,17 @@ using SQL_Judge_System.Models;
 namespace SQL_Judge_System.BL
 {
     internal class SubmissionBL
-    {
-        public static DataTable GetSubmissionsForAdmin()
-        {
-            return SubmissionDL.GetSubmissionsForAdmin();
-        }
+    {        
         public static void AddSubmission(Submission submission)
         {
             submission.SubmissionID = SubmissionDL.AddSubmission(submission);
+        }
+
+
+        // Submission Panel in Admin Dashboard
+        public static DataTable GetSubmissions()
+        {
+            return SubmissionDL.GetSubmissionsForAdmin();
         }
         public static int TotalSubmissions()
         {

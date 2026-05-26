@@ -24,7 +24,8 @@ namespace SQL_Judge_System.UI
 
             this.userID = userID;
 
-            LoadData();
+            LoadCheckListBox(clbAddTags);
+            LoadComboBox(cmbDifficulty);
             ShowAddPanel();
         }
         public ProblemPopupForm(int userID, int problemID)
@@ -34,7 +35,8 @@ namespace SQL_Judge_System.UI
             this.userID = userID;
             this.problemID = problemID;
 
-            LoadData();
+            LoadCheckListBox(clbUpdateTags);
+            LoadComboBox(cmbUDifficulty);
             LoadProblem(problemID);
             ShowUpdatePanel();            
         }
@@ -50,50 +52,68 @@ namespace SQL_Judge_System.UI
             updatePanel.Visible = true;
         }
 
-
         // Loading Data
         private void LoadCheckListBox(CheckedListBox box)
         {
-            box.DataSource = ProblemBL.GetProblemTags();
-            box.DisplayMember = "TagName";
-            box.ValueMember = "TagID";
+            try
+            {
+                box.DataSource = ProblemBL.GetProblemTags();
+                box.DisplayMember = "Name";
+                box.ValueMember = "ID";
+
+                box.ClearSelected();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
-        private void LoadComboBox(ComboBox comboBox)
+        private void LoadComboBox(ComboBox box)
         {
-            comboBox.DataSource = ProblemBL.GetProblemDifficulties();
-            comboBox.DisplayMember = "DifficultyName";
-            comboBox.ValueMember = "DifficultyID";
-        }
-        private void LoadData()
-        {
-            LoadCheckListBox(clbUpdateTags);
-            LoadCheckListBox(clbAddTags);
-            LoadComboBox(cmbDifficulty);
-            LoadComboBox(cmbUDifficulty);
+            try
+            {
+                box.DataSource = ProblemBL.GetProblemDifficulties();
+                box.DisplayMember = "Name";
+                box.ValueMember = "ID";
+
+                box.SelectedValue = -1;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         private void LoadProblem(int problemID)
         {
-            Problem problem = ProblemBL.GetProblemByID(problemID);
-
-            if (problem == null)
+            try
             {
-                MessageBox.Show("Problem not found.");
-                return;
+                Problem problem = ProblemBL.GetProblemByID(problemID);
+
+                if (problem == null)
+                {
+                    MessageBox.Show("Problem not found.");
+                    return;
+                }
+
+                txtUTitle.Text = problem.Title;
+                txtUDescription.Text = problem.Description;
+                txtUPoints.Text = problem.Points.ToString();
+
+                cmbUDifficulty.SelectedValue = problem.DifficultyID;
+
+                List<ProblemTagMap> tags = ProblemBL.GetProblemTags(problem.ProblemID);
+                List<int> tagIDs = tags.Select(t => t.TagID).ToList();
+
+                for (int i = 0; i < clbUpdateTags.Items.Count; i++)
+                {
+                    ProblemTag tag = (ProblemTag)clbUpdateTags.Items[i];
+
+                    clbUpdateTags.SetItemChecked(i, tagIDs.Contains(tag.Id));
+                }
             }
-
-            txtUTitle.Text = problem.Title;
-            txtUDescription.Text = problem.Description;
-            txtUPoints.Text = problem.Points.ToString();
-
-            cmbUDifficulty.SelectedValue = problem.ProblemDifficulty.Id;
-
-            List<int> tagIDs = ProblemBL.GetProblemTagIDs(problemID);
-
-            for (int i = 0; i < clbUpdateTags.Items.Count; i++)
+            catch(Exception ex)
             {
-                ProblemTag tag = (ProblemTag)clbUpdateTags.Items[i];
-
-                clbUpdateTags.SetItemChecked(i, tagIDs.Contains(tag.Id));
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -110,14 +130,13 @@ namespace SQL_Judge_System.UI
                     return;
                 }
 
-                int points;
-                if (!int.TryParse(txtPoints.Text.Trim(), out points))
+                if (!int.TryParse(txtPoints.Text.Trim(), out int points))
                 {
                     MessageBox.Show("Please enter valid points.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
-                if (cmbDifficulty.SelectedItem == null)
+                if (cmbDifficulty.SelectedIndex == -1)
                 {
                     MessageBox.Show("Please select difficulty.");
                     return;
@@ -129,23 +148,18 @@ namespace SQL_Judge_System.UI
                     return;
                 }
 
-                ProblemDifficulty difficulty = (ProblemDifficulty)cmbDifficulty.SelectedItem;
+                int diffucultyId = (int)cmbDifficulty.SelectedValue;
 
-                if (ProblemBL.IsProblemExists(title, difficulty.Id))
-                {
-                    MessageBox.Show("Problem already exists.");
-                    return;
-                }
+                Problem problem = new Problem(title, description, diffucultyId, points, userID);
 
-                Problem problem = new Problem(title, description, difficulty, points, userID);
+                // INSERT PROBLEM
                 ProblemBL.AddProblem(problem);
 
                 // INSERT TAG MAPPINGS
                 foreach (ProblemTag tag in clbAddTags.CheckedItems)
                 {
-                    ProblemTagMap map = new ProblemTagMap(problem.ProblemID, tag.Id);
-
-                    ProblemBL.MapProblemTag(map);
+                    ProblemTagMap problemTag = new ProblemTagMap(problem.ProblemID, tag.Id);
+                    ProblemBL.MapProblemTag(problemTag);
                 }
 
                 MessageBox.Show("Problem created successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -188,14 +202,13 @@ namespace SQL_Judge_System.UI
                     return;
                 }
 
-                int points;
-                if (!int.TryParse(txtUPoints.Text.Trim(), out points))
+                if (!int.TryParse(txtUPoints.Text.Trim(), out int points))
                 {
                     MessageBox.Show("Please enter valid points.");
                     return;
                 }
 
-                if (cmbUDifficulty.SelectedItem == null)
+                if (cmbDifficulty.SelectedIndex == -1)
                 {
                     MessageBox.Show("Please select difficulty.");
                     return;
@@ -207,9 +220,9 @@ namespace SQL_Judge_System.UI
                     return;
                 }
 
-                ProblemDifficulty difficulty = (ProblemDifficulty)cmbDifficulty.SelectedItem;
+                int difficultyID = (int)cmbUDifficulty.SelectedValue;
 
-                Problem problem = new Problem(problemID, title, description, difficulty, points, userID);
+                Problem problem = new Problem(problemID, title, description, difficultyID, points, userID);
 
                 // UPDATE PROBLEM
                 ProblemBL.UpdateProblem(problem);
@@ -220,9 +233,8 @@ namespace SQL_Judge_System.UI
                 // ADD NEW TAGS
                 foreach (ProblemTag tag in clbUpdateTags.CheckedItems)
                 {
-                    ProblemTagMap map = new ProblemTagMap(problemID, tag.Id);
-
-                    ProblemBL.MapProblemTag(map);
+                    ProblemTagMap problemTag = new ProblemTagMap(problemID, tag.Id);
+                    ProblemBL.MapProblemTag(problemTag);
                 }
 
                 MessageBox.Show("Problem updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);

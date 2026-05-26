@@ -131,7 +131,6 @@ namespace SQL_Judge_System.UI
             catch (Exception ex)
             {
                 MessageBox.Show("Failed to add admin: " + ex.Message);
-
             }
             LoadAdminData();
         }
@@ -291,23 +290,23 @@ namespace SQL_Judge_System.UI
             try
             {
                 dgvProblems.DataSource = ProblemBL.ProblemsList();
+
                 dgvProblems.Columns["ProblemID"].FillWeight = 20;
-                dgvProblems.Columns["Title"].FillWeight = 100;
+                dgvProblems.Columns["Title"].FillWeight = 80;
                 dgvProblems.Columns["DifficultyName"].FillWeight = 30;
-                dgvProblems.Columns["Points"].FillWeight = 20;
-                dgvProblems.Columns["IsActive"].FillWeight = 20;
+                dgvProblems.Columns["Points"].FillWeight = 30;
+                dgvProblems.Columns["IsActive"].FillWeight = 30;
                 dgvProblems.Columns["CreatedBy"].FillWeight = 50;
                 dgvProblems.Columns["CreatedAt"].FillWeight = 50;
                 dgvProblems.Columns["UpdatedBy"].FillWeight = 50;
                 dgvProblems.Columns["UpdatedAt"].FillWeight = 50;
-
 
                 dgvProblems.Columns["ProblemID"].HeaderText = "ID";
                 dgvProblems.Columns["Title"].HeaderText = "Title";
                 dgvProblems.Columns["DifficultyName"].HeaderText = "Difficulty Level";
                 dgvProblems.Columns["Points"].HeaderText = "Points";
                 dgvProblems.Columns["IsActive"].HeaderText = "Status";
-                dgvProblems.Columns["CretedBy"].HeaderText = "Created By";
+                dgvProblems.Columns["CreatedBy"].HeaderText = "Created By";
                 dgvProblems.Columns["CreatedAt"].HeaderText = "Created At";
                 dgvProblems.Columns["UpdatedBy"].HeaderText = "Updated By";
                 dgvProblems.Columns["UpdatedAt"].HeaderText = "Updated At";
@@ -411,6 +410,8 @@ namespace SQL_Judge_System.UI
         {
             try
             {
+                dgvContest.DataSource = ContestBL.GetContests();
+
                 // ===== Column Styling =====
                 dgvContest.Columns["ContestID"].HeaderText = "ID";
                 dgvContest.Columns["Title"].HeaderText = "Title";
@@ -425,15 +426,15 @@ namespace SQL_Judge_System.UI
 
                 // ===== Layout =====
                 dgvContest.Columns["ContestID"].FillWeight = 20;
-                dgvContest.Columns["Title"].FillWeight = 100;
-                dgvContest.Columns["StartDate"].FillWeight = 50;
-                dgvContest.Columns["EndDate"].FillWeight = 50;
-                dgvContest.Columns["TotalParticipants"].FillWeight = 30;
+                dgvContest.Columns["Title"].FillWeight = 80;
+                dgvContest.Columns["StartDate"].FillWeight = 40;
+                dgvContest.Columns["EndDate"].FillWeight = 40;
+                dgvContest.Columns["TotalParticipants"].FillWeight = 50;
                 dgvContest.Columns["CreatedBy"].FillWeight = 50;
                 dgvContest.Columns["UpdatedBy"].FillWeight = 50;
                 dgvContest.Columns["CreatedAt"].FillWeight = 50;
                 dgvContest.Columns["UpdatedAt"].FillWeight = 50;
-
+                dgvContest.Columns["ContestStatus"].FillWeight = 40;
             }
             catch (Exception ex)
             {
@@ -500,28 +501,29 @@ namespace SQL_Judge_System.UI
         {
             try
             {
-                dgvTestCases.DataSource = TestCaseBL.GetTestCasesForAdmin();
-                dgvTestCases.Columns["TestCaseID"].FillWeight = 20;
-                dgvTestCases.Columns["ProblemID"].FillWeight = 20;
-                dgvTestCases.Columns["Title"].FillWeight = 50;
+                dgvTestCases.DataSource = TestCaseBL.GetTestCases();
+
+                dgvTestCases.Columns["TestCaseID"].FillWeight = 30;
+                dgvTestCases.Columns["ProblemID"].FillWeight = 50;
+                dgvTestCases.Columns["ProblemTitle"].FillWeight = 80;
                 dgvTestCases.Columns["SetupSQLPreview"].FillWeight = 80;
                 dgvTestCases.Columns["SolutionQueryPreview"].FillWeight = 80;
-                dgvContest.Columns["CreatedBy"].FillWeight = 50;
-                dgvContest.Columns["UpdatedBy"].FillWeight = 50;
-                dgvContest.Columns["CreatedAt"].FillWeight = 50;
-                dgvContest.Columns["UpdatedAt"].FillWeight = 50;
-                dgvTestCases.Columns["IsActive"].FillWeight = 20;
+                dgvContest.Columns["CreatedBy"].FillWeight = 30;
+                dgvContest.Columns["UpdatedBy"].FillWeight = 30;
+                dgvContest.Columns["CreatedAt"].FillWeight = 30;
+                dgvContest.Columns["UpdatedAt"].FillWeight = 30;
+                dgvTestCases.Columns["IsActive"].FillWeight = 40;
 
                 dgvTestCases.Columns["TestCaseID"].HeaderText = "ID";
                 dgvTestCases.Columns["ProblemID"].HeaderText = "Problem ID";
-                dgvTestCases.Columns["Title"].HeaderText = "Problem Title";
+                dgvTestCases.Columns["ProblemTitle"].HeaderText = "Problem Title";
                 dgvTestCases.Columns["SetupSQLPreview"].HeaderText = "Setup SQL Preview";
-                dgvTestCases.Columns["SolutionQueryPreview"].HeaderText = "Solution Query Preview";
-                dgvTestCases.Columns["IsActive"].HeaderText = "Status";
+                dgvTestCases.Columns["SolutionQueryPreview"].HeaderText = "Solution Query Preview";                
                 dgvContest.Columns["CreatedBy"].HeaderText = "Created By";
                 dgvContest.Columns["UpdatedBy"].HeaderText = "Updated By";
                 dgvContest.Columns["CreatedAt"].HeaderText = "Created At";
                 dgvContest.Columns["UpdatedAt"].HeaderText = "Updated At";
+                dgvTestCases.Columns["IsActive"].HeaderText = "Status";
             }
             catch(Exception ex)
             {
@@ -545,8 +547,7 @@ namespace SQL_Judge_System.UI
         {
             try
             {
-                TestCasePopupForm form = new TestCasePopupForm();
-                form.ShowAddPanel();
+                TestCasePopupForm form = new TestCasePopupForm(user.UserID);
                 form.ShowDialog();
             }
             catch (Exception ex)
@@ -559,9 +560,17 @@ namespace SQL_Judge_System.UI
         {
             try
             {
-                TestCasePopupForm form = new TestCasePopupForm();
-                form.ShowUpdatePanel();
-                form.ShowDialog();
+                if (dgvTestCases.SelectedRows.Count > 0)
+                {
+                    int testCaseID = Convert.ToInt32(dgvContest.SelectedRows[0].Cells["TestCaseID"].Value);
+
+                    TestCasePopupForm form = new TestCasePopupForm(user.UserID, testCaseID);
+                    form.ShowDialog();
+                }
+                else
+                {
+                    MessageBox.Show("Please select a Test Case to update.");
+                }
             }
             catch (Exception ex)
             {
@@ -613,20 +622,23 @@ namespace SQL_Judge_System.UI
         private void LoadSubmissions()
         {
             try {
-                dgvSubmissions.DataSource = SubmissionBL.GetSubmissionsForAdmin();
-                dgvSubmissions.Columns["SubmissionID"].FillWeight = 20;
-                dgvSubmissions.Columns["StudentID"].FillWeight = 50;
-                dgvSubmissions.Columns["ProblemID"].FillWeight = 50;
-                dgvSubmissions.Columns["StatusName"].FillWeight = 60;
-                dgvSubmissions.Columns["AttemptNumber"].FillWeight = 40;
-                dgvSubmissions.Columns["TotalScore"].FillWeight = 50;
-                dgvSubmissions.Columns["SubmittedAt"].FillWeight = 50;
+                dgvSubmissions.DataSource = SubmissionBL.GetSubmissions();
 
+                dgvSubmissions.Columns["SubmissionID"].FillWeight = 20;
+                dgvSubmissions.Columns["StudentID"].FillWeight = 30;
+                dgvSubmissions.Columns["StudentName"].FillWeight = 50;
+                dgvSubmissions.Columns["ProblemID"].FillWeight = 30;
+                dgvSubmissions.Columns["ProblemTitle"].FillWeight = 80;
+                dgvSubmissions.Columns["TotalScore"].FillWeight = 30;
+                dgvSubmissions.Columns["AttemptNumber"].FillWeight = 30;
+                dgvSubmissions.Columns["SubmittedAt"].FillWeight = 50;
+                dgvSubmissions.Columns["Status"].FillWeight = 50;                           
 
                 dgvSubmissions.Columns["SubmissionID"].HeaderText = "ID";
                 dgvSubmissions.Columns["StudentID"].HeaderText = "Student ID";
+                dgvSubmissions.Columns["StudentName"].HeaderText = "Student Name";
                 dgvSubmissions.Columns["ProblemID"].HeaderText = "Problem ID";
-                dgvSubmissions.Columns["StatusName"].HeaderText = "Status";
+                dgvSubmissions.Columns["ProblemTitle"].HeaderText = "Problem Title";
                 dgvSubmissions.Columns["AttemptNumber"].HeaderText = "Attempt #";
                 dgvSubmissions.Columns["TotalScore"].HeaderText = "Total Score";
                 dgvSubmissions.Columns["SubmittedAt"].HeaderText = "Submitted At";

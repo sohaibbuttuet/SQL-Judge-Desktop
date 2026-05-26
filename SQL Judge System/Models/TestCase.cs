@@ -15,7 +15,6 @@ namespace SQL_Judge_System.Models
         private string solutionQuery;
         private bool isActive;
 
-
         public int TestCaseID
         {
             get { return testCaseID; }

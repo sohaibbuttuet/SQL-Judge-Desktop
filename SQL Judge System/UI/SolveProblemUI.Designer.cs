@@ -1,0 +1,856 @@
+﻿namespace SQL_Judge_System.UI
+{
+    partial class SolveProblemUI
+    {
+        private System.ComponentModel.IContainer components = null;
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null)) components.Dispose();
+            base.Dispose(disposing);
+        }
+
+        private void InitializeComponent()
+        {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.pnlSidebar = new System.Windows.Forms.Panel();
+            this.btnReport = new FontAwesome.Sharp.IconButton();
+            this.btn_contest = new FontAwesome.Sharp.IconButton();
+            this.btn_problems = new FontAwesome.Sharp.IconButton();
+            this.btn_home = new FontAwesome.Sharp.IconButton();
+            this.pnlSidebarLogo = new System.Windows.Forms.Panel();
+            this.picLogo = new System.Windows.Forms.PictureBox();
+            this.lblAppSub = new System.Windows.Forms.Label();
+            this.lblAppName = new System.Windows.Forms.Label();
+            this.btn_settings = new FontAwesome.Sharp.IconButton();
+            this.btn_Logout = new FontAwesome.Sharp.IconButton();
+            this.pnlHeader = new System.Windows.Forms.Panel();
+            this.lblOnlineStatus = new System.Windows.Forms.Label();
+            this.lblPageTitle = new System.Windows.Forms.Label();
+            this.pnlMain = new System.Windows.Forms.Panel();
+            this.splitMain = new System.Windows.Forms.SplitContainer();
+            this.pnlProblemList = new System.Windows.Forms.Panel();
+            this.dgvProblems = new System.Windows.Forms.DataGridView();
+            this.pnlListHeader = new System.Windows.Forms.Panel();
+            this.cmbDifficulty = new System.Windows.Forms.ComboBox();
+            this.lblProblemsTitle = new System.Windows.Forms.Label();
+            this.splitRight = new System.Windows.Forms.SplitContainer();
+            this.pnlEditorArea = new System.Windows.Forms.Panel();
+            this.rtbSQLEditor = new System.Windows.Forms.RichTextBox();
+            this.pnlEditorActions = new System.Windows.Forms.Panel();
+            this.lblLineCol = new System.Windows.Forms.Label();
+            this.btnSubmit = new FontAwesome.Sharp.IconButton();
+            this.btnRunQuery = new FontAwesome.Sharp.IconButton();
+            this.pnlEditorHeader = new System.Windows.Forms.Panel();
+            this.btnClearEditor = new FontAwesome.Sharp.IconButton();
+            this.lblEditorTitle = new System.Windows.Forms.Label();
+            this.pnlProblemDesc = new System.Windows.Forms.Panel();
+            this.lblDifficultyBadge = new System.Windows.Forms.Label();
+            this.lblProblemName = new System.Windows.Forms.Label();
+            this.rtbProblemDesc = new System.Windows.Forms.RichTextBox();
+            this.pnlOutputArea = new System.Windows.Forms.Panel();
+            this.dgvOutput = new System.Windows.Forms.DataGridView();
+            this.pnlOutputHeader = new System.Windows.Forms.Panel();
+            this.lblResultBadge = new System.Windows.Forms.Label();
+            this.btnClearOutput = new FontAwesome.Sharp.IconButton();
+            this.lblOutputTitle = new System.Windows.Forms.Label();
+            this.pnlSidebar.SuspendLayout();
+            this.pnlSidebarLogo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
+            this.pnlHeader.SuspendLayout();
+            this.pnlMain.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitMain)).BeginInit();
+            this.splitMain.Panel1.SuspendLayout();
+            this.splitMain.Panel2.SuspendLayout();
+            this.splitMain.SuspendLayout();
+            this.pnlProblemList.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvProblems)).BeginInit();
+            this.pnlListHeader.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitRight)).BeginInit();
+            this.splitRight.Panel1.SuspendLayout();
+            this.splitRight.Panel2.SuspendLayout();
+            this.splitRight.SuspendLayout();
+            this.pnlEditorArea.SuspendLayout();
+            this.pnlEditorActions.SuspendLayout();
+            this.pnlEditorHeader.SuspendLayout();
+            this.pnlProblemDesc.SuspendLayout();
+            this.pnlOutputArea.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvOutput)).BeginInit();
+            this.pnlOutputHeader.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // pnlSidebar
+            // 
+            this.pnlSidebar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(29)))), ((int)(((byte)(56)))));
+            this.pnlSidebar.Controls.Add(this.btnReport);
+            this.pnlSidebar.Controls.Add(this.btn_contest);
+            this.pnlSidebar.Controls.Add(this.btn_problems);
+            this.pnlSidebar.Controls.Add(this.btn_home);
+            this.pnlSidebar.Controls.Add(this.pnlSidebarLogo);
+            this.pnlSidebar.Controls.Add(this.btn_settings);
+            this.pnlSidebar.Controls.Add(this.btn_Logout);
+            this.pnlSidebar.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlSidebar.Location = new System.Drawing.Point(0, 0);
+            this.pnlSidebar.Name = "pnlSidebar";
+            this.pnlSidebar.Size = new System.Drawing.Size(200, 700);
+            this.pnlSidebar.TabIndex = 0;
+            // 
+            // btnReport
+            // 
+            this.btnReport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(29)))), ((int)(((byte)(56)))));
+            this.btnReport.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnReport.FlatAppearance.BorderSize = 0;
+            this.btnReport.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(40)))), ((int)(((byte)(69)))));
+            this.btnReport.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(40)))), ((int)(((byte)(69)))));
+            this.btnReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnReport.Font = new System.Drawing.Font("Segoe UI", 10.5F);
+            this.btnReport.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
+            this.btnReport.IconChar = FontAwesome.Sharp.IconChar.ChartSimple;
+            this.btnReport.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
+            this.btnReport.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnReport.IconSize = 20;
+            this.btnReport.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnReport.Location = new System.Drawing.Point(0, 214);
+            this.btnReport.Name = "btnReport";
+            this.btnReport.Padding = new System.Windows.Forms.Padding(14, 0, 0, 0);
+            this.btnReport.Size = new System.Drawing.Size(200, 48);
+            this.btnReport.TabIndex = 4;
+            this.btnReport.Text = "Generate Report";
+            this.btnReport.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnReport.UseVisualStyleBackColor = false;
+            this.btnReport.Click += new System.EventHandler(this.btnReport_Click);
+            // 
+            // btn_contest
+            // 
+            this.btn_contest.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(29)))), ((int)(((byte)(56)))));
+            this.btn_contest.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btn_contest.FlatAppearance.BorderSize = 0;
+            this.btn_contest.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(40)))), ((int)(((byte)(69)))));
+            this.btn_contest.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(40)))), ((int)(((byte)(69)))));
+            this.btn_contest.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_contest.Font = new System.Drawing.Font("Segoe UI", 10.5F);
+            this.btn_contest.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
+            this.btn_contest.IconChar = FontAwesome.Sharp.IconChar.Trophy;
+            this.btn_contest.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
+            this.btn_contest.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btn_contest.IconSize = 20;
+            this.btn_contest.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_contest.Location = new System.Drawing.Point(0, 166);
+            this.btn_contest.Name = "btn_contest";
+            this.btn_contest.Padding = new System.Windows.Forms.Padding(14, 0, 0, 0);
+            this.btn_contest.Size = new System.Drawing.Size(200, 48);
+            this.btn_contest.TabIndex = 3;
+            this.btn_contest.Text = "Join Contest";
+            this.btn_contest.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btn_contest.UseVisualStyleBackColor = false;
+            this.btn_contest.Click += new System.EventHandler(this.btn_contest_Click);
+            // 
+            // btn_problems
+            // 
+            this.btn_problems.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(40)))), ((int)(((byte)(69)))));
+            this.btn_problems.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btn_problems.FlatAppearance.BorderSize = 0;
+            this.btn_problems.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(40)))), ((int)(((byte)(69)))));
+            this.btn_problems.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(40)))), ((int)(((byte)(69)))));
+            this.btn_problems.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_problems.Font = new System.Drawing.Font("Segoe UI", 10.5F, System.Drawing.FontStyle.Bold);
+            this.btn_problems.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(111)))), ((int)(((byte)(255)))));
+            this.btn_problems.IconChar = FontAwesome.Sharp.IconChar.Code;
+            this.btn_problems.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(111)))), ((int)(((byte)(255)))));
+            this.btn_problems.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btn_problems.IconSize = 20;
+            this.btn_problems.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_problems.Location = new System.Drawing.Point(0, 118);
+            this.btn_problems.Name = "btn_problems";
+            this.btn_problems.Padding = new System.Windows.Forms.Padding(14, 0, 0, 0);
+            this.btn_problems.Size = new System.Drawing.Size(200, 48);
+            this.btn_problems.TabIndex = 2;
+            this.btn_problems.Text = "Solve Problems";
+            this.btn_problems.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btn_problems.UseVisualStyleBackColor = false;
+            // 
+            // btn_home
+            // 
+            this.btn_home.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(29)))), ((int)(((byte)(56)))));
+            this.btn_home.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btn_home.FlatAppearance.BorderSize = 0;
+            this.btn_home.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(40)))), ((int)(((byte)(69)))));
+            this.btn_home.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(40)))), ((int)(((byte)(69)))));
+            this.btn_home.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_home.Font = new System.Drawing.Font("Segoe UI", 10.5F);
+            this.btn_home.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
+            this.btn_home.IconChar = FontAwesome.Sharp.IconChar.HomeLg;
+            this.btn_home.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
+            this.btn_home.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btn_home.IconSize = 20;
+            this.btn_home.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_home.Location = new System.Drawing.Point(0, 70);
+            this.btn_home.Name = "btn_home";
+            this.btn_home.Padding = new System.Windows.Forms.Padding(14, 0, 0, 0);
+            this.btn_home.Size = new System.Drawing.Size(200, 48);
+            this.btn_home.TabIndex = 1;
+            this.btn_home.Text = "Home";
+            this.btn_home.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btn_home.UseVisualStyleBackColor = false;
+            this.btn_home.Click += new System.EventHandler(this.btn_home_Click);
+            // 
+            // pnlSidebarLogo
+            // 
+            this.pnlSidebarLogo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(29)))), ((int)(((byte)(56)))));
+            this.pnlSidebarLogo.Controls.Add(this.picLogo);
+            this.pnlSidebarLogo.Controls.Add(this.lblAppSub);
+            this.pnlSidebarLogo.Controls.Add(this.lblAppName);
+            this.pnlSidebarLogo.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlSidebarLogo.Location = new System.Drawing.Point(0, 0);
+            this.pnlSidebarLogo.Name = "pnlSidebarLogo";
+            this.pnlSidebarLogo.Size = new System.Drawing.Size(200, 70);
+            this.pnlSidebarLogo.TabIndex = 0;
+            // 
+            // picLogo
+            // 
+            this.picLogo.BackColor = System.Drawing.Color.Transparent;
+            this.picLogo.Location = new System.Drawing.Point(8, 13);
+            this.picLogo.Name = "picLogo";
+            this.picLogo.Size = new System.Drawing.Size(44, 44);
+            this.picLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picLogo.TabIndex = 3;
+            this.picLogo.TabStop = false;
+            // 
+            // lblAppSub
+            // 
+            this.lblAppSub.AutoSize = true;
+            this.lblAppSub.Font = new System.Drawing.Font("Segoe UI", 8.5F);
+            this.lblAppSub.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
+            this.lblAppSub.Location = new System.Drawing.Point(72, 40);
+            this.lblAppSub.Name = "lblAppSub";
+            this.lblAppSub.Size = new System.Drawing.Size(82, 15);
+            this.lblAppSub.TabIndex = 1;
+            this.lblAppSub.Text = "Student Portal";
+            // 
+            // lblAppName
+            // 
+            this.lblAppName.AutoSize = true;
+            this.lblAppName.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold);
+            this.lblAppName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(111)))), ((int)(((byte)(255)))));
+            this.lblAppName.Location = new System.Drawing.Point(65, 12);
+            this.lblAppName.Name = "lblAppName";
+            this.lblAppName.Size = new System.Drawing.Size(110, 28);
+            this.lblAppName.TabIndex = 0;
+            this.lblAppName.Text = "SQL Judge";
+            // 
+            // btn_settings
+            // 
+            this.btn_settings.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(29)))), ((int)(((byte)(56)))));
+            this.btn_settings.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.btn_settings.FlatAppearance.BorderSize = 0;
+            this.btn_settings.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(40)))), ((int)(((byte)(69)))));
+            this.btn_settings.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(40)))), ((int)(((byte)(69)))));
+            this.btn_settings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_settings.Font = new System.Drawing.Font("Segoe UI", 10.5F);
+            this.btn_settings.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
+            this.btn_settings.IconChar = FontAwesome.Sharp.IconChar.Gears;
+            this.btn_settings.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
+            this.btn_settings.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btn_settings.IconSize = 20;
+            this.btn_settings.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_settings.Location = new System.Drawing.Point(0, 604);
+            this.btn_settings.Name = "btn_settings";
+            this.btn_settings.Padding = new System.Windows.Forms.Padding(14, 0, 0, 0);
+            this.btn_settings.Size = new System.Drawing.Size(200, 48);
+            this.btn_settings.TabIndex = 10;
+            this.btn_settings.Text = "Settings";
+            this.btn_settings.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btn_settings.UseVisualStyleBackColor = false;
+            this.btn_settings.Click += new System.EventHandler(this.btn_settings_Click);
+            // 
+            // btn_Logout
+            // 
+            this.btn_Logout.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(29)))), ((int)(((byte)(56)))));
+            this.btn_Logout.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.btn_Logout.FlatAppearance.BorderSize = 0;
+            this.btn_Logout.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(40)))), ((int)(((byte)(69)))));
+            this.btn_Logout.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(40)))), ((int)(((byte)(69)))));
+            this.btn_Logout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_Logout.Font = new System.Drawing.Font("Segoe UI", 10.5F);
+            this.btn_Logout.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
+            this.btn_Logout.IconChar = FontAwesome.Sharp.IconChar.RightFromBracket;
+            this.btn_Logout.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
+            this.btn_Logout.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btn_Logout.IconSize = 20;
+            this.btn_Logout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_Logout.Location = new System.Drawing.Point(0, 652);
+            this.btn_Logout.Name = "btn_Logout";
+            this.btn_Logout.Padding = new System.Windows.Forms.Padding(14, 0, 0, 0);
+            this.btn_Logout.Size = new System.Drawing.Size(200, 48);
+            this.btn_Logout.TabIndex = 11;
+            this.btn_Logout.Text = "Logout";
+            this.btn_Logout.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btn_Logout.UseVisualStyleBackColor = false;
+            this.btn_Logout.Click += new System.EventHandler(this.btn_Logout_Click);
+            // 
+            // pnlHeader
+            // 
+            this.pnlHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
+            this.pnlHeader.Controls.Add(this.lblOnlineStatus);
+            this.pnlHeader.Controls.Add(this.lblPageTitle);
+            this.pnlHeader.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlHeader.Location = new System.Drawing.Point(200, 0);
+            this.pnlHeader.Name = "pnlHeader";
+            this.pnlHeader.Size = new System.Drawing.Size(1004, 56);
+            this.pnlHeader.TabIndex = 1;
+            // 
+            // lblOnlineStatus
+            // 
+            this.lblOnlineStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblOnlineStatus.AutoSize = true;
+            this.lblOnlineStatus.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lblOnlineStatus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(207)))), ((int)(((byte)(142)))));
+            this.lblOnlineStatus.Location = new System.Drawing.Point(930, 20);
+            this.lblOnlineStatus.Name = "lblOnlineStatus";
+            this.lblOnlineStatus.Size = new System.Drawing.Size(52, 15);
+            this.lblOnlineStatus.TabIndex = 1;
+            this.lblOnlineStatus.Text = "● Online";
+            // 
+            // lblPageTitle
+            // 
+            this.lblPageTitle.AutoSize = true;
+            this.lblPageTitle.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold);
+            this.lblPageTitle.ForeColor = System.Drawing.Color.White;
+            this.lblPageTitle.Location = new System.Drawing.Point(20, 14);
+            this.lblPageTitle.Name = "lblPageTitle";
+            this.lblPageTitle.Size = new System.Drawing.Size(172, 30);
+            this.lblPageTitle.TabIndex = 0;
+            this.lblPageTitle.Text = "Solve Problems";
+            // 
+            // pnlMain
+            // 
+            this.pnlMain.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(31)))), ((int)(((byte)(58)))));
+            this.pnlMain.Controls.Add(this.splitMain);
+            this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlMain.Location = new System.Drawing.Point(200, 56);
+            this.pnlMain.Name = "pnlMain";
+            this.pnlMain.Padding = new System.Windows.Forms.Padding(10);
+            this.pnlMain.Size = new System.Drawing.Size(1004, 644);
+            this.pnlMain.TabIndex = 2;
+            // 
+            // splitMain
+            // 
+            this.splitMain.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(31)))), ((int)(((byte)(58)))));
+            this.splitMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitMain.Location = new System.Drawing.Point(10, 10);
+            this.splitMain.Name = "splitMain";
+            // 
+            // splitMain.Panel1
+            // 
+            this.splitMain.Panel1.Controls.Add(this.pnlProblemList);
+            // 
+            // splitMain.Panel2
+            // 
+            this.splitMain.Panel2.Controls.Add(this.splitRight);
+            this.splitMain.Size = new System.Drawing.Size(984, 624);
+            this.splitMain.SplitterDistance = 280;
+            this.splitMain.SplitterWidth = 6;
+            this.splitMain.TabIndex = 0;
+            // 
+            // pnlProblemList
+            // 
+            this.pnlProblemList.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
+            this.pnlProblemList.Controls.Add(this.dgvProblems);
+            this.pnlProblemList.Controls.Add(this.pnlListHeader);
+            this.pnlProblemList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlProblemList.Location = new System.Drawing.Point(0, 0);
+            this.pnlProblemList.Name = "pnlProblemList";
+            this.pnlProblemList.Size = new System.Drawing.Size(280, 624);
+            this.pnlProblemList.TabIndex = 0;
+            // 
+            // dgvProblems
+            // 
+            this.dgvProblems.AllowUserToAddRows = false;
+            this.dgvProblems.AllowUserToDeleteRows = false;
+            this.dgvProblems.AllowUserToResizeRows = false;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(35)))), ((int)(((byte)(60)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(201)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(40)))), ((int)(((byte)(69)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
+            this.dgvProblems.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvProblems.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
+            this.dgvProblems.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 8.5F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
+            this.dgvProblems.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvProblems.ColumnHeadersHeight = 36;
+            this.dgvProblems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(201)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(40)))), ((int)(((byte)(69)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvProblems.DefaultCellStyle = dataGridViewCellStyle3;
+            this.dgvProblems.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvProblems.EnableHeadersVisualStyles = false;
+            this.dgvProblems.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(52)))), ((int)(((byte)(88)))));
+            this.dgvProblems.Location = new System.Drawing.Point(0, 64);
+            this.dgvProblems.MultiSelect = false;
+            this.dgvProblems.Name = "dgvProblems";
+            this.dgvProblems.ReadOnly = true;
+            this.dgvProblems.RowHeadersVisible = false;
+            this.dgvProblems.RowTemplate.Height = 34;
+            this.dgvProblems.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvProblems.Size = new System.Drawing.Size(280, 560);
+            this.dgvProblems.TabIndex = 1;
+            this.dgvProblems.SelectionChanged += new System.EventHandler(this.dgvProblems_SelectionChanged);
+            // 
+            // pnlListHeader
+            // 
+            this.pnlListHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
+            this.pnlListHeader.Controls.Add(this.cmbDifficulty);
+            this.pnlListHeader.Controls.Add(this.lblProblemsTitle);
+            this.pnlListHeader.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlListHeader.Location = new System.Drawing.Point(0, 0);
+            this.pnlListHeader.Name = "pnlListHeader";
+            this.pnlListHeader.Padding = new System.Windows.Forms.Padding(10, 8, 10, 8);
+            this.pnlListHeader.Size = new System.Drawing.Size(280, 64);
+            this.pnlListHeader.TabIndex = 0;
+            // 
+            // cmbDifficulty
+            // 
+            this.cmbDifficulty.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(40)))), ((int)(((byte)(69)))));
+            this.cmbDifficulty.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbDifficulty.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cmbDifficulty.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.cmbDifficulty.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(201)))), ((int)(((byte)(224)))));
+            this.cmbDifficulty.Items.AddRange(new object[] {
+            "All",
+            "Easy",
+            "Medium",
+            "Hard"});
+            this.cmbDifficulty.Location = new System.Drawing.Point(10, 36);
+            this.cmbDifficulty.Name = "cmbDifficulty";
+            this.cmbDifficulty.Size = new System.Drawing.Size(260, 23);
+            this.cmbDifficulty.TabIndex = 1;
+            this.cmbDifficulty.SelectedIndexChanged += new System.EventHandler(this.cmbDifficulty_SelectedIndexChanged);
+            // 
+            // lblProblemsTitle
+            // 
+            this.lblProblemsTitle.AutoSize = true;
+            this.lblProblemsTitle.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
+            this.lblProblemsTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
+            this.lblProblemsTitle.Location = new System.Drawing.Point(10, 10);
+            this.lblProblemsTitle.Name = "lblProblemsTitle";
+            this.lblProblemsTitle.Size = new System.Drawing.Size(75, 20);
+            this.lblProblemsTitle.TabIndex = 0;
+            this.lblProblemsTitle.Text = "Problems";
+            // 
+            // splitRight
+            // 
+            this.splitRight.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(31)))), ((int)(((byte)(58)))));
+            this.splitRight.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitRight.Location = new System.Drawing.Point(0, 0);
+            this.splitRight.Name = "splitRight";
+            this.splitRight.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitRight.Panel1
+            // 
+            this.splitRight.Panel1.Controls.Add(this.pnlEditorArea);
+            // 
+            // splitRight.Panel2
+            // 
+            this.splitRight.Panel2.Controls.Add(this.pnlOutputArea);
+            this.splitRight.Size = new System.Drawing.Size(698, 624);
+            this.splitRight.SplitterDistance = 443;
+            this.splitRight.SplitterWidth = 6;
+            this.splitRight.TabIndex = 0;
+            // 
+            // pnlEditorArea
+            // 
+            this.pnlEditorArea.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
+            this.pnlEditorArea.Controls.Add(this.rtbSQLEditor);
+            this.pnlEditorArea.Controls.Add(this.pnlEditorActions);
+            this.pnlEditorArea.Controls.Add(this.pnlEditorHeader);
+            this.pnlEditorArea.Controls.Add(this.pnlProblemDesc);
+            this.pnlEditorArea.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlEditorArea.Location = new System.Drawing.Point(0, 0);
+            this.pnlEditorArea.Name = "pnlEditorArea";
+            this.pnlEditorArea.Size = new System.Drawing.Size(698, 443);
+            this.pnlEditorArea.TabIndex = 0;
+            // 
+            // rtbSQLEditor
+            // 
+            this.rtbSQLEditor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(24)))), ((int)(((byte)(48)))));
+            this.rtbSQLEditor.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.rtbSQLEditor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtbSQLEditor.Font = new System.Drawing.Font("Consolas", 11F);
+            this.rtbSQLEditor.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(223)))), ((int)(((byte)(255)))));
+            this.rtbSQLEditor.Location = new System.Drawing.Point(0, 166);
+            this.rtbSQLEditor.Name = "rtbSQLEditor";
+            this.rtbSQLEditor.Size = new System.Drawing.Size(698, 229);
+            this.rtbSQLEditor.TabIndex = 2;
+            this.rtbSQLEditor.Text = "-- Write your SQL query here\nSELECT ";
+            this.rtbSQLEditor.WordWrap = false;
+            this.rtbSQLEditor.KeyUp += new System.Windows.Forms.KeyEventHandler(this.rtbSQLEditor_KeyUp);
+            // 
+            // pnlEditorActions
+            // 
+            this.pnlEditorActions.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(29)))), ((int)(((byte)(56)))));
+            this.pnlEditorActions.Controls.Add(this.lblLineCol);
+            this.pnlEditorActions.Controls.Add(this.btnSubmit);
+            this.pnlEditorActions.Controls.Add(this.btnRunQuery);
+            this.pnlEditorActions.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pnlEditorActions.Location = new System.Drawing.Point(0, 395);
+            this.pnlEditorActions.Name = "pnlEditorActions";
+            this.pnlEditorActions.Padding = new System.Windows.Forms.Padding(10, 6, 10, 6);
+            this.pnlEditorActions.Size = new System.Drawing.Size(698, 48);
+            this.pnlEditorActions.TabIndex = 3;
+            // 
+            // lblLineCol
+            // 
+            this.lblLineCol.Dock = System.Windows.Forms.DockStyle.Right;
+            this.lblLineCol.Font = new System.Drawing.Font("Consolas", 8.5F);
+            this.lblLineCol.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(106)))), ((int)(((byte)(140)))));
+            this.lblLineCol.Location = new System.Drawing.Point(568, 6);
+            this.lblLineCol.Name = "lblLineCol";
+            this.lblLineCol.Size = new System.Drawing.Size(120, 36);
+            this.lblLineCol.TabIndex = 2;
+            this.lblLineCol.Text = "Ln 1, Col 1";
+            this.lblLineCol.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // btnSubmit
+            // 
+            this.btnSubmit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(207)))), ((int)(((byte)(142)))));
+            this.btnSubmit.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnSubmit.FlatAppearance.BorderSize = 0;
+            this.btnSubmit.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(175)))), ((int)(((byte)(115)))));
+            this.btnSubmit.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(220)))), ((int)(((byte)(155)))));
+            this.btnSubmit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSubmit.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Bold);
+            this.btnSubmit.ForeColor = System.Drawing.Color.White;
+            this.btnSubmit.IconChar = FontAwesome.Sharp.IconChar.PaperPlane;
+            this.btnSubmit.IconColor = System.Drawing.Color.White;
+            this.btnSubmit.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnSubmit.IconSize = 14;
+            this.btnSubmit.Location = new System.Drawing.Point(120, 6);
+            this.btnSubmit.Name = "btnSubmit";
+            this.btnSubmit.Padding = new System.Windows.Forms.Padding(8, 0, 8, 0);
+            this.btnSubmit.Size = new System.Drawing.Size(110, 36);
+            this.btnSubmit.TabIndex = 1;
+            this.btnSubmit.Text = "Submit";
+            this.btnSubmit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSubmit.UseVisualStyleBackColor = false;
+            this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
+            // 
+            // btnRunQuery
+            // 
+            this.btnRunQuery.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(182)))), ((int)(((byte)(255)))));
+            this.btnRunQuery.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnRunQuery.FlatAppearance.BorderSize = 0;
+            this.btnRunQuery.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(150)))), ((int)(((byte)(220)))));
+            this.btnRunQuery.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(190)))), ((int)(((byte)(255)))));
+            this.btnRunQuery.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRunQuery.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Bold);
+            this.btnRunQuery.ForeColor = System.Drawing.Color.White;
+            this.btnRunQuery.IconChar = FontAwesome.Sharp.IconChar.Play;
+            this.btnRunQuery.IconColor = System.Drawing.Color.White;
+            this.btnRunQuery.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnRunQuery.IconSize = 14;
+            this.btnRunQuery.Location = new System.Drawing.Point(10, 6);
+            this.btnRunQuery.Name = "btnRunQuery";
+            this.btnRunQuery.Padding = new System.Windows.Forms.Padding(8, 0, 8, 0);
+            this.btnRunQuery.Size = new System.Drawing.Size(110, 36);
+            this.btnRunQuery.TabIndex = 0;
+            this.btnRunQuery.Text = "Run";
+            this.btnRunQuery.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnRunQuery.UseVisualStyleBackColor = false;
+            this.btnRunQuery.Click += new System.EventHandler(this.btnRunQuery_Click);
+            // 
+            // pnlEditorHeader
+            // 
+            this.pnlEditorHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
+            this.pnlEditorHeader.Controls.Add(this.btnClearEditor);
+            this.pnlEditorHeader.Controls.Add(this.lblEditorTitle);
+            this.pnlEditorHeader.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlEditorHeader.Location = new System.Drawing.Point(0, 130);
+            this.pnlEditorHeader.Name = "pnlEditorHeader";
+            this.pnlEditorHeader.Padding = new System.Windows.Forms.Padding(12, 0, 8, 0);
+            this.pnlEditorHeader.Size = new System.Drawing.Size(698, 36);
+            this.pnlEditorHeader.TabIndex = 1;
+            // 
+            // btnClearEditor
+            // 
+            this.btnClearEditor.BackColor = System.Drawing.Color.Transparent;
+            this.btnClearEditor.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnClearEditor.FlatAppearance.BorderSize = 0;
+            this.btnClearEditor.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(40)))), ((int)(((byte)(69)))));
+            this.btnClearEditor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClearEditor.Font = new System.Drawing.Font("Segoe UI", 8.5F);
+            this.btnClearEditor.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
+            this.btnClearEditor.IconChar = FontAwesome.Sharp.IconChar.Eraser;
+            this.btnClearEditor.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
+            this.btnClearEditor.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnClearEditor.IconSize = 14;
+            this.btnClearEditor.Location = new System.Drawing.Point(610, 0);
+            this.btnClearEditor.Name = "btnClearEditor";
+            this.btnClearEditor.Size = new System.Drawing.Size(80, 36);
+            this.btnClearEditor.TabIndex = 1;
+            this.btnClearEditor.Text = "Clear";
+            this.btnClearEditor.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnClearEditor.UseVisualStyleBackColor = false;
+            this.btnClearEditor.Click += new System.EventHandler(this.btnClearEditor_Click);
+            // 
+            // lblEditorTitle
+            // 
+            this.lblEditorTitle.AutoSize = true;
+            this.lblEditorTitle.Dock = System.Windows.Forms.DockStyle.Left;
+            this.lblEditorTitle.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Bold);
+            this.lblEditorTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
+            this.lblEditorTitle.Location = new System.Drawing.Point(12, 0);
+            this.lblEditorTitle.Name = "lblEditorTitle";
+            this.lblEditorTitle.Size = new System.Drawing.Size(81, 17);
+            this.lblEditorTitle.TabIndex = 0;
+            this.lblEditorTitle.Text = "  SQL Editor";
+            this.lblEditorTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // pnlProblemDesc
+            // 
+            this.pnlProblemDesc.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(29)))), ((int)(((byte)(56)))));
+            this.pnlProblemDesc.Controls.Add(this.lblDifficultyBadge);
+            this.pnlProblemDesc.Controls.Add(this.lblProblemName);
+            this.pnlProblemDesc.Controls.Add(this.rtbProblemDesc);
+            this.pnlProblemDesc.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlProblemDesc.Location = new System.Drawing.Point(0, 0);
+            this.pnlProblemDesc.Name = "pnlProblemDesc";
+            this.pnlProblemDesc.Padding = new System.Windows.Forms.Padding(12, 8, 12, 8);
+            this.pnlProblemDesc.Size = new System.Drawing.Size(698, 130);
+            this.pnlProblemDesc.TabIndex = 0;
+            // 
+            // lblDifficultyBadge
+            // 
+            this.lblDifficultyBadge.AutoSize = true;
+            this.lblDifficultyBadge.Font = new System.Drawing.Font("Segoe UI", 8.5F, System.Drawing.FontStyle.Bold);
+            this.lblDifficultyBadge.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(207)))), ((int)(((byte)(142)))));
+            this.lblDifficultyBadge.Location = new System.Drawing.Point(12, 34);
+            this.lblDifficultyBadge.Name = "lblDifficultyBadge";
+            this.lblDifficultyBadge.Size = new System.Drawing.Size(0, 15);
+            this.lblDifficultyBadge.TabIndex = 1;
+            // 
+            // lblProblemName
+            // 
+            this.lblProblemName.AutoSize = true;
+            this.lblProblemName.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.lblProblemName.ForeColor = System.Drawing.Color.White;
+            this.lblProblemName.Location = new System.Drawing.Point(12, 10);
+            this.lblProblemName.Name = "lblProblemName";
+            this.lblProblemName.Size = new System.Drawing.Size(206, 21);
+            this.lblProblemName.TabIndex = 0;
+            this.lblProblemName.Text = "Select a problem to begin";
+            // 
+            // rtbProblemDesc
+            // 
+            this.rtbProblemDesc.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(29)))), ((int)(((byte)(56)))));
+            this.rtbProblemDesc.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.rtbProblemDesc.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            this.rtbProblemDesc.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(201)))), ((int)(((byte)(224)))));
+            this.rtbProblemDesc.Location = new System.Drawing.Point(12, 54);
+            this.rtbProblemDesc.Name = "rtbProblemDesc";
+            this.rtbProblemDesc.ReadOnly = true;
+            this.rtbProblemDesc.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
+            this.rtbProblemDesc.Size = new System.Drawing.Size(674, 68);
+            this.rtbProblemDesc.TabIndex = 2;
+            this.rtbProblemDesc.Text = "";
+            // 
+            // pnlOutputArea
+            // 
+            this.pnlOutputArea.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
+            this.pnlOutputArea.Controls.Add(this.dgvOutput);
+            this.pnlOutputArea.Controls.Add(this.pnlOutputHeader);
+            this.pnlOutputArea.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlOutputArea.Location = new System.Drawing.Point(0, 0);
+            this.pnlOutputArea.Name = "pnlOutputArea";
+            this.pnlOutputArea.Size = new System.Drawing.Size(698, 175);
+            this.pnlOutputArea.TabIndex = 0;
+            // 
+            // dgvOutput
+            // 
+            this.dgvOutput.AllowUserToAddRows = false;
+            this.dgvOutput.AllowUserToDeleteRows = false;
+            this.dgvOutput.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
+            this.dgvOutput.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvOutput.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvOutput.ColumnHeadersHeight = 34;
+            this.dgvOutput.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(201)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(40)))), ((int)(((byte)(69)))));
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvOutput.DefaultCellStyle = dataGridViewCellStyle4;
+            this.dgvOutput.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvOutput.EnableHeadersVisualStyles = false;
+            this.dgvOutput.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(52)))), ((int)(((byte)(88)))));
+            this.dgvOutput.Location = new System.Drawing.Point(0, 36);
+            this.dgvOutput.Name = "dgvOutput";
+            this.dgvOutput.ReadOnly = true;
+            this.dgvOutput.RowHeadersVisible = false;
+            this.dgvOutput.RowTemplate.Height = 30;
+            this.dgvOutput.Size = new System.Drawing.Size(698, 139);
+            this.dgvOutput.TabIndex = 1;
+            // 
+            // pnlOutputHeader
+            // 
+            this.pnlOutputHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
+            this.pnlOutputHeader.Controls.Add(this.lblResultBadge);
+            this.pnlOutputHeader.Controls.Add(this.btnClearOutput);
+            this.pnlOutputHeader.Controls.Add(this.lblOutputTitle);
+            this.pnlOutputHeader.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlOutputHeader.Location = new System.Drawing.Point(0, 0);
+            this.pnlOutputHeader.Name = "pnlOutputHeader";
+            this.pnlOutputHeader.Padding = new System.Windows.Forms.Padding(12, 0, 8, 0);
+            this.pnlOutputHeader.Size = new System.Drawing.Size(698, 36);
+            this.pnlOutputHeader.TabIndex = 0;
+            // 
+            // lblResultBadge
+            // 
+            this.lblResultBadge.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblResultBadge.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.lblResultBadge.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
+            this.lblResultBadge.Location = new System.Drawing.Point(122, 0);
+            this.lblResultBadge.Name = "lblResultBadge";
+            this.lblResultBadge.Size = new System.Drawing.Size(488, 36);
+            this.lblResultBadge.TabIndex = 1;
+            this.lblResultBadge.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // btnClearOutput
+            // 
+            this.btnClearOutput.BackColor = System.Drawing.Color.Transparent;
+            this.btnClearOutput.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnClearOutput.FlatAppearance.BorderSize = 0;
+            this.btnClearOutput.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(40)))), ((int)(((byte)(69)))));
+            this.btnClearOutput.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClearOutput.Font = new System.Drawing.Font("Segoe UI", 8.5F);
+            this.btnClearOutput.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
+            this.btnClearOutput.IconChar = FontAwesome.Sharp.IconChar.Eraser;
+            this.btnClearOutput.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
+            this.btnClearOutput.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnClearOutput.IconSize = 14;
+            this.btnClearOutput.Location = new System.Drawing.Point(610, 0);
+            this.btnClearOutput.Name = "btnClearOutput";
+            this.btnClearOutput.Size = new System.Drawing.Size(80, 36);
+            this.btnClearOutput.TabIndex = 2;
+            this.btnClearOutput.Text = "Clear";
+            this.btnClearOutput.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnClearOutput.UseVisualStyleBackColor = false;
+            this.btnClearOutput.Click += new System.EventHandler(this.btnClearOutput_Click);
+            // 
+            // lblOutputTitle
+            // 
+            this.lblOutputTitle.Dock = System.Windows.Forms.DockStyle.Left;
+            this.lblOutputTitle.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Bold);
+            this.lblOutputTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
+            this.lblOutputTitle.Location = new System.Drawing.Point(12, 0);
+            this.lblOutputTitle.Name = "lblOutputTitle";
+            this.lblOutputTitle.Size = new System.Drawing.Size(110, 36);
+            this.lblOutputTitle.TabIndex = 0;
+            this.lblOutputTitle.Text = "  Output";
+            this.lblOutputTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // SolveProblemUI
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(31)))), ((int)(((byte)(58)))));
+            this.ClientSize = new System.Drawing.Size(1204, 700);
+            this.Controls.Add(this.pnlMain);
+            this.Controls.Add(this.pnlHeader);
+            this.Controls.Add(this.pnlSidebar);
+            this.Name = "SolveProblemUI";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "SQL Judge — Solve Problems";
+            this.Load += new System.EventHandler(this.SolveProblemUI_Load);
+            this.pnlSidebar.ResumeLayout(false);
+            this.pnlSidebarLogo.ResumeLayout(false);
+            this.pnlSidebarLogo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
+            this.pnlHeader.ResumeLayout(false);
+            this.pnlHeader.PerformLayout();
+            this.pnlMain.ResumeLayout(false);
+            this.splitMain.Panel1.ResumeLayout(false);
+            this.splitMain.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitMain)).EndInit();
+            this.splitMain.ResumeLayout(false);
+            this.pnlProblemList.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvProblems)).EndInit();
+            this.pnlListHeader.ResumeLayout(false);
+            this.pnlListHeader.PerformLayout();
+            this.splitRight.Panel1.ResumeLayout(false);
+            this.splitRight.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitRight)).EndInit();
+            this.splitRight.ResumeLayout(false);
+            this.pnlEditorArea.ResumeLayout(false);
+            this.pnlEditorActions.ResumeLayout(false);
+            this.pnlEditorHeader.ResumeLayout(false);
+            this.pnlEditorHeader.PerformLayout();
+            this.pnlProblemDesc.ResumeLayout(false);
+            this.pnlProblemDesc.PerformLayout();
+            this.pnlOutputArea.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvOutput)).EndInit();
+            this.pnlOutputHeader.ResumeLayout(false);
+            this.ResumeLayout(false);
+
+        }
+
+        // ── Declarations ─────────────────────────────────────────────────────
+        private System.Windows.Forms.Panel pnlSidebar;
+        private System.Windows.Forms.Panel pnlSidebarLogo;
+        private System.Windows.Forms.PictureBox picLogo;
+        private System.Windows.Forms.Label lblAppName;
+        private System.Windows.Forms.Label lblAppSub;
+        private FontAwesome.Sharp.IconButton btn_home;
+        private FontAwesome.Sharp.IconButton btn_problems;
+        private FontAwesome.Sharp.IconButton btn_contest;
+        private FontAwesome.Sharp.IconButton btnReport;
+        private FontAwesome.Sharp.IconButton btn_settings;
+        private FontAwesome.Sharp.IconButton btn_Logout;
+        private System.Windows.Forms.Panel pnlHeader;
+        private System.Windows.Forms.Label lblPageTitle;
+        private System.Windows.Forms.Label lblOnlineStatus;
+        private System.Windows.Forms.Panel pnlMain;
+        private System.Windows.Forms.SplitContainer splitMain;
+        private System.Windows.Forms.Panel pnlProblemList;
+        private System.Windows.Forms.Panel pnlListHeader;
+        private System.Windows.Forms.Label lblProblemsTitle;
+        private System.Windows.Forms.ComboBox cmbDifficulty;
+        private System.Windows.Forms.DataGridView dgvProblems;
+        private System.Windows.Forms.SplitContainer splitRight;
+        private System.Windows.Forms.Panel pnlEditorArea;
+        private System.Windows.Forms.Panel pnlProblemDesc;
+        private System.Windows.Forms.Label lblProblemName;
+        private System.Windows.Forms.Label lblDifficultyBadge;
+        private System.Windows.Forms.RichTextBox rtbProblemDesc;
+        private System.Windows.Forms.Panel pnlEditorHeader;
+        private System.Windows.Forms.Label lblEditorTitle;
+        private FontAwesome.Sharp.IconButton btnClearEditor;
+        private System.Windows.Forms.RichTextBox rtbSQLEditor;
+        private System.Windows.Forms.Panel pnlEditorActions;
+        private FontAwesome.Sharp.IconButton btnRunQuery;
+        private FontAwesome.Sharp.IconButton btnSubmit;
+        private System.Windows.Forms.Label lblLineCol;
+        private System.Windows.Forms.Panel pnlOutputArea;
+        private System.Windows.Forms.Panel pnlOutputHeader;
+        private System.Windows.Forms.Label lblOutputTitle;
+        private System.Windows.Forms.Label lblResultBadge;
+        private FontAwesome.Sharp.IconButton btnClearOutput;
+        private System.Windows.Forms.DataGridView dgvOutput;
+    }
+}

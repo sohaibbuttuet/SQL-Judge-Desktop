@@ -1,5 +1,6 @@
 ﻿using SQL_Judge_System.BL;
 using SQL_Judge_System.Models;
+using SQL_Judge_System.UI;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -12,10 +13,11 @@ namespace SQL_Judge_System.DL
 {
     internal class UserDL
     {
+        // Auth Form
         public static int SignUp(User user)
         {
-            string query = $"INSERT INTO Users (FullName, Email, Password, IsActive, CreatedAt) " +
-                           $"VALUES ('{user.FullName}', '{user.Email}', '{user.Password}', {user.IsActive}, '{user.CreatedAt:yyyy-MM-dd HH:mm:ss}'); " +
+            string query = $"INSERT INTO Users (FullName, Email, Password, IsActive) " +
+                           $"VALUES ('{user.FullName}', '{user.Email}', '{user.Password}', {user.IsActive}); " +
                            $"SELECT LAST_INSERT_ID();";
 
             return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
@@ -30,12 +32,57 @@ namespace SQL_Judge_System.DL
             string query = $"SELECT * FROM Users WHERE Email = '{email}' AND Password = '{password}' AND IsActive = 1;";
             DataTable dt = DatabaseHelper.Instance.GetDataTable(query);
 
-            if(dt.Rows.Count == 0 )
+            if(dt.Rows.Count == 0)
                 return null;
 
             return MapDataRowToUser(dt.Rows[0]);
         }
-    
+        public static User GetUserByID(int userId)
+        {
+            string query = $"SELECT * FROM Users WHERE UserID = {userId};";
+            DataTable dt = DatabaseHelper.Instance.GetDataTable(query);
+
+            if (dt.Rows.Count == 0)
+                return null;
+
+            return MapDataRowToUser(dt.Rows[0]);
+        }
+
+        // Helping Function
+        private static User MapDataRowToUser(DataRow row)
+        {
+            return new User(Convert.ToInt32(row["UserID"]), row["FullName"].ToString(), row["Email"].ToString(), row["Password"].ToString(), Convert.ToBoolean(row["IsActive"]), Convert.ToDateTime(row["CreatedAt"]), Convert.ToDateTime(row["UpdatedAt"]));
+        }
+
+        // Validation
+        public static bool IsEmailRegistered(string email)
+        {
+            string query = $"SELECT COUNT(*) FROM Users WHERE Email = '{email}';";
+            return DatabaseHelper.Instance.ExecuteScalar(query) > 0;
+        }
+        public static bool IsEmailRegistered(int userID, string email)
+        {
+            string query = $"SELECT COUNT(*) FROM Users WHERE UserID <> {userID} AND Email = '{email}';";
+            return DatabaseHelper.Instance.ExecuteScalar(query) > 0;
+        }
+        public static bool IsUserExists(int userId)
+        {
+            string query = $"SELECT COUNT(*) FROM Users WHERE UserID = {userId};";
+            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query)) > 0;
+        }
+        public static bool IsUserAdmin(int userId)
+        {
+            string query = $"SELECT COUNT(*) FROM vw_users WHERE RoleName = 'Admin' AND UserID = {userId};";
+            return DatabaseHelper.Instance.ExecuteScalar(query) > 0;
+        }
+        public static bool IsUserSuperAdmin(int userId)
+        {
+            string query = $"SELECT COUNT(*) FROM vw_users WHERE RoleName = 'SuperAdmin' AND UserID = {userId};";
+            return DatabaseHelper.Instance.ExecuteScalar(query) > 0;
+        }
+
+        // ----------------------------------- AdminDashboardUI Form ------------------------------------ //
+
         public static void ActivateUser(int userId)
         {
             string query = $"UPDATE Users SET IsActive = 1 WHERE UserID = {userId};";
@@ -47,52 +94,6 @@ namespace SQL_Judge_System.DL
             DatabaseHelper.Instance.Update(query);
         }
 
-        public static bool IsEmailRegistered(string email)
-        {
-            string query = $"SELECT COUNT(*) FROM Users WHERE Email = '{email}';";
-            return DatabaseHelper.Instance.ExecuteScalar(query) > 0;
-        }
-        public static bool IsEmailRegistered(int userID, string email)
-        {
-            string query = $"SELECT COUNT(*) FROM Users WHERE UserID <> {userID} AND Email = '{email}';";
-            return DatabaseHelper.Instance.ExecuteScalar(query) > 0;
-        }
-
-        public static bool IsUserExists(int userId)
-        {
-            string query = $"SELECT COUNT(*) FROM Users WHERE UserID = {userId};";
-            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query)) > 0;
-        }
-
-        public static bool IsUserAdmin(int userId)
-        {
-            string query = $"SELECT COUNT(*) FROM vw_users WHERE RoleName = 'Admin' AND UserID = {userId};";
-            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query)) > 0;
-        }
-        public static bool IsUserSuperAdmin(int userId)
-        {
-            string query = $"SELECT COUNT(*) FROM vw_users WHERE RoleName = 'SuperAdmin' AND UserID = {userId};";
-            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query)) > 0;
-        }        
-
-        public static User GetUserByID(int userId)
-        {
-            string query = $"SELECT * FROM Users WHERE UserID = {userId};";
-            DataTable dt = DatabaseHelper.Instance.GetDataTable(query);
-
-            if (dt.Rows.Count == 0)
-                return null;
-            return MapDataRowToUser(dt.Rows[0]);
-        }
-
-
-        // Helper Function
-        private static User MapDataRowToUser(DataRow row)
-        {
-            return new User(Convert.ToInt32(row["UserID"]), row["FullName"].ToString(), row["Email"].ToString(), row["Password"].ToString(), Convert.ToBoolean(row["IsActive"]), Convert.ToDateTime(row["CreatedAt"]), Convert.ToDateTime(row["UpdatedAt"]));
-        }
-
-        // ----------------------------------------------------------------------- //
         // SuperAdmin Panel
         public static DataTable GetAdminList()
         {
@@ -141,8 +142,5 @@ namespace SQL_Judge_System.DL
             string query = "SELECT COUNT(*) FROM vw_users WHERE IsActive = 0;";
             return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
         }
-        // ----------------------------------------------------------------------- //
-
-
     }
 }

@@ -12,19 +12,10 @@ namespace SQL_Judge_System.Models
         private int studentID;
         private int problemID;
         private string queryText;
+        private int statusID;
         private int attemptNumber;
         private int totalScore;
         private DateTime submittedAt;
-
-        // =====================================
-        // Composition: (1-to-many relationship)
-        // =====================================
-        private List<SubmissionResult> submissionResults = new List<SubmissionResult>;
-
-        // =====================================
-        // Aggregation: (1-to-1 relationship)
-        // =====================================
-        private SubmissionStatus status;
 
         public int SubmissionID
         {
@@ -70,6 +61,16 @@ namespace SQL_Judge_System.Models
                 queryText = value;
             }
         }
+        public int StatusID
+        {
+            get { return statusID; }
+            set
+            {
+                if (value <= 0)
+                    throw new Exception("Invalid Status ID");
+                statusID = value;
+            }
+        }
         public int AttemptNumber
         {
             get { return attemptNumber; }
@@ -99,30 +100,6 @@ namespace SQL_Judge_System.Models
         }
 
         // =========================
-        // Aggregation Property
-        // =========================
-        public SubmissionStatus Status
-        {
-            get { return status; }
-            set
-            {
-                if (value == null)
-                    throw new Exception("Submission Status can not be null");
-
-                status = value;
-            }
-        }
-
-        // =========================
-        // Safe Composition Exposure
-        // =========================
-        public IReadOnlyList<SubmissionResult> SubmissionResults
-        {
-            get { return submissionResults.AsReadOnly(); }
-        }
-
-
-        // =========================
         // Constructers
         // =========================
         public Submission()
@@ -131,58 +108,16 @@ namespace SQL_Judge_System.Models
             AttemptNumber = 1;
             TotalScore = 0;
         }
-        public Submission(int studentID, int problemID, string queryText, SubmissionStatus status, int attemptNumber, int totalScore)
+        public Submission(int studentID, int problemID, string queryText, int statusID, int attemptNumber, int totalScore)
         {
             StudentID = studentID;
             ProblemID = problemID;
             QueryText = queryText;
-            Status = status;
+            StatusID = statusID;
             AttemptNumber = attemptNumber;
             TotalScore = totalScore;
 
             SubmittedAt = DateTime.Now;
         }
-
-        // =========================
-        // Composition Management
-        // =========================
-        public void AddResult(SubmissionResult result)
-        {
-            if (result == null)
-                throw new Exception("Submission result cannot be null.");
-
-            submissionResults.Add(result);
-        }
-        public void RemoveResult(SubmissionResult result)
-        {
-            if (result == null)
-                throw new Exception("Submission result cannot be null.");
-
-            submissionResults.Remove(result);
-        }
-        public void ClearResult()
-        {
-           submissionResults.Clear();
-        }
-
-        // =========================
-        // Business Methods
-        // =========================
-        public void AddScore(int score)
-        {
-            if (score < 0)
-                throw new Exception("Score cannot be negative.");
-
-            TotalScore += score;
-        }
-        public void IncrementAttempt()
-        {
-            AttemptNumber++;
-        }
-        public void UpdateStatus(SubmissionStatus newStatus)
-        {
-            Status = newStatus;
-        }
-
     }
 }

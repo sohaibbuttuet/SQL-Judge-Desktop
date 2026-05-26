@@ -174,6 +174,7 @@
             // 
             // cmbDifficulty
             // 
+            this.cmbDifficulty.BackColor = System.Drawing.Color.White;
             this.cmbDifficulty.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbDifficulty.Location = new System.Drawing.Point(20, 213);
             this.cmbDifficulty.Name = "cmbDifficulty";
@@ -348,8 +349,8 @@
             // ProblemPopupForm
             // 
             this.ClientSize = new System.Drawing.Size(584, 511);
-            this.Controls.Add(this.updatePanel);
             this.Controls.Add(this.addPanel);
+            this.Controls.Add(this.updatePanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.Name = "ProblemPopupForm";

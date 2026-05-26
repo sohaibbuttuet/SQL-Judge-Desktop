@@ -13,7 +13,7 @@ namespace SQL_Judge_System.LookupDL
     {
         public static List<ProblemDifficulty> GetProblemDifficulties()
         {
-            string query = "SELECT DifficultyID, DifficultyName FROM ProblemDifficulties";
+            string query = "SELECT * FROM ProblemDifficulties ORDER BY DifficultyID;";
             DataTable dt = DatabaseHelper.Instance.GetDataTable(query);
 
             List<ProblemDifficulty> list = new List<ProblemDifficulty>();

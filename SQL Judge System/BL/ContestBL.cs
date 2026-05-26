@@ -27,20 +27,20 @@ namespace SQL_Judge_System.BL
             {
                 throw new ArgumentException("Contest description cannot exceed 1000 characters.");
             }
-            if (IsContestExists(contest.Title))
+            if (ContestDL.IsContestExists(contest.Title))
             {
                 throw new ArgumentException("Contest already exists.");
             }
 
-            ContestDL.CreateContest(contest);
+            contest.ContestID = ContestDL.CreateContest(contest);
         }
-        public static void UpdateContest(Contest contest, int currentUserID)
+        public static void UpdateContest(Contest contest)
         {
             if (contest == null)
             {
                 throw new ArgumentNullException(nameof(contest), "Contest cannot be null.");
             }
-            if (IsContestExists(contest.ContestID, contest.Title))
+            if (ContestDL.IsContestExists(contest.ContestID, contest.Title))
             {
                 throw new ArgumentException("Contest title already exists.");
             }
@@ -52,20 +52,59 @@ namespace SQL_Judge_System.BL
             {
                 throw new ArgumentException("Contest description cannot exceed 1000 characters.");
             }
-            if (contest.CreatedBy != currentUserID)
-            {
-                throw new UnauthorizedAccessException("You are not allowed to update this contest.");
-            }
 
             ContestDL.UpdateContest(contest);
         }
-        public static bool IsContestExists(string Title)
+        public static Contest GetContestByID(int contestID)
         {
-            return ContestDL.IsContestExists(Title);
+            if (contestID <= 0)
+                throw new ArgumentException("Invalid Contest ID");
+
+            return ContestDL.GetContestByID(contestID);
         }
-        public static bool IsContestExists(int contestID, string Title)
+
+        public static void AddProblem(ContestProblem contestProblem)
         {
-            return ContestDL.IsContestExists(contestID, Title);
+            if(contestProblem.ContestID <= 0)
+                throw new ArgumentException("Invalid Contest ID");
+
+            if (contestProblem.ProblemID <= 0)
+                throw new ArgumentException("Invalid Problem ID");
+
+            if (ContestProblemDL.IsProblemExistsinContest(contestProblem))
+                throw new Exception("Problem already exists;");
+
+            ContestProblemDL.AddProblem(contestProblem);
+        }
+        public static void RemoveProblem(ContestProblem contestProblem)
+        {
+            if (contestProblem.ContestID <= 0)
+                throw new ArgumentException("Invalid Contest ID");
+
+            if (contestProblem.ProblemID <= 0)
+                throw new ArgumentException("Invalid Problem ID");
+
+            if (!ContestProblemDL.IsProblemExistsinContest(contestProblem))
+                throw new Exception("Problem does not exist;");
+
+            ContestProblemDL.DeleteProblem(contestProblem);
+        }
+        public static void DeleteProblemsByContestID(int contestID)
+        {
+            if (contestID <= 0)
+                throw new ArgumentException("Invalid Contest ID");
+
+            if (!ContestProblemDL.IsContestExists(contestID))
+                throw new Exception("Contest does not exists.");
+
+            ContestProblemDL.DeleteProblemsByContestID(contestID);
+        }
+        public static List<ContestProblem> GetProblemsByContestID(int contestID)
+        {
+            if (contestID <= 0)
+                throw new ArgumentException("Invalid Problem ID");
+
+            return ContestProblemDL.GetProblemsByContestID(contestID);
         }
 
         // For Contest Panel in Admin Dashboard

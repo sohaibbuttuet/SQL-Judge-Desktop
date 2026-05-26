@@ -15,23 +15,24 @@ namespace SQL_Judge_System.BL
         public static void AddProblem(Problem problem)
         {
             if(problem == null)
-            {
                 throw new ArgumentNullException(nameof(problem), "Problem cannot be null.");
-            }
+
+            if (ProblemDL.IsProblemExists(problem.Title, problem.DifficultyID))
+                throw new ArgumentException("Problem already exists.");                
+
             problem.ProblemID = ProblemDL.AddProblem(problem);
         }
         public static void UpdateProblem(Problem problem)
         {
             if (problem == null)
-            {
                 throw new ArgumentNullException(nameof(problem), "Problem cannot be null.");
-            }
+
+            if (ProblemDL.IsProblemExists(problem.ProblemID, problem.Title, problem.DifficultyID))
+                throw new ArgumentException("Problem already exists.");
+
             ProblemDL.UpdateProblem(problem);
         }
-        public static bool IsProblemExists(string title, int difficultyID)
-        {
-            return ProblemDL.IsProblemExists(title, difficultyID);
-        }
+
         public static void ActivateProblem(int problemId)
         {
             if (problemId < 0)
@@ -62,6 +63,10 @@ namespace SQL_Judge_System.BL
         {
             return ProblemDL.ProblemsList();
         }
+        public static List<Problem> GetProblems()
+        {
+            return ProblemDL.GetProblems();
+        }
         public static Problem GetProblemByID(int problemId)
         {
             if (problemId <= 0)
@@ -91,12 +96,12 @@ namespace SQL_Judge_System.BL
         {
             return ProblemTagsDL.GetProblemTags();
         }
-        public static List<int> GetProblemTagIDs(int problemId)
+        public static List<ProblemTagMap> GetProblemTags(int problemId)
         {
             if (problemId <= 0)
                 throw new ArgumentOutOfRangeException(nameof(problemId), "Invalid Problem ID");
 
-            return ProblemTagMapDL.GetTagIDs(problemId);
+            return ProblemTagMapDL.GetProblemTags(problemId);
         }
 
         // For Problem Junction Tables
@@ -117,7 +122,7 @@ namespace SQL_Judge_System.BL
                 throw new ArgumentException("Invalid Tag ID.");
             }
 
-            ProblemDL.MapProblemTag(pt);
+            ProblemTagMapDL.MapProblemTag(pt);
         }
         public static void DeleteByProblemID(int problemID)
         {
@@ -125,7 +130,7 @@ namespace SQL_Judge_System.BL
             {
                 throw new ArgumentException("Invalid Problem ID.");
             }
-            ProblemDL.DeleteByProblemID(problemID);
+            ProblemTagMapDL.DeleteByProblemID(problemID);
         }
     }
 }

@@ -8,9 +8,8 @@ namespace SQL_Judge_System.Models
 {
     internal class SkillLevel : LookupBase
     {
-        public SkillLevel(int id, string name) : base(id,name)
+        public SkillLevel(int id, string name) : base(id, name)
         {
-
         }
     }
 }

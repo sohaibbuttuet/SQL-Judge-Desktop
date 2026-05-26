@@ -11,13 +11,9 @@ namespace SQL_Judge_System.Models
         private int studentID;
         private int userID;
         private string registrationNumber;
+        private int skillLevelID;
         private int totalScore;
         private int problemsSolved;
-
-        // ===================================
-        // Aggregation: (1-to-1 relationship)
-        // ===================================
-        private SkillLevel skillLevel; 
 
         public int StudentID
         {
@@ -55,11 +51,10 @@ namespace SQL_Judge_System.Models
         public int SkillLevelID
         {
             get { return skillLevelID; }
-            private set
+            set
             {
                 if (value <= 0)
-                    throw new Exception("Invalid Skill Level ID.");
-
+                    throw new Exception("Invalid Skill Level ID");
                 skillLevelID = value;
             }
         }
@@ -87,40 +82,27 @@ namespace SQL_Judge_System.Models
         }
 
         // =========================
-        // Aggregation Property
-        // =========================
-        public SkillLevel SkillLevel
-        {
-            get { return skillLevel; }
-            set
-            {
-                if(value == null)
-                    throw new Exception("Skill level cannot be null.");
-
-                skillLevel = value;           
-            }
-        }
-
-        // =========================
         // Constructers
         // =========================
         public Student() { }
-        public Student(int userID, string registrationNumber, SkillLevel skillLevel)
+        public Student(int userID, string registrationNumber, int skillLevelID)
         {
             UserID = userID;
             RegistrationNumber = registrationNumber;
-            SkillLevel = skillLevel;
+            SkillLevelID = skillLevelID;
             TotalScore = 0;
             ProblemsSolved = 0;
         }
-        public Student(int studentID, int userID, string registrationNumber, int totalScore, int problemsSolved, SkillLevel skillLevel)
+
+        // Full Constructer For Database Load
+        public Student(int studentID, int userID, string registrationNumber, int totalScore, int problemsSolved, int skillLevelID)
         {
             StudentID = studentID;
             UserID = userID;
             RegistrationNumber = registrationNumber;            
             TotalScore = totalScore;
             ProblemsSolved = problemsSolved;
-            SkillLevel = skillLevel;
+            SkillLevelID = skillLevelID;
         }
     }
 }

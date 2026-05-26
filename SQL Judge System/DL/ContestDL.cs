@@ -33,13 +33,7 @@ namespace SQL_Judge_System.DL
                 return null;
 
             return MapDataRowToContest(dt.Rows[0]);
-        }       
-
-        public static DataTable GetAllContests()
-        {
-            string query = "SELECT * FROM vw_contests;";
-            return DatabaseHelper.Instance.GetDataTable(query);
-        }
+        }            
 
         // Helping Function
         private static Contest MapDataRowToContest(DataRow row)
@@ -70,6 +64,11 @@ namespace SQL_Judge_System.DL
         }
 
         // Contests in Admin Dashboard
+        public static DataTable GetAllContests()
+        {
+            string query = "SELECT * FROM vw_contests;";
+            return DatabaseHelper.Instance.GetDataTable(query);
+        }
         public static int TotalContests()
         {
             string query = "SELECT COUNT(*) FROM Contests;";
