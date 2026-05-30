@@ -97,7 +97,7 @@ namespace SQL_Judge_System.DL
         // Problem Panel in Admin Dashboard
         public static DataTable ProblemsList()
         {
-            string query = "SELECT * FROM vw_problems;";
+            string query = "SELECT * FROM vw_problems Order BY ProblemID;";
             return DatabaseHelper.Instance.GetDataTable(query);
         }
         public static int TotalProblems()
@@ -116,6 +116,40 @@ namespace SQL_Judge_System.DL
             return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
         }
 
+        // Student Panel Problems
+
+        // only those problems will show that have test cases
+        public static DataTable AllProblemsList()
+        {
+            string query = "SELECT ProblemID, Title, DifficultyName FROM vw_problems JOIN TestCases USING(ProblemID) Order BY ProblemID;";
+            return DatabaseHelper.Instance.GetDataTable(query);
+        }
+        public static DataTable EasyProblemsList()
+        {
+            string query = "SELECT ProblemID, Title, DifficultyName FROM vw_problems JOIN TestCases USING(ProblemID) WHERE DifficultyName = 'Easy' Order BY ProblemID;";
+            return DatabaseHelper.Instance.GetDataTable(query);
+        }
+        public static DataTable MediumProblemsList()
+        {
+            string query = "SELECT ProblemID, Title, DifficultyName FROM vw_problems JOIN TestCases USING(ProblemID) WHERE DifficultyName = 'Medium' Order BY ProblemID;";
+            return DatabaseHelper.Instance.GetDataTable(query);
+        }
+        public static DataTable HardProblemsList()
+        {
+            string query = "SELECT ProblemID, Title, DifficultyName FROM vw_problems JOIN TestCases USING(ProblemID) WHERE DifficultyName = 'Hard' Order BY ProblemID;";
+            return DatabaseHelper.Instance.GetDataTable(query);
+        }
+        public static string GetDescriptionByID(int problemID)
+        {
+            string query = $"SELECT Description FROM problems WHERE problemID = {problemID};";
+
+            DataTable dt = DatabaseHelper.Instance.GetDataTable(query);
+
+            if (dt.Rows.Count == 0)
+                return "";
+
+            return dt.Rows[0]["Description"].ToString();
+        }
 
         public static bool IsProblemExists(int problemId)
         {

@@ -6,15 +6,14 @@ namespace SQL_Judge_System.DL
 {
     internal class DatabaseHelper
     {
-        private String serverName = "127.0.0.1";
-        private String port = "3306";
-        private String databaseName = "sqljudgesystem";
-        private String databaseUser = "root";
-        private String databasePassword = "SohaibButt@16122006";
-
-        private DatabaseHelper() { }
+        private string serverName = "127.0.0.1";
+        private string port = "3306";
+        private string databaseName = "sqljudgesystem";
+        private string databaseUser = "root";
+        private string databasePassword = "SohaibButt@16122006";
 
         private static DatabaseHelper _instance;
+
         public static DatabaseHelper Instance
         {
             get
@@ -27,48 +26,96 @@ namespace SQL_Judge_System.DL
 
         private MySqlConnection getConnection()
         {
-            string connectionString = $"server={serverName};port={port};user={databaseUser};database={databaseName};password={databasePassword};SslMode=Required;";
-            var connection = new MySqlConnection(connectionString);
-            connection.Open();
-            return connection;
+            string connectionString =
+                $"server={serverName};port={port};user={databaseUser};database={databaseName};password={databasePassword};SslMode=Required;";
+
+            return new MySqlConnection(connectionString);
         }
-        public int Update(string query)
+
+        // Accepts an optional parameter array
+        public int Update(string query, MySqlParameter[] parameters = null)
         {
             using (var connection = getConnection())
             {
+                connection.Open();
+
                 using (var command = new MySqlCommand(query, connection))
                 {
+                    // If parameters were passed, attach them to the command safely
+                    if (parameters != null)
+                    {
+                        command.Parameters.AddRange(parameters);
+                    }
                     return command.ExecuteNonQuery();
                 }
             }
         }
-        public DataTable GetDataTable(string query)
+
+        // Accepts an optional parameter array
+        public DataTable GetDataTable(string query, MySqlParameter[] parameters = null)
         {
             DataTable dt = new DataTable();
-            using (MySqlConnection connection = getConnection())
+
+            using (var connection = getConnection())
             {
-                using (MySqlCommand command = new MySqlCommand(query, connection))
+                connection.Open();
+
+                using (var command = new MySqlCommand(query, connection))
                 {
-                    using (MySqlDataReader reader = command.ExecuteReader())
+                    if (parameters != null)
+                    {
+                        command.Parameters.AddRange(parameters);
+                    }
+
+                    using (var reader = command.ExecuteReader())
                     {
                         dt.Load(reader);
                     }
                 }
             }
+
             return dt;
         }
-        public int ExecuteScalar(string query)
+
+        // Accepts an optional parameter array
+        public int ExecuteScalar(string query, MySqlParameter[] parameters = null)
         {
             using (var connection = getConnection())
             {
+                connection.Open();
+
                 using (var command = new MySqlCommand(query, connection))
                 {
+                    if (parameters != null)
+                    {
+                        command.Parameters.AddRange(parameters);
+                    }
+
                     object result = command.ExecuteScalar();
 
                     if (result == null || result == DBNull.Value)
                         return -1;
 
                     return Convert.ToInt32(result);
+                }
+            }
+        }
+
+        // Accepts an optional parameter array
+        public object ExecuteScalarObject(string query, MySqlParameter[] parameters = null)
+        {
+            using (var connection = getConnection())
+            {
+                connection.Open();
+
+                using (var command = new MySqlCommand(query, connection))
+                {
+                    if (parameters != null)
+                    {
+                        command.Parameters.AddRange(parameters);
+                    }
+
+                    return command.ExecuteScalar();
                 }
             }
         }

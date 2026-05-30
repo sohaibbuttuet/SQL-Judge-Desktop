@@ -21,7 +21,7 @@ namespace SQL_Judge_System.Models
             set
             {
                 if (value <= 0)
-                    throw new Exception("Invalid Problem ID.");
+                    throw new ArgumentException("Invalid Problem ID.");
 
                 problemID = value;
             }
@@ -32,7 +32,7 @@ namespace SQL_Judge_System.Models
             set
             {
                 if (string.IsNullOrWhiteSpace(value))
-                    throw new Exception("Title cannot be empty.");
+                    throw new ArgumentException("Title cannot be empty.");
 
                 title = value;
             }
@@ -43,7 +43,7 @@ namespace SQL_Judge_System.Models
             set
             {
                 if (string.IsNullOrWhiteSpace(value))
-                    throw new Exception("Description cannot be empty.");
+                    throw new ArgumentException("Description cannot be empty.");
 
                 description = value;
             }
@@ -54,7 +54,7 @@ namespace SQL_Judge_System.Models
             set
             {
                 if (value <= 0)
-                    throw new Exception("Invalid Difficulty ID"); 
+                    throw new ArgumentException("Invalid Difficulty ID"); 
                 difficultyID = value;
             }
         }
@@ -64,7 +64,7 @@ namespace SQL_Judge_System.Models
             set
             {
                 if (value <= 0)
-                    throw new Exception("Points must be greater than 0.");
+                    throw new ArgumentException("Points must be greater than 0.");
 
                 points = value;
             }

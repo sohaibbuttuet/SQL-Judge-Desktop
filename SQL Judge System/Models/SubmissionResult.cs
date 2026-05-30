@@ -11,7 +11,6 @@ namespace SQL_Judge_System.Models
         private int resultID;
         private int submissionID;
         private int testCaseID;
-        private string actualOutput;
         private bool isPassed;
         private string errorMessage;
 
@@ -21,7 +20,7 @@ namespace SQL_Judge_System.Models
             set
             {
                 if (value <= 0)
-                    throw new Exception("Invalid Result ID.");
+                    throw new ArgumentException("Invalid Result ID.");
 
                 resultID = value;
             }
@@ -32,7 +31,7 @@ namespace SQL_Judge_System.Models
             set
             {
                 if (value <= 0)
-                    throw new Exception("Invalid Submission ID.");
+                    throw new ArgumentException("Invalid Submission ID.");
 
                 submissionID = value;
             }
@@ -43,17 +42,9 @@ namespace SQL_Judge_System.Models
             set
             {
                 if (value <= 0)
-                    throw new Exception("Invalid Test Case ID.");
+                    throw new ArgumentException("Invalid Test Case ID.");
 
                 testCaseID = value;
-            }
-        }
-        public string ActualOutput
-        {
-            get { return actualOutput; }
-            set
-            {
-                actualOutput = value ?? "";
             }
         }
         public bool IsPassed
@@ -73,14 +64,12 @@ namespace SQL_Judge_System.Models
         public SubmissionResult()
         {
             IsPassed = false;
-            ActualOutput = "";
             ErrorMessage = "";
         }
-        public SubmissionResult(int submissionID, int testCaseID, string actualOutput, bool isPassed, string errorMessage)
+        public SubmissionResult(int submissionID, int testCaseID, bool isPassed, string errorMessage)
         {
             SubmissionID = submissionID;
             TestCaseID = testCaseID;
-            ActualOutput = actualOutput ?? "";
             IsPassed = isPassed;
             ErrorMessage = errorMessage ?? "";
         }

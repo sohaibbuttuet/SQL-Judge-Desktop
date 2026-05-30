@@ -11,6 +11,27 @@ namespace SQL_Judge_System.BL
 {
     internal class StudentBL
     {
+        public static void RegisterStudent(Student s)
+        {
+            if (s == null)
+            {
+                throw new ArgumentNullException(nameof(s), "Student object cannot be null.");
+            }
+            if (StudentDL.IsStudentExist(s.RegistrationNumber))
+            {
+                throw new InvalidOperationException($"A student with registration number {s.RegistrationNumber} already exists.");
+            }
+            s.StudentID = StudentDL.AddStudent(s);
+        }
+        public static Student GetStudentByUserID(int userId)
+        {
+            if (userId < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(userId), "User ID cannot be negative.");
+            }
+            return StudentDL.GetStudentByUserID(userId);
+        }
+
         // --- STUDENT PANEL IN ADMIN DASHBOARD ---
         public static DataTable GetStudentsForAdmin()
         {
@@ -29,25 +50,17 @@ namespace SQL_Judge_System.BL
             return StudentDL.InactiveStudents();
         }
 
-        public static void RegisterStudent(Student s)
+        // For StudentDashboard
+        public static DataTable GetLeaderboard()
         {
-            if(s== null)
-            {
-                throw new ArgumentNullException(nameof(s), "Student object cannot be null.");
-            }
-            if(StudentDL.IsStudentExist(s.RegistrationNumber))
-            {
-                throw new InvalidOperationException($"A student with registration number {s.RegistrationNumber} already exists.");
-            }
-            s.StudentID = StudentDL.AddStudent(s);
+            return StudentDL.GetLeaderboard();
         }
-        public static Student GetStudentByUserID(int userId)
+        public static int GetRank(int studentId)
         {
-            if(userId < 0)
-            {
-                throw new ArgumentOutOfRangeException(nameof(userId), "User ID cannot be negative.");
-            }
-            return StudentDL.GetStudentByUserID(userId);
+            if (studentId <= 0)
+                throw new Exception("Invalid Student ID");
+
+            return StudentDL.GetRank(studentId);
         }
     }
 }

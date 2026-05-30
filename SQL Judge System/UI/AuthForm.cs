@@ -2,8 +2,6 @@
 using SQL_Judge_System.LookupDL;
 using SQL_Judge_System.Models;
 using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -20,6 +18,9 @@ namespace SQL_Judge_System.UI
             SetSignInMode();
         }
 
+        // =========================================
+        // LOAD SKILL LEVELS
+        // =========================================
         private void LoadSkillLevels()
         {
             try
@@ -32,89 +33,138 @@ namespace SQL_Judge_System.UI
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Failed to load skill levels.\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(
+                    "Failed to load skill levels.\n" + ex.Message,
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
             }
         }
 
-        // TOGGLE MODE
+        // =========================================
+        // TOGGLE LOGIN / SIGNUP
+        // =========================================
         private void lnkToggle_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             ClearFields();
 
-            if (isSignUpMode) 
+            if (isSignUpMode)
                 SetSignInMode();
-            else 
+            else
                 SetSignUpMode();
         }
 
+        // =========================================
+        // SIGN UP MODE
+        // =========================================
         private void SetSignUpMode()
         {
             isSignUpMode = true;
-            lblTitle.Text = "Student Registration";
+
+            lblTitle.Text = "Create Account";
+            lblSubtitle.Text = "Register as Student";
+
             btnMainAction.Text = "SIGN UP";
+
             lnkToggle.Text = "Already have an account? Sign In";
 
-            // Show the panel containing extra fields
             pnlStudentExtra.Visible = true;
 
-            // Shift buttons down to make room for the panel
-            btnMainAction.Location = new Point(50, pnlStudentExtra.Bottom + 20);
-            lnkToggle.Location = new Point(50, btnMainAction.Bottom + 15);
+            btnMainAction.Location = new Point(45, pnlStudentExtra.Bottom + 25);
 
-            this.ClientSize = new Size(400, 650);
+            lnkToggle.Location = new Point(45, btnMainAction.Bottom + 15);
+
+            this.ClientSize = new Size(520, 760);
         }
 
+        // =========================================
+        // SIGN IN MODE
+        // =========================================
         private void SetSignInMode()
         {
             isSignUpMode = false;
-            lblTitle.Text = "Sign In";
+
+            lblTitle.Text = "Welcome Back";
+            lblSubtitle.Text = "Sign in to continue";
+
             btnMainAction.Text = "LOGIN";
+
             lnkToggle.Text = "Don't have an account? Sign Up";
 
-            // Hide the panel
             pnlStudentExtra.Visible = false;
 
-            // Move buttons up (immediately under the password field)
-            btnMainAction.Location = new Point(50, txtPassword.Bottom + 40);
-            lnkToggle.Location = new Point(50, btnMainAction.Bottom + 15);
+            btnMainAction.Location = new Point(
+                45,
+                txtPassword.Bottom + 45
+            );
 
-            this.ClientSize = new Size(400, 450);
+            lnkToggle.Location = new Point(
+                45,
+                btnMainAction.Bottom + 15
+            );
+
+            this.ClientSize = new Size(520, 720);
         }
 
+        // =========================================
+        // MAIN BUTTON CLICK
+        // =========================================
         private void btnMainAction_Click(object sender, EventArgs e)
         {
             try
             {
                 string name = txtName.Text.Trim();
                 string email = txtEmail.Text.Trim();
-                string password = txtPassword.Text;                
+                string password = txtPassword.Text;
 
-                if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
-                {
-                    MessageBox.Show("Please fill in all required fields.");
-                    return;
-                }
-
-                if (string.IsNullOrWhiteSpace(email) || !email.Contains("@") || !email.Contains("."))
-                {
-                    MessageBox.Show("Invalid email format.");
-                    return;
-                }
-                    
                 // =========================
+                // BASIC VALIDATION
+                // =========================
+                if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
+                {
+                    MessageBox.Show(
+                        "Please fill in all required fields.",
+                        "Validation",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning
+                    );
+
+                    return;
+                }
+
+                if (!email.Contains("@") || !email.Contains("."))
+                {
+                    MessageBox.Show(
+                        "Invalid email format.",
+                        "Validation",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning
+                    );
+
+                    return;
+                }
+
+                // =====================================
                 // SIGN UP
-                // =========================
+                // =====================================
                 if (isSignUpMode)
-                {                    
+                {
                     string regNo = txtRegNo.Text.Trim();
 
                     if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(regNo))
                     {
-                        MessageBox.Show("Please fill all student details.");
+                        MessageBox.Show(
+                            "Please fill all student details.",
+                            "Validation",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Warning
+                        );
+
                         return;
                     }
 
-                    if (cmbSkillLevel.SelectedValue == null)
+                    if (cmbSkillLevel.SelectedIndex == -1 || cmbSkillLevel.SelectedValue == null)
                     {
                         MessageBox.Show("Please select skill level.");
                         return;
@@ -122,62 +172,97 @@ namespace SQL_Judge_System.UI
 
                     int skillLevelID = Convert.ToInt32(cmbSkillLevel.SelectedValue);
 
-                    // Create User object
+                    // =========================
+                    // CREATE USER
+                    // =========================
                     User user = new User(name, email, password);
+
                     UserBL.SignUp(user);
 
-                    // Create Student object
+                    // =========================
+                    // REGISTER STUDENT
+                    // =========================
                     Student student = new Student(user.UserID, regNo, skillLevelID);
+
                     StudentBL.RegisterStudent(student);
 
-                    // Assign Role to User
+                    // =========================
+                    // ASSIGN ROLE
+                    // =========================
                     int roleId = UserBL.GetStudentRoleID();
 
                     UserRole userRole = new UserRole(user.UserID, roleId);
+
                     UserBL.AssignRoleToUser(userRole);
 
-                    MessageBox.Show("Student registered successfully!");
+                    MessageBox.Show(
+                        "Student registered successfully!",
+                        "Success",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information
+                    );
+
+                    ClearFields();
                     SetSignInMode();
                 }
 
-                // =========================
+                // =====================================
                 // LOGIN
-                // =========================
+                // =====================================
                 else
                 {
                     User user = UserBL.SignIn(email, password);
 
                     if (user != null)
                     {
+                        this.Hide();
+
                         if (UserBL.IsUserSuperAdmin(user.UserID) || UserBL.IsUserAdmin(user.UserID))
                         {
-                            new AdminDashboardUI(user.UserID).Show();
+                            AdminDashboardUI adminDashboard =  new AdminDashboardUI(user.UserID);
+
+                            adminDashboard.Show();
                         }
                         else
                         {
-                            new StudentDashboardUI(user.UserID).Show();
-                        }
+                            StudentDashboardUI studentDashboard = new StudentDashboardUI(user.UserID);
 
-                        this.Hide();
+                            studentDashboard.Show();
+                        }
                     }
                     else
                     {
-                        MessageBox.Show("Invalid email or password.");
+                        MessageBox.Show(
+                            "Invalid email or password.",
+                            "Authentication Failed",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Error
+                        );
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(
+                    ex.Message,
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
             }
         }
+
+        // =========================================
+        // CLEAR INPUT FIELDS
+        // =========================================
         private void ClearFields()
         {
             txtEmail.Clear();
             txtPassword.Clear();
             txtName.Clear();
             txtRegNo.Clear();
+
             cmbSkillLevel.SelectedIndex = -1;
         }
-    } 
+    }
 }

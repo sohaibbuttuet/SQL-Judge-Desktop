@@ -67,6 +67,32 @@ namespace SQL_Judge_System.BL
         {
             return ProblemDL.GetProblems();
         }
+
+        // Student Panel Problems
+        public static DataTable GetAllProblems()
+        {
+            return ProblemDL.AllProblemsList();
+        }
+        public static DataTable GetEasyProblems()
+        {
+            return ProblemDL.EasyProblemsList();
+        }
+        public static DataTable GetMediumProblems()
+        {
+            return ProblemDL.MediumProblemsList();
+        }
+        public static DataTable GetHardProblems()
+        {
+            return ProblemDL.HardProblemsList();
+        }
+        public static string GetDescriptionByID(int problemID)
+        {
+            if (problemID < 0)
+                throw new ArgumentOutOfRangeException(nameof(problemID), "Invalid Problem ID");
+
+           return ProblemDL.GetDescriptionByID(problemID);
+        }
+
         public static Problem GetProblemByID(int problemId)
         {
             if (problemId <= 0)

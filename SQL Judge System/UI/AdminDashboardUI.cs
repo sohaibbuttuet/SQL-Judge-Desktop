@@ -34,6 +34,7 @@ namespace SQL_Judge_System.UI
             LoadContestData();
             LoadTestCaseData();
             LoadSubmissionData();
+            WirePasswordHint();
             ToolTip();        
         }
 
@@ -506,8 +507,7 @@ namespace SQL_Judge_System.UI
                 dgvTestCases.Columns["TestCaseID"].FillWeight = 30;
                 dgvTestCases.Columns["ProblemID"].FillWeight = 50;
                 dgvTestCases.Columns["ProblemTitle"].FillWeight = 80;
-                dgvTestCases.Columns["SetupSQLPreview"].FillWeight = 80;
-                dgvTestCases.Columns["SolutionQueryPreview"].FillWeight = 80;
+                dgvTestCases.Columns["SolutionQueryPreview"].FillWeight = 100;
                 dgvContest.Columns["CreatedBy"].FillWeight = 30;
                 dgvContest.Columns["UpdatedBy"].FillWeight = 30;
                 dgvContest.Columns["CreatedAt"].FillWeight = 30;
@@ -517,7 +517,6 @@ namespace SQL_Judge_System.UI
                 dgvTestCases.Columns["TestCaseID"].HeaderText = "ID";
                 dgvTestCases.Columns["ProblemID"].HeaderText = "Problem ID";
                 dgvTestCases.Columns["ProblemTitle"].HeaderText = "Problem Title";
-                dgvTestCases.Columns["SetupSQLPreview"].HeaderText = "Setup SQL Preview";
                 dgvTestCases.Columns["SolutionQueryPreview"].HeaderText = "Solution Query Preview";                
                 dgvContest.Columns["CreatedBy"].HeaderText = "Created By";
                 dgvContest.Columns["UpdatedBy"].HeaderText = "Updated By";
@@ -662,6 +661,173 @@ namespace SQL_Judge_System.UI
             }
         }
 
+        // --- Settings Panel
+        private void LoadSettingsData()
+        {
+        }
+        private void LoadSettingsProfile()
+        {
+            try
+            {
+                // Re-fetch fresh data every time so edits elsewhere are reflected
+                user = UserBL.GetUserById(user.UserID);
+
+                txtSettingsFullName.Text = user.FullName;
+                txtSettingsEmail.Text = user.Email;
+                txtSettingsRole.Text = user.RoleName;
+                txtSettingsCreatedAt.Text = user.CreatedAt.ToString("dd MMM yyyy");
+                txtSettingsStatus.Text = user.IsActive ? "Active" : "Inactive";
+
+                // Colour the status field dynamically
+                txtSettingsStatus.ForeColor = user.IsActive
+                    ? System.Drawing.Color.FromArgb(52, 211, 153)    // emerald
+                    : System.Drawing.Color.FromArgb(251, 113, 133);  // rose
+
+                // Clear password fields every open
+                txtCurrentPassword.Text = string.Empty;
+                txtNewPassword.Text = string.Empty;
+                txtConfirmPassword.Text = string.Empty;
+                lblPasswordMatchHint.Text = string.Empty;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to load profile data: " + ex.Message);
+            }
+        }
+        private void WirePasswordHint()
+        {
+            txtConfirmPassword.TextChanged += new System.EventHandler(this.txtConfirmPassword_TextChanged);
+        }
+        private void txtConfirmPassword_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtNewPassword.Text) || string.IsNullOrEmpty(txtConfirmPassword.Text))
+            {
+                lblPasswordMatchHint.Text = string.Empty;
+                return;
+            }
+
+            if (txtNewPassword.Text == txtConfirmPassword.Text)
+            {
+                lblPasswordMatchHint.Text = "✔  Passwords match";
+                lblPasswordMatchHint.ForeColor = System.Drawing.Color.FromArgb(52, 211, 153);
+            }
+            else
+            {
+                lblPasswordMatchHint.Text = "✘  Passwords do not match";
+                lblPasswordMatchHint.ForeColor = System.Drawing.Color.FromArgb(251, 113, 133);
+            }
+        }
+        private void btnSaveProfile_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string newFullName = txtSettingsFullName.Text.Trim();
+                string newEmail = txtSettingsEmail.Text.Trim();
+
+                if (string.IsNullOrEmpty(newFullName))
+                {
+                    MessageBox.Show("Full name cannot be empty.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtSettingsFullName.Focus();
+                    return;
+                }
+
+                if (string.IsNullOrEmpty(newEmail))
+                {
+                    MessageBox.Show("Email cannot be empty.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtSettingsEmail.Focus();
+                    return;
+                }
+
+                bool updated = UserBL.UpdateUserProfile(user.UserID, newFullName, newEmail);
+
+                if (updated)
+                {
+                    user.FullName = newFullName;
+                    user.Email = newEmail;
+
+                    MessageBox.Show("Profile updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadSettingsProfile();
+                }
+                else
+                {
+                    MessageBox.Show("Failed to update profile. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to save profile: " + ex.Message);
+            }
+        }
+        private void btnChangePassword_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string currentPassword = txtCurrentPassword.Text;
+                string newPassword = txtNewPassword.Text;
+                string confirmPassword = txtConfirmPassword.Text;
+
+                if (string.IsNullOrEmpty(currentPassword))
+                {
+                    MessageBox.Show("Please enter your current password.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtCurrentPassword.Focus();
+                    return;
+                }
+
+                if (string.IsNullOrEmpty(newPassword))
+                {
+                    MessageBox.Show("Please enter a new password.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtNewPassword.Focus();
+                    return;
+                }
+
+                if (newPassword.Length < 6)
+                {
+                    MessageBox.Show("New password must be at least 6 characters long.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtNewPassword.Focus();
+                    return;
+                }
+
+                if (newPassword != confirmPassword)
+                {
+                    MessageBox.Show("New password and confirm password do not match.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtConfirmPassword.Focus();
+                    return;
+                }
+
+                bool currentPasswordCorrect = UserBL.VerifyPassword(user.UserID, currentPassword);
+
+                if (!currentPasswordCorrect)
+                {
+                    MessageBox.Show("Current password is incorrect.", "Authentication Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtCurrentPassword.Focus();
+                    return;
+                }
+
+                bool changed = UserBL.ChangePassword(user.UserID, newPassword);
+
+                if (changed)
+                {
+                    MessageBox.Show("Password changed successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    txtCurrentPassword.Text = string.Empty;
+                    txtNewPassword.Text = string.Empty;
+                    txtConfirmPassword.Text = string.Empty;
+                    lblPasswordMatchHint.Text = string.Empty;
+                }
+                else
+                {
+                    MessageBox.Show("Failed to change password. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to change password: " + ex.Message);
+            }
+        }
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
 
         // Slide Bar Menu Buttons
         private void btnHome_Click(object sender, EventArgs e)
@@ -702,7 +868,8 @@ namespace SQL_Judge_System.UI
         }
         private void btn_Settings_Click(object sender, EventArgs e)
         {
-
+            ShowPanel(pnlSettings, "Settings");
+            LoadSettingsData();
         }
         private void btnLogout_Click(object sender, EventArgs e)
         {
@@ -723,6 +890,7 @@ namespace SQL_Judge_System.UI
             pnlContest.Visible = false;
             pnlsubmissions.Visible = false;
             pnlTestCases.Visible = false;
+            pnlSettings.Visible = false;
 
             // 2. Show the target panel
             targetPanel.Visible = true;

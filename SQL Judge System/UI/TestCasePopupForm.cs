@@ -66,18 +66,22 @@ namespace SQL_Judge_System.UI
             try
             {
                 string testCaseName = txtATestName.Text;
-                string setup = txtASetupSQL.Text;
+                string setupSQl = txtSetupSQL.Text;
                 string solution = txtASolutionQuery.Text;
+
+                if(string.IsNullOrWhiteSpace(testCaseName) || string.IsNullOrWhiteSpace(setupSQl) || string.IsNullOrWhiteSpace(solution))
+                {
+                    MessageBox.Show("All fields are required"); return;
+                }
 
                 if (cmbAProblem.SelectedValue == null)
                 {
                     MessageBox.Show("Please select a problem.");
+                    return;
                 }
-
                 int problemID = Convert.ToInt32(cmbAProblem.SelectedValue);
 
-                TestCase testCase = new TestCase(testCaseName, problemID, setup, solution, userID);
-
+                TestCase testCase = new TestCase(testCaseName, problemID, setupSQl, solution, userID);
                 TestCaseBL.AddTestCase(testCase);
 
                 MessageBox.Show("Test case added successfully.");
@@ -94,7 +98,7 @@ namespace SQL_Judge_System.UI
         }
         private void ClearAddInputs()
         {
-            txtASetupSQL.Clear();
+            txtSetupSQL.Clear();
             txtASolutionQuery.Clear();
             txtATestName.Clear();
             cmbAProblem.SelectedIndex = -1;
@@ -105,7 +109,7 @@ namespace SQL_Judge_System.UI
             try
             {
                 string testCaseName = txtUTestName.Text;
-                string setup = txtUSetupSQL.Text;
+                string setupSQL = txtUsetupSQL.Text;
                 string solution = txtUSolutionQuery.Text;
 
                 if (cmbUProblem.SelectedValue == null)
@@ -115,7 +119,7 @@ namespace SQL_Judge_System.UI
 
                 int problemID = Convert.ToInt32(cmbAProblem.SelectedValue);
 
-                TestCase testCase = new TestCase(testCaseID, testCaseName, problemID, setup, solution, userID);
+                TestCase testCase = new TestCase(testCaseID, testCaseName, problemID, setupSQL, solution, userID);
 
                 TestCaseBL.UpdateTestCase(testCase);
 
@@ -133,11 +137,10 @@ namespace SQL_Judge_System.UI
         }
         private void ClearUpdateInputs()
         {
-            txtUSetupSQL.Clear();
             txtUSolutionQuery.Clear();
+            txtUsetupSQL.Clear();
             txtUTestName.Clear();
             cmbUProblem.SelectedIndex = -1;
-        }
-      
+        }      
     }
 }

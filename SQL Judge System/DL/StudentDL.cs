@@ -84,10 +84,10 @@ namespace SQL_Judge_System.DL
             return new Student(
                 Convert.ToInt32(row["StudentID"]),
                 Convert.ToInt32(row["UserID"]),
-                row["RegistrationNumber"].ToString(),
-                Convert.ToInt32(row["SkillLevelID"]),
+                row["RegistrationNumber"].ToString(),               
                 Convert.ToInt32(row["TotalScore"]),
-                Convert.ToInt32(row["ProblemsSolved"])                
+                Convert.ToInt32(row["ProblemsSolved"]),
+                 Convert.ToInt32(row["SkillLevelID"])
             );
         }
 
@@ -118,6 +118,18 @@ namespace SQL_Judge_System.DL
         {
             string query = "SELECT * FROM vw_students ORDER BY StudentID;";
             return DatabaseHelper.Instance.GetDataTable(query);
+        }
+
+        // For StudentDashboard
+        public static DataTable GetLeaderboard()
+        {
+            string query = "SELECT * FROM vw_students_leaderboard;";
+            return DatabaseHelper.Instance.GetDataTable(query);
+        }
+        public static int GetRank(int studentId)
+        {
+            string query = $"SELECT GlobalRank FROM vw_students_leaderboard WHERE StudentID = {studentId};";
+            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
         }
     }
 } 

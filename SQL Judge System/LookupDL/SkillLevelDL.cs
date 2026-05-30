@@ -21,5 +21,12 @@ namespace SQL_Judge_System.LookupDL
 
             return list;
         }
+        public static string GetSkillName(int skillID)
+        {
+            string query = $"SELECT LevelName FROM SkillLevels WHERE SkillLevelID = {skillID};";
+            object result = DatabaseHelper.Instance.ExecuteScalarObject(query);
+
+            return result?.ToString() ?? "Unknown";
+        }
     }
 }          

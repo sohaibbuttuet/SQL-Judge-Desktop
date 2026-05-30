@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -116,6 +117,15 @@ namespace SQL_Judge_System.Models
             StatusID = statusID;
             AttemptNumber = attemptNumber;
             TotalScore = totalScore;
+
+            SubmittedAt = DateTime.Now;
+        }
+        public Submission(int studentID, int problemID, string queryText, int statusID)
+        {
+            StudentID = studentID;
+            ProblemID = problemID;
+            QueryText = queryText;
+            StatusID = statusID;
 
             SubmittedAt = DateTime.Now;
         }

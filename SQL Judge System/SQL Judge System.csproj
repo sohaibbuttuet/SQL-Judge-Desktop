@@ -105,22 +105,22 @@
     <Compile Include="BL\ContestBL.cs" />
     <Compile Include="BL\ContestParticipentBL.cs" />
     <Compile Include="BL\ProblemBL.cs" />
+    <Compile Include="BL\QueryRunnerBL.cs" />
     <Compile Include="BL\StudentBL.cs" />
-    <Compile Include="BL\StudentLeaderboardBL.cs" />
     <Compile Include="BL\SubmissionBL.cs" />
     <Compile Include="BL\TestCaseBL.cs" />
     <Compile Include="BL\UserBL.cs" />
     <Compile Include="DL\ContestDL.cs" />
     <Compile Include="DL\ContestParticipentDL.cs" />
     <Compile Include="DL\ContestProblemDL.cs" />
+    <Compile Include="DL\QueryRunnerDB.cs" />
     <Compile Include="DL\ProblemDL.cs" />
     <Compile Include="DL\ProblemTagMapDL.cs" />
-    <Compile Include="DL\SubmissionResult.cs" />
+    <Compile Include="DL\SubmissionResultDL.cs" />
     <Compile Include="LookupDL\ProblemDifficultiesDL.cs" />
     <Compile Include="LookupDL\ProblemTagsDL.cs" />
-    <Compile Include="DL\StudentLeaderboardDL.cs" />
     <Compile Include="DL\SubmissionDL.cs" />
-    <Compile Include="DL\TestCasesDL.cs" />
+    <Compile Include="DL\TestCaseDL.cs" />
     <Compile Include="DL\DatabaseHelper.cs" />
     <Compile Include="DL\UserRoleDL.cs" />
     <Compile Include="LookupDL\RoleDL.cs" />
@@ -190,10 +190,10 @@
     <Compile Include="UI\ProblemPopupForm.Designer.cs">
       <DependentUpon>ProblemPopupForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\SolveProblemUI.cs">
+    <Compile Include="SolveProblemUI.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\SolveProblemUI.Designer.cs">
+    <Compile Include="SolveProblemUI.Designer.cs">
       <DependentUpon>SolveProblemUI.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\StudentDashboardUI.cs">
@@ -236,7 +236,7 @@
     <EmbeddedResource Include="UI\ProblemPopupForm.resx">
       <DependentUpon>ProblemPopupForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\SolveProblemUI.resx">
+    <EmbeddedResource Include="SolveProblemUI.resx">
       <DependentUpon>SolveProblemUI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\StudentDashboardUI.resx">

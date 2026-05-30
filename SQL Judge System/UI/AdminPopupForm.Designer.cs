@@ -68,7 +68,7 @@
             this.addPanel.Controls.Add(this.txtAddPassword);
             this.addPanel.Controls.Add(this.btnAdd);
             this.addPanel.Controls.Add(this.btnAddClear);
-            this.addPanel.Location = new System.Drawing.Point(32, 40);
+            this.addPanel.Location = new System.Drawing.Point(28, 31);
             this.addPanel.Name = "addPanel";
             this.addPanel.Size = new System.Drawing.Size(370, 280);
             this.addPanel.TabIndex = 2;
@@ -76,7 +76,8 @@
             // lblAddTitle
             // 
             this.lblAddTitle.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.lblAddTitle.Location = new System.Drawing.Point(120, 10);
+            this.lblAddTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
+            this.lblAddTitle.Location = new System.Drawing.Point(135, 10);
             this.lblAddTitle.Name = "lblAddTitle";
             this.lblAddTitle.Size = new System.Drawing.Size(100, 23);
             this.lblAddTitle.TabIndex = 0;
@@ -84,14 +85,18 @@
             // 
             // lblAddName
             // 
-            this.lblAddName.Location = new System.Drawing.Point(20, 50);
+            this.lblAddName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
+            this.lblAddName.Location = new System.Drawing.Point(20, 54);
             this.lblAddName.Name = "lblAddName";
-            this.lblAddName.Size = new System.Drawing.Size(100, 23);
+            this.lblAddName.Size = new System.Drawing.Size(100, 13);
             this.lblAddName.TabIndex = 1;
             this.lblAddName.Text = "Full Name";
             // 
             // txtAddName
             // 
+            this.txtAddName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
+            this.txtAddName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtAddName.ForeColor = System.Drawing.Color.White;
             this.txtAddName.Location = new System.Drawing.Point(20, 73);
             this.txtAddName.Name = "txtAddName";
             this.txtAddName.Size = new System.Drawing.Size(300, 20);
@@ -99,14 +104,18 @@
             // 
             // lblAddEmail
             // 
-            this.lblAddEmail.Location = new System.Drawing.Point(20, 100);
+            this.lblAddEmail.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
+            this.lblAddEmail.Location = new System.Drawing.Point(20, 104);
             this.lblAddEmail.Name = "lblAddEmail";
-            this.lblAddEmail.Size = new System.Drawing.Size(100, 23);
+            this.lblAddEmail.Size = new System.Drawing.Size(100, 13);
             this.lblAddEmail.TabIndex = 3;
             this.lblAddEmail.Text = "Email";
             // 
             // txtAddEmail
             // 
+            this.txtAddEmail.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
+            this.txtAddEmail.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtAddEmail.ForeColor = System.Drawing.Color.White;
             this.txtAddEmail.Location = new System.Drawing.Point(20, 123);
             this.txtAddEmail.Name = "txtAddEmail";
             this.txtAddEmail.Size = new System.Drawing.Size(300, 20);
@@ -114,14 +123,18 @@
             // 
             // lblAddPassword
             // 
-            this.lblAddPassword.Location = new System.Drawing.Point(20, 150);
+            this.lblAddPassword.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
+            this.lblAddPassword.Location = new System.Drawing.Point(20, 154);
             this.lblAddPassword.Name = "lblAddPassword";
-            this.lblAddPassword.Size = new System.Drawing.Size(100, 23);
+            this.lblAddPassword.Size = new System.Drawing.Size(100, 12);
             this.lblAddPassword.TabIndex = 5;
             this.lblAddPassword.Text = "Password";
             // 
             // txtAddPassword
             // 
+            this.txtAddPassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
+            this.txtAddPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtAddPassword.ForeColor = System.Drawing.Color.White;
             this.txtAddPassword.Location = new System.Drawing.Point(20, 173);
             this.txtAddPassword.Name = "txtAddPassword";
             this.txtAddPassword.PasswordChar = '*';
@@ -130,8 +143,11 @@
             // 
             // btnAdd
             // 
-            this.btnAdd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
+            this.btnAdd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(52)))), ((int)(((byte)(88)))));
             this.btnAdd.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAdd.FlatAppearance.BorderSize = 0;
+            this.btnAdd.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(40)))), ((int)(((byte)(69)))));
+            this.btnAdd.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(40)))), ((int)(((byte)(69)))));
             this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAdd.ForeColor = System.Drawing.Color.White;
             this.btnAdd.Location = new System.Drawing.Point(20, 219);
@@ -146,6 +162,9 @@
             // 
             this.btnAddClear.BackColor = System.Drawing.Color.IndianRed;
             this.btnAddClear.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAddClear.FlatAppearance.BorderSize = 0;
+            this.btnAddClear.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(40)))), ((int)(((byte)(69)))));
+            this.btnAddClear.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(40)))), ((int)(((byte)(69)))));
             this.btnAddClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddClear.ForeColor = System.Drawing.Color.White;
             this.btnAddClear.Location = new System.Drawing.Point(120, 219);
@@ -167,7 +186,7 @@
             this.editPanel.Controls.Add(this.lblEditTitle);
             this.editPanel.Controls.Add(this.btnUpdate);
             this.editPanel.Controls.Add(this.btnEditClear);
-            this.editPanel.Location = new System.Drawing.Point(32, 40);
+            this.editPanel.Location = new System.Drawing.Point(28, 31);
             this.editPanel.Name = "editPanel";
             this.editPanel.Size = new System.Drawing.Size(370, 280);
             this.editPanel.TabIndex = 3;
@@ -175,7 +194,8 @@
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(21, 63);
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
+            this.label1.Location = new System.Drawing.Point(21, 60);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(100, 14);
             this.label1.TabIndex = 9;
@@ -183,14 +203,18 @@
             // 
             // txtEditName
             // 
-            this.txtEditName.Location = new System.Drawing.Point(21, 82);
+            this.txtEditName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
+            this.txtEditName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtEditName.ForeColor = System.Drawing.Color.White;
+            this.txtEditName.Location = new System.Drawing.Point(21, 79);
             this.txtEditName.Name = "txtEditName";
             this.txtEditName.Size = new System.Drawing.Size(300, 20);
             this.txtEditName.TabIndex = 10;
             // 
             // label2
             // 
-            this.label2.Location = new System.Drawing.Point(21, 113);
+            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
+            this.label2.Location = new System.Drawing.Point(21, 110);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(100, 14);
             this.label2.TabIndex = 11;
@@ -198,14 +222,18 @@
             // 
             // txtEditEmail
             // 
-            this.txtEditEmail.Location = new System.Drawing.Point(21, 132);
+            this.txtEditEmail.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
+            this.txtEditEmail.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtEditEmail.ForeColor = System.Drawing.Color.White;
+            this.txtEditEmail.Location = new System.Drawing.Point(21, 129);
             this.txtEditEmail.Name = "txtEditEmail";
             this.txtEditEmail.Size = new System.Drawing.Size(300, 20);
             this.txtEditEmail.TabIndex = 12;
             // 
             // label3
             // 
-            this.label3.Location = new System.Drawing.Point(21, 162);
+            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
+            this.label3.Location = new System.Drawing.Point(21, 159);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(100, 20);
             this.label3.TabIndex = 13;
@@ -213,7 +241,10 @@
             // 
             // txtEditPassword
             // 
-            this.txtEditPassword.Location = new System.Drawing.Point(21, 182);
+            this.txtEditPassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
+            this.txtEditPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtEditPassword.ForeColor = System.Drawing.Color.White;
+            this.txtEditPassword.Location = new System.Drawing.Point(21, 179);
             this.txtEditPassword.Name = "txtEditPassword";
             this.txtEditPassword.PasswordChar = '*';
             this.txtEditPassword.Size = new System.Drawing.Size(300, 20);
@@ -222,16 +253,20 @@
             // lblEditTitle
             // 
             this.lblEditTitle.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.lblEditTitle.Location = new System.Drawing.Point(135, 13);
+            this.lblEditTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
+            this.lblEditTitle.Location = new System.Drawing.Point(121, 14);
             this.lblEditTitle.Name = "lblEditTitle";
-            this.lblEditTitle.Size = new System.Drawing.Size(100, 23);
+            this.lblEditTitle.Size = new System.Drawing.Size(129, 23);
             this.lblEditTitle.TabIndex = 0;
-            this.lblEditTitle.Text = "Edit Admin";
+            this.lblEditTitle.Text = "Update Admin";
             // 
             // btnUpdate
             // 
-            this.btnUpdate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
+            this.btnUpdate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(52)))), ((int)(((byte)(88)))));
             this.btnUpdate.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnUpdate.FlatAppearance.BorderSize = 0;
+            this.btnUpdate.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(40)))), ((int)(((byte)(69)))));
+            this.btnUpdate.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(40)))), ((int)(((byte)(69)))));
             this.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnUpdate.ForeColor = System.Drawing.Color.White;
             this.btnUpdate.Location = new System.Drawing.Point(24, 228);
@@ -246,6 +281,9 @@
             // 
             this.btnEditClear.BackColor = System.Drawing.Color.IndianRed;
             this.btnEditClear.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnEditClear.FlatAppearance.BorderSize = 0;
+            this.btnEditClear.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(40)))), ((int)(((byte)(69)))));
+            this.btnEditClear.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(40)))), ((int)(((byte)(69)))));
             this.btnEditClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEditClear.ForeColor = System.Drawing.Color.White;
             this.btnEditClear.Location = new System.Drawing.Point(124, 228);
@@ -258,7 +296,8 @@
             // 
             // AdminPopupForm
             // 
-            this.ClientSize = new System.Drawing.Size(434, 361);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(29)))), ((int)(((byte)(56)))));
+            this.ClientSize = new System.Drawing.Size(426, 342);
             this.Controls.Add(this.editPanel);
             this.Controls.Add(this.addPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;

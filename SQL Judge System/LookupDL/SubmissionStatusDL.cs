@@ -13,7 +13,7 @@ namespace SQL_Judge_System.LookupDL
     {
         public static List<SubmissionStatus> GetAll()
         {
-            string query = "SELECT * FROM SubmissionStatus ORDER BY StatusID;";
+            string query = "SELECT * FROM SubmissionStatuses ORDER BY StatusID;";
             DataTable dt = DatabaseHelper.Instance.GetDataTable(query);    
 
             List<SubmissionStatus> statuses = new List<SubmissionStatus>();
@@ -23,6 +23,26 @@ namespace SQL_Judge_System.LookupDL
                 statuses.Add(status);
             }
             return statuses;
+        }
+        public static int GetAccepted()
+        {
+            string query = "SELECT StatusID FROM SubmissionStatuses WHERE StatusName = 'Accepted';";
+            return DatabaseHelper.Instance.ExecuteScalar(query);
+        }
+        public static int GetWrongAnswer()
+        {
+            string query = "SELECT StatusID FROM SubmissionStatuses WHERE StatusName = 'Wrong Answer';";
+            return DatabaseHelper.Instance.ExecuteScalar(query);
+        }
+        public static int GetRunTimeError()
+        {
+            string query = "SELECT StatusID FROM SubmissionStatuses WHERE StatusName = 'Runtime Error';";
+            return DatabaseHelper.Instance.ExecuteScalar(query);
+        }
+        public static int GetPending()
+        {
+            string query = "SELECT StatusID FROM SubmissionStatuses WHERE StatusName = 'Pending';";
+            return DatabaseHelper.Instance.ExecuteScalar(query);
         }
     }
 }

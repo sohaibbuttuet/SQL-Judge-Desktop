@@ -57,12 +57,7 @@ namespace SQL_Judge_System.BL
         }
         public static User SignIn(string email, string password)
         {
-            User user = UserDL.SignIn(email, password);
-
-            if (user == null)
-                throw new InvalidOperationException("Invalid email or password.");
-
-            return user;
+            return UserDL.SignIn(email, password);
         }
 
         // Admin Home Panel

@@ -53,7 +53,10 @@ namespace SQL_Judge_System.Models
             get { return setupSQL; }
             set
             {
-                setupSQL = value ?? "";
+                if (string.IsNullOrWhiteSpace(value))
+                    throw new Exception("Setup SQL cannot be empty.");
+
+                setupSQL = value;
             }
         }
         public string SolutionQuery
@@ -105,6 +108,21 @@ namespace SQL_Judge_System.Models
 
             MarkUpdated(updatedBy);
         }
+
+        // Full Constructer For DB Load
+        public TestCase(int testCaseID, string testCaseName, int problemID, string setupSQL, string solutionQuery, int createdBy, DateTime createdAt, int updatedBy, DateTime updatedAt, bool isActive)
+        {
+            TestCaseID = testCaseID;
+            TestCaseName = testCaseName;
+            ProblemID = problemID;
+            SetupSQL = setupSQL;
+            SolutionQuery = solutionQuery;
+
+            LoadAuditData(createdBy, createdAt, updatedBy, updatedAt);
+
+            IsActive = isActive;
+        }
+
     }
 }
 
