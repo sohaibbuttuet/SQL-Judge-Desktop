@@ -7,6 +7,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Net.Mail;
 using System.Windows.Forms;
 
 namespace SQL_Judge_System.BL
@@ -24,40 +25,73 @@ namespace SQL_Judge_System.BL
         }
         public static void SignUp(User user)
         {
-            if (user == null)
-            {
+            if(user == null)
                 throw new ArgumentNullException(nameof(user), "User cannot be null.");
-            }
-            if(!user.Email.Contains("@") || !user.Email.Contains("."))
-            {
-                throw new ArgumentException("Invalid email format.", nameof(user.Email));
-            }
+
+            ValidateEmail(user.Email); // internally throww exceptions
+
             if (UserDL.IsEmailRegistered(user.Email))
-            {
                 throw new InvalidOperationException("Email is already registered.");
-            }
+
             user.UserID = UserDL.SignUp(user);
         }
         public static void UpdateUser(User user)
         {
-            if (user == null)
-            {
-                throw new ArgumentNullException("user can not null");
-            }
-            if (!user.Email.Contains("@") || !user.Email.Contains("."))
-            {
-                throw new ArgumentException("Invalid email format.", nameof(user.Email));
-            }
-            if (UserDL.IsEmailRegistered(user.UserID, user.Email))
-            {
-                MessageBox.Show("Email already exists!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+            ValidateUser(user);
+
             UserDL.UpdateUser(user);
+        }
+        public static void UpdateProfile(User user)
+        {
+            ValidateUser(user);
+
+            UserDL.UpdateProfile(user);
+        }        
+        public static void ChangePassword(int userID, string password)
+        {
+            if (userID <= 0)
+                throw new ArgumentException("Invalid User ID");
+
+            UserDL.ChangePassword(userID, password);
+        }
+        public static bool VerifyPassword(int userID, string password)
+        {
+            if (userID <= 0)
+                throw new ArgumentException("Invalid User ID");
+
+            return UserDL.VerifyPassword(userID, password);
         }
         public static User SignIn(string email, string password)
         {
+           ValidateEmail(email); // internally throww exceptions
+
             return UserDL.SignIn(email, password);
+        }
+
+        // Helping Function
+        private static void ValidateEmail(string email)
+        {
+            if (string.IsNullOrWhiteSpace(email))
+                throw new ArgumentNullException(nameof(email), "Email cannot be null or empty.");
+
+            try
+            {
+                MailAddress m = new MailAddress(email);
+            }
+            catch (FormatException)
+            {
+                throw new ArgumentException("Invalid email format.");
+            }
+        }
+        private static void ValidateUser(User user)
+        {
+            if (user == null)
+                throw new ArgumentNullException(nameof(user), "User cannot be null.");
+
+            ValidateEmail(user.Email); // internally throww exceptions
+
+            if (UserDL.IsEmailRegistered(user.UserID, user.Email))
+                throw new ArgumentException("Email already exists!");
         }
 
         // Admin Home Panel
@@ -159,6 +193,22 @@ namespace SQL_Judge_System.BL
                 throw new ArgumentNullException(nameof(u), "UserRole cannot be null.");
             }
             UserRoleDL.AssignRoleToUser(u);
+        }
+
+        // Setting Form
+        public static string GetUserRole(int userID)
+        {
+            if (userID <= 0)
+                throw new ArgumentOutOfRangeException(nameof(userID), "Invalid User ID");
+
+            return UserDL.GetUserRole(userID);
+        }
+        public static bool IsUserStudent(int userID)
+        {
+            if (userID <= 0)
+                throw new ArgumentOutOfRangeException(nameof(userID), "Invalid User ID");
+
+            return UserDL.IsUserStudent(userID);
         }
     }
 }

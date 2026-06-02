@@ -16,6 +16,7 @@ namespace SQL_Judge_System.UI
     {
         private int userID;
         private int contestID;
+        private bool isEditMode = false;
 
         public ContestPopupForm(int userID)
         {
@@ -23,8 +24,7 @@ namespace SQL_Judge_System.UI
 
             this.userID = userID;
 
-            ShowAddPanel();
-            LoadCheckBox(clbAProblem);
+            LoadCheckBox(clbProblem);
         }
         public ContestPopupForm(int userID, int contestID)
         {
@@ -32,10 +32,10 @@ namespace SQL_Judge_System.UI
 
             this.userID = userID;
             this.contestID = contestID;
+            isEditMode = true;
 
-            ShowUpdatePanel();
-            LoadContest(contestID);
-            LoadCheckBox(clbUProblem);
+            LoadCheckBox(clbProblem);
+            LoadContest(contestID);            
         }
 
         private void LoadCheckBox(CheckedListBox box)
@@ -65,42 +65,30 @@ namespace SQL_Judge_System.UI
                     return;
                 }
 
-                txtUTitle.Text = c.Title;
-                txtUDescription.Text = c.Description;
-
-                dtp_UStartDate.Value = c.StartDate;
-                dtp_UEndDate.Value = c.EndDate;
+                txtTitle.Text = c.Title;
+                txtDescription.Text = c.Description;
+                dtStartDate.Value = c.StartDate;
+                dtEndDate.Value = c.EndDate;
 
                 List<ContestProblem> problems = ContestBL.GetProblemsByContestID(c.ContestID);
                 List<int> problemID = problems.Select(p => p.ProblemID).ToList();
 
-                for (int i = 0; i < clbUProblem.Items.Count; i++)
+                for (int i = 0; i < clbProblem.Items.Count; i++)
                 {
-                    var problem = clbUProblem.Items[i] as Problem;
+                    Problem problem = (Problem)clbProblem.Items[i];
 
                     if (problem == null) continue;
 
-                    clbUProblem.SetItemChecked(i, problemID.Contains(problem.ProblemID));
+                    clbProblem.SetItemChecked(i, problemID.Contains(problem.ProblemID));
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
+        }     
 
-        private void ShowAddPanel()
-        {
-            addPanel.Visible = true;
-            updatePanel.Visible = false;
-        }
-        private void ShowUpdatePanel()
-        {
-            addPanel.Visible = false;
-            updatePanel.Visible = true;
-        }
-
-        private void btnAdd_Click(object sender, EventArgs e)
+        private void btnSaveProblem_Click(object sender, EventArgs e)
         {
             try
             {
@@ -115,7 +103,7 @@ namespace SQL_Judge_System.UI
                     return;
                 }
 
-                if (clbAProblem.CheckedItems.Count == 0)
+                if (clbProblem.CheckedItems.Count == 0)
                 {
                     MessageBox.Show("Please select at least one problem.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
@@ -123,11 +111,24 @@ namespace SQL_Judge_System.UI
 
                 Contest contest = new Contest(title, description, startDate, endDate, userID);
 
-                // Create Contest
-                ContestBL.CreateContest(contest);
+                if(isEditMode)
+                {
+                    contest.ContestID = contestID;
 
+                    // Update Contest
+                    ContestBL.UpdateContest(contest);
+
+                    // Remove old Problems
+                    ContestBL.DeleteProblemsByContestID(contest.ContestID);
+                }
+                else
+                {
+                    // Create Contest
+                    ContestBL.CreateContest(contest);
+                }
+               
                 // Insert problems
-                foreach (Problem p in clbAProblem.CheckedItems)
+                foreach (Problem p in clbProblem.CheckedItems)
                 {
                     if (p == null) continue;
 
@@ -135,94 +136,30 @@ namespace SQL_Judge_System.UI
                     ContestBL.AddProblem(contestProblem);
                 }
 
-                MessageBox.Show("Contest created successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Contest saved successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            ClearAddInputs();
         }
-        private void btnAddClear_Click(object sender, EventArgs e)
+
+        private void btnClear_Click(object sender, EventArgs e)
         {
-            ClearAddInputs();
+            ClearInputs();
         }
-
-        private void btnUpdate_Click(object sender, EventArgs e)
-        {
-            try {
-                string title = txtUTitle.Text;
-                string description = txtUDescription.Text;
-                DateTime startDate = dtp_UStartDate.Value;
-                DateTime endDate = dtp_UEndDate.Value;
-
-                if (string.IsNullOrWhiteSpace(title) || string.IsNullOrWhiteSpace(description))
-                {
-                    MessageBox.Show("Please fill all required fields.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                if (clbUProblem.CheckedItems.Count == 0)
-                {
-                    MessageBox.Show("Please select at least one problem.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                Contest contest = new Contest(contestID, title, description, startDate, endDate, userID);
-
-                // Update Contest
-                ContestBL.UpdateContest(contest);
-
-                // Remove old Problems
-                ContestBL.DeleteProblemsByContestID(contest.ContestID);
-
-                // Insert problems
-                foreach (Problem p in clbUProblem.CheckedItems)
-                {
-                    if (p == null) continue;
-
-                    ContestProblem contestProblem = new ContestProblem(contest.ContestID, p.ProblemID);
-                    ContestBL.AddProblem(contestProblem);
-                }
-
-                MessageBox.Show("Contest updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            ClearUpdateInputs();
-        }
-        private void btnUClear_Click(object sender, EventArgs e)
-        {
-            ClearUpdateInputs();
-        }
-
-        private void ClearAddInputs()
+        private void ClearInputs()
         {
             txtTitle.Clear();
             txtDescription.Clear();
             dtStartDate.Value = DateTime.Now;
             dtEndDate.Value = DateTime.Now.AddHours(1);
 
-            for (int i = 0; i < clbAProblem.Items.Count; i++)
+            for (int i = 0; i < clbProblem.Items.Count; i++)
             {
-                clbAProblem.SetItemChecked(i, false);
+                clbProblem.SetItemChecked(i, false);
             }
         }
-        private void ClearUpdateInputs()
-        {
-            txtUTitle.Clear();
-            txtUDescription.Clear();
-            dtp_UStartDate.Value = DateTime.Now;
-            dtp_UEndDate.Value = DateTime.Now.AddHours(1);
-
-            for (int i = 0; i < clbUProblem.Items.Count; i++)
-            {
-                clbUProblem.SetItemChecked(i, false);
-            }
-        } 
     }
 }

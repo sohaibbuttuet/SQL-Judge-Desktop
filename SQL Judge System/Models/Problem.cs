@@ -10,6 +10,8 @@ namespace SQL_Judge_System.Models
         private string description;
         private int difficultyID;
         private int points;
+        private string targetDatabase;
+        private string masterQuery;
         private bool isActive;
 
         // =========================
@@ -69,6 +71,26 @@ namespace SQL_Judge_System.Models
                 points = value;
             }
         }
+        public string TargetDatabase
+        {
+            get { return targetDatabase; }
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                    throw new ArgumentException("Target Database cannot be empty.");
+                targetDatabase = value;
+            }
+        }
+        public string MasterQuery
+        {
+            get { return masterQuery; }
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                    throw new ArgumentException("Master Query cannot be empty.");
+                masterQuery = value;
+            }
+        }
         public bool IsActive
         {
             get { return isActive; }
@@ -85,12 +107,14 @@ namespace SQL_Judge_System.Models
         }
 
         // Constructor For Creating New Problem (without ID, CreatedBy)
-        public Problem(string title, string description, int difficultyID, int points, int createdBy)
+        public Problem(string title, string description, int difficultyID, int points, string targetDatabase, string masterQuery, int createdBy)
         {
             Title = title;
             Description = description;
             DifficultyID = difficultyID;
             Points = points;
+            TargetDatabase = targetDatabase;
+            MasterQuery = masterQuery;
 
             IsActive = true;
 
@@ -98,24 +122,28 @@ namespace SQL_Judge_System.Models
         }
 
         // Constructor For Updating Existing Problem (with ID, UpdatedBy)
-        public Problem(int problemID, string title, string description, int difficultyID, int points, int updatedBy)
+        public Problem(int problemID, string title, string description, int difficultyID, int points, string targetDatabase, string masterQuery, int updatedBy)
         {
             ProblemID = problemID;
             Title = title;
             Description = description;
             DifficultyID = difficultyID;
             Points = points;
+            TargetDatabase = targetDatabase;
+            MasterQuery = masterQuery;
 
             MarkUpdated(updatedBy);
         }
 
         // Full Constructer For Database Load
-        public Problem(int problemID, string title, string description, int difficultyID, int points, bool isActive, int createdBy, DateTime createdAt, int updatedBy, DateTime updatedAt)
+        public Problem(int problemID, string title, string description, int difficultyID, int points, string targetDatabase, string masterQuery, int createdBy, DateTime createdAt, int updatedBy, DateTime updatedAt, bool isActive)
         {
             ProblemID = problemID;
             Title = title;
             Description = description;
             DifficultyID = difficultyID;
+            TargetDatabase = targetDatabase;
+            MasterQuery = masterQuery;
             Points = points;
             IsActive = isActive;
 

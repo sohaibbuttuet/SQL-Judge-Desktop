@@ -14,11 +14,11 @@ namespace SQL_Judge_System.BL
     {
         public static void AddProblem(Problem problem)
         {
-            if(problem == null)
+            if (problem == null)
                 throw new ArgumentNullException(nameof(problem), "Problem cannot be null.");
 
             if (ProblemDL.IsProblemExists(problem.Title, problem.DifficultyID))
-                throw new ArgumentException("Problem already exists.");                
+                throw new ArgumentException("Problem with the same title and difficulty already exists.");
 
             problem.ProblemID = ProblemDL.AddProblem(problem);
         }
@@ -28,35 +28,30 @@ namespace SQL_Judge_System.BL
                 throw new ArgumentNullException(nameof(problem), "Problem cannot be null.");
 
             if (ProblemDL.IsProblemExists(problem.ProblemID, problem.Title, problem.DifficultyID))
-                throw new ArgumentException("Problem already exists.");
+                throw new ArgumentException("Problem with the same title and difficulty already exists.");
 
             ProblemDL.UpdateProblem(problem);
         }
 
         public static void ActivateProblem(int problemId)
         {
-            if (problemId < 0)
-            {
-                throw new ArgumentOutOfRangeException(nameof(problemId), "Problem ID must be a non-negative integer.");
-            }
-            if (!ProblemDL.IsProblemExists(problemId))
-            {
-                throw new InvalidOperationException("Problem does not exist.");
-            }
+            ValidateProblemId(problemId);
             ProblemDL.ActivateProblem(problemId);
         }
         public static void DeactivateProblem(int problemId)
         {
-            if (problemId < 0)
-            {
-                throw new ArgumentOutOfRangeException(nameof(problemId), "Problem ID must be a non-negative integer.");
-            }
-            if (!ProblemDL.IsProblemExists(problemId))
-            {
-                throw new InvalidOperationException("Problem does not exist.");
-            }
+            ValidateProblemId(problemId);
             ProblemDL.DeactivateProblem(problemId);
         }
+        private static void ValidateProblemId(int problemId)
+        {
+            if (problemId < 0)
+                throw new ArgumentOutOfRangeException(nameof(problemId), "Problem ID must be a non-negative integer.");
+
+            if (!ProblemDL.IsProblemExists(problemId))
+                throw new InvalidOperationException("Problem does not exist.");
+        }
+
 
         // Problem Panel in Admin Dashboard
         public static DataTable ProblemsList()
@@ -90,7 +85,7 @@ namespace SQL_Judge_System.BL
             if (problemID < 0)
                 throw new ArgumentOutOfRangeException(nameof(problemID), "Invalid Problem ID");
 
-           return ProblemDL.GetDescriptionByID(problemID);
+            return ProblemDL.GetDescriptionByID(problemID);
         }
 
         public static Problem GetProblemByID(int problemId)
@@ -111,7 +106,7 @@ namespace SQL_Judge_System.BL
         public static int InactiveProblems()
         {
             return ProblemDL.InactiveProblems();
-        }        
+        }
 
         // For Problem lookups
         public static List<ProblemDifficulty> GetProblemDifficulties()
@@ -134,29 +129,56 @@ namespace SQL_Judge_System.BL
         public static void MapProblemTag(ProblemTagMap pt)
         {
             if (pt == null)
-            {
                 throw new ArgumentNullException(nameof(pt), "ProblemTagMap object cannot be null.");
-            }
 
             if (pt.ProblemID <= 0)
-            {
                 throw new ArgumentException("Invalid Problem ID.");
-            }
 
             if (pt.TagID <= 0)
-            {
                 throw new ArgumentException("Invalid Tag ID.");
-            }
 
             ProblemTagMapDL.MapProblemTag(pt);
         }
-        public static void DeleteByProblemID(int problemID)
+        public static void DeleteTagsByProblemID(int problemID)
         {
             if (problemID <= 0)
-            {
                 throw new ArgumentException("Invalid Problem ID.");
-            }
+            
             ProblemTagMapDL.DeleteByProblemID(problemID);
+        }
+
+        // For Problem Schema
+        public static void SaveCheckedTables(int problemID, List<string> selectedTables)
+        {
+            if (problemID <= 0)
+                throw new ArgumentException("Invalid Problem ID.");
+
+            foreach(string tableName in selectedTables)
+            {
+                if (!string.IsNullOrWhiteSpace(tableName))
+                {
+                    ProblemTable table = new ProblemTable
+                    {
+                        ProblemID = problemID,
+                        TableName = tableName.Trim()
+                    };
+                    ProblemTablesDL.AddProblemTable(table);
+                }
+            }
+        }
+        public static void DeleteSchemaByProblemID(int problemID)
+        {
+            if (problemID <= 0)
+                throw new ArgumentException("Invalid Problem ID.");
+
+            ProblemTablesDL.DeleteAllByProblemID(problemID);
+        }
+        public static List<ProblemTable> GetSchemaByProblemID(int problemID)
+        {
+            if (problemID <= 0)
+                throw new ArgumentException("Invalid Problem ID.");
+
+            return ProblemTablesDL.GetTablesByProblemID(problemID);
         }
     }
 }

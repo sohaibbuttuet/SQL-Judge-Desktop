@@ -15,46 +15,32 @@ namespace SQL_Judge_System.BL
     {
         public static void CreateContest(Contest contest)
         {
-            if (contest == null)
-            {
-                throw new ArgumentNullException(nameof(contest), "Contest cannot be null.");
-            }
-            if (contest.StartDate >= contest.EndDate)
-            {
-                throw new ArgumentException("Contest start date must be before end date.");
-            }
-            if (contest.Description.Length > 1000)
-            {
-                throw new ArgumentException("Contest description cannot exceed 1000 characters.");
-            }
+            ValidateContest(contest); // internally throws exceptions if validation fails
+
             if (ContestDL.IsContestExists(contest.Title))
-            {
                 throw new ArgumentException("Contest already exists.");
-            }
 
             contest.ContestID = ContestDL.CreateContest(contest);
         }
         public static void UpdateContest(Contest contest)
         {
-            if (contest == null)
-            {
-                throw new ArgumentNullException(nameof(contest), "Contest cannot be null.");
-            }
+            ValidateContest(contest); // internally throws exceptions if validation fails
+
             if (ContestDL.IsContestExists(contest.ContestID, contest.Title))
-            {
-                throw new ArgumentException("Contest title already exists.");
-            }
-            if (contest.EndDate <= contest.StartDate)
-            {
-                throw new ArgumentException("End date must be greater than start date.");
-            }
-            if (contest.Description.Length > 1000)
-            {
-                throw new ArgumentException("Contest description cannot exceed 1000 characters.");
-            }
+                throw new ArgumentException("Contest title already exists.");          
 
             ContestDL.UpdateContest(contest);
         }
+        private static void ValidateContest(Contest contest)
+        {
+            if (contest == null)
+                throw new ArgumentNullException(nameof(contest), "Contest cannot be null.");
+            if (contest.StartDate >= contest.EndDate)
+                throw new ArgumentException("Contest start date must be before end date.");
+            if (contest.Description.Length > 1000)
+                throw new ArgumentException("Contest description cannot exceed 1000 characters.");
+        }
+
         public static Contest GetContestByID(int contestID)
         {
             if (contestID <= 0)
@@ -63,6 +49,7 @@ namespace SQL_Judge_System.BL
             return ContestDL.GetContestByID(contestID);
         }
 
+        // Managing Contest Problems
         public static void AddProblem(ContestProblem contestProblem)
         {
             if(contestProblem.ContestID <= 0)
@@ -71,10 +58,10 @@ namespace SQL_Judge_System.BL
             if (contestProblem.ProblemID <= 0)
                 throw new ArgumentException("Invalid Problem ID");
 
-            if (ContestProblemDL.IsProblemExistsinContest(contestProblem))
+            if (ContestProblemsDL.IsProblemExistsinContest(contestProblem))
                 throw new Exception("Problem already exists;");
 
-            ContestProblemDL.AddProblem(contestProblem);
+            ContestProblemsDL.AddProblem(contestProblem);
         }
         public static void RemoveProblem(ContestProblem contestProblem)
         {
@@ -84,28 +71,44 @@ namespace SQL_Judge_System.BL
             if (contestProblem.ProblemID <= 0)
                 throw new ArgumentException("Invalid Problem ID");
 
-            if (!ContestProblemDL.IsProblemExistsinContest(contestProblem))
+            if (!ContestProblemsDL.IsProblemExistsinContest(contestProblem))
                 throw new Exception("Problem does not exist;");
 
-            ContestProblemDL.DeleteProblem(contestProblem);
+            ContestProblemsDL.DeleteProblem(contestProblem);
         }
         public static void DeleteProblemsByContestID(int contestID)
         {
             if (contestID <= 0)
                 throw new ArgumentException("Invalid Contest ID");
 
-            if (!ContestProblemDL.IsContestExists(contestID))
+            if (!ContestProblemsDL.IsContestExists(contestID))
                 throw new Exception("Contest does not exists.");
 
-            ContestProblemDL.DeleteProblemsByContestID(contestID);
+            ContestProblemsDL.DeleteProblemsByContestID(contestID);
         }
         public static List<ContestProblem> GetProblemsByContestID(int contestID)
         {
             if (contestID <= 0)
                 throw new ArgumentException("Invalid Problem ID");
 
-            return ContestProblemDL.GetProblemsByContestID(contestID);
+            return ContestProblemsDL.GetProblemsByContestID(contestID);
         }
+
+        // Managing Contest Participents
+        public static void AddContestParticipent(ContestParticipant contestParticipent)
+        {
+            if (contestParticipent == null)
+                throw new ArgumentNullException(nameof(contestParticipent), "ContestParticipent cannot be null.");
+  
+            if (contestParticipent.ContestId <= 0)
+                throw new ArgumentException("ContestId must be a positive integer.", nameof(contestParticipent.ContestId));
+
+            if (contestParticipent.StudentId <= 0)
+                throw new ArgumentException("StudentId must be a positive integer.", nameof(contestParticipent.StudentId));
+
+            ContestParticipentsDL.AddContestParticipent(contestParticipent);
+        }
+
 
         // For Contest Panel in Admin Dashboard
         public static DataTable GetContests()

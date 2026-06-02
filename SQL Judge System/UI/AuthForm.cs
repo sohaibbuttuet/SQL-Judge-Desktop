@@ -18,9 +18,7 @@ namespace SQL_Judge_System.UI
             SetSignInMode();
         }
 
-        // =========================================
         // LOAD SKILL LEVELS
-        // =========================================
         private void LoadSkillLevels()
         {
             try
@@ -42,9 +40,7 @@ namespace SQL_Judge_System.UI
             }
         }
 
-        // =========================================
         // TOGGLE LOGIN / SIGNUP
-        // =========================================
         private void lnkToggle_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             ClearFields();
@@ -55,18 +51,14 @@ namespace SQL_Judge_System.UI
                 SetSignUpMode();
         }
 
-        // =========================================
         // SIGN UP MODE
-        // =========================================
         private void SetSignUpMode()
         {
             isSignUpMode = true;
 
             lblTitle.Text = "Create Account";
             lblSubtitle.Text = "Register as Student";
-
             btnMainAction.Text = "SIGN UP";
-
             lnkToggle.Text = "Already have an account? Sign In";
 
             pnlStudentExtra.Visible = true;
@@ -78,9 +70,7 @@ namespace SQL_Judge_System.UI
             this.ClientSize = new Size(520, 760);
         }
 
-        // =========================================
         // SIGN IN MODE
-        // =========================================
         private void SetSignInMode()
         {
             isSignUpMode = false;
@@ -94,22 +84,14 @@ namespace SQL_Judge_System.UI
 
             pnlStudentExtra.Visible = false;
 
-            btnMainAction.Location = new Point(
-                45,
-                txtPassword.Bottom + 45
-            );
+            btnMainAction.Location = new Point(45, txtPassword.Bottom + 45);
 
-            lnkToggle.Location = new Point(
-                45,
-                btnMainAction.Bottom + 15
-            );
+            lnkToggle.Location = new Point(45, btnMainAction.Bottom + 15);
 
             this.ClientSize = new Size(520, 720);
         }
 
-        // =========================================
         // MAIN BUTTON CLICK
-        // =========================================
         private void btnMainAction_Click(object sender, EventArgs e)
         {
             try
@@ -118,9 +100,6 @@ namespace SQL_Judge_System.UI
                 string email = txtEmail.Text.Trim();
                 string password = txtPassword.Text;
 
-                // =========================
-                // BASIC VALIDATION
-                // =========================
                 if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
                 {
                     MessageBox.Show(
@@ -133,21 +112,6 @@ namespace SQL_Judge_System.UI
                     return;
                 }
 
-                if (!email.Contains("@") || !email.Contains("."))
-                {
-                    MessageBox.Show(
-                        "Invalid email format.",
-                        "Validation",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Warning
-                    );
-
-                    return;
-                }
-
-                // =====================================
-                // SIGN UP
-                // =====================================
                 if (isSignUpMode)
                 {
                     string regNo = txtRegNo.Text.Trim();
@@ -172,43 +136,23 @@ namespace SQL_Judge_System.UI
 
                     int skillLevelID = Convert.ToInt32(cmbSkillLevel.SelectedValue);
 
-                    // =========================
                     // CREATE USER
-                    // =========================
                     User user = new User(name, email, password);
-
                     UserBL.SignUp(user);
 
-                    // =========================
                     // REGISTER STUDENT
-                    // =========================
                     Student student = new Student(user.UserID, regNo, skillLevelID);
-
                     StudentBL.RegisterStudent(student);
 
-                    // =========================
                     // ASSIGN ROLE
-                    // =========================
                     int roleId = UserBL.GetStudentRoleID();
 
                     UserRole userRole = new UserRole(user.UserID, roleId);
-
                     UserBL.AssignRoleToUser(userRole);
 
-                    MessageBox.Show(
-                        "Student registered successfully!",
-                        "Success",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Information
-                    );
-
-                    ClearFields();
+                    MessageBox.Show("Student registered successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     SetSignInMode();
                 }
-
-                // =====================================
-                // LOGIN
-                // =====================================
                 else
                 {
                     User user = UserBL.SignIn(email, password);
@@ -217,34 +161,27 @@ namespace SQL_Judge_System.UI
                     {
                         this.Hide();
 
-                        if (UserBL.IsUserSuperAdmin(user.UserID) || UserBL.IsUserAdmin(user.UserID))
+                        if (UserBL.IsUserStudent(user.UserID))
                         {
-                            AdminDashboardUI adminDashboard =  new AdminDashboardUI(user.UserID);
-
-                            adminDashboard.Show();
+                            StudentDashboardUI studentDashboard = new StudentDashboardUI(user.UserID);
+                            studentDashboard.Show();
                         }
                         else
                         {
-                            StudentDashboardUI studentDashboard = new StudentDashboardUI(user.UserID);
-
-                            studentDashboard.Show();
+                            AdminDashboardUI adminDashboard =  new AdminDashboardUI(user.UserID);
+                            adminDashboard.Show();
                         }
                     }
                     else
                     {
-                        MessageBox.Show(
-                            "Invalid email or password.",
-                            "Authentication Failed",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Error
-                        );
+                        MessageBox.Show("Invalid email or password.", "Authentication Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(
-                    ex.Message,
+                    "An error occurred during authentication.\n" + ex.Message,
                     "Error",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error
@@ -252,9 +189,7 @@ namespace SQL_Judge_System.UI
             }
         }
 
-        // =========================================
         // CLEAR INPUT FIELDS
-        // =========================================
         private void ClearFields()
         {
             txtEmail.Clear();

@@ -10,33 +10,28 @@ namespace SQL_Judge_System.BL
 {
     internal class QueryRunnerBL
     {
-        public static DataTable GetOutput(int problemID, string query)
+        public static void ValidateQuery(string targetDatabase, string query)
         {
-            if (problemID <= 0)
-                throw new ArgumentException("Invalid Problem ID");
+            if (string.IsNullOrWhiteSpace(targetDatabase))
+                throw new ArgumentException("Target schema database context cannot be null or empty.");
 
-            // 1. Clean and validate student query text
+            // 1. Clean and validate the query to ensure it is a single, read-only statement without dangerous keywords
             query = CleanAndValidateQuery(query);
 
-            // 2. Get All Test Cases of the Problem
-            var testCases = TestCaseDL.GetByProblemID(problemID);
-            if (testCases == null || testCases.Count == 0)
-                throw new Exception("This problem does not have any test cases configured yet.");
+            // 2. Attempt to execute the query to ensure it runs without syntax errors and returns a dataset structure
+            QueryRunnerDB runnerDb = new QueryRunnerDB(targetDatabase);
+            DataTable dt = runnerDb.GetDataTable(query);
 
-            // 3. Run Query against first test case's setupsql
-            string setupsql = testCases[0].SetupSQL;
-            DataTable studentResult = QueryRunnerDB.Instance.ExecuteTransactionViaSql(setupsql, query);
-
-            return studentResult;
+            if (dt == null)
+                throw new Exception("Failed to execute query or no dataset structure returned.");
         }
         public static string CleanAndValidateQuery(string sql)
         {
-            // Clean up whitespace and remove any trailing semicolon typed by the student
+            // Clean up whitespace and remove any trailing semicolon typed by the user
             string cleanedSql = sql.Trim();
+
             if (cleanedSql.EndsWith(";"))
-            {
                 cleanedSql = cleanedSql.Substring(0, cleanedSql.Length - 1).Trim();
-            }
 
             string lowerSql = cleanedSql.ToLower();
 
@@ -54,6 +49,7 @@ namespace SQL_Judge_System.BL
 
             // Safe Keyword Blocklist: Uses word boundaries (\b) so words like 'Walter' or 'Creative' work!
             string[] blockedKeywords = { "drop", "alter", "delete", "truncate", "update", "insert", "create", "exec", "merge", "replace", "rename" };
+
             foreach (string keyword in blockedKeywords)
             {
                 // \b ensures match on full words only

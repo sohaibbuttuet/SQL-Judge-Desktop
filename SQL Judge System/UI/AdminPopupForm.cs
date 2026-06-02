@@ -16,39 +16,37 @@ namespace SQL_Judge_System.UI
     public partial class AdminPopupForm : Form
     {
         private int userId;
+        private bool isEditMode = false;
         public AdminPopupForm()
         {
             InitializeComponent();
-            ShowAddPanel();
         }
         public AdminPopupForm(int userID)
         {
             InitializeComponent();
 
             this.userId = userID;
+            isEditMode = true;
 
-            LoadUserData(userID);
-            ShowEditPanel();
+            LoadAdmin(userID);
         }
 
-        public void ShowAddPanel()
+        private void LoadAdmin(int userID)
         {
-            addPanel.Visible = true;
-            editPanel.Visible = false;
-        }
-        public void ShowEditPanel()
-        {
-            addPanel.Visible = false;
-            editPanel.Visible = true;
+            User user = UserBL.GetUserById(userID);
+
+            txtName.Text = user.FullName;
+            txtEmail.Text = user.Email;
+            txtPassword.Text = user.Password;
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
+        private void btnSave_Click(object sender, EventArgs e)
         {
             try
             {
-                string name = txtAddName.Text.Trim();
-                string email = txtAddEmail.Text.Trim();
-                string password = txtAddPassword.Text.Trim();
+                string name = txtName.Text.Trim();
+                string email = txtEmail.Text.Trim();
+                string password = txtPassword.Text.Trim();
 
                 if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
                 {
@@ -57,77 +55,42 @@ namespace SQL_Judge_System.UI
                 }
 
                 User user = new User(name, email, password);
-                UserBL.SignUp(user);
 
-                // Get Admin RoleID
-                int AdminRoleID = UserBL.GetAdminRoleID();
+                if (!isEditMode)
+                {
+                    UserBL.SignUp(user);
 
-                // Assign Admin Role
-                UserRole userRole = new UserRole(user.UserID, AdminRoleID);
-                UserBL.AssignRoleToUser(userRole);
+                    // Get Admin RoleID
+                    int AdminRoleID = UserBL.GetAdminRoleID();
 
-                MessageBox.Show("Admin added successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                ClearAddInputs();
+                    // Assign Admin Role
+                    UserRole userRole = new UserRole(user.UserID, AdminRoleID);
+                    UserBL.AssignRoleToUser(userRole);
+                }
+                else
+                {
+                    user.UserID = userId;
+                    UserBL.UpdateUser(user);
+                }
+
+                MessageBox.Show("Admin saved successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Close();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
         }
-        private void btnAddClear_Click(object sender, EventArgs e)
+        private void btnClear_Click(object sender, EventArgs e)
         {
-            ClearAddInputs();
+            ClearInputs();
         }
 
-        private void btnUpdate_Click(object sender, EventArgs e)  
+        private void ClearInputs()
         {
-            try
-            {
-                string name = txtEditName.Text.Trim();
-                string email = txtEditEmail.Text.Trim();
-                string password = txtEditPassword.Text.Trim();
-
-                if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
-                {
-                    MessageBox.Show("Please fill all required fields.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                User user = new User(userId, name, email, password);
-                UserBL.UpdateUser(user);
-
-                MessageBox.Show("Admin updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                ClearEditInputs();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-        private void btnEditClear_Click(object sender, EventArgs e)
-        {
-            ClearEditInputs();
-        }
-
-        private void LoadUserData(int userID)
-        {
-            User user = UserBL.GetUserById(userID);
-
-            txtEditName.Text = user.FullName;
-            txtEditEmail.Text = user.Email;
-            txtEditPassword.Text = user.Password;
-        }
-        private void ClearAddInputs()
-        {
-            txtAddName.Clear();
-            txtAddEmail.Clear();
-            txtAddPassword.Clear();
-        }
-        private void ClearEditInputs()
-        {           
-            txtEditEmail.Clear();
-            txtEditName.Clear(); 
-            txtEditPassword.Clear();
-        }
+            txtName.Clear();
+            txtEmail.Clear();
+            txtPassword.Clear();
+        }      
     }
 }

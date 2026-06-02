@@ -1,12 +1,13 @@
-﻿using SQL_Judge_System.BL;
+﻿using MySqlX.XDevAPI;
+using SQL_Judge_System.BL;
 using SQL_Judge_System.DL;
 using SQL_Judge_System.LookupDL;
 using SQL_Judge_System.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace SQL_Judge_System.UI
@@ -97,8 +98,9 @@ namespace SQL_Judge_System.UI
 
                 dgvLeaderboard.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
+                dgvLeaderboard.Columns["StudentID"].Visible = false;
+
                 SafeColumn("GlobalRank", "Global Rank", 50);
-                SafeColumn("StudentID", "Student ID", 50);
                 SafeColumn("FullName", "Student Name", 150);
                 SafeColumn("RegistrationNumber", "Reg No", 80);
                 SafeColumn("LevelName", "Skill Level", 80);
@@ -163,6 +165,14 @@ namespace SQL_Judge_System.UI
                     row.DefaultCellStyle.BackColor = Color.FromArgb(45, 40, 90);
                     row.DefaultCellStyle.ForeColor = clrAccentPurple;
                     row.DefaultCellStyle.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
+
+                    // Append (You) to the Name
+                    var nameCell = row.Cells["FullName"];
+                    if (nameCell.Value != null)
+                    {
+                        nameCell.Value = $"{nameCell.Value} (You)";
+                    }
+
                     break;
                 }
             }
@@ -205,18 +215,48 @@ namespace SQL_Judge_System.UI
             try
             {
                 dgvProblems.DataSource = dt;
+                dgvProblems.Columns["ProblemID"].Visible = false;
 
-                dgvProblems.Columns["ProblemID"].FillWeight = 20;
                 dgvProblems.Columns["Title"].FillWeight = 80;
                 dgvProblems.Columns["DifficultyName"].FillWeight = 30;
 
-                dgvProblems.Columns["ProblemID"].HeaderText = "ID";
                 dgvProblems.Columns["Title"].HeaderText = "Title";
                 dgvProblems.Columns["DifficultyName"].HeaderText = "Difficulty Level";
             }
             catch (Exception)
             {
                 MessageBox.Show("Unable to load problems. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private void LoadAllowedSchemaTree(string databaseName, int problemID)
+        {
+            tvSchema.Nodes.Clear();
+            TreeNode rootNode = new TreeNode(databaseName);
+
+            try
+            {
+                // Get the list of tables assigned to this specific problem
+                List<ProblemTable> allowedTables = ProblemBL.GetSchemaByProblemID(problemID);
+
+                foreach (var table in allowedTables)
+                {
+                    TreeNode tableNode = new TreeNode(table.TableName);
+
+                    // Fetch columns to show under each table node
+                    List<string> columns = SchemaDL.GetColumnsOfTable(databaseName, table.TableName);
+                    foreach (string colName in columns)
+                    {
+                        tableNode.Nodes.Add(new TreeNode(colName));
+                    }
+
+                    rootNode.Nodes.Add(tableNode);
+                }
+
+                tvSchema.Nodes.Add(rootNode);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Could not load schema tree blueprint mapping: {ex.Message}", "Schema Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
         private void dgvProblems_SelectionChanged(object sender, EventArgs e)
@@ -230,10 +270,14 @@ namespace SQL_Judge_System.UI
                 string title = dgvProblems.CurrentRow.Cells["Title"].Value.ToString();
                 string difficulty = dgvProblems.CurrentRow.Cells["DifficultyName"].Value.ToString();
                 string description = ProblemBL.GetDescriptionByID(problemID);
+                //string databaseName = ProblemBL.GetDatabaseName(problemID);
 
                 lblProblemName.Text = title;
                 lblDifficultyBadge.Text = difficulty;
                 rtbProblemDesc.Text = description;
+
+                // Load the allowed schema tree for this problem
+                LoadAllowedSchemaTree("SQL_Judge_DB", problemID);
             }
             catch
             {
@@ -243,6 +287,9 @@ namespace SQL_Judge_System.UI
             }
         }
 
+        // =========================
+        // Button Events
+        // =========================
         private void btnRunQuery_Click(object sender, EventArgs e)
         {
             try
@@ -263,12 +310,15 @@ namespace SQL_Judge_System.UI
                     return;
                 }
 
-                DataTable dt = QueryRunnerBL.GetOutput(problemID, query);
+                // This will throw an exception if the query is invalid or contains disallowed statements
+                query = QueryRunnerBL.CleanAndValidateQuery(query); 
 
-                dgvOutput.DataSource = dt;
+                //DataTable dt = QueryRunnerBL.GetOutput(problemID, query);
 
-                lblResultBadge.ForeColor = Color.FromArgb(62, 207, 142); // green colour
-                lblResultBadge.Text = $"Output generated • {dt.Rows.Count} rows";
+                //dgvOutput.DataSource = dt;
+
+                //lblResultBadge.ForeColor = Color.FromArgb(62, 207, 142); // green colour
+                //lblResultBadge.Text = $"Output generated • {dt.Rows.Count} rows";
             }
             catch (Exception ex)
             {
@@ -302,28 +352,23 @@ namespace SQL_Judge_System.UI
                 int pendingStatusID = SubmissionStatusDL.GetPending();
                 Submission submission = new Submission(student.StudentID, problemID, query, pendingStatusID);
 
-                // Get Results of all test cases
-                List<SubmissionResult> results = SubmissionBL.CreateSubmission(submission);
+                SubmissionBL.CreateSubmission(submission);
 
-                int totalCases = results.Count;
-                int passedCases = results.Count(r => r.IsPassed);
 
-                string headingSummary = $"Evaluation Summary: Passed {passedCases} / {totalCases} Test Cases.\n\n";
+                //if (passedCases == totalCases)
+                //{
+                //    MessageBox.Show("🎉 Success! All test cases cleared. Your solution has been Accepted!",
+                //        "Submission Accepted", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //}
+                //else
+                //{
+                //    // Extract details from the very first failing scenario to guide the student's debugging
+                //    SubmissionResult firstFailure = results.FirstOrDefault(r => !r.IsPassed);
+                //    string failFeedback = firstFailure?.ErrorMessage ?? "Output formatting variance discovered.";
 
-                if (passedCases == totalCases)
-                {
-                    MessageBox.Show(headingSummary + "🎉 Success! All test cases cleared. Your solution has been Accepted!",
-                        "Submission Accepted", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
-                {
-                    // Extract details from the very first failing scenario to guide the student's debugging
-                    SubmissionResult firstFailure = results.FirstOrDefault(r => !r.IsPassed);
-                    string failFeedback = firstFailure?.ErrorMessage ?? "Output formatting variance discovered.";
-
-                    MessageBox.Show(headingSummary + $"❌ Status: Rejected\n\nReason for Failure:\n{failFeedback}",
-                        "Submission Rejected", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
+                //    MessageBox.Show(headingSummary + $"❌ Status: Rejected\n\nReason for Failure:\n{failFeedback}",
+                //        "Submission Rejected", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                //}
             }
             catch (ArgumentException argEx)
             {
@@ -371,13 +416,31 @@ namespace SQL_Judge_System.UI
         {
             VisiblePanel(pnlSolveProblem);
         }
-        private void btn_contest_Click(object sender, EventArgs e) { }
+        private void btn_contest_Click(object sender, EventArgs e)
+        {
+            // Update this line inside your original btnSubmit_Click method workspace:
+            int problemID;
+            if (dgvProblems.CurrentRow != null)
+            {
+                problemID = Convert.ToInt32(dgvProblems.CurrentRow.Cells["ProblemID"].Value);
+            }
+            else if (dgvProblems.Tag != null) // Fallback used when loaded from the contest workspace
+            {
+                problemID = Convert.ToInt32(dgvProblems.Tag);
+            }
+            else
+            {
+                MessageBox.Show("Please select a problem statement workspace focus context.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+        }
         private void btnReport_Click(object sender, EventArgs e)
         {
         }
         private void btn_settings_Click(object sender, EventArgs e)
         {
-
+            SettingsForm form = new SettingsForm(user.UserID);
+            form.ShowDialog();
         }
         private void btn_Logout_Click(object sender, EventArgs e)
         {

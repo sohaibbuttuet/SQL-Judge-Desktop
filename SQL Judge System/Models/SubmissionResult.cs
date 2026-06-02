@@ -10,7 +10,6 @@ namespace SQL_Judge_System.Models
     {
         private int resultID;
         private int submissionID;
-        private int testCaseID;
         private bool isPassed;
         private string errorMessage;
 
@@ -36,17 +35,6 @@ namespace SQL_Judge_System.Models
                 submissionID = value;
             }
         }
-        public int TestCaseID
-        {
-            get { return testCaseID; }
-            set
-            {
-                if (value <= 0)
-                    throw new ArgumentException("Invalid Test Case ID.");
-
-                testCaseID = value;
-            }
-        }
         public bool IsPassed
         {
             get { return isPassed; }
@@ -66,10 +54,9 @@ namespace SQL_Judge_System.Models
             IsPassed = false;
             ErrorMessage = "";
         }
-        public SubmissionResult(int submissionID, int testCaseID, bool isPassed, string errorMessage)
+        public SubmissionResult(int submissionID, bool isPassed, string errorMessage)
         {
             SubmissionID = submissionID;
-            TestCaseID = testCaseID;
             IsPassed = isPassed;
             ErrorMessage = errorMessage ?? "";
         }

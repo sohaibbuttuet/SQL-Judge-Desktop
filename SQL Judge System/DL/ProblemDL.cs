@@ -14,43 +14,80 @@ namespace SQL_Judge_System.DL
         public static int AddProblem(Problem problem)
         {
             string query =
-                $"INSERT INTO Problems (Title, Description, DifficultyID, Points, CreatedBy, CreatedAt, UpdatedBy, UpdatedAt, IsActive) " +
-                $"VALUES ('{problem.Title}', '{problem.Description}', {problem.DifficultyID}, {problem.Points}, " +
-                $"{problem.CreatedBy}, '{problem.CreatedAt:yyyy-MM-dd HH:mm:ss}', {problem.CreatedBy}, " +
-                $"'{problem.CreatedAt:yyyy-MM-dd HH:mm:ss}', {Convert.ToInt32(problem.IsActive)}); " +
+                $"INSERT INTO Problems (Title, Description, DifficultyID, Points, TargetDatabase, MasterQuery, CreatedBy, UpdatedBy) " +
+                $"VALUES(@Title, @Description, @DifficultyID, @Points, @TargetDatabase, @MasterQuery, @CreatedBy, @UpdatedBy); " +
                 $"SELECT LAST_INSERT_ID();";
 
-            return DatabaseHelper.Instance.ExecuteScalar(query);
+            MySqlParameter[] parameters =
+            {
+                new MySqlParameter("@Title", problem.Title),
+                new MySqlParameter("@Description", problem.Description),
+                new MySqlParameter("@DifficultyID", problem.DifficultyID),
+                new MySqlParameter("@Points", problem.Points),
+                new MySqlParameter("@TargetDatabase", problem.TargetDatabase),
+                new MySqlParameter("@MasterQuery", problem.MasterQuery),
+                new MySqlParameter("@CreatedBy", problem.CreatedBy),
+                new MySqlParameter("@UpdatedBy", problem.UpdatedBy),
+            };
+
+            return DatabaseHelper.Instance.ExecuteScalar(query, parameters);
         }
         public static void UpdateProblem(Problem problem)
         {
             string query =
-                $"UPDATE Problems SET " +
-                $"Title = '{problem.Title}', " +
-                $"Description = '{problem.Description}', " +
-                $"DifficultyID = {problem.DifficultyID}, " +
-                $"Points = {problem.Points}, " +
-                $"UpdatedBy = {problem.UpdatedBy}, " +
-                $"UpdatedAt = '{problem.UpdatedAt:yyyy-MM-dd HH:mm:ss}' " +
-                $"WHERE ProblemID = {problem.ProblemID};";
+                $"UPDATE Problems SET Title = @Title, Description = @Description, DifficultyID = @DifficultyID, Points = @Points, TargetDatabase = @TargetDatabase, MasterQuery = @MasterQuery, UpdatedBy = @UpdatedBy WHERE ProblemID = @ProblemID;";
 
+            MySqlParameter[] parameters =
+            {
+                new MySqlParameter("@Title", problem.Title),
+                new MySqlParameter("@Description", problem.Description),
+                new MySqlParameter("@DifficultyID", problem.DifficultyID),
+                new MySqlParameter("@Points", problem.Points),
+                new MySqlParameter("@TargetDatabase", problem.TargetDatabase),
+                new MySqlParameter("@MasterQuery", problem.MasterQuery),
+                new MySqlParameter("@UpdatedBy", problem.UpdatedBy),
+                new MySqlParameter("@ProblemID", problem.ProblemID)
+            };
+
+            DatabaseHelper.Instance.Update(query, parameters);
+        }
+        public static void ActivateProblem(int problemId)
+        {
+            string query = $"UPDATE Problems SET IsActive = 1 WHERE ProblemID = {problemId};";
             DatabaseHelper.Instance.Update(query);
         }
-
-        public static void UpdateProblemStatus(int problemID, bool isActive)
+        public static void DeactivateProblem(int problemId)
         {
-            string query = $"UPDATE Problems SET IsActive = {Convert.ToInt32(isActive)} WHERE ProblemID = {problemID};";
+            string query = $"UPDATE Problems SET IsActive = 0 WHERE ProblemID = {problemId};";
             DatabaseHelper.Instance.Update(query);
+        }
+        public static bool IsProblemExists(int problemId)
+        {
+            string query = $"SELECT COUNT(*) FROM Problems WHERE ProblemID = {problemId};";
+            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query)) > 0;
         }
         public static bool IsProblemExists(string title, int difficultyID)
         {
-            string query = $"SELECT COUNT(*) FROM Problems WHERE Title = '{title}' AND DifficultyID = {difficultyID};";
-            return DatabaseHelper.Instance.ExecuteScalar(query) > 0;
+            string query = $"SELECT COUNT(*) FROM Problems WHERE Title = @Title AND DifficultyID = @DifficultyID;";
+            MySqlParameter[] parameters =
+            {
+                new MySqlParameter("@Title", title),
+                new MySqlParameter("@DifficultyID", difficultyID)
+            };
+
+            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query, parameters)) > 0;
         }
         public static bool IsProblemExists(int problemID, string title, int difficultyID)
         {
-            string query = $"SELECT COUNT(*) FROM Problems WHERE ProblemID <> {problemID} AND Title = '{title}' AND DifficultyID = {difficultyID};";
-            return DatabaseHelper.Instance.ExecuteScalar(query) > 0;
+            string query = $"SELECT COUNT(*) FROM Problems WHERE ProblemID <> @ProblemID AND Title = @Title AND DifficultyID = @DifficultyID;";
+
+            MySqlParameter[] parameters =
+            {
+                new MySqlParameter("@ProblemID", problemID),
+                new MySqlParameter("@Title", title),
+                new MySqlParameter("@DifficultyID", difficultyID)
+            };
+            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query, parameters)) > 0;
         }
         public static Problem GetProblemByID(int problemID)
         {
@@ -86,11 +123,13 @@ namespace SQL_Judge_System.DL
                 row["Description"].ToString(),
                 Convert.ToInt32(row["DifficultyID"]),
                 Convert.ToInt32(row["Points"]),
-                Convert.ToBoolean(row["IsActive"]),
+                row["TargetDatabase"].ToString(),
+                row["MasterQuery"].ToString(),
                 Convert.ToInt32(row["CreatedBy"]),
                 Convert.ToDateTime(row["CreatedAt"]),
                 Convert.ToInt32(row["UpdatedBy"]),
-                Convert.ToDateTime(row["UpdatedAt"])
+                Convert.ToDateTime(row["UpdatedAt"]),
+                 Convert.ToBoolean(row["IsActive"])
             );
         }
 
@@ -121,22 +160,22 @@ namespace SQL_Judge_System.DL
         // only those problems will show that have test cases
         public static DataTable AllProblemsList()
         {
-            string query = "SELECT ProblemID, Title, DifficultyName FROM vw_problems JOIN TestCases USING(ProblemID) Order BY ProblemID;";
+            string query = "SELECT ProblemID, Title, DifficultyName FROM vw_problems Order BY ProblemID;";
             return DatabaseHelper.Instance.GetDataTable(query);
         }
         public static DataTable EasyProblemsList()
         {
-            string query = "SELECT ProblemID, Title, DifficultyName FROM vw_problems JOIN TestCases USING(ProblemID) WHERE DifficultyName = 'Easy' Order BY ProblemID;";
+            string query = "SELECT ProblemID, Title, DifficultyName FROM vw_problems WHERE DifficultyName = 'Easy' Order BY ProblemID;";
             return DatabaseHelper.Instance.GetDataTable(query);
         }
         public static DataTable MediumProblemsList()
         {
-            string query = "SELECT ProblemID, Title, DifficultyName FROM vw_problems JOIN TestCases USING(ProblemID) WHERE DifficultyName = 'Medium' Order BY ProblemID;";
+            string query = "SELECT ProblemID, Title, DifficultyName FROM vw_problems WHERE DifficultyName = 'Medium' Order BY ProblemID;";
             return DatabaseHelper.Instance.GetDataTable(query);
         }
         public static DataTable HardProblemsList()
         {
-            string query = "SELECT ProblemID, Title, DifficultyName FROM vw_problems JOIN TestCases USING(ProblemID) WHERE DifficultyName = 'Hard' Order BY ProblemID;";
+            string query = "SELECT ProblemID, Title, DifficultyName FROM vw_problems WHERE DifficultyName = 'Hard' Order BY ProblemID;";
             return DatabaseHelper.Instance.GetDataTable(query);
         }
         public static string GetDescriptionByID(int problemID)
@@ -149,22 +188,6 @@ namespace SQL_Judge_System.DL
                 return "";
 
             return dt.Rows[0]["Description"].ToString();
-        }
-
-        public static bool IsProblemExists(int problemId)
-        {
-            string query = $"SELECT COUNT(*) FROM Problems WHERE ProblemID = {problemId};";
-            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query)) > 0;
-        }
-        public static void ActivateProblem(int problemId)
-        {
-            string query = $"UPDATE Problems SET IsActive = 1 WHERE ProblemID = {problemId};";
-            DatabaseHelper.Instance.Update(query);
-        }
-        public static void DeactivateProblem(int problemId)
-        {
-            string query = $"UPDATE Problems SET IsActive = 0 WHERE ProblemID = {problemId};";
-            DatabaseHelper.Instance.Update(query);
-        }          
+        }       
     }
 }

@@ -106,6 +106,17 @@ namespace SQL_Judge_System.Models
             IsActive = true;
         }
 
+        // For Change Personal Details
+        public User(int userId, string fullName, string email)
+        {
+            UserID = userId;
+            FullName = fullName;
+            Email = email;
+
+            UpdatedAt = DateTime.Now;
+            IsActive = true;
+        }
+
         // Full Constructer for DB load
         public User(int userId, string fullName, string email, string password, bool isActive, DateTime createdAt, DateTime updatedAt)
         {

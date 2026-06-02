@@ -27,6 +27,11 @@ namespace SQL_Judge_System.DL
             string query = $"UPDATE Users SET FullName = '{user.FullName}', Email = '{user.Email}', Password = '{user.Password}' WHERE UserID = {user.UserID};";
             DatabaseHelper.Instance.Update(query);
         }
+        public static void UpdateProfile(User user)
+        {
+            string query = $"UPDATE Users SET FullName = '{user.FullName}', Email = '{user.Email}' WHERE UserID = {user.UserID};";
+            DatabaseHelper.Instance.Update(query);
+        }
         public static User SignIn(string email, string password)
         {
             string query = $"SELECT * FROM Users WHERE Email = '{email}' AND Password = '{password}' AND IsActive = 1;";
@@ -36,6 +41,16 @@ namespace SQL_Judge_System.DL
                 return null;
 
             return MapDataRowToUser(dt.Rows[0]);
+        }
+        public static bool VerifyPassword(int userID, string password)
+        {
+            string query = $"SELECT COUNT(*) FROM Users where UserID = {userID} AND Password = '{password}';";
+            return DatabaseHelper.Instance.ExecuteScalar(query) > 0;
+        }
+        public static void ChangePassword(int userID, string password)
+        {
+            string query = $"UPDATE users SET Password = '{password}' WHERE UserID = {userID};";
+            DatabaseHelper.Instance.Update(query);
         }
         public static User GetUserByID(int userId)
         {
@@ -81,7 +96,7 @@ namespace SQL_Judge_System.DL
             return DatabaseHelper.Instance.ExecuteScalar(query) > 0;
         }
 
-        // ----------------------------------- AdminDashboardUI Form ------------------------------------ //
+        // --------------------- AdminDashboardUI Form ---------------------------------- //
 
         public static void ActivateUser(int userId)
         {
@@ -141,6 +156,18 @@ namespace SQL_Judge_System.DL
         {
             string query = "SELECT COUNT(*) FROM vw_users WHERE IsActive = 0;";
             return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
+        }
+
+        // Settings Form
+        public static string GetUserRole(int userID)
+        {
+            string query = $"SELECT RoleName FROM vw_users WHERE UserID = {userID};";
+            return DatabaseHelper.Instance.ExecuteScalarObject(query).ToString();
+        }
+        public static bool IsUserStudent(int userID)
+        {
+            string query = $"SELECT Count(*) FROM vw_users WHERE UserID = {userID} AND RoleName = 'Student';";
+            return DatabaseHelper.Instance.ExecuteScalar(query) > 0;
         }
     }
 }

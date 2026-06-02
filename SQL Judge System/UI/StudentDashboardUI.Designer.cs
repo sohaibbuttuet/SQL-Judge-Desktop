@@ -1,4 +1,6 @@
-﻿namespace SQL_Judge_System.UI
+﻿using System.Windows.Forms;
+
+namespace SQL_Judge_System.UI
 {
     partial class StudentDashboardUI
     {
@@ -31,9 +33,6 @@
             this.lblAppName = new System.Windows.Forms.Label();
             this.btn_settings = new FontAwesome.Sharp.IconButton();
             this.btn_Logout = new FontAwesome.Sharp.IconButton();
-            this.pnlHeader = new System.Windows.Forms.Panel();
-            this.lblOnlineStatus = new System.Windows.Forms.Label();
-            this.lblWelcome = new System.Windows.Forms.Label();
             this.pnlHome = new System.Windows.Forms.Panel();
             this.pnlContentArea = new System.Windows.Forms.Panel();
             this.dgvLeaderboard = new System.Windows.Forms.DataGridView();
@@ -83,10 +82,14 @@
             this.lblResultBadge = new System.Windows.Forms.Label();
             this.btnClearOutput = new FontAwesome.Sharp.IconButton();
             this.lblOutputTitle = new System.Windows.Forms.Label();
+            this.lblWelcome = new System.Windows.Forms.Label();
+            this.lblOnlineStatus = new System.Windows.Forms.Label();
+            this.pnlHeader = new System.Windows.Forms.Panel();
+            this.tvSchema = new System.Windows.Forms.TreeView();
+            this.lblDifficulty = new System.Windows.Forms.Label();
             this.pnlSidebar.SuspendLayout();
             this.pnlSidebarLogo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
-            this.pnlHeader.SuspendLayout();
             this.pnlHome.SuspendLayout();
             this.pnlContentArea.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLeaderboard)).BeginInit();
@@ -115,6 +118,7 @@
             this.pnlOutputArea.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOutput)).BeginInit();
             this.pnlOutputHeader.SuspendLayout();
+            this.pnlHeader.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlSidebar
@@ -130,7 +134,7 @@
             this.pnlSidebar.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlSidebar.Location = new System.Drawing.Point(0, 0);
             this.pnlSidebar.Name = "pnlSidebar";
-            this.pnlSidebar.Size = new System.Drawing.Size(200, 700);
+            this.pnlSidebar.Size = new System.Drawing.Size(220, 681);
             this.pnlSidebar.TabIndex = 0;
             // 
             // btnReport
@@ -151,7 +155,7 @@
             this.btnReport.Location = new System.Drawing.Point(0, 214);
             this.btnReport.Name = "btnReport";
             this.btnReport.Padding = new System.Windows.Forms.Padding(14, 0, 0, 0);
-            this.btnReport.Size = new System.Drawing.Size(200, 48);
+            this.btnReport.Size = new System.Drawing.Size(220, 48);
             this.btnReport.TabIndex = 4;
             this.btnReport.Text = "Generate Report";
             this.btnReport.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -176,7 +180,7 @@
             this.btn_contest.Location = new System.Drawing.Point(0, 166);
             this.btn_contest.Name = "btn_contest";
             this.btn_contest.Padding = new System.Windows.Forms.Padding(14, 0, 0, 0);
-            this.btn_contest.Size = new System.Drawing.Size(200, 48);
+            this.btn_contest.Size = new System.Drawing.Size(220, 48);
             this.btn_contest.TabIndex = 3;
             this.btn_contest.Text = "Join Contest";
             this.btn_contest.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -201,7 +205,7 @@
             this.btn_problems.Location = new System.Drawing.Point(0, 118);
             this.btn_problems.Name = "btn_problems";
             this.btn_problems.Padding = new System.Windows.Forms.Padding(14, 0, 0, 0);
-            this.btn_problems.Size = new System.Drawing.Size(200, 48);
+            this.btn_problems.Size = new System.Drawing.Size(220, 48);
             this.btn_problems.TabIndex = 2;
             this.btn_problems.Text = "Solve Problems";
             this.btn_problems.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -226,7 +230,7 @@
             this.btn_home.Location = new System.Drawing.Point(0, 70);
             this.btn_home.Name = "btn_home";
             this.btn_home.Padding = new System.Windows.Forms.Padding(14, 0, 0, 0);
-            this.btn_home.Size = new System.Drawing.Size(200, 48);
+            this.btn_home.Size = new System.Drawing.Size(220, 48);
             this.btn_home.TabIndex = 1;
             this.btn_home.Text = "Home";
             this.btn_home.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -242,7 +246,7 @@
             this.pnlSidebarLogo.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlSidebarLogo.Location = new System.Drawing.Point(0, 0);
             this.pnlSidebarLogo.Name = "pnlSidebarLogo";
-            this.pnlSidebarLogo.Size = new System.Drawing.Size(200, 70);
+            this.pnlSidebarLogo.Size = new System.Drawing.Size(220, 70);
             this.pnlSidebarLogo.TabIndex = 0;
             // 
             // picLogo
@@ -292,10 +296,10 @@
             this.btn_settings.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btn_settings.IconSize = 20;
             this.btn_settings.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_settings.Location = new System.Drawing.Point(0, 604);
+            this.btn_settings.Location = new System.Drawing.Point(0, 585);
             this.btn_settings.Name = "btn_settings";
             this.btn_settings.Padding = new System.Windows.Forms.Padding(14, 0, 0, 0);
-            this.btn_settings.Size = new System.Drawing.Size(200, 48);
+            this.btn_settings.Size = new System.Drawing.Size(220, 48);
             this.btn_settings.TabIndex = 10;
             this.btn_settings.Text = "Settings";
             this.btn_settings.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -317,58 +321,24 @@
             this.btn_Logout.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btn_Logout.IconSize = 20;
             this.btn_Logout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_Logout.Location = new System.Drawing.Point(0, 652);
+            this.btn_Logout.Location = new System.Drawing.Point(0, 633);
             this.btn_Logout.Name = "btn_Logout";
             this.btn_Logout.Padding = new System.Windows.Forms.Padding(14, 0, 0, 0);
-            this.btn_Logout.Size = new System.Drawing.Size(200, 48);
+            this.btn_Logout.Size = new System.Drawing.Size(220, 48);
             this.btn_Logout.TabIndex = 11;
             this.btn_Logout.Text = "Logout";
             this.btn_Logout.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btn_Logout.UseVisualStyleBackColor = false;
             this.btn_Logout.Click += new System.EventHandler(this.btn_Logout_Click);
             // 
-            // pnlHeader
-            // 
-            this.pnlHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
-            this.pnlHeader.Controls.Add(this.lblOnlineStatus);
-            this.pnlHeader.Controls.Add(this.lblWelcome);
-            this.pnlHeader.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlHeader.Location = new System.Drawing.Point(200, 0);
-            this.pnlHeader.Name = "pnlHeader";
-            this.pnlHeader.Size = new System.Drawing.Size(1004, 56);
-            this.pnlHeader.TabIndex = 1;
-            // 
-            // lblOnlineStatus
-            // 
-            this.lblOnlineStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblOnlineStatus.AutoSize = true;
-            this.lblOnlineStatus.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblOnlineStatus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(207)))), ((int)(((byte)(142)))));
-            this.lblOnlineStatus.Location = new System.Drawing.Point(926, 20);
-            this.lblOnlineStatus.Name = "lblOnlineStatus";
-            this.lblOnlineStatus.Size = new System.Drawing.Size(52, 15);
-            this.lblOnlineStatus.TabIndex = 1;
-            this.lblOnlineStatus.Text = "● Online";
-            // 
-            // lblWelcome
-            // 
-            this.lblWelcome.AutoSize = true;
-            this.lblWelcome.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold);
-            this.lblWelcome.ForeColor = System.Drawing.Color.White;
-            this.lblWelcome.Location = new System.Drawing.Point(20, 14);
-            this.lblWelcome.Name = "lblWelcome";
-            this.lblWelcome.Size = new System.Drawing.Size(115, 30);
-            this.lblWelcome.TabIndex = 0;
-            this.lblWelcome.Text = "Welcome!";
-            // 
             // pnlHome
             // 
             this.pnlHome.Controls.Add(this.pnlContentArea);
             this.pnlHome.Controls.Add(this.pnlStatsContainer);
             this.pnlHome.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlHome.Location = new System.Drawing.Point(200, 56);
+            this.pnlHome.Location = new System.Drawing.Point(0, 0);
             this.pnlHome.Name = "pnlHome";
-            this.pnlHome.Size = new System.Drawing.Size(1004, 644);
+            this.pnlHome.Size = new System.Drawing.Size(1184, 681);
             this.pnlHome.TabIndex = 12;
             // 
             // pnlContentArea
@@ -412,29 +382,28 @@
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvLeaderboard.DefaultCellStyle = dataGridViewCellStyle3;
-            this.dgvLeaderboard.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvLeaderboard.EnableHeadersVisualStyles = false;
             this.dgvLeaderboard.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(52)))), ((int)(((byte)(88)))));
-            this.dgvLeaderboard.Location = new System.Drawing.Point(14, 41);
+            this.dgvLeaderboard.Location = new System.Drawing.Point(0, 47);
             this.dgvLeaderboard.Name = "dgvLeaderboard";
             this.dgvLeaderboard.ReadOnly = true;
             this.dgvLeaderboard.RowHeadersVisible = false;
             this.dgvLeaderboard.RowTemplate.Height = 36;
             this.dgvLeaderboard.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvLeaderboard.Size = new System.Drawing.Size(973, 424);
+            this.dgvLeaderboard.Size = new System.Drawing.Size(964, 413);
             this.dgvLeaderboard.TabIndex = 1;
             // 
             // lblGridTitle
             // 
-            this.lblGridTitle.Dock = System.Windows.Forms.DockStyle.Top;
             this.lblGridTitle.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
             this.lblGridTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
-            this.lblGridTitle.Location = new System.Drawing.Point(14, 10);
+            this.lblGridTitle.Location = new System.Drawing.Point(0, 10);
             this.lblGridTitle.Name = "lblGridTitle";
             this.lblGridTitle.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
-            this.lblGridTitle.Size = new System.Drawing.Size(973, 31);
+            this.lblGridTitle.Size = new System.Drawing.Size(961, 31);
             this.lblGridTitle.TabIndex = 0;
             this.lblGridTitle.Text = "Global Leaderboard";
+            this.lblGridTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // pnlStatsContainer
             // 
@@ -444,7 +413,7 @@
             this.pnlStatsContainer.Location = new System.Drawing.Point(0, 0);
             this.pnlStatsContainer.Name = "pnlStatsContainer";
             this.pnlStatsContainer.Padding = new System.Windows.Forms.Padding(12, 12, 12, 0);
-            this.pnlStatsContainer.Size = new System.Drawing.Size(1004, 165);
+            this.pnlStatsContainer.Size = new System.Drawing.Size(1184, 165);
             this.pnlStatsContainer.TabIndex = 4;
             // 
             // tlpnlStudentDashboard
@@ -464,7 +433,7 @@
             this.tlpnlStudentDashboard.Name = "tlpnlStudentDashboard";
             this.tlpnlStudentDashboard.RowCount = 1;
             this.tlpnlStudentDashboard.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpnlStudentDashboard.Size = new System.Drawing.Size(980, 153);
+            this.tlpnlStudentDashboard.Size = new System.Drawing.Size(1160, 153);
             this.tlpnlStudentDashboard.TabIndex = 0;
             // 
             // pnlSkillLevel
@@ -478,7 +447,7 @@
             this.pnlSkillLevel.Margin = new System.Windows.Forms.Padding(6);
             this.pnlSkillLevel.Name = "pnlSkillLevel";
             this.pnlSkillLevel.Padding = new System.Windows.Forms.Padding(8);
-            this.pnlSkillLevel.Size = new System.Drawing.Size(233, 141);
+            this.pnlSkillLevel.Size = new System.Drawing.Size(278, 141);
             this.pnlSkillLevel.TabIndex = 0;
             // 
             // lblSkillValue
@@ -488,7 +457,7 @@
             this.lblSkillValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(158)))), ((int)(((byte)(66)))));
             this.lblSkillValue.Location = new System.Drawing.Point(8, 30);
             this.lblSkillValue.Name = "lblSkillValue";
-            this.lblSkillValue.Size = new System.Drawing.Size(217, 83);
+            this.lblSkillValue.Size = new System.Drawing.Size(262, 83);
             this.lblSkillValue.TabIndex = 1;
             this.lblSkillValue.Text = "—";
             this.lblSkillValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -500,7 +469,7 @@
             this.lblSkillLevel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
             this.lblSkillLevel.Location = new System.Drawing.Point(8, 8);
             this.lblSkillLevel.Name = "lblSkillLevel";
-            this.lblSkillLevel.Size = new System.Drawing.Size(217, 22);
+            this.lblSkillLevel.Size = new System.Drawing.Size(262, 22);
             this.lblSkillLevel.TabIndex = 0;
             this.lblSkillLevel.Text = "SKILL LEVEL";
             this.lblSkillLevel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -512,7 +481,7 @@
             this.lblSkillBadge.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(158)))), ((int)(((byte)(66)))));
             this.lblSkillBadge.Location = new System.Drawing.Point(8, 113);
             this.lblSkillBadge.Name = "lblSkillBadge";
-            this.lblSkillBadge.Size = new System.Drawing.Size(217, 20);
+            this.lblSkillBadge.Size = new System.Drawing.Size(262, 20);
             this.lblSkillBadge.TabIndex = 2;
             this.lblSkillBadge.Text = "Getting Started";
             this.lblSkillBadge.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -524,11 +493,11 @@
             this.pnlRankCard.Controls.Add(this.lblRankTitle);
             this.pnlRankCard.Controls.Add(this.lblRankBadge);
             this.pnlRankCard.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlRankCard.Location = new System.Drawing.Point(251, 6);
+            this.pnlRankCard.Location = new System.Drawing.Point(296, 6);
             this.pnlRankCard.Margin = new System.Windows.Forms.Padding(6);
             this.pnlRankCard.Name = "pnlRankCard";
             this.pnlRankCard.Padding = new System.Windows.Forms.Padding(8);
-            this.pnlRankCard.Size = new System.Drawing.Size(233, 141);
+            this.pnlRankCard.Size = new System.Drawing.Size(278, 141);
             this.pnlRankCard.TabIndex = 1;
             // 
             // lblRankValue
@@ -538,7 +507,7 @@
             this.lblRankValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(111)))), ((int)(((byte)(255)))));
             this.lblRankValue.Location = new System.Drawing.Point(8, 30);
             this.lblRankValue.Name = "lblRankValue";
-            this.lblRankValue.Size = new System.Drawing.Size(217, 83);
+            this.lblRankValue.Size = new System.Drawing.Size(262, 83);
             this.lblRankValue.TabIndex = 1;
             this.lblRankValue.Text = "—";
             this.lblRankValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -550,7 +519,7 @@
             this.lblRankTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
             this.lblRankTitle.Location = new System.Drawing.Point(8, 8);
             this.lblRankTitle.Name = "lblRankTitle";
-            this.lblRankTitle.Size = new System.Drawing.Size(217, 22);
+            this.lblRankTitle.Size = new System.Drawing.Size(262, 22);
             this.lblRankTitle.TabIndex = 0;
             this.lblRankTitle.Text = "RANK";
             this.lblRankTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -562,7 +531,7 @@
             this.lblRankBadge.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(111)))), ((int)(((byte)(255)))));
             this.lblRankBadge.Location = new System.Drawing.Point(8, 113);
             this.lblRankBadge.Name = "lblRankBadge";
-            this.lblRankBadge.Size = new System.Drawing.Size(217, 20);
+            this.lblRankBadge.Size = new System.Drawing.Size(262, 20);
             this.lblRankBadge.TabIndex = 2;
             this.lblRankBadge.Text = "Global";
             this.lblRankBadge.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -574,11 +543,11 @@
             this.pnlSolvedCard.Controls.Add(this.lblSolvedTitle);
             this.pnlSolvedCard.Controls.Add(this.lblSolvedBadge);
             this.pnlSolvedCard.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlSolvedCard.Location = new System.Drawing.Point(496, 6);
+            this.pnlSolvedCard.Location = new System.Drawing.Point(586, 6);
             this.pnlSolvedCard.Margin = new System.Windows.Forms.Padding(6);
             this.pnlSolvedCard.Name = "pnlSolvedCard";
             this.pnlSolvedCard.Padding = new System.Windows.Forms.Padding(8);
-            this.pnlSolvedCard.Size = new System.Drawing.Size(233, 141);
+            this.pnlSolvedCard.Size = new System.Drawing.Size(278, 141);
             this.pnlSolvedCard.TabIndex = 2;
             // 
             // lblSolvedValue
@@ -588,7 +557,7 @@
             this.lblSolvedValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(182)))), ((int)(((byte)(255)))));
             this.lblSolvedValue.Location = new System.Drawing.Point(8, 30);
             this.lblSolvedValue.Name = "lblSolvedValue";
-            this.lblSolvedValue.Size = new System.Drawing.Size(217, 83);
+            this.lblSolvedValue.Size = new System.Drawing.Size(262, 83);
             this.lblSolvedValue.TabIndex = 1;
             this.lblSolvedValue.Text = "—";
             this.lblSolvedValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -600,7 +569,7 @@
             this.lblSolvedTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
             this.lblSolvedTitle.Location = new System.Drawing.Point(8, 8);
             this.lblSolvedTitle.Name = "lblSolvedTitle";
-            this.lblSolvedTitle.Size = new System.Drawing.Size(217, 22);
+            this.lblSolvedTitle.Size = new System.Drawing.Size(262, 22);
             this.lblSolvedTitle.TabIndex = 0;
             this.lblSolvedTitle.Text = "PROBLEMS SOLVED";
             this.lblSolvedTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -612,7 +581,7 @@
             this.lblSolvedBadge.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(182)))), ((int)(((byte)(255)))));
             this.lblSolvedBadge.Location = new System.Drawing.Point(8, 113);
             this.lblSolvedBadge.Name = "lblSolvedBadge";
-            this.lblSolvedBadge.Size = new System.Drawing.Size(217, 20);
+            this.lblSolvedBadge.Size = new System.Drawing.Size(262, 20);
             this.lblSolvedBadge.TabIndex = 2;
             this.lblSolvedBadge.Text = "All Time";
             this.lblSolvedBadge.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -624,11 +593,11 @@
             this.pnlScoreCard.Controls.Add(this.lblScoreTitle);
             this.pnlScoreCard.Controls.Add(this.lblScoreBadge);
             this.pnlScoreCard.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlScoreCard.Location = new System.Drawing.Point(741, 6);
+            this.pnlScoreCard.Location = new System.Drawing.Point(876, 6);
             this.pnlScoreCard.Margin = new System.Windows.Forms.Padding(6);
             this.pnlScoreCard.Name = "pnlScoreCard";
             this.pnlScoreCard.Padding = new System.Windows.Forms.Padding(8);
-            this.pnlScoreCard.Size = new System.Drawing.Size(233, 141);
+            this.pnlScoreCard.Size = new System.Drawing.Size(278, 141);
             this.pnlScoreCard.TabIndex = 3;
             // 
             // lblScoreValue
@@ -638,7 +607,7 @@
             this.lblScoreValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(207)))), ((int)(((byte)(142)))));
             this.lblScoreValue.Location = new System.Drawing.Point(8, 30);
             this.lblScoreValue.Name = "lblScoreValue";
-            this.lblScoreValue.Size = new System.Drawing.Size(217, 83);
+            this.lblScoreValue.Size = new System.Drawing.Size(262, 83);
             this.lblScoreValue.TabIndex = 1;
             this.lblScoreValue.Text = "—";
             this.lblScoreValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -650,7 +619,7 @@
             this.lblScoreTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
             this.lblScoreTitle.Location = new System.Drawing.Point(8, 8);
             this.lblScoreTitle.Name = "lblScoreTitle";
-            this.lblScoreTitle.Size = new System.Drawing.Size(217, 22);
+            this.lblScoreTitle.Size = new System.Drawing.Size(262, 22);
             this.lblScoreTitle.TabIndex = 0;
             this.lblScoreTitle.Text = "TOTAL SCORE";
             this.lblScoreTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -662,7 +631,7 @@
             this.lblScoreBadge.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(207)))), ((int)(((byte)(142)))));
             this.lblScoreBadge.Location = new System.Drawing.Point(8, 113);
             this.lblScoreBadge.Name = "lblScoreBadge";
-            this.lblScoreBadge.Size = new System.Drawing.Size(217, 20);
+            this.lblScoreBadge.Size = new System.Drawing.Size(262, 20);
             this.lblScoreBadge.TabIndex = 2;
             this.lblScoreBadge.Text = "Points";
             this.lblScoreBadge.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -672,10 +641,10 @@
             this.pnlSolveProblem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(31)))), ((int)(((byte)(58)))));
             this.pnlSolveProblem.Controls.Add(this.splitMain);
             this.pnlSolveProblem.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlSolveProblem.Location = new System.Drawing.Point(0, 0);
+            this.pnlSolveProblem.Location = new System.Drawing.Point(220, 56);
             this.pnlSolveProblem.Name = "pnlSolveProblem";
             this.pnlSolveProblem.Padding = new System.Windows.Forms.Padding(10);
-            this.pnlSolveProblem.Size = new System.Drawing.Size(1204, 700);
+            this.pnlSolveProblem.Size = new System.Drawing.Size(964, 625);
             this.pnlSolveProblem.TabIndex = 13;
             // 
             // splitMain
@@ -692,20 +661,22 @@
             // splitMain.Panel2
             // 
             this.splitMain.Panel2.Controls.Add(this.splitRight);
-            this.splitMain.Size = new System.Drawing.Size(1184, 680);
-            this.splitMain.SplitterDistance = 336;
+            this.splitMain.Size = new System.Drawing.Size(944, 605);
+            this.splitMain.SplitterDistance = 267;
             this.splitMain.SplitterWidth = 6;
             this.splitMain.TabIndex = 0;
             // 
             // pnlProblemList
             // 
             this.pnlProblemList.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
+            this.pnlProblemList.Controls.Add(this.lblDifficulty);
+            this.pnlProblemList.Controls.Add(this.tvSchema);
             this.pnlProblemList.Controls.Add(this.dgvProblems);
             this.pnlProblemList.Controls.Add(this.pnlListHeader);
             this.pnlProblemList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlProblemList.Location = new System.Drawing.Point(0, 0);
             this.pnlProblemList.Name = "pnlProblemList";
-            this.pnlProblemList.Size = new System.Drawing.Size(336, 680);
+            this.pnlProblemList.Size = new System.Drawing.Size(267, 605);
             this.pnlProblemList.TabIndex = 0;
             // 
             // dgvProblems
@@ -741,7 +712,7 @@
             dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvProblems.DefaultCellStyle = dataGridViewCellStyle6;
-            this.dgvProblems.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvProblems.Dock = System.Windows.Forms.DockStyle.Top;
             this.dgvProblems.EnableHeadersVisualStyles = false;
             this.dgvProblems.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(52)))), ((int)(((byte)(88)))));
             this.dgvProblems.Location = new System.Drawing.Point(0, 64);
@@ -751,7 +722,7 @@
             this.dgvProblems.RowHeadersVisible = false;
             this.dgvProblems.RowTemplate.Height = 34;
             this.dgvProblems.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvProblems.Size = new System.Drawing.Size(336, 616);
+            this.dgvProblems.Size = new System.Drawing.Size(267, 262);
             this.dgvProblems.TabIndex = 1;
             this.dgvProblems.SelectionChanged += new System.EventHandler(this.dgvProblems_SelectionChanged);
             // 
@@ -764,7 +735,7 @@
             this.pnlListHeader.Location = new System.Drawing.Point(0, 0);
             this.pnlListHeader.Name = "pnlListHeader";
             this.pnlListHeader.Padding = new System.Windows.Forms.Padding(10, 8, 10, 8);
-            this.pnlListHeader.Size = new System.Drawing.Size(336, 64);
+            this.pnlListHeader.Size = new System.Drawing.Size(267, 64);
             this.pnlListHeader.TabIndex = 0;
             // 
             // cmbDifficulty
@@ -811,8 +782,8 @@
             // splitRight.Panel2
             // 
             this.splitRight.Panel2.Controls.Add(this.pnlOutputArea);
-            this.splitRight.Size = new System.Drawing.Size(842, 680);
-            this.splitRight.SplitterDistance = 482;
+            this.splitRight.Size = new System.Drawing.Size(671, 605);
+            this.splitRight.SplitterDistance = 427;
             this.splitRight.SplitterWidth = 6;
             this.splitRight.TabIndex = 0;
             // 
@@ -826,7 +797,7 @@
             this.pnlEditorArea.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlEditorArea.Location = new System.Drawing.Point(0, 0);
             this.pnlEditorArea.Name = "pnlEditorArea";
-            this.pnlEditorArea.Size = new System.Drawing.Size(842, 482);
+            this.pnlEditorArea.Size = new System.Drawing.Size(671, 427);
             this.pnlEditorArea.TabIndex = 0;
             // 
             // rtbSQLEditor
@@ -838,7 +809,7 @@
             this.rtbSQLEditor.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(223)))), ((int)(((byte)(255)))));
             this.rtbSQLEditor.Location = new System.Drawing.Point(0, 166);
             this.rtbSQLEditor.Name = "rtbSQLEditor";
-            this.rtbSQLEditor.Size = new System.Drawing.Size(842, 268);
+            this.rtbSQLEditor.Size = new System.Drawing.Size(671, 213);
             this.rtbSQLEditor.TabIndex = 2;
             this.rtbSQLEditor.Text = "-- Write your SQL query here\nSELECT ";
             this.rtbSQLEditor.WordWrap = false;
@@ -851,10 +822,10 @@
             this.pnlEditorActions.Controls.Add(this.btnSubmit);
             this.pnlEditorActions.Controls.Add(this.btnRunQuery);
             this.pnlEditorActions.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlEditorActions.Location = new System.Drawing.Point(0, 434);
+            this.pnlEditorActions.Location = new System.Drawing.Point(0, 379);
             this.pnlEditorActions.Name = "pnlEditorActions";
             this.pnlEditorActions.Padding = new System.Windows.Forms.Padding(10, 6, 10, 6);
-            this.pnlEditorActions.Size = new System.Drawing.Size(842, 48);
+            this.pnlEditorActions.Size = new System.Drawing.Size(671, 48);
             this.pnlEditorActions.TabIndex = 3;
             // 
             // lblLineCol
@@ -862,7 +833,7 @@
             this.lblLineCol.Dock = System.Windows.Forms.DockStyle.Right;
             this.lblLineCol.Font = new System.Drawing.Font("Consolas", 8.5F);
             this.lblLineCol.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(106)))), ((int)(((byte)(140)))));
-            this.lblLineCol.Location = new System.Drawing.Point(712, 6);
+            this.lblLineCol.Location = new System.Drawing.Point(541, 6);
             this.lblLineCol.Name = "lblLineCol";
             this.lblLineCol.Size = new System.Drawing.Size(120, 36);
             this.lblLineCol.TabIndex = 2;
@@ -928,7 +899,7 @@
             this.pnlEditorHeader.Location = new System.Drawing.Point(0, 130);
             this.pnlEditorHeader.Name = "pnlEditorHeader";
             this.pnlEditorHeader.Padding = new System.Windows.Forms.Padding(12, 0, 8, 0);
-            this.pnlEditorHeader.Size = new System.Drawing.Size(842, 36);
+            this.pnlEditorHeader.Size = new System.Drawing.Size(671, 36);
             this.pnlEditorHeader.TabIndex = 1;
             // 
             // btnClearEditor
@@ -945,7 +916,7 @@
             this.btnClearEditor.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
             this.btnClearEditor.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnClearEditor.IconSize = 14;
-            this.btnClearEditor.Location = new System.Drawing.Point(754, 0);
+            this.btnClearEditor.Location = new System.Drawing.Point(583, 0);
             this.btnClearEditor.Name = "btnClearEditor";
             this.btnClearEditor.Size = new System.Drawing.Size(80, 36);
             this.btnClearEditor.TabIndex = 1;
@@ -976,7 +947,7 @@
             this.pnlProblemDesc.Location = new System.Drawing.Point(0, 0);
             this.pnlProblemDesc.Name = "pnlProblemDesc";
             this.pnlProblemDesc.Padding = new System.Windows.Forms.Padding(12, 8, 12, 8);
-            this.pnlProblemDesc.Size = new System.Drawing.Size(842, 130);
+            this.pnlProblemDesc.Size = new System.Drawing.Size(671, 130);
             this.pnlProblemDesc.TabIndex = 0;
             // 
             // lblDifficultyBadge
@@ -1022,7 +993,7 @@
             this.pnlOutputArea.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlOutputArea.Location = new System.Drawing.Point(0, 0);
             this.pnlOutputArea.Name = "pnlOutputArea";
-            this.pnlOutputArea.Size = new System.Drawing.Size(842, 192);
+            this.pnlOutputArea.Size = new System.Drawing.Size(671, 172);
             this.pnlOutputArea.TabIndex = 0;
             // 
             // dgvOutput
@@ -1061,7 +1032,7 @@
             this.dgvOutput.RowHeadersVisible = false;
             this.dgvOutput.RowTemplate.Height = 30;
             this.dgvOutput.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvOutput.Size = new System.Drawing.Size(842, 156);
+            this.dgvOutput.Size = new System.Drawing.Size(671, 136);
             this.dgvOutput.TabIndex = 1;
             // 
             // pnlOutputHeader
@@ -1074,7 +1045,7 @@
             this.pnlOutputHeader.Location = new System.Drawing.Point(0, 0);
             this.pnlOutputHeader.Name = "pnlOutputHeader";
             this.pnlOutputHeader.Padding = new System.Windows.Forms.Padding(12, 0, 8, 0);
-            this.pnlOutputHeader.Size = new System.Drawing.Size(842, 36);
+            this.pnlOutputHeader.Size = new System.Drawing.Size(671, 36);
             this.pnlOutputHeader.TabIndex = 0;
             // 
             // lblResultBadge
@@ -1084,7 +1055,7 @@
             this.lblResultBadge.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(207)))), ((int)(((byte)(142)))));
             this.lblResultBadge.Location = new System.Drawing.Point(122, 0);
             this.lblResultBadge.Name = "lblResultBadge";
-            this.lblResultBadge.Size = new System.Drawing.Size(632, 36);
+            this.lblResultBadge.Size = new System.Drawing.Size(461, 36);
             this.lblResultBadge.TabIndex = 1;
             this.lblResultBadge.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -1102,7 +1073,7 @@
             this.btnClearOutput.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
             this.btnClearOutput.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnClearOutput.IconSize = 14;
-            this.btnClearOutput.Location = new System.Drawing.Point(754, 0);
+            this.btnClearOutput.Location = new System.Drawing.Point(583, 0);
             this.btnClearOutput.Name = "btnClearOutput";
             this.btnClearOutput.Size = new System.Drawing.Size(80, 36);
             this.btnClearOutput.TabIndex = 2;
@@ -1123,26 +1094,80 @@
             this.lblOutputTitle.Text = "  Output";
             this.lblOutputTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // lblWelcome
+            // 
+            this.lblWelcome.AutoSize = true;
+            this.lblWelcome.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold);
+            this.lblWelcome.ForeColor = System.Drawing.Color.White;
+            this.lblWelcome.Location = new System.Drawing.Point(20, 14);
+            this.lblWelcome.Name = "lblWelcome";
+            this.lblWelcome.Size = new System.Drawing.Size(115, 30);
+            this.lblWelcome.TabIndex = 0;
+            this.lblWelcome.Text = "Welcome!";
+            // 
+            // lblOnlineStatus
+            // 
+            this.lblOnlineStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblOnlineStatus.AutoSize = true;
+            this.lblOnlineStatus.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lblOnlineStatus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(207)))), ((int)(((byte)(142)))));
+            this.lblOnlineStatus.Location = new System.Drawing.Point(900, 21);
+            this.lblOnlineStatus.Name = "lblOnlineStatus";
+            this.lblOnlineStatus.Size = new System.Drawing.Size(52, 15);
+            this.lblOnlineStatus.TabIndex = 1;
+            this.lblOnlineStatus.Text = "● Online";
+            // 
+            // pnlHeader
+            // 
+            this.pnlHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
+            this.pnlHeader.Controls.Add(this.lblOnlineStatus);
+            this.pnlHeader.Controls.Add(this.lblWelcome);
+            this.pnlHeader.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlHeader.Location = new System.Drawing.Point(220, 0);
+            this.pnlHeader.Name = "pnlHeader";
+            this.pnlHeader.Size = new System.Drawing.Size(964, 56);
+            this.pnlHeader.TabIndex = 1;
+            // 
+            // tvSchema
+            // 
+            this.tvSchema.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
+            this.tvSchema.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tvSchema.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.tvSchema.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(243)))));
+            this.tvSchema.Location = new System.Drawing.Point(0, 364);
+            this.tvSchema.Name = "tvSchema";
+            this.tvSchema.Size = new System.Drawing.Size(267, 241);
+            this.tvSchema.TabIndex = 2;
+            // 
+            // lblDifficulty
+            // 
+            this.lblDifficulty.AutoSize = true;
+            this.lblDifficulty.Font = new System.Drawing.Font("Segoe UI", 8.5F, System.Drawing.FontStyle.Bold);
+            this.lblDifficulty.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(142)))), ((int)(((byte)(163)))));
+            this.lblDifficulty.Location = new System.Drawing.Point(3, 341);
+            this.lblDifficulty.Name = "lblDifficulty";
+            this.lblDifficulty.Size = new System.Drawing.Size(72, 15);
+            this.lblDifficulty.TabIndex = 3;
+            this.lblDifficulty.Text = "▸  SCHEMA";
+            // 
             // StudentDashboardUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(31)))), ((int)(((byte)(58)))));
-            this.ClientSize = new System.Drawing.Size(1204, 700);
-            this.Controls.Add(this.pnlHome);
+            this.ClientSize = new System.Drawing.Size(1184, 681);
+            this.Controls.Add(this.pnlSolveProblem);
             this.Controls.Add(this.pnlHeader);
             this.Controls.Add(this.pnlSidebar);
-            this.Controls.Add(this.pnlSolveProblem);
+            this.Controls.Add(this.pnlHome);
             this.Name = "StudentDashboardUI";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "SQL Judge — Student Portal";
+            this.Text = "Student SQL Judge Workspace";
             this.Load += new System.EventHandler(this.StudentDashboard_Load);
             this.pnlSidebar.ResumeLayout(false);
             this.pnlSidebarLogo.ResumeLayout(false);
             this.pnlSidebarLogo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
-            this.pnlHeader.ResumeLayout(false);
-            this.pnlHeader.PerformLayout();
             this.pnlHome.ResumeLayout(false);
             this.pnlContentArea.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvLeaderboard)).EndInit();
@@ -1158,6 +1183,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitMain)).EndInit();
             this.splitMain.ResumeLayout(false);
             this.pnlProblemList.ResumeLayout(false);
+            this.pnlProblemList.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProblems)).EndInit();
             this.pnlListHeader.ResumeLayout(false);
             this.pnlListHeader.PerformLayout();
@@ -1174,6 +1200,8 @@
             this.pnlOutputArea.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvOutput)).EndInit();
             this.pnlOutputHeader.ResumeLayout(false);
+            this.pnlHeader.ResumeLayout(false);
+            this.pnlHeader.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1189,9 +1217,6 @@
         private FontAwesome.Sharp.IconButton btnReport;
         private FontAwesome.Sharp.IconButton btn_settings;
         private FontAwesome.Sharp.IconButton btn_Logout;
-        private System.Windows.Forms.Panel pnlHeader;
-        private System.Windows.Forms.Label lblWelcome;
-        private System.Windows.Forms.Label lblOnlineStatus;
         private System.Windows.Forms.PictureBox picLogo;
         private System.Windows.Forms.Panel pnlHome;
         private System.Windows.Forms.Panel pnlContentArea;
@@ -1242,5 +1267,10 @@
         private System.Windows.Forms.Label lblResultBadge;
         private FontAwesome.Sharp.IconButton btnClearOutput;
         private System.Windows.Forms.Label lblOutputTitle;
+        private Label lblWelcome;
+        private Label lblOnlineStatus;
+        private Panel pnlHeader;
+        private TreeView tvSchema;
+        private Label lblDifficulty;
     }
 }

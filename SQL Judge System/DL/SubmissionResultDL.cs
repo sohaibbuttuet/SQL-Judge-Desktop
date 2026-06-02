@@ -13,13 +13,12 @@ namespace SQL_Judge_System.DL
     {
         public static void AddResult(SubmissionResult result)
         {
-            string query = "INSERT INTO submissionResults (SubmissionID, TestCaseID, IsPassed, ErrorMessage) " +
-                           "VALUES (@SubmissionID, @TestCaseID, @IsPassed, @ErrorMessage);";
+            string query = "INSERT INTO submissionResults (SubmissionID, IsPassed, ErrorMessage) " +
+                           "VALUES (@SubmissionID, @IsPassed, @ErrorMessage);";
 
             MySqlParameter[] parameters = 
             {
                 new MySqlParameter("@SubmissionID", result.SubmissionID),
-                new MySqlParameter("@TestCaseID", result.TestCaseID),
                 new MySqlParameter("@IsPassed", result.IsPassed ? 1 : 0), 
                 new MySqlParameter("@ErrorMessage", (object)result.ErrorMessage ?? DBNull.Value) // Handles null values cleanly if there is no error
             };

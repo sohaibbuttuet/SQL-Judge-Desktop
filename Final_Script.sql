@@ -96,13 +96,6 @@ CREATE TABLE ProblemTables (
     FOREIGN KEY (ProblemID) REFERENCES Problems(ProblemID) ON DELETE CASCADE
 );
 
-CREATE TABLE ProblemColumns (
-    ProblemColumnID INT AUTO_INCREMENT PRIMARY KEY,
-    ProblemTableID INT NOT NULL,
-    ColumnName VARCHAR(100) NOT NULL,
-    FOREIGN KEY (ProblemTableID) REFERENCES ProblemTables(ProblemTableID) ON DELETE CASCADE
-);
-
 CREATE TABLE ProblemTagMap (
     ProblemID INT,
     TagID INT,
@@ -259,6 +252,95 @@ LEFT JOIN Users u ON st.UserID = u.UserID
 LEFT JOIN Problems p ON s.ProblemID = p.ProblemID;
 
 -- =====================================
+-- TRIGGERS
+-- =====================================
+
+-- Update attempt number
+DELIMITER $$
+CREATE TRIGGER upd_attempts
+BEFORE INSERT ON submissions
+FOR EACH ROW
+BEGIN
+	DECLARE max_attempt INT;
+    
+    --  Find the highest current attempt number for this specific student and problem
+	SELECT MAX(AttemptNumber) INTO max_attempt 
+    FROM submissions 
+    WHERE StudentID = NEW.StudentID 
+    AND ProblemID = NEW.ProblemID;
+    
+    -- If no previous attempts exist, start at 1. Otherwise, increment by 1.
+    IF max_attempt IS NULL THEN 
+		SET NEW.AttemptNumber = 1;
+	ELSE		
+		SET NEW.AttemptNumber = max_attempt + 1;
+	END IF;
+
+END $$
+DELIMITER ;
+
+-- Calculate submission score
+DELIMITER $$
+CREATE TRIGGER calculate_submission_score_on_update
+BEFORE UPDATE ON submissions
+FOR EACH ROW
+BEGIN
+	DECLARE already_solved INT DEFAULT 0;
+    
+    IF NEW.StatusID = 1 THEN
+		SELECT 1 INTO already_solved
+		FROM submissions 
+		WHERE StudentID = NEW.StudentID 
+		AND ProblemID = NEW.ProblemID  
+		AND StatusID = 1
+		AND SubmissionID <> NEW.SubmissionID
+		LIMIT 1;
+	END IF;
+    
+    IF NEW.StatusID <> 1 OR already_solved = 1 THEN 
+        SET NEW.TotalScore = 0;
+	ELSE		
+		SET NEW.TotalScore = (SELECT points FROM problems WHERE ProblemID = NEW.ProblemID);
+	END IF;
+
+END $$
+DELIMITER ;
+
+-- =====================================
+-- STORED PROCEDURE
+-- =====================================
+
+-- Extract Column names and their datatypes by database Name and Table Name
+DELIMITER $$
+
+CREATE PROCEDURE db_schema(IN p_databaseName VARCHAR(30))
+BEGIN
+    SELECT TABLE_NAME,
+           COLUMN_NAME,
+           DATA_TYPE
+    FROM INFORMATION_SCHEMA.COLUMNS
+    WHERE TABLE_SCHEMA = p_databaseName
+    ORDER BY TABLE_NAME, ORDINAL_POSITION;
+END $$
+
+DELIMITER ;
+
+-- Extract Column names and their datatypes by database Name and Table Name
+DELIMITER $$
+
+CREATE PROCEDURE `db_table_columns` (IN database_name VARCHAR(30), IN table_name VARCHAR(30))
+BEGIN
+ SELECT COLUMN_NAME, 
+           DATA_TYPE 
+    FROM INFORMATION_SCHEMA.COLUMNS 
+    WHERE TABLE_SCHEMA = database_name
+      AND TABLE_NAME = table_name
+    ORDER BY ORDINAL_POSITION;
+END$$
+
+DELIMITER ;
+
+-- =====================================
 -- LOOKUP DATA
 -- =====================================
 
@@ -300,7 +382,6 @@ INSERT INTO Problems (ProblemID, Title, Description, DifficultyID, Points, Targe
 VALUES (1, 'Select All Customers', 'Fetch all data records out of your client tracking dataset.', 1, 10, 'Northwind', 'SELECT * FROM Customers;', 1, 1, 1);
 
 INSERT INTO ProblemTables (ProblemTableID, ProblemID, TableName) VALUES (1, 1, 'Customers');
-INSERT INTO ProblemColumns (ProblemTableID, ColumnName) VALUES (1, 'CustomerID'), (1, 'CompanyName'), (1, 'ContactName');
 INSERT INTO ProblemTagMap (ProblemID, TagID) VALUES (1, 11);
 
  INSERT INTO Submissions

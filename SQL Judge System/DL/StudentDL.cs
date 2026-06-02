@@ -21,8 +21,7 @@ namespace SQL_Judge_System.DL
         }
         public static void UpdateStudent(Student student)
         {
-            string query = $"UPDATE Students SET RegistrationNumber = '{student.RegistrationNumber}', SkillLevelID = {student.SkillLevelID}, TotalScore = {student.TotalScore}, ProblemsSolved = {student.ProblemsSolved} " +
-                           $"WHERE StudentID = {student.StudentID};";
+            string query = $"UPDATE Students SET RegistrationNumber = '{student.RegistrationNumber}', SkillLevelID = {student.SkillLevelID} WHERE StudentID = {student.StudentID};";
             DatabaseHelper.Instance.Update(query);
         }
         public static void UpdateStudentRecord(int studentId, int score, int solved)

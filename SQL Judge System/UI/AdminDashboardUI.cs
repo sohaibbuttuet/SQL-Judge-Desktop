@@ -22,6 +22,7 @@ namespace SQL_Judge_System.UI
                 btn_Admin.Visible = false;
             }
 
+            // Default startup view
             ShowPanel(pnlHome, "Home");
         }
 
@@ -32,25 +33,26 @@ namespace SQL_Judge_System.UI
             LoadStudentData();
             LoadProblemData();
             LoadContestData();
-            LoadTestCaseData();
             LoadSubmissionData();
-            WirePasswordHint();
-            ToolTip();        
+            SetupToolTips();
         }
 
-        // --- HOME PANEL ---
+
+        // ==========================================
+        // --- 1. HOME PANEL ---
+        // ==========================================
         private void LoadHomeData()
         {
-            LoadHome();
-            LoadHomeDashboard();
+            LoadHomeGrid();
+            LoadHomeDashboardCounters();
         }
-        private void LoadHome()
+        private void LoadHomeGrid()
         {
             try
             {
                 dgv_Users.DataSource = UserBL.GetUsers();
+                dgv_Users.Columns["UserID"].Visible = false;
 
-                dgv_Users.Columns["UserID"].FillWeight = 20;
                 dgv_Users.Columns["FullName"].FillWeight = 70;
                 dgv_Users.Columns["Email"].FillWeight = 40;
                 dgv_Users.Columns["RoleName"].FillWeight = 50;
@@ -62,7 +64,7 @@ namespace SQL_Judge_System.UI
                 MessageBox.Show("Failed to load home data: " + ex.Message);
             }
         }
-        private void LoadHomeDashboard()
+        private void LoadHomeDashboardCounters()
         {
             try
             {
@@ -73,45 +75,46 @@ namespace SQL_Judge_System.UI
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Failed to load home dashboard data: " + ex.Message);
+                MessageBox.Show("Failed to load home dashboard data: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        // --- SUPER ADMIN PANEL ---
+        // ==========================================
+        // --- 2. SUPER ADMIN PANEL ---
+        // ==========================================
         private void LoadAdminData()
         {
-            LoadAdminDashboard();
-            LoadAdmin();
-        }
-        private void LoadAdmin()
+            LoadAdminDashboardCounters();
+            LoadAdminGrid();
+        }   
+        private void LoadAdminGrid()
         {
             try
             {
                 dgvAdmins.DataSource = UserBL.GetAdminList();
 
-                dgvAdmins.Columns["UserID"].FillWeight = 20;
+                dgvAdmins.Columns["UserID"].Visible = false;
+                dgvAdmins.Columns["RoleName"].Visible = false;
+
                 dgvAdmins.Columns["FullName"].FillWeight = 80;
                 dgvAdmins.Columns["Email"].FillWeight = 40;
                 dgvAdmins.Columns["IsActive"].FillWeight = 20;
                 dgvAdmins.Columns["CreatedAt"].FillWeight = 50;
-                dgvAdmins.Columns["RoleName"].Visible = false;
-
-                dgvAdmins.Columns["UserID"].HeaderText = "ID";
+                
                 dgvAdmins.Columns["FullName"].HeaderText = "Admin Name";
                 dgvAdmins.Columns["Email"].HeaderText = "Email";
-                dgvAdmins.Columns["RoleName"].HeaderText = "Role Name";
                 dgvAdmins.Columns["IsActive"].HeaderText = "Status";
                 dgvAdmins.Columns["CreatedAt"].HeaderText = "Created At";
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                MessageBox.Show("Failed to load admin data: " + ex.Message);
+                MessageBox.Show("Failed to load admin data: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        public void LoadAdminDashboard()
+        public void LoadAdminDashboardCounters()
         {
             try
-            {                
+            {
                 lblsuperAdminValue.Text = UserBL.TotalSuperAdmins().ToString();
                 lbladminValue.Text = UserBL.TotalAdmins().ToString();
                 lblinActAdminsValue.Text = UserBL.InactiveAdmins().ToString();
@@ -119,7 +122,7 @@ namespace SQL_Judge_System.UI
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Failed to load dashboard data: " + ex.Message);
+                MessageBox.Show("Failed to load admin dashboard counters: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void btnAddAdmin_Click(object sender, EventArgs e)
@@ -131,7 +134,7 @@ namespace SQL_Judge_System.UI
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Failed to add admin: " + ex.Message);
+                MessageBox.Show("Failed to open add admin screen: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             LoadAdminData();
         }
@@ -148,12 +151,12 @@ namespace SQL_Judge_System.UI
                 }
                 else
                 {
-                    MessageBox.Show("Please select a Contest to update.");
+                    MessageBox.Show("Please select an Admin account from the grid to update.", "Selection Required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Failed to update admin: " + ex.Message);
+                MessageBox.Show("Failed to update admin: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             LoadAdminData();
         }
@@ -165,48 +168,52 @@ namespace SQL_Judge_System.UI
                 {
                     int adminID = Convert.ToInt32(dgvAdmins.SelectedRows[0].Cells["UserID"].Value);
                     bool isActive = Convert.ToBoolean(dgvAdmins.SelectedRows[0].Cells["IsActive"].Value);
+
                     if (isActive)
                     {
-                        DialogResult confirm = MessageBox.Show("Are you sure you want to deactivate this admin?", "Confirm Deactivation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                        DialogResult confirm = MessageBox.Show("Are you sure you want to deactivate this admin account?", "Confirm Deactivation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                         if (confirm == DialogResult.Yes)
                         {
                             UserBL.DeactivateUser(adminID);
-                            MessageBox.Show("Admin deactivated successfully.");
+                            MessageBox.Show("Admin deactivated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
                     else
                     {
                         UserBL.ActivateUser(adminID);
-                        MessageBox.Show("Admin activated successfully.");
+                        MessageBox.Show("Admin activated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Please select an admin");
+                    MessageBox.Show("Please select an admin from the list.", "Selection Required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Failed to toggle admin status: " + ex.Message);
+                MessageBox.Show("Failed to toggle admin status: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             LoadAdminData();
         }
 
-        // --- STUDENT PANEL ---
+        // ==========================================
+        // --- 3. STUDENT PANEL ---
+        // ==========================================
         private void LoadStudentData()
         {
-            LoadStudents();
-            LoadStudentDashboard();
+            LoadStudentsGrid();
+            LoadStudentDashboardCounters();
         }
-        private void LoadStudents()
+        private void LoadStudentsGrid()
         {
             try
             {
                 dgvStudents.DataSource = StudentBL.GetStudentsForAdmin();
+               
+                dgvStudents.Columns["StudentID"].Visible = false;
+                dgvStudents.Columns["UserID"].Visible = false;
 
                 // Set specific weight to columns 
-                dgvStudents.Columns["StudentID"].FillWeight = 20;
-                dgvStudents.Columns["UserID"].FillWeight = 30;
                 dgvStudents.Columns["FullName"].FillWeight = 70;
                 dgvStudents.Columns["RegistrationNumber"].FillWeight = 50;
                 dgvStudents.Columns["LevelName"].FillWeight = 50;
@@ -216,8 +223,6 @@ namespace SQL_Judge_System.UI
                 dgvStudents.Columns["CreatedAt"].FillWeight = 50;
 
                 // Set the header text for each column
-                dgvStudents.Columns["StudentID"].HeaderText = "ID";
-                dgvStudents.Columns["UserID"].HeaderText = "User ID";
                 dgvStudents.Columns["FullName"].HeaderText = "Student Name";
                 dgvStudents.Columns["RegistrationNumber"].HeaderText = "Reg No.";
                 dgvStudents.Columns["LevelName"].HeaderText = "Skill Level";
@@ -228,10 +233,10 @@ namespace SQL_Judge_System.UI
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Failed to load student data: " + ex.Message);
+                MessageBox.Show("Failed to load student data: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private void LoadStudentDashboard()
+        private void LoadStudentDashboardCounters()
         {
             try
             {
@@ -241,7 +246,7 @@ namespace SQL_Judge_System.UI
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Failed to load student dashboard data: " + ex.Message);
+                MessageBox.Show("Failed to load student dashboard counters: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void btntoggleStd_Click(object sender, EventArgs e)
@@ -255,44 +260,48 @@ namespace SQL_Judge_System.UI
 
                     if (isActive)
                     {
-                        DialogResult confirm = MessageBox.Show("Are you sure you want to deactivate this student?", "Confirm Deactivation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                        DialogResult confirm = MessageBox.Show("Are you sure you want to deactivate this student account?", "Confirm Deactivation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
                         if (confirm == DialogResult.Yes)
                         {
                             UserBL.DeactivateUser(userID);
-                            MessageBox.Show("Student deactivated successfully.");
+                            MessageBox.Show("Student deactivated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
                     else
                     {
                         UserBL.ActivateUser(userID);
-                        MessageBox.Show("Student activated successfully.");
+                        MessageBox.Show("Student activated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Please select a student");
+                    MessageBox.Show("Please select a student from the list.", "Selection Required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Failed to toggle student status: " + ex.Message);
+                MessageBox.Show("Failed to toggle student status: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             LoadStudentData();
         }
 
-        // --- PROBLEM PANEL ---
+        // ==========================================
+        // --- 4. PROBLEM PANEL ---
+        // ==========================================
         private void LoadProblemData()
         {
-            LoadProblem(); 
-            LoadProblemDashboard();
+            LoadProblemGrid();
+            LoadProblemDashboardCounters();
         }
-        private void LoadProblem()
+        private void LoadProblemGrid()
         {
             try
             {
                 dgvProblems.DataSource = ProblemBL.ProblemsList();
 
-                dgvProblems.Columns["ProblemID"].FillWeight = 20;
+                dgvProblems.Columns["ProblemID"].Visible = false;
+
                 dgvProblems.Columns["Title"].FillWeight = 80;
                 dgvProblems.Columns["DifficultyName"].FillWeight = 30;
                 dgvProblems.Columns["Points"].FillWeight = 30;
@@ -302,7 +311,6 @@ namespace SQL_Judge_System.UI
                 dgvProblems.Columns["UpdatedBy"].FillWeight = 50;
                 dgvProblems.Columns["UpdatedAt"].FillWeight = 50;
 
-                dgvProblems.Columns["ProblemID"].HeaderText = "ID";
                 dgvProblems.Columns["Title"].HeaderText = "Title";
                 dgvProblems.Columns["DifficultyName"].HeaderText = "Difficulty Level";
                 dgvProblems.Columns["Points"].HeaderText = "Points";
@@ -314,10 +322,10 @@ namespace SQL_Judge_System.UI
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Failed to load problem data: " + ex.Message);
+                MessageBox.Show("Failed to load problem database list: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private void LoadProblemDashboard()
+        private void LoadProblemDashboardCounters()
         {
             try
             {
@@ -327,19 +335,19 @@ namespace SQL_Judge_System.UI
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Failed to load problem dashboard data: " + ex.Message);
+                MessageBox.Show("Failed to load problem dashboard counters: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void btnAddProb_Click(object sender, EventArgs e)
         {
             try
             {
-                ProblemPopupForm form = new ProblemPopupForm(user.UserID);
+                CreateProblemUI form = new CreateProblemUI(user.UserID);
                 form.ShowDialog();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Failed to update admin: " + ex.Message);
+                MessageBox.Show("Failed to open creation engine form: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             LoadProblemData();
         }
@@ -351,12 +359,12 @@ namespace SQL_Judge_System.UI
                 {
                     int problemID = Convert.ToInt32(dgvProblems.SelectedRows[0].Cells["ProblemID"].Value);
 
-                    ProblemPopupForm form = new ProblemPopupForm(user.UserID, problemID);
+                    CreateProblemUI form = new CreateProblemUI(user.UserID, problemID);
                     form.ShowDialog();
                 }
                 else
                 {
-                    MessageBox.Show("Please select a Problem to update.");
+                    MessageBox.Show("Please select a Problem from the grid to modify.", "Selection Required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             catch (Exception ex)
@@ -376,45 +384,50 @@ namespace SQL_Judge_System.UI
 
                     if (isActive)
                     {
-                        DialogResult confirm = MessageBox.Show("Are you sure you want to deactivate this problem?", "Confirm Deactivation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                        DialogResult confirm = MessageBox.Show("Are you sure you want to pull this problem down from active judging status?", "Confirm Deactivation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
                         if (confirm == DialogResult.Yes)
                         {
                             ProblemBL.DeactivateProblem(problemID);
-                            MessageBox.Show("Problem deactivated successfully.");
+
+                            MessageBox.Show("Problem deactivated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
                     else
                     {
                         ProblemBL.ActivateProblem(problemID);
-                        MessageBox.Show("Problem activated successfully.");
+
+                        MessageBox.Show("Problem deployed and activated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Please select a problem");
+                    MessageBox.Show("Please select a problem from the grid matrix view.", "Selection Required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Failed to toggle problem status: " + ex.Message);
+                MessageBox.Show("Failed to toggle problem deployment validation status: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             LoadProblemData();
         }
 
-        // --- Contest Panel ---
+        // ==========================================
+        // --- 5. CONTEST PANEL ---
+        // ==========================================
         private void LoadContestData()
         {
-            LoadContest();
-            LoadContestDashboard();
+            LoadContestGrid();
+            LoadContestDashboardCounters();
         }
-        private void LoadContest()
+        private void LoadContestGrid()
         {
             try
             {
-                dgvContest.DataSource = ContestBL.GetContests();
+                dgvContest.DataSource = ContestBL.GetContests();               
+                dgvContest.Columns["ContestID"].Visible = false;
 
                 // ===== Column Styling =====
-                dgvContest.Columns["ContestID"].HeaderText = "ID";
                 dgvContest.Columns["Title"].HeaderText = "Title";
                 dgvContest.Columns["StartDate"].HeaderText = "Start Date";
                 dgvContest.Columns["EndDate"].HeaderText = "End Date";
@@ -426,7 +439,6 @@ namespace SQL_Judge_System.UI
                 dgvContest.Columns["ContestStatus"].HeaderText = "Status";
 
                 // ===== Layout =====
-                dgvContest.Columns["ContestID"].FillWeight = 20;
                 dgvContest.Columns["Title"].FillWeight = 80;
                 dgvContest.Columns["StartDate"].FillWeight = 40;
                 dgvContest.Columns["EndDate"].FillWeight = 40;
@@ -439,10 +451,10 @@ namespace SQL_Judge_System.UI
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Failed to load contest data: " + ex.Message);
+                MessageBox.Show("Failed to load contest data: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private void LoadContestDashboard()
+        private void LoadContestDashboardCounters()
         {
             try
             {
@@ -453,7 +465,7 @@ namespace SQL_Judge_System.UI
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Failed to load contest dashboard data: " + ex.Message);
+                MessageBox.Show("Failed to load contest dashboard: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void btnAddContest_Click(object sender, EventArgs e)
@@ -465,7 +477,7 @@ namespace SQL_Judge_System.UI
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Failed to update admin: " + ex.Message);
+                MessageBox.Show("Failed to add contest: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             LoadContestData();
         }
@@ -482,172 +494,54 @@ namespace SQL_Judge_System.UI
                 }
                 else
                 {
-                    MessageBox.Show("Please select a Contest to update.");
+                    MessageBox.Show("Please select a contest row to update.", "Selection Required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Failed to update admin: " + ex.Message);
+                MessageBox.Show("Failed to load contest data: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             LoadContestData();
         }
 
-        // --- Test Cases Panel ---
-        private void LoadTestCaseData()
-        {
-            LoadTestCases();
-            LoadTestCaseDashboard();
-        }
-        private void LoadTestCases()
-        {
-            try
-            {
-                dgvTestCases.DataSource = TestCaseBL.GetTestCases();
-
-                dgvTestCases.Columns["TestCaseID"].FillWeight = 30;
-                dgvTestCases.Columns["ProblemID"].FillWeight = 50;
-                dgvTestCases.Columns["ProblemTitle"].FillWeight = 80;
-                dgvTestCases.Columns["SolutionQueryPreview"].FillWeight = 100;
-                dgvContest.Columns["CreatedBy"].FillWeight = 30;
-                dgvContest.Columns["UpdatedBy"].FillWeight = 30;
-                dgvContest.Columns["CreatedAt"].FillWeight = 30;
-                dgvContest.Columns["UpdatedAt"].FillWeight = 30;
-                dgvTestCases.Columns["IsActive"].FillWeight = 40;
-
-                dgvTestCases.Columns["TestCaseID"].HeaderText = "ID";
-                dgvTestCases.Columns["ProblemID"].HeaderText = "Problem ID";
-                dgvTestCases.Columns["ProblemTitle"].HeaderText = "Problem Title";
-                dgvTestCases.Columns["SolutionQueryPreview"].HeaderText = "Solution Query Preview";                
-                dgvContest.Columns["CreatedBy"].HeaderText = "Created By";
-                dgvContest.Columns["UpdatedBy"].HeaderText = "Updated By";
-                dgvContest.Columns["CreatedAt"].HeaderText = "Created At";
-                dgvContest.Columns["UpdatedAt"].HeaderText = "Updated At";
-                dgvTestCases.Columns["IsActive"].HeaderText = "Status";
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show("Failed to load test case data: " + ex.Message);
-            }
-        }
-        private void LoadTestCaseDashboard()
-        {
-            try
-            {
-                lbltotalTestCases.Text = TestCaseBL.TotalTestCases().ToString();
-                lblActTestCases.Text = TestCaseBL.ActiveTestCases().ToString();
-                lblInActiveTestCases.Text = TestCaseBL.InactiveTestCases().ToString();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Failed to load test case dashboard data: " + ex.Message);
-            }
-        }
-        private void btnAddTestCase_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                TestCasePopupForm form = new TestCasePopupForm(user.UserID);
-                form.ShowDialog();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Failed to update admin: " + ex.Message);
-            }
-            LoadTestCaseData();
-        }
-        private void btnUpdateTestCase_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (dgvTestCases.SelectedRows.Count > 0)
-                {
-                    int testCaseID = Convert.ToInt32(dgvContest.SelectedRows[0].Cells["TestCaseID"].Value);
-
-                    TestCasePopupForm form = new TestCasePopupForm(user.UserID, testCaseID);
-                    form.ShowDialog();
-                }
-                else
-                {
-                    MessageBox.Show("Please select a Test Case to update.");
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Failed to update admin: " + ex.Message);
-            }
-            LoadTestCaseData();
-        }
-        private void btnToggleTestCase_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (dgvTestCases.SelectedRows.Count > 0)
-                {
-                    int testCaseID = Convert.ToInt32(dgvTestCases.SelectedRows[0].Cells["TestCaseID"].Value);
-                    bool isActive = Convert.ToBoolean(dgvTestCases.SelectedRows[0].Cells["IsActive"].Value);
-                    if (isActive)
-                    {
-                        DialogResult confirm = MessageBox.Show("Are you sure you want to deactivate this test case?", "Confirm Deactivation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                        if (confirm == DialogResult.Yes)
-                        {
-                            TestCaseBL.DeactivateTestCase(testCaseID);
-                            MessageBox.Show("Test case deactivated successfully.");
-                        }
-                    }
-                    else
-                    {
-                        TestCaseBL.ActivateTestCase(testCaseID);
-                        MessageBox.Show("Test case activated successfully.");
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Please select a test case");
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Failed to toggle test case status: " + ex.Message);
-            }
-            LoadTestCaseData();
-        }
-
         // --- Submissions Panel ---
+        // ==========================================
+        // --- 6. SUBMISSIONS PANEL ---
+        // ==========================================
         private void LoadSubmissionData()
         {
-            LoadSubmissions();
-            LoadSubmissionDashboard();
+            LoadSubmissionsGrid();
+            LoadSubmissionDashboardCounters();
         }
-        private void LoadSubmissions()
+        private void LoadSubmissionsGrid()
         {
             try {
                 dgvSubmissions.DataSource = SubmissionBL.GetSubmissions();
 
-                dgvSubmissions.Columns["SubmissionID"].FillWeight = 20;
-                dgvSubmissions.Columns["StudentID"].FillWeight = 30;
-                dgvSubmissions.Columns["StudentName"].FillWeight = 50;
-                dgvSubmissions.Columns["ProblemID"].FillWeight = 30;
+                dgvSubmissions.Columns["SubmissionID"].Visible = false;
+                dgvSubmissions.Columns["StudentID"].Visible = false;
+                dgvSubmissions.Columns["ProblemID"].Visible = false;
+
+                dgvSubmissions.Columns["StudentName"].FillWeight = 50;                
                 dgvSubmissions.Columns["ProblemTitle"].FillWeight = 80;
                 dgvSubmissions.Columns["TotalScore"].FillWeight = 30;
                 dgvSubmissions.Columns["AttemptNumber"].FillWeight = 30;
                 dgvSubmissions.Columns["SubmittedAt"].FillWeight = 50;
                 dgvSubmissions.Columns["Status"].FillWeight = 50;                           
 
-                dgvSubmissions.Columns["SubmissionID"].HeaderText = "ID";
-                dgvSubmissions.Columns["StudentID"].HeaderText = "Student ID";
                 dgvSubmissions.Columns["StudentName"].HeaderText = "Student Name";
-                dgvSubmissions.Columns["ProblemID"].HeaderText = "Problem ID";
                 dgvSubmissions.Columns["ProblemTitle"].HeaderText = "Problem Title";
-                dgvSubmissions.Columns["AttemptNumber"].HeaderText = "Attempt #";
                 dgvSubmissions.Columns["TotalScore"].HeaderText = "Total Score";
+                dgvSubmissions.Columns["AttemptNumber"].HeaderText = "Attempt #";                
                 dgvSubmissions.Columns["SubmittedAt"].HeaderText = "Submitted At";
+                dgvSubmissions.Columns["Status"].HeaderText = "Status";
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Failed to load submission data: " + ex.Message);
+                MessageBox.Show("Failed to load submission data: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private void LoadSubmissionDashboard()
+        private void LoadSubmissionDashboardCounters()
         {
             try
             {
@@ -657,179 +551,13 @@ namespace SQL_Judge_System.UI
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Failed to load submission dashboard data: " + ex.Message);
+                MessageBox.Show("Failed to load compiled matrix logs: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        // --- Settings Panel
-        private void LoadSettingsData()
-        {
-        }
-        private void LoadSettingsProfile()
-        {
-            try
-            {
-                // Re-fetch fresh data every time so edits elsewhere are reflected
-                user = UserBL.GetUserById(user.UserID);
-
-                txtSettingsFullName.Text = user.FullName;
-                txtSettingsEmail.Text = user.Email;
-                txtSettingsRole.Text = user.RoleName;
-                txtSettingsCreatedAt.Text = user.CreatedAt.ToString("dd MMM yyyy");
-                txtSettingsStatus.Text = user.IsActive ? "Active" : "Inactive";
-
-                // Colour the status field dynamically
-                txtSettingsStatus.ForeColor = user.IsActive
-                    ? System.Drawing.Color.FromArgb(52, 211, 153)    // emerald
-                    : System.Drawing.Color.FromArgb(251, 113, 133);  // rose
-
-                // Clear password fields every open
-                txtCurrentPassword.Text = string.Empty;
-                txtNewPassword.Text = string.Empty;
-                txtConfirmPassword.Text = string.Empty;
-                lblPasswordMatchHint.Text = string.Empty;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Failed to load profile data: " + ex.Message);
-            }
-        }
-        private void WirePasswordHint()
-        {
-            txtConfirmPassword.TextChanged += new System.EventHandler(this.txtConfirmPassword_TextChanged);
-        }
-        private void txtConfirmPassword_TextChanged(object sender, EventArgs e)
-        {
-            if (string.IsNullOrEmpty(txtNewPassword.Text) || string.IsNullOrEmpty(txtConfirmPassword.Text))
-            {
-                lblPasswordMatchHint.Text = string.Empty;
-                return;
-            }
-
-            if (txtNewPassword.Text == txtConfirmPassword.Text)
-            {
-                lblPasswordMatchHint.Text = "✔  Passwords match";
-                lblPasswordMatchHint.ForeColor = System.Drawing.Color.FromArgb(52, 211, 153);
-            }
-            else
-            {
-                lblPasswordMatchHint.Text = "✘  Passwords do not match";
-                lblPasswordMatchHint.ForeColor = System.Drawing.Color.FromArgb(251, 113, 133);
-            }
-        }
-        private void btnSaveProfile_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                string newFullName = txtSettingsFullName.Text.Trim();
-                string newEmail = txtSettingsEmail.Text.Trim();
-
-                if (string.IsNullOrEmpty(newFullName))
-                {
-                    MessageBox.Show("Full name cannot be empty.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    txtSettingsFullName.Focus();
-                    return;
-                }
-
-                if (string.IsNullOrEmpty(newEmail))
-                {
-                    MessageBox.Show("Email cannot be empty.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    txtSettingsEmail.Focus();
-                    return;
-                }
-
-                bool updated = UserBL.UpdateUserProfile(user.UserID, newFullName, newEmail);
-
-                if (updated)
-                {
-                    user.FullName = newFullName;
-                    user.Email = newEmail;
-
-                    MessageBox.Show("Profile updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    LoadSettingsProfile();
-                }
-                else
-                {
-                    MessageBox.Show("Failed to update profile. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Failed to save profile: " + ex.Message);
-            }
-        }
-        private void btnChangePassword_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                string currentPassword = txtCurrentPassword.Text;
-                string newPassword = txtNewPassword.Text;
-                string confirmPassword = txtConfirmPassword.Text;
-
-                if (string.IsNullOrEmpty(currentPassword))
-                {
-                    MessageBox.Show("Please enter your current password.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    txtCurrentPassword.Focus();
-                    return;
-                }
-
-                if (string.IsNullOrEmpty(newPassword))
-                {
-                    MessageBox.Show("Please enter a new password.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    txtNewPassword.Focus();
-                    return;
-                }
-
-                if (newPassword.Length < 6)
-                {
-                    MessageBox.Show("New password must be at least 6 characters long.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    txtNewPassword.Focus();
-                    return;
-                }
-
-                if (newPassword != confirmPassword)
-                {
-                    MessageBox.Show("New password and confirm password do not match.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    txtConfirmPassword.Focus();
-                    return;
-                }
-
-                bool currentPasswordCorrect = UserBL.VerifyPassword(user.UserID, currentPassword);
-
-                if (!currentPasswordCorrect)
-                {
-                    MessageBox.Show("Current password is incorrect.", "Authentication Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    txtCurrentPassword.Focus();
-                    return;
-                }
-
-                bool changed = UserBL.ChangePassword(user.UserID, newPassword);
-
-                if (changed)
-                {
-                    MessageBox.Show("Password changed successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    txtCurrentPassword.Text = string.Empty;
-                    txtNewPassword.Text = string.Empty;
-                    txtConfirmPassword.Text = string.Empty;
-                    lblPasswordMatchHint.Text = string.Empty;
-                }
-                else
-                {
-                    MessageBox.Show("Failed to change password. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Failed to change password: " + ex.Message);
-            }
-        }
-        private void btnClose_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-
-        // Slide Bar Menu Buttons
+        // ==========================================
+        // --- 7. SLIDE BAR NAVIGATION ACTIONS ---
+        // ==========================================
         private void btnHome_Click(object sender, EventArgs e)
         {
           ShowPanel(pnlHome, "Home");
@@ -850,10 +578,6 @@ namespace SQL_Judge_System.UI
         {
             ShowPanel(pnlContest, "Contest Management");
         }
-        private void btnTestCases_Click(object sender, EventArgs e)
-        {
-            ShowPanel(pnlTestCases, "Test Case Management");
-        }
         private void btnContestLeaderboard_Click(object sender, EventArgs e)
         {
             //ShowPanel(pnlContestLeaderboard, "Contest Leaderboard");
@@ -868,8 +592,8 @@ namespace SQL_Judge_System.UI
         }
         private void btn_Settings_Click(object sender, EventArgs e)
         {
-            ShowPanel(pnlSettings, "Settings");
-            LoadSettingsData();
+            SettingsForm form = new SettingsForm(user.UserID);
+            form.ShowDialog();
         }
         private void btnLogout_Click(object sender, EventArgs e)
         {
@@ -880,35 +604,34 @@ namespace SQL_Judge_System.UI
             }
         }
 
-        // --- Utility Methods ---
+        // ==========================================
+        // --- 8. UTILITY CORE INFRASTRUCTURE ---
+        // ==========================================
         private void ShowPanel(Panel targetPanel, string headerText)
         {
-            // 1. Hide all panels first
+            // Hide all panels
+            pnlHome.Visible = false;
             pnlSuperAdmin.Visible = false;
             pnlProblems.Visible = false;
             pnlStudent.Visible = false;
             pnlContest.Visible = false;
             pnlsubmissions.Visible = false;
-            pnlTestCases.Visible = false;
-            pnlSettings.Visible = false;
 
-            // 2. Show the target panel
-            targetPanel.Visible = true;
-
-            // 3. Ensure it fills the space and is on top
+            // Show target panel
+           
             targetPanel.Dock = DockStyle.Fill;
             targetPanel.BringToFront();
 
-            // 4. Update the header label
+            targetPanel.Visible = true;
+            // Set main app frame layout title
             lblSuperAdmin.Text = headerText;
         }
-        private void ToolTip()
+        private void SetupToolTips()
         {
             ToolTip tip = new ToolTip();
-            tip.SetToolTip(btntoggleStd, "Active/Inactive");
-            tip.SetToolTip(btnToggleTestCase, "Active/Inactive");
-            tip.SetToolTip(btnToggleProb, "Active/Inactive");
-            tip.SetToolTip(btnToggleAdmin, "Active/Inactive");
+            tip.SetToolTip(btntoggleStd, "Toggle Account Status (Active/Inactive)");
+            tip.SetToolTip(btnToggleProb, "Toggle Problem Deployment (Active/Inactive)");
+            tip.SetToolTip(btnToggleAdmin, "Toggle Administrator Status (Active/Inactive)");
         }
     }
 }

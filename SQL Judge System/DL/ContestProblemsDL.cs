@@ -8,7 +8,7 @@ using SQL_Judge_System.Models;
 
 namespace SQL_Judge_System.DL
 {
-    internal class ContestProblemDL
+    internal class ContestProblemsDL
     {
         public static void AddProblem(ContestProblem contestProblem)
         {

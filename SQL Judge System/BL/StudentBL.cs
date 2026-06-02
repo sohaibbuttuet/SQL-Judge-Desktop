@@ -13,15 +13,21 @@ namespace SQL_Judge_System.BL
     {
         public static void RegisterStudent(Student s)
         {
-            if (s == null)
-            {
-                throw new ArgumentNullException(nameof(s), "Student object cannot be null.");
-            }
-            if (StudentDL.IsStudentExist(s.RegistrationNumber))
-            {
-                throw new InvalidOperationException($"A student with registration number {s.RegistrationNumber} already exists.");
-            }
+            ValidateStudent(s);
             s.StudentID = StudentDL.AddStudent(s);
+        }
+        public static void UpdateStudent(Student s)
+        {
+            ValidateStudent(s);
+            StudentDL.UpdateStudent(s);
+        }
+        private static void ValidateStudent(Student s)
+        {
+            if (s == null)
+                throw new ArgumentNullException(nameof(s), "Student object cannot be null.");
+
+            if (StudentDL.IsStudentExist(s.RegistrationNumber))
+                throw new InvalidOperationException($"A student with registration number {s.RegistrationNumber} already exists.");
         }
         public static Student GetStudentByUserID(int userId)
         {

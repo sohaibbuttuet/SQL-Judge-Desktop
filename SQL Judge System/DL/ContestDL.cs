@@ -1,10 +1,11 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using SQL_Judge_System.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SQL_Judge_System.Models;
 
 namespace SQL_Judge_System.DL
 {
@@ -12,22 +13,46 @@ namespace SQL_Judge_System.DL
     {
         public static int CreateContest(Contest c)
         {
-            string query = $"INSERT INTO Contests (Title, Description, StartDate, EndDate, CreatedBy, CreatedAt, UpdatedBy, UpdatedAt) " +
-                           $"VALUES ('{c.Title}', '{c.Description}', '{c.StartDate:yyyy-MM-dd HH:mm:ss}', '{c.EndDate:yyyy-MM-dd HH:mm:ss}', {c.CreatedBy}, '{c.CreatedAt:yyyy-MM-dd HH:mm:ss}', {c.CreatedBy}, '{c.CreatedAt:yyyy-MM-dd HH:mm:ss}'); " +
-                           $"SELECT LAST_INSERT_ID();";
+            string query = $"INSERT INTO Contests (Title, Description, StartDate, EndDate, CreatedBy, UpdatedBy) " + "VALUES (@Title, @Description, @StartDate, @EndDate, @CreatedBy, @UpdatedBy);" +
+            $"SELECT LAST_INSERT_ID();";
 
-            return DatabaseHelper.Instance.ExecuteScalar(query);
+            MySqlParameter[] parameters =
+            {
+                new MySqlParameter("@Title", c.Title),
+                new MySqlParameter("@Description", c.Description),
+                new MySqlParameter("@StartDate", c.StartDate),
+                new MySqlParameter("@EndDate", c.EndDate),
+                new MySqlParameter("@CreatedBy", c.CreatedBy),
+                new MySqlParameter("@UpdatedBy", c.UpdatedBy)
+            };
+
+            return DatabaseHelper.Instance.ExecuteScalar(query, parameters);
         }
         public static void UpdateContest(Contest c)
         {
-            string query = $"UPDATE Contests SET Title = '{c.Title}', Description = '{c.Description}', StartDate = '{c.StartDate:yyyy-MM-dd HH:mm:ss}', " +
-                           $"EndDate = '{c.EndDate:yyyy-MM-dd HH:mm:ss}', UpdatedBy = {c.UpdatedBy}, UpdatedAt = '{c.UpdatedAt:yyyy-MM-dd HH:mm:ss}' WHERE ContestID = {c.ContestID};";
-            DatabaseHelper.Instance.Update(query);
+            string query = $"UPDATE Contests SET Title = @Title, Description = @Description, StartDate = @StartDate, EndDate = @EndDate, UpdatedBy = @UpdatedBy WHERE ContestID = @ContestID;";
+
+            MySqlParameter[] parameters =
+            {
+                new MySqlParameter("@Title", c.Title),
+                new MySqlParameter("@Description", c.Description),
+                new MySqlParameter("@StartDate", c.StartDate),
+                new MySqlParameter("@EndDate", c.EndDate),
+                new MySqlParameter("@UpdatedBy", c.UpdatedBy),
+                new MySqlParameter("@ContestID", c.ContestID)
+            };
+
+            DatabaseHelper.Instance.Update(query, parameters);
         }
         public static Contest GetContestByID(int contestid)
         {
-            string query = $"SELECT * FROM Contests WHERE ContestID = {contestid};";
-            DataTable dt = DatabaseHelper.Instance.GetDataTable(query);
+            string query = $"SELECT * FROM Contests WHERE ContestID = @ContestID;";
+            MySqlParameter[] parameters =
+            {
+                new MySqlParameter("@ContestID", contestid)
+            };
+
+            DataTable dt = DatabaseHelper.Instance.GetDataTable(query, parameters);
 
             if (dt.Rows.Count == 0)
                 return null;

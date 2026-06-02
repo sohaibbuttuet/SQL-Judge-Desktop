@@ -103,16 +103,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BL\ContestBL.cs" />
-    <Compile Include="BL\ContestParticipentBL.cs" />
     <Compile Include="BL\ProblemBL.cs" />
     <Compile Include="BL\QueryRunnerBL.cs" />
     <Compile Include="BL\StudentBL.cs" />
     <Compile Include="BL\SubmissionBL.cs" />
-    <Compile Include="BL\TestCaseBL.cs" />
     <Compile Include="BL\UserBL.cs" />
     <Compile Include="DL\ContestDL.cs" />
-    <Compile Include="DL\ContestParticipentDL.cs" />
-    <Compile Include="DL\ContestProblemDL.cs" />
+    <Compile Include="DL\ContestParticipentsDL.cs" />
+    <Compile Include="DL\ContestProblemsDL.cs" />
+    <Compile Include="DL\ProblemTablesDL.cs" />
     <Compile Include="DL\QueryRunnerDB.cs" />
     <Compile Include="DL\ProblemDL.cs" />
     <Compile Include="DL\ProblemTagMapDL.cs" />
@@ -120,10 +119,10 @@
     <Compile Include="LookupDL\ProblemDifficultiesDL.cs" />
     <Compile Include="LookupDL\ProblemTagsDL.cs" />
     <Compile Include="DL\SubmissionDL.cs" />
-    <Compile Include="DL\TestCaseDL.cs" />
     <Compile Include="DL\DatabaseHelper.cs" />
     <Compile Include="DL\UserRoleDL.cs" />
     <Compile Include="LookupDL\RoleDL.cs" />
+    <Compile Include="DL\SchemaDL.cs" />
     <Compile Include="LookupDL\SkillLevelDL.cs" />
     <Compile Include="DL\StudentDL.cs" />
     <Compile Include="LookupDL\SubmissionStatusDL.cs" />
@@ -141,6 +140,7 @@
     <Compile Include="Models\LookupBase.cs" />
     <Compile Include="Models\Problem.cs" />
     <Compile Include="Models\ProblemDifficulty.cs" />
+    <Compile Include="Models\ProblemTable.cs" />
     <Compile Include="Models\ProblemTag.cs" />
     <Compile Include="Models\ProblemTagMap.cs" />
     <Compile Include="Models\Role.cs" />
@@ -149,7 +149,6 @@
     <Compile Include="Models\Submission.cs" />
     <Compile Include="Models\SubmissionResult.cs" />
     <Compile Include="Models\SubmissionStatus.cs" />
-    <Compile Include="Models\TestCase.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserRole.cs" />
     <Compile Include="Program.cs" />
@@ -184,29 +183,23 @@
     <Compile Include="UI\ContestUI.Designer.cs">
       <DependentUpon>ContestUI.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\ProblemPopupForm.cs">
+    <Compile Include="UI\CreateProblemUI.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\ProblemPopupForm.Designer.cs">
-      <DependentUpon>ProblemPopupForm.cs</DependentUpon>
+    <Compile Include="UI\CreateProblemUI.Designer.cs">
+      <DependentUpon>CreateProblemUI.cs</DependentUpon>
     </Compile>
-    <Compile Include="SolveProblemUI.cs">
+    <Compile Include="UI\SettingsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SolveProblemUI.Designer.cs">
-      <DependentUpon>SolveProblemUI.cs</DependentUpon>
+    <Compile Include="UI\SettingsForm.Designer.cs">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\StudentDashboardUI.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI\StudentDashboardUI.Designer.cs">
       <DependentUpon>StudentDashboardUI.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI\TestCasePopupForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI\TestCasePopupForm.Designer.cs">
-      <DependentUpon>TestCasePopupForm.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -233,17 +226,14 @@
     <EmbeddedResource Include="UI\ContestUI.resx">
       <DependentUpon>ContestUI.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\ProblemPopupForm.resx">
-      <DependentUpon>ProblemPopupForm.cs</DependentUpon>
+    <EmbeddedResource Include="UI\CreateProblemUI.resx">
+      <DependentUpon>CreateProblemUI.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SolveProblemUI.resx">
-      <DependentUpon>SolveProblemUI.cs</DependentUpon>
+    <EmbeddedResource Include="UI\SettingsForm.resx">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\StudentDashboardUI.resx">
       <DependentUpon>StudentDashboardUI.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\TestCasePopupForm.resx">
-      <DependentUpon>TestCasePopupForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

@@ -109,17 +109,6 @@ namespace SQL_Judge_System.Models
             AttemptNumber = 1;
             TotalScore = 0;
         }
-        public Submission(int studentID, int problemID, string queryText, int statusID, int attemptNumber, int totalScore)
-        {
-            StudentID = studentID;
-            ProblemID = problemID;
-            QueryText = queryText;
-            StatusID = statusID;
-            AttemptNumber = attemptNumber;
-            TotalScore = totalScore;
-
-            SubmittedAt = DateTime.Now;
-        }
         public Submission(int studentID, int problemID, string queryText, int statusID)
         {
             StudentID = studentID;
@@ -128,6 +117,17 @@ namespace SQL_Judge_System.Models
             StatusID = statusID;
 
             SubmittedAt = DateTime.Now;
+        }
+        public Submission(int submissionID, int studentID, int problemID, string queryText, int statusID, int attemptNumber, int totalScore, DateTime submittedAt)
+        {
+            SubmissionID = submissionID;
+            StudentID = studentID;
+            ProblemID = problemID;
+            QueryText = queryText;
+            StatusID = statusID;
+            AttemptNumber = attemptNumber;
+            TotalScore = totalScore;
+            SubmittedAt = submittedAt;
         }
     }
 }

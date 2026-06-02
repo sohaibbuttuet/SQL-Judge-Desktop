@@ -14,5 +14,10 @@ namespace SQL_Judge_System.DL
             string query = $"INSERT INTO UserRoles (UserID, RoleID) VALUES ({u.UserID}, {u.RoleID});";
             DatabaseHelper.Instance.Update(query);
         }
+        public static string GetRoleNameByUserID(int userID)
+        {
+            string query = $"SELECT r.RoleName FROM Roles r JOIN UserRoles ur ON r.RoleID = ur.RoleID WHERE ur.UserID = {userID};";
+            return DatabaseHelper.Instance.ExecuteScalarObject(query).ToString();
+        }
     }
 }
