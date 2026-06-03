@@ -327,8 +327,7 @@ namespace SQL_Judge_System.UI
                     MessageBox.Show("Please select a problem.", "Warning",
                         MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
-                }
-                int problemID = Convert.ToInt32(dgvProblems.CurrentRow.Cells["ProblemID"].Value);
+                }                
 
                 string query = rtbSQLEditor.Text.Trim();
                 if (string.IsNullOrWhiteSpace(query))
@@ -338,23 +337,44 @@ namespace SQL_Judge_System.UI
                     return;
                 }
 
-                // Create submission object with pending evaluation status
-                int pendingStatusID = SubmissionStatusDL.GetPending();
-                Submission submission = new Submission(student.StudentID, problemID, query, pendingStatusID);
+                int problemID = Convert.ToInt32(dgvProblems.CurrentRow.Cells["ProblemID"].Value);
 
-                SubmissionBL.CreateSubmission(submission);
+                // pass student ID, problem ID, the query text, and the target database name
+                SubmissionResult result = SubmissionBL.ProcessAndGradeSubmission(student.StudentID, problemID, query, databaseName);
+
+                // 3. Update UI Badges and Alerts based on execution results
+                if (result.IsPassed)
+                {
+                    lblResultBadge.ForeColor = Color.FromArgb(62, 207, 142); // Green
+                    lblResultBadge.Text = "Submission Accepted! Your query is correct.";
+                    MessageBox.Show("Congratulations! Your submission is correct.", "Accepted", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    lblResultBadge.ForeColor = Color.FromArgb(224, 90, 90); // Red
+
+                    if (result.ErrorMessage.StartsWith("Runtime error"))
+                    {
+                        lblResultBadge.Text = "Runtime Error encountered during evaluation.";
+                        MessageBox.Show(result.ErrorMessage, "Runtime Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        lblResultBadge.Text = "Submission Rejected. Query results mismatch.";
+                        MessageBox.Show($"Your submission is incorrect.\n\nReason: {result.ErrorMessage}", "Rejected", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
             }
             catch (ArgumentException argEx)
             {
-                // Catches syntax validation blocks (e.g., trying to write an UPDATE statement or empty strings)
-                MessageBox.Show(argEx.Message, "SQL Policy Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                // Catches syntax validation blocks (e.g., trying to write an UPDATE statement, blocked tables)
+                MessageBox.Show(argEx.Message, "SQL Policy Violation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"System execution tracking fault: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"System execution tracking fault: {ex.Message}", "System Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-     
+        }    
 
         private void btnClearEditor_Click(object sender, EventArgs e)
         {

@@ -16,50 +16,108 @@ namespace SQL_Judge_System.BL
     {
         public static void CreateSubmission(Submission submission)
         {
-            if (submission == null)
-                throw new ArgumentException("Submission cannot be null.");
+            if (submission == null) throw new ArgumentException("Submission cannot be null.");
+            if (submission.ProblemID <= 0) throw new ArgumentException("Invalid Problem ID.");
+            if (submission.StudentID <= 0) throw new ArgumentException("Invalid StudentID.");
 
-            if (submission.ProblemID <= 0)
-                throw new ArgumentException("Invalid Problem ID.");
-
-            if (submission.StudentID <= 0)
-                throw new ArgumentException("Invalid StudentID.");
-
-            // This will throw an ArgumentException and stop execution if malicious text is found.
-            submission.QueryText = QueryRunnerBL.CleanAndValidateQuery(submission.QueryText);
-
-            // 1. Save submission record FIRST to get the Auto-Incremented SubmissionID
             submission.SubmissionID = SubmissionDL.AddSubmission(submission);
         }
-        private static bool CompareTables(DataTable expected, DataTable student, out string mismatchReason)
+        public static void UpdateSubmissionStatus(int submissionID, int statusID)
         {
-            mismatchReason = "";
+            if (submissionID <= 0) throw new ArgumentException("Invalid Submission ID.");
+            if (statusID <= 0) throw new ArgumentException("Invalid Status ID.");
 
-            if (expected.Rows.Count != student.Rows.Count)
+            SubmissionDL.UpdateSubmissionStatus(submissionID, statusID);
+        }
+        public static void AddSubmissionResult(SubmissionResult result)
+        {
+            if (result == null) throw new ArgumentException("SubmissionResult cannot be null.");
+            if (result.SubmissionID <= 0) throw new ArgumentException("Invalid Submission ID.");
+
+            SubmissionResultDL.AddResult(result);
+        }
+
+        public static SubmissionResult ProcessAndGradeSubmission(int studentID, int problemID, string query, string databaseName)
+        {
+            // 1. Create a new submission record with "Pending" status
+            int pendingStatusID = SubmissionStatusDL.GetPending();
+            Submission submission = new Submission(studentID, problemID, query, pendingStatusID);
+
+            // This will generate a new SubmissionID and save the record in the database with "Pending" status
+            CreateSubmission(submission);
+
+            // 2. Fetch problem constraints: Allowed Tables and Master Query
+            List<ProblemTable> allowedTables = ProblemBL.GetSelectedTablesByProblemID(problemID);
+            List<string> allowedTableNames = allowedTables.Select(t => t.TableName).ToList();
+            string masterQuery = ProblemBL.GetProblemByID(problemID).MasterQuery;
+
+            // 3. Initialize a result object to capture the grading outcome and any error messages
+            SubmissionResult submissionResult = new SubmissionResult
             {
-                mismatchReason = $"Row count mismatch. Expected: {expected.Rows.Count}, Got: {student.Rows.Count}.";
-                return false;
+                SubmissionID = submission.SubmissionID,
+                IsPassed = false,
+                ErrorMessage = ""
+            };
+
+            DataTable studentOutput = null;
+            DataTable expectedOutput = null;
+
+            // 4. Try Running Student Query with strict validation and error handling
+            try
+            {
+                studentOutput = QueryRunnerBL.ExecuteQuery(databaseName, query, allowedTableNames);
+            }
+            catch (ArgumentException validationEx) 
+            {
+                // Handle validation errors such as disallowed tables, syntax issues, or other query constraints
+                UpdateSubmissionStatus(submission.SubmissionID, SubmissionStatusDL.GetWrongAnswer());
+                submissionResult.ErrorMessage = validationEx.Message;
+                AddSubmissionResult(submissionResult);
+                throw; 
+            }
+            catch (Exception ex) 
+            {
+                // Handle compilation or server-level database engine syntax runtime crashes
+                UpdateSubmissionStatus(submission.SubmissionID, SubmissionStatusDL.GetRunTimeError());
+                submissionResult.ErrorMessage = "Runtime error during query execution: " + ex.Message;
+                AddSubmissionResult(submissionResult);
+                return submissionResult;
             }
 
-            if (expected.Columns.Count != student.Columns.Count)
+            // 5. Try Running Master Query
+            try
+            {                
+                expectedOutput = QueryRunnerBL.ExecuteQuery(databaseName, masterQuery, allowedTableNames);
+            }
+            catch (Exception ex)
             {
-                mismatchReason = $"Column count mismatch. Expected: {expected.Columns.Count}, Got: {student.Columns.Count}.";
-                return false;
+                // System failure running the master query. Rollback status to pending for admin oversight
+                UpdateSubmissionStatus(submission.SubmissionID, SubmissionStatusDL.GetPending());
+                submissionResult.ErrorMessage = "System error while fetching expected output: " + ex.Message;
+                AddSubmissionResult(submissionResult);
+                return submissionResult;
             }
 
-            for (int i = 0; i < expected.Rows.Count; i++)
+            // 6. Compare Table Contents 
+            string mismatchReason;
+            bool isCorrect = QueryRunnerBL.CompareTables(expectedOutput, studentOutput, out mismatchReason);
+
+            if (isCorrect)
             {
-                for (int j = 0; j < expected.Columns.Count; j++)
-                {
-                    if (expected.Rows[i][j]?.ToString() != student.Rows[i][j]?.ToString())
-                    {
-                        mismatchReason = $"Data mismatch at Row {i + 1}, Column '{expected.Columns[j].ColumnName}'.";
-                        return false;
-                    }
-                }
+                UpdateSubmissionStatus(submission.SubmissionID, SubmissionStatusDL.GetAccepted());
+                submissionResult.IsPassed = true;
+                submissionResult.ErrorMessage = "";
+            }
+            else
+            {
+                UpdateSubmissionStatus(submission.SubmissionID, SubmissionStatusDL.GetWrongAnswer());
+                submissionResult.IsPassed = false;
+                submissionResult.ErrorMessage = mismatchReason;
             }
 
-            return true;
+            // 7. Record the grading result in the database
+            AddSubmissionResult(submissionResult);
+            return submissionResult;
         }
 
         // Submission Panel in Admin Dashboard

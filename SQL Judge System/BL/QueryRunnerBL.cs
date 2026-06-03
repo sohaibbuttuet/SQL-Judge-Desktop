@@ -1,4 +1,5 @@
-﻿using SQL_Judge_System.DL;
+﻿using SQL_Judge_System.BL;
+using SQL_Judge_System.DL;
 using SQL_Judge_System.Models;
 using System;
 using System.Collections.Generic;
@@ -87,6 +88,38 @@ namespace SQL_Judge_System.BL
                     throw new ArgumentException($"Access to table '{forbiddenTable}' is restricted for this problem.");
                 }
             }
+        }
+
+        // This method compares the expected output DataTable with the student's output DataTable to determine if they match. It checks for row and column count, and then compares each cell's value. If any mismatch is found, it provides a reason for the mismatch.
+        public static bool CompareTables(DataTable expected, DataTable student, out string mismatchReason)
+        {
+            mismatchReason = "";
+
+            if (expected.Rows.Count != student.Rows.Count)
+            {
+                mismatchReason = $"Row count mismatch. Expected: {expected.Rows.Count}, Got: {student.Rows.Count}.";
+                return false;
+            }
+
+            if (expected.Columns.Count != student.Columns.Count)
+            {
+                mismatchReason = $"Column count mismatch. Expected: {expected.Columns.Count}, Got: {student.Columns.Count}.";
+                return false;
+            }
+
+            for (int i = 0; i < expected.Rows.Count; i++)
+            {
+                for (int j = 0; j < expected.Columns.Count; j++)
+                {
+                    if (expected.Rows[i][j]?.ToString() != student.Rows[i][j]?.ToString())
+                    {
+                        mismatchReason = $"Data mismatch at Row {i + 1}, Column '{expected.Columns[j].ColumnName}'.";
+                        return false;
+                    }
+                }
+            }
+
+            return true;
         }
     }
 }

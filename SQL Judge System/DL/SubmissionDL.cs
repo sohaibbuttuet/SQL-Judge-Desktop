@@ -18,22 +18,22 @@ namespace SQL_Judge_System.DL
                     "VALUES (@StudentID, @ProblemID, @QueryText); " +
                     "SELECT LAST_INSERT_ID();";
 
-            MySqlParameter[] parameters = {
-            new MySqlParameter("@StudentID", submission.StudentID),
-            new MySqlParameter("@ProblemID", submission.ProblemID),
-            new MySqlParameter("@QueryText", submission.QueryText)
+            MySqlParameter[] parameters =
+            {
+                new MySqlParameter("@StudentID", submission.StudentID),
+                new MySqlParameter("@ProblemID", submission.ProblemID),
+                new MySqlParameter("@QueryText", submission.QueryText)
             };
-
 
             return DatabaseHelper.Instance.ExecuteScalar(query, parameters);
         }
-        public static void UpdateSubmissionStatus(Submission submission)
+        public static void UpdateSubmissionStatus(int submissionID, int statusID)
         {
             string query = "UPDATE Submissions SET StatusID = @StatusID WHERE SubmissionID = @SubmissionID;";
 
             MySqlParameter[] parameters = {
-                new MySqlParameter("@StatusID", submission.StatusID),
-                new MySqlParameter("@SubmissionID", submission.SubmissionID)
+                new MySqlParameter("@StatusID", statusID),
+                new MySqlParameter("@SubmissionID", submissionID)
             };
 
             DatabaseHelper.Instance.Update(query, parameters);
