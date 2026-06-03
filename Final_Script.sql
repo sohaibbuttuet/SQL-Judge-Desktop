@@ -316,27 +316,11 @@ DELIMITER $$
 CREATE PROCEDURE db_schema(IN p_databaseName VARCHAR(30))
 BEGIN
     SELECT TABLE_NAME,
-           COLUMN_NAME,
+		   COLUMN_NAME,
            DATA_TYPE
     FROM INFORMATION_SCHEMA.COLUMNS
-    WHERE TABLE_SCHEMA = p_databaseName
-    ORDER BY TABLE_NAME, ORDINAL_POSITION;
+    WHERE TABLE_SCHEMA = p_databaseName;
 END $$
-
-DELIMITER ;
-
--- Extract Column names and their datatypes by database Name and Table Name
-DELIMITER $$
-
-CREATE PROCEDURE `db_table_columns` (IN database_name VARCHAR(30), IN table_name VARCHAR(30))
-BEGIN
- SELECT COLUMN_NAME, 
-           DATA_TYPE 
-    FROM INFORMATION_SCHEMA.COLUMNS 
-    WHERE TABLE_SCHEMA = database_name
-      AND TABLE_NAME = table_name
-    ORDER BY ORDINAL_POSITION;
-END$$
 
 DELIMITER ;
 

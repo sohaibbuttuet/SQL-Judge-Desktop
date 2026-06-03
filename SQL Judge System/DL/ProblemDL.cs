@@ -156,8 +156,6 @@ namespace SQL_Judge_System.DL
         }
 
         // Student Panel Problems
-
-        // only those problems will show that have test cases
         public static DataTable AllProblemsList()
         {
             string query = "SELECT ProblemID, Title, DifficultyName FROM vw_problems Order BY ProblemID;";

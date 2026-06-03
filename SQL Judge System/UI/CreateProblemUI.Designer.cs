@@ -357,7 +357,7 @@
             this.pnlTreeContainer.Controls.Add(this.tvSchema);
             this.pnlTreeContainer.Location = new System.Drawing.Point(14, 38);
             this.pnlTreeContainer.Name = "pnlTreeContainer";
-            this.pnlTreeContainer.Size = new System.Drawing.Size(293, 382);
+            this.pnlTreeContainer.Size = new System.Drawing.Size(293, 466);
             this.pnlTreeContainer.TabIndex = 2;
             // 
             // tvSchema
@@ -373,8 +373,9 @@
             this.tvSchema.ItemHeight = 24;
             this.tvSchema.Location = new System.Drawing.Point(0, 0);
             this.tvSchema.Name = "tvSchema";
-            this.tvSchema.Size = new System.Drawing.Size(293, 382);
+            this.tvSchema.Size = new System.Drawing.Size(293, 466);
             this.tvSchema.TabIndex = 0;
+            this.tvSchema.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvSchema_NodeMouseDoubleClick);
             // 
             // pnlHeader
             // 

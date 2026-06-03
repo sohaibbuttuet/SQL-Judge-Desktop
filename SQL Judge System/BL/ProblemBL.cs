@@ -166,14 +166,14 @@ namespace SQL_Judge_System.BL
                 }
             }
         }
-        public static void DeleteSchemaByProblemID(int problemID)
+        public static void DeleteCheckedTables(int problemID)
         {
             if (problemID <= 0)
                 throw new ArgumentException("Invalid Problem ID.");
 
             ProblemTablesDL.DeleteAllByProblemID(problemID);
         }
-        public static List<ProblemTable> GetSchemaByProblemID(int problemID)
+        public static List<ProblemTable> GetSelectedTablesByProblemID(int problemID)
         {
             if (problemID <= 0)
                 throw new ArgumentException("Invalid Problem ID.");

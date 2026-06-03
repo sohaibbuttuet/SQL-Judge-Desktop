@@ -23,48 +23,24 @@ namespace SQL_Judge_System.DL
 
             return DatabaseHelper.Instance.GetDataTable(query, parameters);
         }
-        public static List<string> GetColumnsOfTable(string databaseName, string tableName)
+        public static List<string> GetAllTables(string databaseName)
         {
-            string query = @"CALL db_table_columns(@DatabaseName, @TableName);";
+            string query = @"CALL db_tables(@DatabaseName);"; // Call the stored procedure 
 
-            MySqlParameter[] parameters =
+            MySqlParameter[] parameters = 
             {
-                new MySqlParameter("@DatabaseName", databaseName),
-                new MySqlParameter("@TableName", tableName)
+                new MySqlParameter("@DatabaseName", databaseName)
             };
 
             DataTable result = DatabaseHelper.Instance.GetDataTable(query, parameters);
 
-            List<string> columns = new List<string>();
+            List<string> tables = new List<string>();
             foreach (DataRow row in result.Rows)
             {
-                columns.Add(row["COLUMN_NAME"].ToString() + "(" + row["DATA_TYPE"].ToString() + ")");
+                tables.Add(row["TABLE_NAME"].ToString());
             }
 
-            return columns;
-        }
-        public static bool ColumnExists(string tableName, string columnName)
-        {
-            string query = @"SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = @TableName AND COLUMN_NAME = @ColumnName;";
-
-            MySqlParameter[] parameters =
-            {
-                  new MySqlParameter("@TableName", tableName),
-                  new MySqlParameter("@ColumnName", columnName)
-            };
-
-            return DatabaseHelper.Instance.ExecuteScalar(query, parameters) > 0;
-        }
-        public static bool TableExists(string tableName)
-        {
-            string query = "SELECT COUNT(*) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = @TableName;";
-
-            MySqlParameter[] parameters = 
-            {
-                new MySqlParameter("@TableName", tableName)
-            };
-
-            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query, parameters)) > 0;
+            return tables;
         }
     }
 }

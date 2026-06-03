@@ -22,8 +22,7 @@ namespace SQL_Judge_System.DL
                 $"user=root;" +
                 $"database={databaseName};" +
                 $"password=SohaibButt@16122006;" +
-                $"SslMode=Required;" +
-                $"Pooling=False;";
+                $"SslMode=Required;";
 
             return new MySqlConnection(connectionString);
         }

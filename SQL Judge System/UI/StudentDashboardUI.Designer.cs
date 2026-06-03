@@ -14,14 +14,14 @@ namespace SQL_Judge_System.UI
 
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlSidebar = new System.Windows.Forms.Panel();
             this.btnReport = new FontAwesome.Sharp.IconButton();
             this.btn_contest = new FontAwesome.Sharp.IconButton();
@@ -34,9 +34,6 @@ namespace SQL_Judge_System.UI
             this.btn_settings = new FontAwesome.Sharp.IconButton();
             this.btn_Logout = new FontAwesome.Sharp.IconButton();
             this.pnlHome = new System.Windows.Forms.Panel();
-            this.pnlContentArea = new System.Windows.Forms.Panel();
-            this.dgvLeaderboard = new System.Windows.Forms.DataGridView();
-            this.lblGridTitle = new System.Windows.Forms.Label();
             this.pnlStatsContainer = new System.Windows.Forms.Panel();
             this.tlpnlStudentDashboard = new System.Windows.Forms.TableLayoutPanel();
             this.pnlSkillLevel = new System.Windows.Forms.Panel();
@@ -85,14 +82,13 @@ namespace SQL_Judge_System.UI
             this.lblWelcome = new System.Windows.Forms.Label();
             this.lblOnlineStatus = new System.Windows.Forms.Label();
             this.pnlHeader = new System.Windows.Forms.Panel();
-            this.tvSchema = new System.Windows.Forms.TreeView();
-            this.lblDifficulty = new System.Windows.Forms.Label();
+            this.pnlContentArea = new System.Windows.Forms.Panel();
+            this.dgvLeaderboard = new System.Windows.Forms.DataGridView();
+            this.lblGridTitle = new System.Windows.Forms.Label();
             this.pnlSidebar.SuspendLayout();
             this.pnlSidebarLogo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             this.pnlHome.SuspendLayout();
-            this.pnlContentArea.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvLeaderboard)).BeginInit();
             this.pnlStatsContainer.SuspendLayout();
             this.tlpnlStudentDashboard.SuspendLayout();
             this.pnlSkillLevel.SuspendLayout();
@@ -119,6 +115,8 @@ namespace SQL_Judge_System.UI
             ((System.ComponentModel.ISupportInitialize)(this.dgvOutput)).BeginInit();
             this.pnlOutputHeader.SuspendLayout();
             this.pnlHeader.SuspendLayout();
+            this.pnlContentArea.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvLeaderboard)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlSidebar
@@ -335,75 +333,10 @@ namespace SQL_Judge_System.UI
             // 
             this.pnlHome.Controls.Add(this.pnlContentArea);
             this.pnlHome.Controls.Add(this.pnlStatsContainer);
-            this.pnlHome.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlHome.Location = new System.Drawing.Point(0, 0);
+            this.pnlHome.Location = new System.Drawing.Point(222, 57);
             this.pnlHome.Name = "pnlHome";
-            this.pnlHome.Size = new System.Drawing.Size(1184, 681);
+            this.pnlHome.Size = new System.Drawing.Size(964, 625);
             this.pnlHome.TabIndex = 12;
-            // 
-            // pnlContentArea
-            // 
-            this.pnlContentArea.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(31)))), ((int)(((byte)(58)))));
-            this.pnlContentArea.Controls.Add(this.dgvLeaderboard);
-            this.pnlContentArea.Controls.Add(this.lblGridTitle);
-            this.pnlContentArea.Location = new System.Drawing.Point(0, 165);
-            this.pnlContentArea.Name = "pnlContentArea";
-            this.pnlContentArea.Padding = new System.Windows.Forms.Padding(14, 10, 14, 14);
-            this.pnlContentArea.Size = new System.Drawing.Size(1001, 479);
-            this.pnlContentArea.TabIndex = 5;
-            // 
-            // dgvLeaderboard
-            // 
-            this.dgvLeaderboard.AllowUserToAddRows = false;
-            this.dgvLeaderboard.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(35)))), ((int)(((byte)(60)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9.5F);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(201)))), ((int)(((byte)(224)))));
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(40)))), ((int)(((byte)(69)))));
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
-            this.dgvLeaderboard.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvLeaderboard.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
-            this.dgvLeaderboard.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 8.5F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
-            this.dgvLeaderboard.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvLeaderboard.ColumnHeadersHeight = 38;
-            this.dgvLeaderboard.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9.5F);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(201)))), ((int)(((byte)(224)))));
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(40)))), ((int)(((byte)(69)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvLeaderboard.DefaultCellStyle = dataGridViewCellStyle3;
-            this.dgvLeaderboard.EnableHeadersVisualStyles = false;
-            this.dgvLeaderboard.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(52)))), ((int)(((byte)(88)))));
-            this.dgvLeaderboard.Location = new System.Drawing.Point(0, 47);
-            this.dgvLeaderboard.Name = "dgvLeaderboard";
-            this.dgvLeaderboard.ReadOnly = true;
-            this.dgvLeaderboard.RowHeadersVisible = false;
-            this.dgvLeaderboard.RowTemplate.Height = 36;
-            this.dgvLeaderboard.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvLeaderboard.Size = new System.Drawing.Size(964, 413);
-            this.dgvLeaderboard.TabIndex = 1;
-            // 
-            // lblGridTitle
-            // 
-            this.lblGridTitle.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
-            this.lblGridTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
-            this.lblGridTitle.Location = new System.Drawing.Point(0, 10);
-            this.lblGridTitle.Name = "lblGridTitle";
-            this.lblGridTitle.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
-            this.lblGridTitle.Size = new System.Drawing.Size(961, 31);
-            this.lblGridTitle.TabIndex = 0;
-            this.lblGridTitle.Text = "Global Leaderboard";
-            this.lblGridTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // pnlStatsContainer
             // 
@@ -413,7 +346,7 @@ namespace SQL_Judge_System.UI
             this.pnlStatsContainer.Location = new System.Drawing.Point(0, 0);
             this.pnlStatsContainer.Name = "pnlStatsContainer";
             this.pnlStatsContainer.Padding = new System.Windows.Forms.Padding(12, 12, 12, 0);
-            this.pnlStatsContainer.Size = new System.Drawing.Size(1184, 165);
+            this.pnlStatsContainer.Size = new System.Drawing.Size(964, 167);
             this.pnlStatsContainer.TabIndex = 4;
             // 
             // tlpnlStudentDashboard
@@ -433,7 +366,7 @@ namespace SQL_Judge_System.UI
             this.tlpnlStudentDashboard.Name = "tlpnlStudentDashboard";
             this.tlpnlStudentDashboard.RowCount = 1;
             this.tlpnlStudentDashboard.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpnlStudentDashboard.Size = new System.Drawing.Size(1160, 153);
+            this.tlpnlStudentDashboard.Size = new System.Drawing.Size(940, 155);
             this.tlpnlStudentDashboard.TabIndex = 0;
             // 
             // pnlSkillLevel
@@ -447,7 +380,7 @@ namespace SQL_Judge_System.UI
             this.pnlSkillLevel.Margin = new System.Windows.Forms.Padding(6);
             this.pnlSkillLevel.Name = "pnlSkillLevel";
             this.pnlSkillLevel.Padding = new System.Windows.Forms.Padding(8);
-            this.pnlSkillLevel.Size = new System.Drawing.Size(278, 141);
+            this.pnlSkillLevel.Size = new System.Drawing.Size(223, 143);
             this.pnlSkillLevel.TabIndex = 0;
             // 
             // lblSkillValue
@@ -457,7 +390,7 @@ namespace SQL_Judge_System.UI
             this.lblSkillValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(158)))), ((int)(((byte)(66)))));
             this.lblSkillValue.Location = new System.Drawing.Point(8, 30);
             this.lblSkillValue.Name = "lblSkillValue";
-            this.lblSkillValue.Size = new System.Drawing.Size(262, 83);
+            this.lblSkillValue.Size = new System.Drawing.Size(207, 85);
             this.lblSkillValue.TabIndex = 1;
             this.lblSkillValue.Text = "—";
             this.lblSkillValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -469,7 +402,7 @@ namespace SQL_Judge_System.UI
             this.lblSkillLevel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
             this.lblSkillLevel.Location = new System.Drawing.Point(8, 8);
             this.lblSkillLevel.Name = "lblSkillLevel";
-            this.lblSkillLevel.Size = new System.Drawing.Size(262, 22);
+            this.lblSkillLevel.Size = new System.Drawing.Size(207, 22);
             this.lblSkillLevel.TabIndex = 0;
             this.lblSkillLevel.Text = "SKILL LEVEL";
             this.lblSkillLevel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -479,9 +412,9 @@ namespace SQL_Judge_System.UI
             this.lblSkillBadge.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.lblSkillBadge.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblSkillBadge.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(158)))), ((int)(((byte)(66)))));
-            this.lblSkillBadge.Location = new System.Drawing.Point(8, 113);
+            this.lblSkillBadge.Location = new System.Drawing.Point(8, 115);
             this.lblSkillBadge.Name = "lblSkillBadge";
-            this.lblSkillBadge.Size = new System.Drawing.Size(262, 20);
+            this.lblSkillBadge.Size = new System.Drawing.Size(207, 20);
             this.lblSkillBadge.TabIndex = 2;
             this.lblSkillBadge.Text = "Getting Started";
             this.lblSkillBadge.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -493,11 +426,11 @@ namespace SQL_Judge_System.UI
             this.pnlRankCard.Controls.Add(this.lblRankTitle);
             this.pnlRankCard.Controls.Add(this.lblRankBadge);
             this.pnlRankCard.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlRankCard.Location = new System.Drawing.Point(296, 6);
+            this.pnlRankCard.Location = new System.Drawing.Point(241, 6);
             this.pnlRankCard.Margin = new System.Windows.Forms.Padding(6);
             this.pnlRankCard.Name = "pnlRankCard";
             this.pnlRankCard.Padding = new System.Windows.Forms.Padding(8);
-            this.pnlRankCard.Size = new System.Drawing.Size(278, 141);
+            this.pnlRankCard.Size = new System.Drawing.Size(223, 143);
             this.pnlRankCard.TabIndex = 1;
             // 
             // lblRankValue
@@ -507,7 +440,7 @@ namespace SQL_Judge_System.UI
             this.lblRankValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(111)))), ((int)(((byte)(255)))));
             this.lblRankValue.Location = new System.Drawing.Point(8, 30);
             this.lblRankValue.Name = "lblRankValue";
-            this.lblRankValue.Size = new System.Drawing.Size(262, 83);
+            this.lblRankValue.Size = new System.Drawing.Size(207, 85);
             this.lblRankValue.TabIndex = 1;
             this.lblRankValue.Text = "—";
             this.lblRankValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -519,7 +452,7 @@ namespace SQL_Judge_System.UI
             this.lblRankTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
             this.lblRankTitle.Location = new System.Drawing.Point(8, 8);
             this.lblRankTitle.Name = "lblRankTitle";
-            this.lblRankTitle.Size = new System.Drawing.Size(262, 22);
+            this.lblRankTitle.Size = new System.Drawing.Size(207, 22);
             this.lblRankTitle.TabIndex = 0;
             this.lblRankTitle.Text = "RANK";
             this.lblRankTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -529,9 +462,9 @@ namespace SQL_Judge_System.UI
             this.lblRankBadge.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.lblRankBadge.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblRankBadge.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(111)))), ((int)(((byte)(255)))));
-            this.lblRankBadge.Location = new System.Drawing.Point(8, 113);
+            this.lblRankBadge.Location = new System.Drawing.Point(8, 115);
             this.lblRankBadge.Name = "lblRankBadge";
-            this.lblRankBadge.Size = new System.Drawing.Size(262, 20);
+            this.lblRankBadge.Size = new System.Drawing.Size(207, 20);
             this.lblRankBadge.TabIndex = 2;
             this.lblRankBadge.Text = "Global";
             this.lblRankBadge.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -543,11 +476,11 @@ namespace SQL_Judge_System.UI
             this.pnlSolvedCard.Controls.Add(this.lblSolvedTitle);
             this.pnlSolvedCard.Controls.Add(this.lblSolvedBadge);
             this.pnlSolvedCard.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlSolvedCard.Location = new System.Drawing.Point(586, 6);
+            this.pnlSolvedCard.Location = new System.Drawing.Point(476, 6);
             this.pnlSolvedCard.Margin = new System.Windows.Forms.Padding(6);
             this.pnlSolvedCard.Name = "pnlSolvedCard";
             this.pnlSolvedCard.Padding = new System.Windows.Forms.Padding(8);
-            this.pnlSolvedCard.Size = new System.Drawing.Size(278, 141);
+            this.pnlSolvedCard.Size = new System.Drawing.Size(223, 143);
             this.pnlSolvedCard.TabIndex = 2;
             // 
             // lblSolvedValue
@@ -557,7 +490,7 @@ namespace SQL_Judge_System.UI
             this.lblSolvedValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(182)))), ((int)(((byte)(255)))));
             this.lblSolvedValue.Location = new System.Drawing.Point(8, 30);
             this.lblSolvedValue.Name = "lblSolvedValue";
-            this.lblSolvedValue.Size = new System.Drawing.Size(262, 83);
+            this.lblSolvedValue.Size = new System.Drawing.Size(207, 85);
             this.lblSolvedValue.TabIndex = 1;
             this.lblSolvedValue.Text = "—";
             this.lblSolvedValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -569,7 +502,7 @@ namespace SQL_Judge_System.UI
             this.lblSolvedTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
             this.lblSolvedTitle.Location = new System.Drawing.Point(8, 8);
             this.lblSolvedTitle.Name = "lblSolvedTitle";
-            this.lblSolvedTitle.Size = new System.Drawing.Size(262, 22);
+            this.lblSolvedTitle.Size = new System.Drawing.Size(207, 22);
             this.lblSolvedTitle.TabIndex = 0;
             this.lblSolvedTitle.Text = "PROBLEMS SOLVED";
             this.lblSolvedTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -579,9 +512,9 @@ namespace SQL_Judge_System.UI
             this.lblSolvedBadge.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.lblSolvedBadge.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblSolvedBadge.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(182)))), ((int)(((byte)(255)))));
-            this.lblSolvedBadge.Location = new System.Drawing.Point(8, 113);
+            this.lblSolvedBadge.Location = new System.Drawing.Point(8, 115);
             this.lblSolvedBadge.Name = "lblSolvedBadge";
-            this.lblSolvedBadge.Size = new System.Drawing.Size(262, 20);
+            this.lblSolvedBadge.Size = new System.Drawing.Size(207, 20);
             this.lblSolvedBadge.TabIndex = 2;
             this.lblSolvedBadge.Text = "All Time";
             this.lblSolvedBadge.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -593,11 +526,11 @@ namespace SQL_Judge_System.UI
             this.pnlScoreCard.Controls.Add(this.lblScoreTitle);
             this.pnlScoreCard.Controls.Add(this.lblScoreBadge);
             this.pnlScoreCard.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlScoreCard.Location = new System.Drawing.Point(876, 6);
+            this.pnlScoreCard.Location = new System.Drawing.Point(711, 6);
             this.pnlScoreCard.Margin = new System.Windows.Forms.Padding(6);
             this.pnlScoreCard.Name = "pnlScoreCard";
             this.pnlScoreCard.Padding = new System.Windows.Forms.Padding(8);
-            this.pnlScoreCard.Size = new System.Drawing.Size(278, 141);
+            this.pnlScoreCard.Size = new System.Drawing.Size(223, 143);
             this.pnlScoreCard.TabIndex = 3;
             // 
             // lblScoreValue
@@ -607,7 +540,7 @@ namespace SQL_Judge_System.UI
             this.lblScoreValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(207)))), ((int)(((byte)(142)))));
             this.lblScoreValue.Location = new System.Drawing.Point(8, 30);
             this.lblScoreValue.Name = "lblScoreValue";
-            this.lblScoreValue.Size = new System.Drawing.Size(262, 83);
+            this.lblScoreValue.Size = new System.Drawing.Size(207, 85);
             this.lblScoreValue.TabIndex = 1;
             this.lblScoreValue.Text = "—";
             this.lblScoreValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -619,7 +552,7 @@ namespace SQL_Judge_System.UI
             this.lblScoreTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
             this.lblScoreTitle.Location = new System.Drawing.Point(8, 8);
             this.lblScoreTitle.Name = "lblScoreTitle";
-            this.lblScoreTitle.Size = new System.Drawing.Size(262, 22);
+            this.lblScoreTitle.Size = new System.Drawing.Size(207, 22);
             this.lblScoreTitle.TabIndex = 0;
             this.lblScoreTitle.Text = "TOTAL SCORE";
             this.lblScoreTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -629,9 +562,9 @@ namespace SQL_Judge_System.UI
             this.lblScoreBadge.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.lblScoreBadge.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblScoreBadge.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(207)))), ((int)(((byte)(142)))));
-            this.lblScoreBadge.Location = new System.Drawing.Point(8, 113);
+            this.lblScoreBadge.Location = new System.Drawing.Point(8, 115);
             this.lblScoreBadge.Name = "lblScoreBadge";
-            this.lblScoreBadge.Size = new System.Drawing.Size(262, 20);
+            this.lblScoreBadge.Size = new System.Drawing.Size(207, 20);
             this.lblScoreBadge.TabIndex = 2;
             this.lblScoreBadge.Text = "Points";
             this.lblScoreBadge.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -669,8 +602,6 @@ namespace SQL_Judge_System.UI
             // pnlProblemList
             // 
             this.pnlProblemList.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
-            this.pnlProblemList.Controls.Add(this.lblDifficulty);
-            this.pnlProblemList.Controls.Add(this.tvSchema);
             this.pnlProblemList.Controls.Add(this.dgvProblems);
             this.pnlProblemList.Controls.Add(this.pnlListHeader);
             this.pnlProblemList.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -712,7 +643,7 @@ namespace SQL_Judge_System.UI
             dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvProblems.DefaultCellStyle = dataGridViewCellStyle6;
-            this.dgvProblems.Dock = System.Windows.Forms.DockStyle.Top;
+            this.dgvProblems.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvProblems.EnableHeadersVisualStyles = false;
             this.dgvProblems.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(52)))), ((int)(((byte)(88)))));
             this.dgvProblems.Location = new System.Drawing.Point(0, 64);
@@ -722,7 +653,7 @@ namespace SQL_Judge_System.UI
             this.dgvProblems.RowHeadersVisible = false;
             this.dgvProblems.RowTemplate.Height = 34;
             this.dgvProblems.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvProblems.Size = new System.Drawing.Size(267, 262);
+            this.dgvProblems.Size = new System.Drawing.Size(267, 541);
             this.dgvProblems.TabIndex = 1;
             this.dgvProblems.SelectionChanged += new System.EventHandler(this.dgvProblems_SelectionChanged);
             // 
@@ -1128,27 +1059,71 @@ namespace SQL_Judge_System.UI
             this.pnlHeader.Size = new System.Drawing.Size(964, 56);
             this.pnlHeader.TabIndex = 1;
             // 
-            // tvSchema
+            // pnlContentArea
             // 
-            this.tvSchema.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
-            this.tvSchema.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tvSchema.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tvSchema.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(243)))));
-            this.tvSchema.Location = new System.Drawing.Point(0, 364);
-            this.tvSchema.Name = "tvSchema";
-            this.tvSchema.Size = new System.Drawing.Size(267, 241);
-            this.tvSchema.TabIndex = 2;
+            this.pnlContentArea.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(31)))), ((int)(((byte)(58)))));
+            this.pnlContentArea.Controls.Add(this.dgvLeaderboard);
+            this.pnlContentArea.Controls.Add(this.lblGridTitle);
+            this.pnlContentArea.Location = new System.Drawing.Point(0, 169);
+            this.pnlContentArea.Name = "pnlContentArea";
+            this.pnlContentArea.Padding = new System.Windows.Forms.Padding(14, 10, 14, 14);
+            this.pnlContentArea.Size = new System.Drawing.Size(961, 456);
+            this.pnlContentArea.TabIndex = 6;
             // 
-            // lblDifficulty
+            // dgvLeaderboard
             // 
-            this.lblDifficulty.AutoSize = true;
-            this.lblDifficulty.Font = new System.Drawing.Font("Segoe UI", 8.5F, System.Drawing.FontStyle.Bold);
-            this.lblDifficulty.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(142)))), ((int)(((byte)(163)))));
-            this.lblDifficulty.Location = new System.Drawing.Point(3, 341);
-            this.lblDifficulty.Name = "lblDifficulty";
-            this.lblDifficulty.Size = new System.Drawing.Size(72, 15);
-            this.lblDifficulty.TabIndex = 3;
-            this.lblDifficulty.Text = "▸  SCHEMA";
+            this.dgvLeaderboard.AllowUserToAddRows = false;
+            this.dgvLeaderboard.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(35)))), ((int)(((byte)(60)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(201)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(40)))), ((int)(((byte)(69)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
+            this.dgvLeaderboard.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvLeaderboard.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
+            this.dgvLeaderboard.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 8.5F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
+            this.dgvLeaderboard.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvLeaderboard.ColumnHeadersHeight = 38;
+            this.dgvLeaderboard.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(201)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(40)))), ((int)(((byte)(69)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvLeaderboard.DefaultCellStyle = dataGridViewCellStyle3;
+            this.dgvLeaderboard.EnableHeadersVisualStyles = false;
+            this.dgvLeaderboard.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(52)))), ((int)(((byte)(88)))));
+            this.dgvLeaderboard.Location = new System.Drawing.Point(-2, 47);
+            this.dgvLeaderboard.MultiSelect = false;
+            this.dgvLeaderboard.Name = "dgvLeaderboard";
+            this.dgvLeaderboard.ReadOnly = true;
+            this.dgvLeaderboard.RowHeadersVisible = false;
+            this.dgvLeaderboard.RowTemplate.Height = 36;
+            this.dgvLeaderboard.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvLeaderboard.Size = new System.Drawing.Size(964, 409);
+            this.dgvLeaderboard.TabIndex = 1;
+            // 
+            // lblGridTitle
+            // 
+            this.lblGridTitle.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblGridTitle.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
+            this.lblGridTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
+            this.lblGridTitle.Location = new System.Drawing.Point(14, 10);
+            this.lblGridTitle.Name = "lblGridTitle";
+            this.lblGridTitle.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
+            this.lblGridTitle.Size = new System.Drawing.Size(933, 31);
+            this.lblGridTitle.TabIndex = 0;
+            this.lblGridTitle.Text = "Global Leaderboard";
+            this.lblGridTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // StudentDashboardUI
             // 
@@ -1156,10 +1131,10 @@ namespace SQL_Judge_System.UI
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(31)))), ((int)(((byte)(58)))));
             this.ClientSize = new System.Drawing.Size(1184, 681);
+            this.Controls.Add(this.pnlHome);
             this.Controls.Add(this.pnlSolveProblem);
             this.Controls.Add(this.pnlHeader);
             this.Controls.Add(this.pnlSidebar);
-            this.Controls.Add(this.pnlHome);
             this.Name = "StudentDashboardUI";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Student SQL Judge Workspace";
@@ -1169,8 +1144,6 @@ namespace SQL_Judge_System.UI
             this.pnlSidebarLogo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
             this.pnlHome.ResumeLayout(false);
-            this.pnlContentArea.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvLeaderboard)).EndInit();
             this.pnlStatsContainer.ResumeLayout(false);
             this.tlpnlStudentDashboard.ResumeLayout(false);
             this.pnlSkillLevel.ResumeLayout(false);
@@ -1183,7 +1156,6 @@ namespace SQL_Judge_System.UI
             ((System.ComponentModel.ISupportInitialize)(this.splitMain)).EndInit();
             this.splitMain.ResumeLayout(false);
             this.pnlProblemList.ResumeLayout(false);
-            this.pnlProblemList.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProblems)).EndInit();
             this.pnlListHeader.ResumeLayout(false);
             this.pnlListHeader.PerformLayout();
@@ -1202,6 +1174,8 @@ namespace SQL_Judge_System.UI
             this.pnlOutputHeader.ResumeLayout(false);
             this.pnlHeader.ResumeLayout(false);
             this.pnlHeader.PerformLayout();
+            this.pnlContentArea.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvLeaderboard)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1219,9 +1193,6 @@ namespace SQL_Judge_System.UI
         private FontAwesome.Sharp.IconButton btn_Logout;
         private System.Windows.Forms.PictureBox picLogo;
         private System.Windows.Forms.Panel pnlHome;
-        private System.Windows.Forms.Panel pnlContentArea;
-        private System.Windows.Forms.DataGridView dgvLeaderboard;
-        private System.Windows.Forms.Label lblGridTitle;
         private System.Windows.Forms.Panel pnlStatsContainer;
         private System.Windows.Forms.TableLayoutPanel tlpnlStudentDashboard;
         private System.Windows.Forms.Panel pnlSkillLevel;
@@ -1270,7 +1241,8 @@ namespace SQL_Judge_System.UI
         private Label lblWelcome;
         private Label lblOnlineStatus;
         private Panel pnlHeader;
-        private TreeView tvSchema;
-        private Label lblDifficulty;
+        private Panel pnlContentArea;
+        private DataGridView dgvLeaderboard;
+        private Label lblGridTitle;
     }
 }

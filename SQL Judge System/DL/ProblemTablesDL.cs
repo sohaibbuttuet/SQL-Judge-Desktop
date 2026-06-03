@@ -50,7 +50,7 @@ namespace SQL_Judge_System.DL
             {
                 list.Add(new ProblemTable
                 {
-                    TableID = Convert.ToInt32(row["TableID"]),
+                    TableID = Convert.ToInt32(row["ProblemTableID"]),
                     ProblemID = Convert.ToInt32(row["ProblemID"]),
                     TableName = row["TableName"].ToString()
                 });
