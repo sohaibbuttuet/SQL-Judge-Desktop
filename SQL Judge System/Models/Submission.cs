@@ -12,6 +12,7 @@ namespace SQL_Judge_System.Models
         private int submissionID;
         private int studentID;
         private int problemID;
+        private int? contestID; // optional
         private string queryText;
         private int statusID;
         private int attemptNumber;
@@ -49,6 +50,17 @@ namespace SQL_Judge_System.Models
                     throw new Exception("Invalid Problem ID.");
 
                 problemID = value;
+            }
+        }
+        public int? ContestID
+        {
+            get { return contestID; }
+            set
+            {
+                // Only validate if the incoming value is NOT null
+                if (value.HasValue && value.Value <= 0)
+                    throw new Exception("Invalid Contest ID. It must be a positive number.");
+                contestID = value;
             }
         }
         public string QueryText
@@ -109,20 +121,24 @@ namespace SQL_Judge_System.Models
             AttemptNumber = 1;
             TotalScore = 0;
         }
-        public Submission(int studentID, int problemID, string queryText, int statusID)
+        public Submission(int studentID, int problemID, int? contestID, string queryText, int statusID)
         {
             StudentID = studentID;
             ProblemID = problemID;
+            ContestID = contestID;
             QueryText = queryText;
             StatusID = statusID;
 
             SubmittedAt = DateTime.Now;
+            AttemptNumber = 1;
+            TotalScore = 0;
         }
-        public Submission(int submissionID, int studentID, int problemID, string queryText, int statusID, int attemptNumber, int totalScore, DateTime submittedAt)
+        public Submission(int submissionID, int studentID, int problemID, int? contestID, string queryText, int statusID, int attemptNumber, int totalScore, DateTime submittedAt)
         {
             SubmissionID = submissionID;
             StudentID = studentID;
             ProblemID = problemID;
+            ContestID = contestID;
             QueryText = queryText;
             StatusID = statusID;
             AttemptNumber = attemptNumber;

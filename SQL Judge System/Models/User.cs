@@ -94,18 +94,6 @@ namespace SQL_Judge_System.Models
             UpdatedAt = DateTime.Now;
         }
 
-        // For Update User
-        public User(int userId, string fullName, string email, string password)
-        {
-            UserID = userId;
-            FullName = fullName;
-            Email = email;
-            Password = password;
-
-            UpdatedAt = DateTime.Now;
-            IsActive = true;
-        }
-
         // For Change Personal Details
         public User(int userId, string fullName, string email)
         {

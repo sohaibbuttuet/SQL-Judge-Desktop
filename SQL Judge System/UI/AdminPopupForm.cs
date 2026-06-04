@@ -58,7 +58,7 @@ namespace SQL_Judge_System.UI
 
                 if (!isEditMode)
                 {
-                    UserBL.SignUp(user);
+                    UserBL.SignUp(user); // without user ID
 
                     // Get Admin RoleID
                     int AdminRoleID = UserBL.GetAdminRoleID();
@@ -70,7 +70,7 @@ namespace SQL_Judge_System.UI
                 else
                 {
                     user.UserID = userId;
-                    UserBL.UpdateUser(user);
+                    UserBL.UpdateUser(user); // with user ID
                 }
 
                 MessageBox.Show("Admin saved successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);

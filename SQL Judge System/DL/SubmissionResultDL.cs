@@ -20,7 +20,7 @@ namespace SQL_Judge_System.DL
             {
                 new MySqlParameter("@SubmissionID", result.SubmissionID),
                 new MySqlParameter("@IsPassed", result.IsPassed ? 1 : 0), 
-                new MySqlParameter("@ErrorMessage", (object)result.ErrorMessage ?? DBNull.Value) // Handles null values cleanly if there is no error
+                new MySqlParameter("@ErrorMessage", string.IsNullOrEmpty(result.ErrorMessage) ? DBNull.Value : (object)result.ErrorMessage) // Handles null values cleanly if there is no error
             };
 
             DatabaseHelper.Instance.Update(query, parameters);

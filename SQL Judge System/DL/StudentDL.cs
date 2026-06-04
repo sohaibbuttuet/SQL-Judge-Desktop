@@ -5,47 +5,75 @@ using System.Linq;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
+using MySql.Data.MySqlClient;
 using SQL_Judge_System.Models;
 
 namespace SQL_Judge_System.DL
 {
     internal class StudentDL
     {
+        // ==========================================
+        // CREATE / INSERT REGISTRATION DATA
+        // ==========================================
         public static int AddStudent(Student student)
         {
-            string query = $"INSERT INTO Students (UserID, RegistrationNumber, SkillLevelID, TotalScore, ProblemsSolved) " +
-                           $"VALUES ({student.UserID}, '{student.RegistrationNumber}', {student.SkillLevelID}, {student.TotalScore}, {student.ProblemsSolved}); " +
-                           $"SELECT LAST_INSERT_ID();";
+            string query = "INSERT INTO Students (UserID, RegistrationNumber, SkillLevelID, TotalScore, ProblemsSolved) " +
+                           "VALUES (@UserID, @RegistrationNumber, @SkillLevelID, @TotalScore, @ProblemsSolved); " +
+                           "SELECT LAST_INSERT_ID();";
 
-            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
+            MySqlParameter[] parameters =
+            {
+        new MySqlParameter("@UserID", student.UserID),
+        new MySqlParameter("@RegistrationNumber", student.RegistrationNumber),
+        new MySqlParameter("@SkillLevelID", student.SkillLevelID),
+        new MySqlParameter("@TotalScore", student.TotalScore),
+        new MySqlParameter("@ProblemsSolved", student.ProblemsSolved)
+    };
+
+            return DatabaseHelper.Instance.ExecuteScalar(query, parameters);
         }
+
+        // ==========================================
+        // UPDATE PROFILE CHANGES
+        // ==========================================
         public static void UpdateStudent(Student student)
         {
-            string query = $"UPDATE Students SET RegistrationNumber = '{student.RegistrationNumber}', SkillLevelID = {student.SkillLevelID} WHERE StudentID = {student.StudentID};";
-            DatabaseHelper.Instance.Update(query);
-        }
-        public static void UpdateStudentRecord(int studentId, int score, int solved)
-        {
-            string query = $"UPDATE Students SET TotalScore = {score}, ProblemsSolved = {solved} WHERE StudentID = {studentId}";
-            DatabaseHelper.Instance.Update(query);
+            string query = "UPDATE Students SET RegistrationNumber = @RegistrationNumber, SkillLevelID = @SkillLevelID WHERE StudentID = @StudentID;";
+
+            MySqlParameter[] parameters =
+            {
+        new MySqlParameter("@RegistrationNumber", student.RegistrationNumber),
+        new MySqlParameter("@SkillLevelID", student.SkillLevelID),
+        new MySqlParameter("@StudentID", student.StudentID)
+            };
+
+            DatabaseHelper.Instance.Update(query, parameters);
         }
 
+
+        // ==========================================
+        // DATA ACCESS 
+        // ==========================================
         public static Student GetStudentByUserID(int userID)
         {
-            string query = $"SELECT * FROM Students WHERE UserID = {userID};";
-            DataTable dt = DatabaseHelper.Instance.GetDataTable(query);
+            string query = "SELECT * FROM Students WHERE UserID = @UserID;";
+            MySqlParameter[] parameters = { new MySqlParameter("@UserID", userID) };
 
-            if (dt.Rows.Count == 0)
+            DataTable dt = DatabaseHelper.Instance.GetDataTable(query, parameters);
+
+            if (dt == null || dt.Rows.Count == 0)
                 return null;
 
             return MapDataRowToStudent(dt.Rows[0]);
         }
         public static Student GetStudentByID(int studentID)
         {
-            string query = $"SELECT * FROM Students WHERE StudentID = {studentID};";
-            DataTable dt = DatabaseHelper.Instance.GetDataTable(query);
+            string query = "SELECT * FROM Students WHERE StudentID = @StudentID;";
+            MySqlParameter[] parameters = { new MySqlParameter("@StudentID", studentID) };
 
-            if (dt.Rows.Count == 0)
+            DataTable dt = DatabaseHelper.Instance.GetDataTable(query, parameters);
+
+            if (dt == null || dt.Rows.Count == 0)
                 return null;
 
             return MapDataRowToStudent(dt.Rows[0]);
@@ -65,10 +93,10 @@ namespace SQL_Judge_System.DL
         }
         public static List<Student> GetTopStudents(int limit)
         {
-            string query = $"SELECT * FROM Students ORDER BY TotalScore DESC LIMIT {limit};";
+            string query = "SELECT * FROM Students ORDER BY TotalScore DESC LIMIT @Limit;";
+            MySqlParameter[] parameters = { new MySqlParameter("@Limit", limit) };
 
-            DataTable dt = DatabaseHelper.Instance.GetDataTable(query);
-
+            DataTable dt = DatabaseHelper.Instance.GetDataTable(query, parameters);
             List<Student> list = new List<Student>();
 
             foreach (DataRow row in dt.Rows)
@@ -77,7 +105,9 @@ namespace SQL_Judge_System.DL
             return list;
         }
 
-        // Helping Function
+        // ==========================================
+        // HELPER FUNCTIONS
+        // ==========================================
         private static Student MapDataRowToStudent(DataRow row)
         {
             return new Student(
@@ -90,28 +120,53 @@ namespace SQL_Judge_System.DL
             );
         }
 
-        // Validation Function
+        // ==========================================
+        // SYSTEM UNIQUE ENTITY ACCOUNT CHECKERS
+        // ==========================================
         public static bool IsStudentExist(string regno)
         {
-            string query = $"SELECT COUNT(*) FROM Students WHERE RegistrationNumber = '{regno}';";
+            string query = "SELECT COUNT(1) FROM Students WHERE RegistrationNumber = @regno;";
+
+            MySqlParameter[] parameters =
+            {
+                 new MySqlParameter("@regno", regno)
+            };
+
+            return DatabaseHelper.Instance.ExecuteScalar(query, parameters) > 0;
+        }
+        public static bool IsStudentExist(int studentID, string regno)
+        {
+            string query = "SELECT COUNT(1) FROM Students WHERE RegistrationNumber = @regno AND StudentID <> @StudentID;";
+
+            MySqlParameter[] parameters =
+            {
+        new MySqlParameter("@regno", regno),
+        new MySqlParameter("@StudentID", studentID)
+            };
+
             return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query)) > 0;
         }
 
-        // --- For AdminDashboard ---
+        // ==========================================
+        // ADMIN MANAGEMENT PANEL ANALYTICS
+        // ==========================================
         public static int TotalStudents()
         {
             string query = "SELECT COUNT(*) FROM vw_students;";
-            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
+            int count = DatabaseHelper.Instance.ExecuteScalar(query, null);
+            return count != -1 ? count : 0;
         }
         public static int ActiveStudents()
         {
             string query = "SELECT COUNT(*) FROM vw_students WHERE IsActive = 1;";
-            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
+            int count = DatabaseHelper.Instance.ExecuteScalar(query, null);
+            return count != -1 ? count : 0;
         }
         public static int InactiveStudents()
         {
             string query = "SELECT COUNT(*) FROM vw_students WHERE IsActive = 0;";
-            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
+            int count = DatabaseHelper.Instance.ExecuteScalar(query, null);
+            return count != -1 ? count : 0;
         }
         public static DataTable GetStudentsForAdmin()
         {
@@ -119,7 +174,9 @@ namespace SQL_Judge_System.DL
             return DatabaseHelper.Instance.GetDataTable(query);
         }
 
-        // For StudentDashboard
+        // ==========================================
+        // STUDENT MANAGEMENT PANEL ANALYTICS
+        // ==========================================
         public static DataTable GetLeaderboard()
         {
             string query = "SELECT * FROM vw_students_leaderboard;";

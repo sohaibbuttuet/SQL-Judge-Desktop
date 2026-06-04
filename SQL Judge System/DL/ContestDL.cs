@@ -58,7 +58,17 @@ namespace SQL_Judge_System.DL
                 return null;
 
             return MapDataRowToContest(dt.Rows[0]);
-        }            
+        }
+        public static DataTable GetAllContestsByName(string contestName)
+        {
+            string query = "SELECT * FROM vw_contests WHERE Title LIKE @ContestName;";
+
+            MySqlParameter[] parameters =
+            {
+                new MySqlParameter("@ContestName", $"%{contestName}%")
+            };
+            return DatabaseHelper.Instance.GetDataTable(query, parameters);
+        }
 
         // Helping Function
         private static Contest MapDataRowToContest(DataRow row)
@@ -66,6 +76,7 @@ namespace SQL_Judge_System.DL
             return new Contest(
                 Convert.ToInt32(row["ContestID"]),
                 row["Title"].ToString(),
+                Convert.ToInt32(row["Duration"]),
                 row["Description"].ToString(),
                 Convert.ToDateTime(row["StartDate"]),
                 Convert.ToDateTime(row["EndDate"]),

@@ -1,4 +1,4 @@
-﻿using MySql.Data.MySqlClient;
+﻿using MySql.Data.MySqlClient ;
 using SQL_Judge_System.LookupDL;
 using SQL_Judge_System.Models;
 using System;
@@ -14,14 +14,15 @@ namespace SQL_Judge_System.DL
     {
         public static int AddSubmission(Submission submission)
         {
-            string query = "INSERT INTO Submissions (StudentID, ProblemID, QueryText) " +
-                    "VALUES (@StudentID, @ProblemID, @QueryText); " +
+            string query = "INSERT INTO Submissions (StudentID, ProblemID, contestID, QueryText) " +
+                    "VALUES (@StudentID, @ProblemID, @ContestID, @QueryText); " +
                     "SELECT LAST_INSERT_ID();";
 
             MySqlParameter[] parameters =
             {
                 new MySqlParameter("@StudentID", submission.StudentID),
                 new MySqlParameter("@ProblemID", submission.ProblemID),
+                new MySqlParameter("@ContestID", submission.ContestID.HasValue ? (object)submission.ContestID.Value : DBNull.Value),
                 new MySqlParameter("@QueryText", submission.QueryText)
             };
 
@@ -39,7 +40,9 @@ namespace SQL_Judge_System.DL
             DatabaseHelper.Instance.Update(query, parameters);
         }
 
-        // Submission Panel in Admin Dashboard
+        // ==========================================
+        // ADMIN DASHBOARD ANALYTICS PANEL RETRIEVALS
+        // ==========================================
         public static DataTable GetSubmissionsForAdmin()
         {
             string query = "SELECT * FROM vw_Submissions;";
@@ -48,7 +51,8 @@ namespace SQL_Judge_System.DL
         public static int TotalSubmissions()
         {
             string query = $"SELECT COUNT(*) FROM Submissions;";
-            return DatabaseHelper.Instance.ExecuteScalar(query);
+            int count = DatabaseHelper.Instance.ExecuteScalar(query, null);
+            return count != -1 ? count : 0;
         }
         public static int AcceptedSubmissions()
         {
@@ -58,7 +62,8 @@ namespace SQL_Judge_System.DL
                 new MySqlParameter("@StatusID", SubmissionStatusDL.GetAccepted())
             };
 
-            return DatabaseHelper.Instance.ExecuteScalar(query, parameters);
+            int count = DatabaseHelper.Instance.ExecuteScalar(query, parameters);
+            return count != -1 ? count : 0;
         }
         public static int RejectedSubmissions()
         {
@@ -68,7 +73,8 @@ namespace SQL_Judge_System.DL
                 new MySqlParameter("@StatusID", SubmissionStatusDL.GetAccepted())
             };
 
-            return DatabaseHelper.Instance.ExecuteScalar(query, parameters);
+            int count = DatabaseHelper.Instance.ExecuteScalar(query, parameters);
+            return count != -1 ? count : 0;
         }
     }
 }

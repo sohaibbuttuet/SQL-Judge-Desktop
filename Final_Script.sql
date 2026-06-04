@@ -117,6 +117,7 @@ CREATE TABLE Submissions (
     SubmissionID INT AUTO_INCREMENT PRIMARY KEY,
     StudentID INT NOT NULL,
     ProblemID INT NOT NULL,
+    ContestID INT NULL,
     QueryText MEDIUMTEXT NOT NULL,
     StatusID INT NOT NULL DEFAULT 4, -- Defaults to Pending
     AttemptNumber INT DEFAULT 1,
@@ -125,6 +126,7 @@ CREATE TABLE Submissions (
 
     FOREIGN KEY (StudentID) REFERENCES Students(StudentID) ON DELETE CASCADE,
     FOREIGN KEY (ProblemID) REFERENCES Problems(ProblemID) ON DELETE CASCADE,
+    FOREIGN KEY (ContestID) REFERENCES Contests(ContestID) ON DELETE CASCADE,
     FOREIGN KEY (StatusID) REFERENCES SubmissionStatuses(StatusID),
     CONSTRAINT chk_attempt_number CHECK (AttemptNumber > 0),
     CONSTRAINT chk_submission_score CHECK (TotalScore >= 0)
@@ -150,6 +152,7 @@ CREATE TABLE Contests (
     ContestID INT AUTO_INCREMENT PRIMARY KEY,
     Title VARCHAR(150) UNIQUE NOT NULL,
     Description TEXT,
+    Duration INT NOT NULL DEFAULT 30,
     StartDate DATETIME NOT NULL,
     EndDate DATETIME NOT NULL,
     CreatedBy INT NOT NULL,
@@ -225,7 +228,7 @@ LEFT JOIN Users u2 ON p.UpdatedBy = u2.UserID;
 ----------------------------------------- -- 5 -- -----------------------------
 CREATE OR REPLACE VIEW vw_contests AS
 SELECT 
-    c.ContestID, c.Title, DATE(c.StartDate) AS StartDate, DATE(c.EndDate) AS EndDate,
+    c.ContestID, c.Title, c.Duration, DATE(c.StartDate) AS StartDate, DATE(c.EndDate) AS EndDate,
     COALESCE(COUNT(cp.StudentID), 0) AS TotalParticipants,
     u1.FullName AS CreatedBy, DATE(c.CreatedAt) AS CreatedAt, 
     u2.FullName AS UpdatedBy, DATE(c.UpdatedAt) AS UpdatedAt,
@@ -251,6 +254,7 @@ LEFT JOIN Students st ON s.StudentID = st.StudentID
 LEFT JOIN Users u ON st.UserID = u.UserID
 LEFT JOIN Problems p ON s.ProblemID = p.ProblemID;
 
+----------------------------------------- -- 6 -- -----------------------------
 -- =====================================
 -- TRIGGERS
 -- =====================================
@@ -310,7 +314,6 @@ DELIMITER ;
 -- STORED PROCEDURE
 -- =====================================
 
--- Extract Column names and their datatypes by database Name and Table Name
 DELIMITER $$
 
 CREATE PROCEDURE db_schema(IN p_databaseName VARCHAR(30))
@@ -323,6 +326,28 @@ BEGIN
 END $$
 
 DELIMITER ;
+
+DELIMITER $$
+
+CREATE PROCEDURE db_tables(IN p_databaseName VARCHAR(30))
+BEGIN
+	SELECT TABLE_NAME 
+    FROM INFORMATION_SCHEMA.TABLES 
+    WHERE TABLE_SCHEMA = p_databaseName;
+END
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE PROCEDURE contestProblems (IN contestID INT)
+BEGIN
+SELECT p.ProblemID, p.Title, p.DifficultyName, p.Points FROM vw_problems p 
+JOIN ContestProblems c ON p.ProblemID = c.ProblemID  
+WHERE c.ContestID = contestID AND p.IsActive = 1;
+END$$
+
+DELIMITER ;
+
 
 -- =====================================
 -- LOOKUP DATA

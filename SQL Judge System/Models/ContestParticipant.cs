@@ -8,30 +8,30 @@ namespace SQL_Judge_System.Models
 {
     internal class ContestParticipant 
     {
-        private int contestId;
-        private int studentId;
+        private int contestID;
+        private int studentID;
         private DateTime joinedAt;
 
-        public int ContestId
+        public int ContestID
         {
-            get { return contestId; }
+            get { return contestID; }
             set
             {
                 if (value <= 0)
                     throw new Exception("Invalid Contest ID.");
 
-                contestId = value;
+                contestID = value;
             }
         }
-        public int StudentId
+        public int StudentID
         {
-            get { return studentId; }
+            get { return studentID; }
             set
             {
                 if (value <= 0)
                     throw new Exception("Invalid Student ID.");
 
-                studentId = value;
+                studentID = value;
             }
         }
         public DateTime JoinedAt
@@ -41,10 +41,10 @@ namespace SQL_Judge_System.Models
         }
 
         public ContestParticipant() { }
-        public ContestParticipant(int contestId, int studentId)
+        public ContestParticipant(int contestID, int studentID)
         {
-            ContestId = contestId;
-            StudentId = studentId;
+            ContestID = contestID;
+            StudentID = studentID;
             JoinedAt = DateTime.Now;
         }
     }

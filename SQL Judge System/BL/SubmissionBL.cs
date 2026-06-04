@@ -14,34 +14,47 @@ namespace SQL_Judge_System.BL
 {
     internal class SubmissionBL
     {
+        // ==========================================
+        // SUBMISSION MANAGEMENT
+        // ==========================================
         public static void CreateSubmission(Submission submission)
         {
-            if (submission == null) throw new ArgumentException("Submission cannot be null.");
-            if (submission.ProblemID <= 0) throw new ArgumentException("Invalid Problem ID.");
-            if (submission.StudentID <= 0) throw new ArgumentException("Invalid StudentID.");
+            if (submission == null)
+                throw new ArgumentNullException(nameof(submission), "Submission record cannot be null.");
+            if (submission.ProblemID <= 0)
+                throw new ArgumentException("Invalid Problem ID specified.", nameof(submission.ProblemID));
+            if (submission.StudentID <= 0)
+                throw new ArgumentException("Invalid Student ID specified.", nameof(submission.StudentID));
 
             submission.SubmissionID = SubmissionDL.AddSubmission(submission);
         }
         public static void UpdateSubmissionStatus(int submissionID, int statusID)
         {
-            if (submissionID <= 0) throw new ArgumentException("Invalid Submission ID.");
-            if (statusID <= 0) throw new ArgumentException("Invalid Status ID.");
+            if (submissionID <= 0)
+                throw new ArgumentException("Invalid Submission ID specified.", nameof(submissionID));
+            if (statusID <= 0)
+                throw new ArgumentException("Invalid Status ID specified.", nameof(statusID));
 
             SubmissionDL.UpdateSubmissionStatus(submissionID, statusID);
         }
         public static void AddSubmissionResult(SubmissionResult result)
         {
-            if (result == null) throw new ArgumentException("SubmissionResult cannot be null.");
-            if (result.SubmissionID <= 0) throw new ArgumentException("Invalid Submission ID.");
+            if (result == null)
+                throw new ArgumentNullException(nameof(result), "SubmissionResult data cannot be null.");
+            if (result.SubmissionID <= 0)
+                throw new ArgumentException("Invalid Submission ID mapping.", nameof(result.SubmissionID));
 
             SubmissionResultDL.AddResult(result);
         }
 
-        public static SubmissionResult ProcessAndGradeSubmission(int studentID, int problemID, string query, string databaseName)
+        // ==========================================
+        // CORE SANDBOX EXECUTION & GRADING ENGINE
+        // ==========================================
+        public static SubmissionResult ProcessAndGradeSubmission(int studentID, int problemID, int? contestID, string query, string databaseName)
         {
             // 1. Create a new submission record with "Pending" status
             int pendingStatusID = SubmissionStatusDL.GetPending();
-            Submission submission = new Submission(studentID, problemID, query, pendingStatusID);
+            Submission submission = new Submission(studentID, problemID, contestID, query, pendingStatusID);
 
             // This will generate a new SubmissionID and save the record in the database with "Pending" status
             CreateSubmission(submission);
@@ -73,7 +86,7 @@ namespace SQL_Judge_System.BL
                 UpdateSubmissionStatus(submission.SubmissionID, SubmissionStatusDL.GetWrongAnswer());
                 submissionResult.ErrorMessage = validationEx.Message;
                 AddSubmissionResult(submissionResult);
-                throw; 
+                throw; // rethrow 
             }
             catch (Exception ex) 
             {
@@ -120,7 +133,9 @@ namespace SQL_Judge_System.BL
             return submissionResult;
         }
 
-        // Submission Panel in Admin Dashboard
+        // ==========================================
+        // ADMIN DASHBOARD ANALYTICS COUNTERS
+        // ==========================================
         public static DataTable GetSubmissions()
         {
             return SubmissionDL.GetSubmissionsForAdmin();

@@ -12,6 +12,9 @@ namespace SQL_Judge_System.BL
 {
     internal class ProblemBL
     {
+        // ==========================================
+        // CORE CRUD OPERATIONS
+        // ==========================================
         public static void AddProblem(Problem problem)
         {
             if (problem == null)
@@ -28,11 +31,14 @@ namespace SQL_Judge_System.BL
                 throw new ArgumentNullException(nameof(problem), "Problem cannot be null.");
 
             if (ProblemDL.IsProblemExists(problem.ProblemID, problem.Title, problem.DifficultyID))
-                throw new ArgumentException("Problem with the same title and difficulty already exists.");
+                throw new ArgumentException("Another problem with the same title and difficulty already exists.");
 
             ProblemDL.UpdateProblem(problem);
         }
 
+        // ==========================================
+        // PROBLEM STATUS MANAGEMENT
+        // ==========================================
         public static void ActivateProblem(int problemId)
         {
             ValidateProblemId(problemId);
@@ -45,15 +51,16 @@ namespace SQL_Judge_System.BL
         }
         private static void ValidateProblemId(int problemId)
         {
-            if (problemId < 0)
-                throw new ArgumentOutOfRangeException(nameof(problemId), "Problem ID must be a non-negative integer.");
+            if (problemId <= 0)
+                throw new ArgumentOutOfRangeException(nameof(problemId), "Problem ID must be a positive integer.");
 
             if (!ProblemDL.IsProblemExists(problemId))
-                throw new InvalidOperationException("Problem does not exist.");
+                throw new InvalidOperationException("The requested problem does not exist.");
         }
 
-
-        // Problem Panel in Admin Dashboard
+        // ==========================================
+        // ADMIN DASHBOARD DATA VIEWS
+        // ==========================================
         public static DataTable ProblemsList()
         {
             return ProblemDL.ProblemsList();
@@ -62,8 +69,17 @@ namespace SQL_Judge_System.BL
         {
             return ProblemDL.GetProblems();
         }
+        public static DataTable GetContestProblems(int contestID)
+        {
+            if (contestID <= 0)
+                throw new ArgumentException("Invalid Contest ID specified.", nameof(contestID));
 
-        // Student Panel Problems
+            return ProblemDL.GetContestProblems(contestID);
+        }
+
+        // ==========================================
+        // STUDENT DASHBOARD PROBLEM MATCHERS
+        // ==========================================
         public static DataTable GetAllProblems()
         {
             return ProblemDL.AllProblemsList();
@@ -80,14 +96,6 @@ namespace SQL_Judge_System.BL
         {
             return ProblemDL.HardProblemsList();
         }
-        public static string GetDescriptionByID(int problemID)
-        {
-            if (problemID < 0)
-                throw new ArgumentOutOfRangeException(nameof(problemID), "Invalid Problem ID");
-
-            return ProblemDL.GetDescriptionByID(problemID);
-        }
-
         public static Problem GetProblemByID(int problemId)
         {
             if (problemId <= 0)
@@ -95,6 +103,10 @@ namespace SQL_Judge_System.BL
 
             return ProblemDL.GetProblemByID(problemId);
         }
+
+        // ==========================================
+        // SYSTEM ANALYTICS COUNTERS
+        // ==========================================
         public static int TotalProblems()
         {
             return ProblemDL.TotalProblems();
@@ -108,7 +120,9 @@ namespace SQL_Judge_System.BL
             return ProblemDL.InactiveProblems();
         }
 
-        // For Problem lookups
+        // ==========================================
+        // LOOKUP DATA
+        // ==========================================
         public static List<ProblemDifficulty> GetProblemDifficulties()
         {
             return ProblemDifficultiesDL.GetProblemDifficulties();
@@ -125,7 +139,9 @@ namespace SQL_Judge_System.BL
             return ProblemTagMapDL.GetProblemTags(problemId);
         }
 
-        // For Problem Junction Tables
+        // ==========================================
+        // JUNCTION RELATION MAPS (MANY-TO-MANY)
+        // ==========================================
         public static void MapProblemTag(ProblemTagMap pt)
         {
             if (pt == null)
@@ -147,13 +163,17 @@ namespace SQL_Judge_System.BL
             ProblemTagMapDL.DeleteByProblemID(problemID);
         }
 
-        // For Problem Schema
+        // ==========================================
+        // VALIDATION SCHEMAS & ACCESSED TABLES
+        // ==========================================
         public static void SaveCheckedTables(int problemID, List<string> selectedTables)
         {
             if (problemID <= 0)
                 throw new ArgumentException("Invalid Problem ID.");
 
-            foreach(string tableName in selectedTables)
+            if (selectedTables == null) return;
+
+            foreach (string tableName in selectedTables)
             {
                 if (!string.IsNullOrWhiteSpace(tableName))
                 {

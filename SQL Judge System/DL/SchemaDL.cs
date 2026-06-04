@@ -12,6 +12,9 @@ namespace SQL_Judge_System.DL
 {
     internal class SchemaDL
     {
+        // ==========================================
+        // FETCH STRUCTURAL DATABASE SCHEMA DATA
+        // ==========================================
         public static DataTable GetDatabaseSchema(string databaseName)
         {
             string query = @"CALL db_schema(@DatabaseName);"; // Call the stored procedure 
@@ -23,6 +26,10 @@ namespace SQL_Judge_System.DL
 
             return DatabaseHelper.Instance.GetDataTable(query, parameters);
         }
+
+        // ==========================================
+        // EXTRACT ALL EXISTING SCHEMA TABLE NAMES
+        // ==========================================
         public static List<string> GetAllTables(string databaseName)
         {
             string query = @"CALL db_tables(@DatabaseName);"; // Call the stored procedure 

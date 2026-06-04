@@ -11,23 +11,32 @@ namespace SQL_Judge_System.BL
 {
     internal class StudentBL
     {
+        // ==========================================
+        // STUDENT REGISTRATION (NEW USERS)
+        // ==========================================
         public static void RegisterStudent(Student s)
-        {
-            ValidateStudent(s);
-            s.StudentID = StudentDL.AddStudent(s);
-        }
-        public static void UpdateStudent(Student s)
-        {
-            ValidateStudent(s);
-            StudentDL.UpdateStudent(s);
-        }
-        private static void ValidateStudent(Student s)
         {
             if (s == null)
                 throw new ArgumentNullException(nameof(s), "Student object cannot be null.");
 
             if (StudentDL.IsStudentExist(s.RegistrationNumber))
                 throw new InvalidOperationException($"A student with registration number {s.RegistrationNumber} already exists.");
+
+            s.StudentID = StudentDL.AddStudent(s);
+        }
+
+        // ==========================================
+        // STUDENT PROFILE UPDATES (EXISTING USERS)
+        // ==========================================
+        public static void UpdateStudent(Student s)
+        {
+            if (s == null)
+                throw new ArgumentNullException(nameof(s), "Student object cannot be null.");
+
+            if (StudentDL.IsStudentExist(s.StudentID, s.RegistrationNumber))
+                throw new InvalidOperationException($"A student with registration number {s.RegistrationNumber} already exists.");
+
+            StudentDL.UpdateStudent(s);
         }
         public static Student GetStudentByUserID(int userId)
         {
@@ -38,7 +47,9 @@ namespace SQL_Judge_System.BL
             return StudentDL.GetStudentByUserID(userId);
         }
 
-        // --- STUDENT PANEL IN ADMIN DASHBOARD ---
+        // ==========================================
+        // ADMIN DASHBOARD ANALYTICS PANEL
+        // ==========================================
         public static DataTable GetStudentsForAdmin()
         {
             return StudentDL.GetStudentsForAdmin();
@@ -56,7 +67,9 @@ namespace SQL_Judge_System.BL
             return StudentDL.InactiveStudents();
         }
 
-        // For StudentDashboard
+        // ==========================================
+        // STUDENT DASHBOARD LEADERBOARD METRICS
+        // ==========================================
         public static DataTable GetLeaderboard()
         {
             return StudentDL.GetLeaderboard();

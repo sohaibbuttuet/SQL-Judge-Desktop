@@ -48,6 +48,13 @@ namespace SQL_Judge_System.BL
 
             return ContestDL.GetContestByID(contestID);
         }
+        public static DataTable GetContestsByName(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name)) 
+                throw new ArgumentNullException("Please enter Name of Contest.");
+
+            return ContestDL.GetAllContestsByName(name);
+        }
 
         // Managing Contest Problems
         public static void AddProblem(ContestProblem contestProblem)
@@ -62,19 +69,6 @@ namespace SQL_Judge_System.BL
                 throw new Exception("Problem already exists;");
 
             ContestProblemsDL.AddProblem(contestProblem);
-        }
-        public static void RemoveProblem(ContestProblem contestProblem)
-        {
-            if (contestProblem.ContestID <= 0)
-                throw new ArgumentException("Invalid Contest ID");
-
-            if (contestProblem.ProblemID <= 0)
-                throw new ArgumentException("Invalid Problem ID");
-
-            if (!ContestProblemsDL.IsProblemExistsinContest(contestProblem))
-                throw new Exception("Problem does not exist;");
-
-            ContestProblemsDL.DeleteProblem(contestProblem);
         }
         public static void DeleteProblemsByContestID(int contestID)
         {
@@ -95,20 +89,22 @@ namespace SQL_Judge_System.BL
         }
 
         // Managing Contest Participents
-        public static void AddContestParticipent(ContestParticipant contestParticipent)
+        public static void AddContestParticipent(ContestParticipant p)
         {
-            if (contestParticipent == null)
-                throw new ArgumentNullException(nameof(contestParticipent), "ContestParticipent cannot be null.");
+            if (p == null)
+                throw new ArgumentNullException(nameof(p), "ContestParticipent cannot be null.");
   
-            if (contestParticipent.ContestId <= 0)
-                throw new ArgumentException("ContestId must be a positive integer.", nameof(contestParticipent.ContestId));
+            if (p.ContestID <= 0)
+                throw new ArgumentException("ContestId must be a positive integer.", nameof(p.ContestID));
 
-            if (contestParticipent.StudentId <= 0)
-                throw new ArgumentException("StudentId must be a positive integer.", nameof(contestParticipent.StudentId));
+            if (p.StudentID <= 0)
+                throw new ArgumentException("StudentId must be a positive integer.", nameof(p.StudentID));
 
-            ContestParticipentsDL.AddContestParticipent(contestParticipent);
+            if (ContestParticipantsDL.IsParticpantAlreadyJoined(p.ContestID, p.StudentID))
+                throw new ArgumentException("You have already joined this contest.");
+
+            ContestParticipantsDL.AddContestParticipent(p);
         }
-
 
         // For Contest Panel in Admin Dashboard
         public static DataTable GetContests()

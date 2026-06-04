@@ -1,10 +1,12 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using SQL_Judge_System.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SQL_Judge_System.Models;
+using static Mysqlx.Datatypes.Scalar.Types;
 
 namespace SQL_Judge_System.DL
 {
@@ -12,40 +14,68 @@ namespace SQL_Judge_System.DL
     {
         public static void AddProblem(ContestProblem contestProblem)
         {
-            string query = $"INSERT INTO ContestProblems(contestID, problemID) " +
-                           $"VALUES ({contestProblem.ContestID},{contestProblem.ProblemID});";
+            string query = "INSERT INTO ContestProblems (ContestID, ProblemID) VALUES (@ContestID, @ProblemID);";
 
-            DatabaseHelper.Instance.Update(query);
-        }
-        public static void DeleteProblem(ContestProblem contestProblem)
-        {
-            string query = $"DELETE FROM ContestProblems WHERE ContestID = {contestProblem.ContestID} AND ProblemID = {contestProblem.ProblemID};";
-            DatabaseHelper.Instance.Update(query);
+            MySqlParameter[] parameters =
+            {
+                new MySqlParameter("@ContestID", contestProblem.ContestID),
+                new MySqlParameter("@ProblemID", contestProblem.ProblemID)
+            };
+
+            DatabaseHelper.Instance.Update(query, parameters);
         }
         public static void DeleteProblemsByContestID(int contestID)
         {
-            string query = $"DELETE FROM ContestProblems WHERE ContestID = {contestID};";
-            DatabaseHelper.Instance.Update(query);
+            string query = "DELETE FROM ContestProblems WHERE ContestID = @ContestID;";
+
+            MySqlParameter[] parameters =
+            {
+                new MySqlParameter("@ContestID", contestID)
+            };
+
+            DatabaseHelper.Instance.Update(query, parameters);
         }
         public static bool IsProblemExistsinContest(ContestProblem contestProblem)
         {
-            string query = $"SELECT COUNT(*) FROM ContestProblems WHERE ContestID = {contestProblem.ContestID} AND ProblemID = {contestProblem.ProblemID}";
+            string query = "SELECT COUNT(*) FROM ContestProblems WHERE ContestID = @ContestID AND ProblemID = @ProblemID;";
+
+            MySqlParameter[] parameters =
+            {
+                new MySqlParameter("@ContestID", contestProblem.ContestID),
+                new MySqlParameter("@ProblemID", contestProblem.ProblemID)
+            };
+
             return DatabaseHelper.Instance.ExecuteScalar(query) > 0;
         }
         public static bool IsContestExists(int contestID)
         {
-            string query = $"SELECT COUNT(*) FROM ContestProblems WHERE ContestID = {contestID};";
+            string query = "SELECT COUNT(*) FROM ContestProblems WHERE ContestID = @ContestID;";
+
+            MySqlParameter[] parameters =
+            {
+                new MySqlParameter("@ContestID", contestID)
+            };
+
             return DatabaseHelper.Instance.ExecuteScalar(query) > 0;
         }
         public static List<ContestProblem> GetProblemsByContestID(int contestID)
         {
-            string query = $"SELECT * FROM ContestProblems WHERE ContestID = {contestID};";
-            DataTable dt = DatabaseHelper.Instance.GetDataTable(query);
+            string query = "SELECT * FROM ContestProblems WHERE ContestID = @ContestID;";
 
+            MySqlParameter[] parameters =
+            {
+                new MySqlParameter("@ContestID", contestID)
+            };
+
+            DataTable dt = DatabaseHelper.Instance.GetDataTable(query);
             List<ContestProblem> problems = new List<ContestProblem>();
+
             foreach (DataRow row in dt.Rows)
             {
-                problems.Add(new ContestProblem((int)row["ContestID"], (int)row["problemID"]));
+                problems.Add(new ContestProblem(
+                    Convert.ToInt32(row["ContestID"]),
+                    Convert.ToInt32(row["ProblemID"]))
+                );
             }
             return problems;
         }

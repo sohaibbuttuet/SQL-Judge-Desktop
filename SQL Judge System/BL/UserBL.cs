@@ -14,13 +14,12 @@ namespace SQL_Judge_System.BL
 {
     internal class UserBL
     {
-        // --- For Auth Form ---
-        public static bool IsUserAdmin(int userId)
-        {
-            return UserDL.IsUserAdmin(userId);
-        }
+        // ==========================================
+        // AUTHENTICATION & ACCESS CONTROL HANDLERS
+        // ==========================================
         public static bool IsUserSuperAdmin(int userId)
         {
+            if (userId <= 0) return false;
             return UserDL.IsUserSuperAdmin(userId);
         }
         public static void SignUp(User user)
@@ -31,44 +30,45 @@ namespace SQL_Judge_System.BL
             ValidateEmail(user.Email); // internally throww exceptions
 
             if (UserDL.IsEmailRegistered(user.Email))
-                throw new InvalidOperationException("Email is already registered.");
+                throw new InvalidOperationException("This email address is already registered in the system.");
 
             user.UserID = UserDL.SignUp(user);
         }
         public static void UpdateUser(User user)
         {
             ValidateUser(user);
-
             UserDL.UpdateUser(user);
         }
         public static void UpdateProfile(User user)
         {
             ValidateUser(user);
-
             UserDL.UpdateProfile(user);
         }        
         public static void ChangePassword(int userID, string password)
         {
             if (userID <= 0)
-                throw new ArgumentException("Invalid User ID");
+                throw new ArgumentException("Invalid User ID mapping for operation.", nameof(userID));
+            if (string.IsNullOrWhiteSpace(password))
+                throw new ArgumentException("Password content cannot be empty.");
 
             UserDL.ChangePassword(userID, password);
         }
         public static bool VerifyPassword(int userID, string password)
         {
             if (userID <= 0)
-                throw new ArgumentException("Invalid User ID");
+                throw new ArgumentException("Invalid User ID mapping for operation.", nameof(userID));
 
             return UserDL.VerifyPassword(userID, password);
         }
         public static User SignIn(string email, string password)
         {
-           ValidateEmail(email); // internally throww exceptions
-
+            ValidateEmail(email); // internally throww exceptions
             return UserDL.SignIn(email, password);
         }
 
-        // Helping Function
+        // ==========================================
+        // VALIDATION UTILITIES (PRIVATE)
+        // ==========================================
         private static void ValidateEmail(string email)
         {
             if (string.IsNullOrWhiteSpace(email))
@@ -80,7 +80,7 @@ namespace SQL_Judge_System.BL
             }
             catch (FormatException)
             {
-                throw new ArgumentException("Invalid email format.");
+                throw new ArgumentException("The provided email address format is invalid.");
             }
         }
         private static void ValidateUser(User user)
@@ -91,10 +91,12 @@ namespace SQL_Judge_System.BL
             ValidateEmail(user.Email); // internally throww exceptions
 
             if (UserDL.IsEmailRegistered(user.UserID, user.Email))
-                throw new ArgumentException("Email already exists!");
+                throw new ArgumentException("This email address is already tied to another registered account.");
         }
 
-        // Admin Home Panel
+        // ==========================================
+        // ADMIN MANAGEMENT PANEL VIEW DATA
+        // ==========================================
         public static DataTable GetUsers()
         {
             return UserDL.GetUsers();
@@ -112,7 +114,9 @@ namespace SQL_Judge_System.BL
             return UserDL.InactiveUsers();
         }
 
-        // Super Admin panel
+        // ==========================================
+        // SUPER-ADMIN MANAGEMENT ROLES
+        // ==========================================
         public static DataTable GetAdminList()
         {
             return UserDL.GetAdminList();
@@ -134,48 +138,40 @@ namespace SQL_Judge_System.BL
             return UserDL.InactiveAdmins();
         }
 
-        // Students panel and SuperAdmin Panel
+        // ==========================================
+        // ACTIVATION CONTROL SWITCHES
+        // ==========================================
         public static void ActivateUser(int userId)
         {
-            if (userId < 0)
-            {
-                throw new ArgumentOutOfRangeException(nameof(userId), "User ID must be a non-negative integer.");
-            }
+            if (userId <= 0)
+                throw new ArgumentOutOfRangeException(nameof(userId), "User ID must be a positive integer.");
 
             if (!UserDL.IsUserExists(userId))
-            {
-                throw new InvalidOperationException("User does not exist.");
-            }
+                throw new InvalidOperationException("The requested user record does not exist.");
 
             UserDL.ActivateUser(userId);
         }
         public static void DeactivateUser(int userId)
         {
-            if (userId < 0)
-            {
-                throw new ArgumentOutOfRangeException(nameof(userId), "User ID must be a non-negative integer.");
-            }
+            if (userId <= 0)
+                throw new ArgumentOutOfRangeException(nameof(userId), "User ID must be a positive integer.");
 
             if (!UserDL.IsUserExists(userId))
-            {
-                throw new InvalidOperationException("User does not exist.");
-            }
+                throw new InvalidOperationException("The requested user record does not exist.");
 
             UserDL.DeactivateUser(userId);
         }
-
-        // AdminPopup Form       
         public static User GetUserById(int userId)
         {
-            if (userId < 0)
-            {
-                throw new ArgumentOutOfRangeException(nameof(userId), "User ID must be a non-negative integer.");
-            }
+            if (userId <= 0)
+                throw new ArgumentOutOfRangeException(nameof(userId), "User ID must be a positive integer.");
 
             return UserDL.GetUserByID(userId);
         }
 
-        // User Lookup Table (Roles)
+        // ==========================================
+        // ROLE ACCESS MANAGEMENT
+        // ==========================================
         public static int GetStudentRoleID()
         {
             return RoleDL.GetStudentRoleID();
@@ -184,29 +180,19 @@ namespace SQL_Judge_System.BL
         {
             return RoleDL.GetAdminRoleID();
         }
-
-        // User Junction Table (UserRole)
         public static void AssignRoleToUser(UserRole u)
         {
             if (u == null)
-            {
-                throw new ArgumentNullException(nameof(u), "UserRole cannot be null.");
-            }
+                throw new ArgumentNullException(nameof(u), "UserRole configuration parameters cannot be null.");
+
             UserRoleDL.AssignRoleToUser(u);
         }
 
         // Setting Form
-        public static string GetUserRole(int userID)
-        {
-            if (userID <= 0)
-                throw new ArgumentOutOfRangeException(nameof(userID), "Invalid User ID");
-
-            return UserDL.GetUserRole(userID);
-        }
         public static bool IsUserStudent(int userID)
         {
             if (userID <= 0)
-                throw new ArgumentOutOfRangeException(nameof(userID), "Invalid User ID");
+                throw new ArgumentOutOfRangeException(nameof(userID), "Invalid target User ID metadata context provided.");
 
             return UserDL.IsUserStudent(userID);
         }

@@ -1,4 +1,5 @@
-﻿using SQL_Judge_System.BL;
+﻿using MySql.Data.MySqlClient;
+using SQL_Judge_System.BL;
 using SQL_Judge_System.Models;
 using SQL_Judge_System.UI;
 using System;
@@ -13,28 +14,62 @@ namespace SQL_Judge_System.DL
 {
     internal class UserDL
     {
-        // Auth Form
+        // ==========================================
+        // AUTHENTICATION & PROFILE CREATION
+        // ==========================================
         public static int SignUp(User user)
         {
-            string query = $"INSERT INTO Users (FullName, Email, Password, IsActive) " +
-                           $"VALUES ('{user.FullName}', '{user.Email}', '{user.Password}', {user.IsActive}); " +
-                           $"SELECT LAST_INSERT_ID();";
+            string query = "INSERT INTO Users (FullName, Email, Password, IsActive) " +
+                           "VALUES (@FullName, @Email, @Password, @IsActive); " +
+                           "SELECT LAST_INSERT_ID();";
+
+            MySqlParameter[] parameters =
+            {
+                new MySqlParameter("@FullName", user.FullName),
+                new MySqlParameter("@Email", user.Email),
+                new MySqlParameter("@Password", user.Password),
+                new MySqlParameter("@IsActive", user.IsActive ? 1 : 0)
+            };
 
             return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
         }
         public static void UpdateUser(User user)
         {
-            string query = $"UPDATE Users SET FullName = '{user.FullName}', Email = '{user.Email}', Password = '{user.Password}' WHERE UserID = {user.UserID};";
+            string query = "UPDATE Users SET FullName = @FullName, Email = @Email, Password = @Password WHERE UserID = @UserID;";
+
+            MySqlParameter[] parameters =
+            {
+                new MySqlParameter("@FullName", user.FullName),
+                new MySqlParameter("@Email", user.Email),
+                new MySqlParameter("@Password", user.Password),
+                new MySqlParameter("@UserID", user.UserID)
+            };
+
             DatabaseHelper.Instance.Update(query);
         }
         public static void UpdateProfile(User user)
         {
-            string query = $"UPDATE Users SET FullName = '{user.FullName}', Email = '{user.Email}' WHERE UserID = {user.UserID};";
+            string query = "UPDATE Users SET FullName = @FullName, Email = @Email WHERE UserID = @UserID;";
+
+            MySqlParameter[] parameters =
+            {
+                new MySqlParameter("@FullName", user.FullName),
+                new MySqlParameter("@Email", user.Email),
+                new MySqlParameter("@UserID", user.UserID)
+            };
+
             DatabaseHelper.Instance.Update(query);
         }
         public static User SignIn(string email, string password)
         {
-            string query = $"SELECT * FROM Users WHERE Email = '{email}' AND Password = '{password}' AND IsActive = 1;";
+            string query = "SELECT * FROM Users WHERE Email = @Email AND Password = @Password AND IsActive = 1;";
+
+            MySqlParameter[] parameters =
+            {
+                new MySqlParameter("@Email", email),
+                new MySqlParameter("@Password", password)
+            };
+
             DataTable dt = DatabaseHelper.Instance.GetDataTable(query);
 
             if(dt.Rows.Count == 0)
@@ -44,99 +79,137 @@ namespace SQL_Judge_System.DL
         }
         public static bool VerifyPassword(int userID, string password)
         {
-            string query = $"SELECT COUNT(*) FROM Users where UserID = {userID} AND Password = '{password}';";
+            string query = "SELECT COUNT(*) FROM Users WHERE UserID = @UserID AND Password = @Password;";
+
+            MySqlParameter[] parameters =
+            {
+                new MySqlParameter("@UserID", userID),
+                new MySqlParameter("@Password", password)
+            };
+
             return DatabaseHelper.Instance.ExecuteScalar(query) > 0;
         }
         public static void ChangePassword(int userID, string password)
         {
-            string query = $"UPDATE users SET Password = '{password}' WHERE UserID = {userID};";
+            string query = "UPDATE Users SET Password = @Password WHERE UserID = @UserID;";
+
+            MySqlParameter[] parameters =
+            {
+                new MySqlParameter("@Password", password),
+                new MySqlParameter("@UserID", userID)
+            };
+
             DatabaseHelper.Instance.Update(query);
         }
         public static User GetUserByID(int userId)
         {
-            string query = $"SELECT * FROM Users WHERE UserID = {userId};";
-            DataTable dt = DatabaseHelper.Instance.GetDataTable(query);
+            string query = "SELECT * FROM Users WHERE UserID = @UserID;";
+            MySqlParameter[] parameters = { new MySqlParameter("@UserID", userId) };
 
-            if (dt.Rows.Count == 0)
+            DataTable dt = DatabaseHelper.Instance.GetDataTable(query, parameters);
+
+            if (dt == null || dt.Rows.Count == 0)
                 return null;
 
             return MapDataRowToUser(dt.Rows[0]);
         }
 
-        // Helping Function
+        // ==========================================
+        // HELPING FUNCTIONS
+        // ==========================================
         private static User MapDataRowToUser(DataRow row)
         {
             return new User(Convert.ToInt32(row["UserID"]), row["FullName"].ToString(), row["Email"].ToString(), row["Password"].ToString(), Convert.ToBoolean(row["IsActive"]), Convert.ToDateTime(row["CreatedAt"]), Convert.ToDateTime(row["UpdatedAt"]));
         }
 
-        // Validation
+        // ==========================================
+        // VALIDATION LOOKUPS
+        // ==========================================
         public static bool IsEmailRegistered(string email)
         {
-            string query = $"SELECT COUNT(*) FROM Users WHERE Email = '{email}';";
+            string query = "SELECT COUNT(*) FROM Users WHERE Email = @Email;";
+            MySqlParameter[] parameters = { new MySqlParameter("@Email", email) };
             return DatabaseHelper.Instance.ExecuteScalar(query) > 0;
         }
         public static bool IsEmailRegistered(int userID, string email)
         {
-            string query = $"SELECT COUNT(*) FROM Users WHERE UserID <> {userID} AND Email = '{email}';";
+            string query = "SELECT COUNT(*) FROM Users WHERE UserID <> @UserID AND Email = @Email;";
+
+            MySqlParameter[] parameters =
+            {
+                new MySqlParameter("@UserID", userID),
+                new MySqlParameter("@Email", email)
+            };
+
             return DatabaseHelper.Instance.ExecuteScalar(query) > 0;
         }
         public static bool IsUserExists(int userId)
         {
-            string query = $"SELECT COUNT(*) FROM Users WHERE UserID = {userId};";
+            string query = "SELECT COUNT(*) FROM Users WHERE UserID = @UserID;";
+            MySqlParameter[] parameters = { new MySqlParameter("@UserID", userId) };
             return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query)) > 0;
-        }
-        public static bool IsUserAdmin(int userId)
-        {
-            string query = $"SELECT COUNT(*) FROM vw_users WHERE RoleName = 'Admin' AND UserID = {userId};";
-            return DatabaseHelper.Instance.ExecuteScalar(query) > 0;
         }
         public static bool IsUserSuperAdmin(int userId)
         {
-            string query = $"SELECT COUNT(*) FROM vw_users WHERE RoleName = 'SuperAdmin' AND UserID = {userId};";
+            string query = "SELECT COUNT(*) FROM vw_users WHERE RoleName = 'SuperAdmin' AND UserID = @UserID;";
+            MySqlParameter[] parameters = { new MySqlParameter("@UserID", userId) };
             return DatabaseHelper.Instance.ExecuteScalar(query) > 0;
         }
 
         // --------------------- AdminDashboardUI Form ---------------------------------- //
 
+        // ==========================================
+        // STATUS MANAGEMENT SWITCHES
+        // ==========================================
         public static void ActivateUser(int userId)
         {
-            string query = $"UPDATE Users SET IsActive = 1 WHERE UserID = {userId};";
-            DatabaseHelper.Instance.Update(query);
+            string query = "UPDATE Users SET IsActive = 1 WHERE UserID = @UserID;";
+            MySqlParameter[] parameters = { new MySqlParameter("@UserID", userId) };
+            DatabaseHelper.Instance.Update(query, parameters);
         }
         public static void DeactivateUser(int userId)
         {
-            string query = $"UPDATE Users SET IsActive = 0 WHERE UserID = {userId};";
-            DatabaseHelper.Instance.Update(query);
+            string query = "UPDATE Users SET IsActive = 0 WHERE UserID = @UserID;";
+            MySqlParameter[] parameters = { new MySqlParameter("@UserID", userId) };
+            DatabaseHelper.Instance.Update(query, parameters);
         }
 
-        // SuperAdmin Panel
+        // ==========================================
+        // ADMIN PANELS
+        // ==========================================
         public static DataTable GetAdminList()
         {
             string query = "SELECT * FROM vw_users WHERE RoleName = 'Admin' ORDER BY UserID;";
             return DatabaseHelper.Instance.GetDataTable(query);
-        }      
+        }
         public static int TotalAdmins()
         {
             string query = "SELECT COUNT(*) FROM vw_users WHERE RoleName = 'Admin';";
-            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
+            int count = DatabaseHelper.Instance.ExecuteScalar(query, null);
+            return count != -1 ? count : 0;
         }
         public static int TotalSuperAdmins()
         {
             string query = "SELECT COUNT(*) FROM vw_users WHERE RoleName = 'SuperAdmin';";
-            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
+            int count = DatabaseHelper.Instance.ExecuteScalar(query, null);
+            return count != -1 ? count : 0;
         }
         public static int ActiveAdmins()
         {
             string query = "SELECT COUNT(*) FROM vw_users WHERE RoleName = 'Admin' AND IsActive = 1;";
-            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
+            int count = DatabaseHelper.Instance.ExecuteScalar(query, null);
+            return count != -1 ? count : 0;
         }
         public static int InactiveAdmins()
         {
             string query = "SELECT COUNT(*) FROM vw_users WHERE RoleName = 'Admin' AND IsActive = 0;";
-            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
+            int count = DatabaseHelper.Instance.ExecuteScalar(query, null);
+            return count != -1 ? count : 0;
         }
 
-        // Admin Home Panel
+        // ==========================================
+        // ADMIN HOME PANEL
+        // ==========================================
         public static DataTable GetUsers()
         {
             string query = "SELECT * FROM vw_users ORDER BY UserID;";
@@ -158,16 +231,16 @@ namespace SQL_Judge_System.DL
             return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
         }
 
-        // Settings Form
-        public static string GetUserRole(int userID)
-        {
-            string query = $"SELECT RoleName FROM vw_users WHERE UserID = {userID};";
-            return DatabaseHelper.Instance.ExecuteScalarObject(query).ToString();
-        }
+        // ==========================================
+        // ACCOUNT SETTINGS CONTEXT RESOLVERS
+        // ==========================================
         public static bool IsUserStudent(int userID)
         {
-            string query = $"SELECT Count(*) FROM vw_users WHERE UserID = {userID} AND RoleName = 'Student';";
-            return DatabaseHelper.Instance.ExecuteScalar(query) > 0;
+            string query = "SELECT COUNT(*) FROM vw_users WHERE UserID = @UserID AND RoleName = 'Student';";
+            MySqlParameter[] parameters = { new MySqlParameter("@UserID", userID) };
+
+            int count = DatabaseHelper.Instance.ExecuteScalar(query, parameters);
+            return count > 0;
         }
     }
 }

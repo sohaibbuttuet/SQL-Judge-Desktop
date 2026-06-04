@@ -103,17 +103,23 @@ namespace SQL_Judge_System.UI
                     return;
                 }
 
+                if (!int.TryParse(txtDuration.Text.Trim(), out int duration))
+                {
+                    MessageBox.Show("Please enter valid Contest Duration.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 if (clbProblem.CheckedItems.Count == 0)
                 {
                     MessageBox.Show("Please select at least one problem.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
-                Contest contest = new Contest(title, description, startDate, endDate, userID);
-
+                Contest contest = null;
                 if(isEditMode)
                 {
-                    contest.ContestID = contestID;
+                    // object for Update
+                    contest = new Contest(contestID, title, duration, description, startDate, endDate, userID);
 
                     // Update Contest
                     ContestBL.UpdateContest(contest);
@@ -123,6 +129,9 @@ namespace SQL_Judge_System.UI
                 }
                 else
                 {
+                    // Object for Insertion 
+                    contest = new Contest(title, description, duration, startDate, endDate, userID);
+
                     // Create Contest
                     ContestBL.CreateContest(contest);
                 }

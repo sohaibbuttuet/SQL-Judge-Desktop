@@ -18,6 +18,7 @@ namespace SQL_Judge_System.UI
         private User user;
         private Student student;
         private string databaseName;
+        private int? activeContestID = null;
 
         private readonly Color clrAccentPurple = Color.FromArgb(124, 111, 255);
 
@@ -38,6 +39,7 @@ namespace SQL_Judge_System.UI
             VisiblePanel(pnlHome);
 
             this.Load += StudentDashboard_Load;
+            LoadContests();
         }
 
         // =========================
@@ -150,6 +152,7 @@ namespace SQL_Judge_System.UI
         {
             pnlHome.Visible = false;
             pnlSolveProblem.Visible = false;
+            pnlContest.Visible = false;
 
             pnl.Visible = true;
             pnl.BringToFront();
@@ -258,9 +261,7 @@ namespace SQL_Judge_System.UI
             }
         }
 
-        // =========================
         // Button Events
-        // =========================
         private void btnRunQuery_Click(object sender, EventArgs e)
         {
             try
@@ -340,7 +341,7 @@ namespace SQL_Judge_System.UI
                 int problemID = Convert.ToInt32(dgvProblems.CurrentRow.Cells["ProblemID"].Value);
 
                 // pass student ID, problem ID, the query text, and the target database name
-                SubmissionResult result = SubmissionBL.ProcessAndGradeSubmission(student.StudentID, problemID, query, databaseName);
+                SubmissionResult result = SubmissionBL.ProcessAndGradeSubmission(student.StudentID, problemID, this.activeContestID, query, databaseName);
 
                 // 3. Update UI Badges and Alerts based on execution results
                 if (result.IsPassed)
@@ -375,7 +376,6 @@ namespace SQL_Judge_System.UI
                 MessageBox.Show($"System execution tracking fault: {ex.Message}", "System Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }    
-
         private void btnClearEditor_Click(object sender, EventArgs e)
         {
             rtbSQLEditor.Clear();
@@ -400,6 +400,175 @@ namespace SQL_Judge_System.UI
         }
 
         // =========================
+        // Contest Panel
+        // =========================
+        private void LoadContests()
+        {
+            try
+            {
+                DataTable dt = ContestBL.GetContests();
+                LoadContest(dt);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading contests: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private void LoadContest(DataTable dt)
+        {
+            dgvContest.DataSource = dt;
+
+            if (dgvContest.Columns.Count > 0)
+            {
+                // Hide unneccessry columns safely
+                string[] columnsToHide = { "ContestID", "Duration", "CreatedAt", "CreatedBy", "UpdatedAt", "UpdatedBy" };
+                foreach (string col in columnsToHide)
+                {
+                    if (dgvContest.Columns.Contains(col))
+                        dgvContest.Columns[col].Visible = false;
+                }
+
+                dgvContest.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+                SafeColumn("Title", "Title", 100);
+                SafeColumn("TotalParticipants", "Participants", 50);
+                SafeColumn("StartDate", "Start Date", 50);
+                SafeColumn("EndDate", "End Date", 50);
+                SafeColumn("ContestStatus", "Status", 50);
+            }
+        }
+        private void dgvContest_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgvContest.CurrentRow == null || dgvContest.CurrentRow.Index < 0)
+                return;
+
+            try
+            {
+                int contestID = Convert.ToInt32(dgvContest.CurrentRow.Cells["ContestID"].Value);
+
+                LoadContestDetails(contestID);
+                LoadContestProblems(contestID);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error handling selection: {ex.Message}", "Application Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }            
+        }
+        private void LoadContestDetails(int contestID)
+        {
+            try
+            {
+                Contest contest = ContestBL.GetContestByID(contestID);
+
+                if (contest != null)
+                {
+                    lblContestNameValue.Text = contest.Title;
+                    lblStartDateValue.Text = contest.StartDate.ToString("g");
+                    lblEndDateValue.Text = contest.EndDate.ToString("g");
+                    txtDescription.Text = contest.Description;
+                    lblContestDuration.Text = $"{contest.Duration} mins";
+                    lblDurationValue.Text = $"{contest.Duration} mins";
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading contest details: {ex.Message}", "Data Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private void LoadContestProblems(int contestID)
+        {
+            try
+            {
+                DataTable contestProblems = ProblemBL.GetContestProblems(contestID);
+                dgvContestProblems.DataSource = contestProblems;
+                dgvContestProblems.Columns["ProblemID"].Visible = false;
+
+                SafeColumn("Title", "Title", 100);
+                SafeColumn("DifficultyName", "Difficulty", 70);
+                SafeColumn("Points", "Points", 50);
+
+                if (contestProblems != null)
+                {
+                    object sumobj = contestProblems.Compute("Sum(Points)", "");
+                    lblTotalPoints.Text = sumobj != DBNull.Value ? sumobj.ToString() : "0";
+                    lblTotalProblems.Text = contestProblems.Rows.Count.ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading problems: {ex.Message}", "Data Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private void btnJoinContest_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dgvContest.CurrentRow == null)
+                {
+                    MessageBox.Show("Please select a contest.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                int contestID = Convert.ToInt32(dgvContest.CurrentRow.Cells["ContestID"].Value);
+
+                // 1. Register the participant in the database
+                ContestParticipant contestParticipant = new ContestParticipant(contestID, student.StudentID);
+                ContestBL.AddContestParticipent(contestParticipant);
+
+                // 2. Set the dashboard's active contest state tracking
+                this.activeContestID = contestID;
+
+                // 3. Load ONLY the contest problems into the existing problems DataGridView
+                DataTable dtContestProblems = ProblemBL.GetContestProblems(contestID);
+                LoadProblems(dtContestProblems);
+
+                // 4. Update UI labels so the student knows they are competing
+                lblProblemName.Text = "Select a Contest Problem to Begin";
+                rtbProblemDesc.Text = "Welcome to the contest workspace! Select a problem from the left panel.";
+
+                // 5. Shift focus smoothly to your existing execution workspace
+                VisiblePanel(pnlSolveProblem);
+
+                MessageBox.Show("You have successfully joined the contest! Your workspace has been configured.", "Contest Started", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "An unexpected execution fault occurred: " + ex.Message,
+                    "Database Engine Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+            }
+        }
+        private void btnsearchContest_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string contestName = txtSearch.Text.Trim();
+
+                // If search is empty, reload everything
+                if (string.IsNullOrWhiteSpace(contestName) || contestName.StartsWith("Search contests here..."))
+                {
+                    LoadContests();
+                    return;
+                }
+
+                DataTable dt = ContestBL.GetContestsByName(contestName);
+                LoadContest(dt);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    $"An error occurred while loading problems:\n\n{ex.Message}",
+                    "Database Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+            }
+        }
+
+        // =========================
         // NAVIGATION
         // =========================
         private void btn_home_Click(object sender, EventArgs e)
@@ -408,10 +577,20 @@ namespace SQL_Judge_System.UI
         }
         private void btn_problems_Click(object sender, EventArgs e)
         {
+            // Clear out active contest state because they clicked the public Practice menu
+            this.activeContestID = null;
+
+            // Reset difficulty dropdown combobox index to refresh the problem list grid
+            if (cmbDifficulty.Items.Count > 0)
+                cmbDifficulty.SelectedIndex = 0;
+            else
+                LoadProblems(ProblemBL.GetAllProblems());
+
             VisiblePanel(pnlSolveProblem);
         }
         private void btn_contest_Click(object sender, EventArgs e)
         {
+            VisiblePanel(pnlContest);
         }
         private void btnReport_Click(object sender, EventArgs e)
         {
@@ -428,5 +607,4 @@ namespace SQL_Judge_System.UI
                 this.Close();
         }
     }
-
 }

@@ -44,8 +44,8 @@ namespace SQL_Judge_System.DL
             };
 
             DataTable dt = DatabaseHelper.Instance.GetDataTable(query, parameters);
-
             List<ProblemTable> list = new List<ProblemTable>();
+
             foreach (DataRow row in dt.Rows)
             {
                 list.Add(new ProblemTable

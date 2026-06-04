@@ -42,11 +42,15 @@
             this.dtStartDate = new System.Windows.Forms.DateTimePicker();
             this.lblEndDate = new System.Windows.Forms.Label();
             this.dtEndDate = new System.Windows.Forms.DateTimePicker();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtDuration = new System.Windows.Forms.TextBox();
             this.pnlContest.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlContest
             // 
+            this.pnlContest.Controls.Add(this.txtDuration);
+            this.pnlContest.Controls.Add(this.label1);
             this.pnlContest.Controls.Add(this.label3);
             this.pnlContest.Controls.Add(this.clbProblem);
             this.pnlContest.Controls.Add(this.btnSaveProblem);
@@ -62,13 +66,13 @@
             this.pnlContest.Controls.Add(this.dtEndDate);
             this.pnlContest.Location = new System.Drawing.Point(30, 40);
             this.pnlContest.Name = "pnlContest";
-            this.pnlContest.Size = new System.Drawing.Size(520, 430);
+            this.pnlContest.Size = new System.Drawing.Size(520, 459);
             this.pnlContest.TabIndex = 2;
             // 
             // label3
             // 
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
-            this.label3.Location = new System.Drawing.Point(17, 235);
+            this.label3.Location = new System.Drawing.Point(17, 273);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(100, 20);
             this.label3.TabIndex = 14;
@@ -80,7 +84,7 @@
             this.clbProblem.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.clbProblem.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.clbProblem.ForeColor = System.Drawing.Color.White;
-            this.clbProblem.Location = new System.Drawing.Point(20, 256);
+            this.clbProblem.Location = new System.Drawing.Point(20, 294);
             this.clbProblem.Name = "clbProblem";
             this.clbProblem.Size = new System.Drawing.Size(462, 108);
             this.clbProblem.TabIndex = 13;
@@ -94,7 +98,7 @@
             this.btnSaveProblem.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(40)))), ((int)(((byte)(69)))));
             this.btnSaveProblem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSaveProblem.ForeColor = System.Drawing.Color.White;
-            this.btnSaveProblem.Location = new System.Drawing.Point(20, 387);
+            this.btnSaveProblem.Location = new System.Drawing.Point(20, 421);
             this.btnSaveProblem.Name = "btnSaveProblem";
             this.btnSaveProblem.Size = new System.Drawing.Size(75, 23);
             this.btnSaveProblem.TabIndex = 11;
@@ -111,7 +115,7 @@
             this.btnClear.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(40)))), ((int)(((byte)(69)))));
             this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClear.ForeColor = System.Drawing.Color.White;
-            this.btnClear.Location = new System.Drawing.Point(120, 387);
+            this.btnClear.Location = new System.Drawing.Point(120, 421);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(75, 23);
             this.btnClear.TabIndex = 12;
@@ -208,6 +212,24 @@
             this.dtEndDate.Size = new System.Drawing.Size(202, 20);
             this.dtEndDate.TabIndex = 8;
             // 
+            // label1
+            // 
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
+            this.label1.Location = new System.Drawing.Point(20, 229);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(100, 15);
+            this.label1.TabIndex = 15;
+            this.label1.Text = "Duration";
+            // 
+            // txtDuration
+            // 
+            this.txtDuration.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
+            this.txtDuration.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtDuration.Location = new System.Drawing.Point(20, 247);
+            this.txtDuration.Name = "txtDuration";
+            this.txtDuration.Size = new System.Drawing.Size(462, 20);
+            this.txtDuration.TabIndex = 16;
+            // 
             // ContestPopupForm
             // 
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(29)))), ((int)(((byte)(56)))));
@@ -227,5 +249,7 @@
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.CheckedListBox clbProblem;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txtDuration;
     }
 }
