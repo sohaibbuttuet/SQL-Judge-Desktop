@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MySql.Data.MySqlClient;
 using SQL_Judge_System.DL;
 using SQL_Judge_System.Models;
 
@@ -44,6 +45,24 @@ namespace SQL_Judge_System.LookupDL
             string query = "SELECT StatusID FROM SubmissionStatuses WHERE StatusName = 'Pending';";
             return DatabaseHelper.Instance.ExecuteScalar(query);
         }
+        public static string StatusOfLastSubmission(int studentID, int problemID)
+        {
+            string query = "SELECT ss.StatusName FROM submissionstatuses ss JOIN submissions s ON ss.StatusID = s.StatusID WHERE s.StudentID = @StudentID AND s.ProblemID = @ProblemID ORDER BY s.SubmittedAt DESC, s.SubmissionID DESC LIMIT 1;";
+
+            MySqlParameter[] parameters =
+            {
+                new MySqlParameter("@StudentID", studentID),
+                new MySqlParameter("@ProblemID", problemID)
+            };
+
+            object result = DatabaseHelper.Instance.ExecuteScalarObject(query, parameters);
+
+            if (result == null || result == DBNull.Value)
+            {
+                return string.Empty;
+            }
+
+            return result.ToString();
+        }
     }
 }
-

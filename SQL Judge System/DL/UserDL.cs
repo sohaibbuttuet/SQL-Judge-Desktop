@@ -31,7 +31,7 @@ namespace SQL_Judge_System.DL
                 new MySqlParameter("@IsActive", user.IsActive ? 1 : 0)
             };
 
-            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
+            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query, parameters));
         }
         public static void UpdateUser(User user)
         {
@@ -45,7 +45,7 @@ namespace SQL_Judge_System.DL
                 new MySqlParameter("@UserID", user.UserID)
             };
 
-            DatabaseHelper.Instance.Update(query);
+            DatabaseHelper.Instance.Update(query, parameters);
         }
         public static void UpdateProfile(User user)
         {
@@ -58,7 +58,7 @@ namespace SQL_Judge_System.DL
                 new MySqlParameter("@UserID", user.UserID)
             };
 
-            DatabaseHelper.Instance.Update(query);
+            DatabaseHelper.Instance.Update(query, parameters);
         }
         public static User SignIn(string email, string password)
         {
@@ -70,7 +70,7 @@ namespace SQL_Judge_System.DL
                 new MySqlParameter("@Password", password)
             };
 
-            DataTable dt = DatabaseHelper.Instance.GetDataTable(query);
+            DataTable dt = DatabaseHelper.Instance.GetDataTable(query, parameters);
 
             if(dt.Rows.Count == 0)
                 return null;
@@ -87,7 +87,7 @@ namespace SQL_Judge_System.DL
                 new MySqlParameter("@Password", password)
             };
 
-            return DatabaseHelper.Instance.ExecuteScalar(query) > 0;
+            return DatabaseHelper.Instance.ExecuteScalar(query, parameters) > 0;
         }
         public static void ChangePassword(int userID, string password)
         {
@@ -99,7 +99,7 @@ namespace SQL_Judge_System.DL
                 new MySqlParameter("@UserID", userID)
             };
 
-            DatabaseHelper.Instance.Update(query);
+            DatabaseHelper.Instance.Update(query, parameters);
         }
         public static User GetUserByID(int userId)
         {
@@ -129,7 +129,7 @@ namespace SQL_Judge_System.DL
         {
             string query = "SELECT COUNT(*) FROM Users WHERE Email = @Email;";
             MySqlParameter[] parameters = { new MySqlParameter("@Email", email) };
-            return DatabaseHelper.Instance.ExecuteScalar(query) > 0;
+            return DatabaseHelper.Instance.ExecuteScalar(query, parameters) > 0;
         }
         public static bool IsEmailRegistered(int userID, string email)
         {
@@ -141,22 +141,20 @@ namespace SQL_Judge_System.DL
                 new MySqlParameter("@Email", email)
             };
 
-            return DatabaseHelper.Instance.ExecuteScalar(query) > 0;
+            return DatabaseHelper.Instance.ExecuteScalar(query, parameters) > 0;
         }
         public static bool IsUserExists(int userId)
         {
             string query = "SELECT COUNT(*) FROM Users WHERE UserID = @UserID;";
             MySqlParameter[] parameters = { new MySqlParameter("@UserID", userId) };
-            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query)) > 0;
+            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query, parameters)) > 0;
         }
         public static bool IsUserSuperAdmin(int userId)
         {
             string query = "SELECT COUNT(*) FROM vw_users WHERE RoleName = 'SuperAdmin' AND UserID = @UserID;";
             MySqlParameter[] parameters = { new MySqlParameter("@UserID", userId) };
-            return DatabaseHelper.Instance.ExecuteScalar(query) > 0;
+            return DatabaseHelper.Instance.ExecuteScalar(query, parameters) > 0;
         }
-
-        // --------------------- AdminDashboardUI Form ---------------------------------- //
 
         // ==========================================
         // STATUS MANAGEMENT SWITCHES
@@ -177,32 +175,14 @@ namespace SQL_Judge_System.DL
         // ==========================================
         // ADMIN PANELS
         // ==========================================
-        public static DataTable GetAdminList()
+        public static DataTable GetAdmins()
         {
             string query = "SELECT * FROM vw_users WHERE RoleName = 'Admin' ORDER BY UserID;";
             return DatabaseHelper.Instance.GetDataTable(query);
         }
-        public static int TotalAdmins()
-        {
-            string query = "SELECT COUNT(*) FROM vw_users WHERE RoleName = 'Admin';";
-            int count = DatabaseHelper.Instance.ExecuteScalar(query, null);
-            return count != -1 ? count : 0;
-        }
         public static int TotalSuperAdmins()
         {
             string query = "SELECT COUNT(*) FROM vw_users WHERE RoleName = 'SuperAdmin';";
-            int count = DatabaseHelper.Instance.ExecuteScalar(query, null);
-            return count != -1 ? count : 0;
-        }
-        public static int ActiveAdmins()
-        {
-            string query = "SELECT COUNT(*) FROM vw_users WHERE RoleName = 'Admin' AND IsActive = 1;";
-            int count = DatabaseHelper.Instance.ExecuteScalar(query, null);
-            return count != -1 ? count : 0;
-        }
-        public static int InactiveAdmins()
-        {
-            string query = "SELECT COUNT(*) FROM vw_users WHERE RoleName = 'Admin' AND IsActive = 0;";
             int count = DatabaseHelper.Instance.ExecuteScalar(query, null);
             return count != -1 ? count : 0;
         }
@@ -214,21 +194,6 @@ namespace SQL_Judge_System.DL
         {
             string query = "SELECT * FROM vw_users ORDER BY UserID;";
             return DatabaseHelper.Instance.GetDataTable(query);
-        }
-        public static int TotalUsers()
-        {
-            string query = "SELECT COUNT(*) FROM vw_users;";
-            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
-        }
-        public static int ActiveUsers()
-        {
-            string query = "SELECT COUNT(*) FROM vw_users WHERE IsActive = 1;";
-            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
-        }
-        public static int InactiveUsers()
-        {
-            string query = "SELECT COUNT(*) FROM vw_users WHERE IsActive = 0;";
-            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
         }
 
         // ==========================================

@@ -144,31 +144,13 @@ namespace SQL_Judge_System.DL
         new MySqlParameter("@StudentID", studentID)
             };
 
-            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query)) > 0;
+            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query, parameters)) > 0;
         }
 
         // ==========================================
         // ADMIN MANAGEMENT PANEL ANALYTICS
         // ==========================================
-        public static int TotalStudents()
-        {
-            string query = "SELECT COUNT(*) FROM vw_students;";
-            int count = DatabaseHelper.Instance.ExecuteScalar(query, null);
-            return count != -1 ? count : 0;
-        }
-        public static int ActiveStudents()
-        {
-            string query = "SELECT COUNT(*) FROM vw_students WHERE IsActive = 1;";
-            int count = DatabaseHelper.Instance.ExecuteScalar(query, null);
-            return count != -1 ? count : 0;
-        }
-        public static int InactiveStudents()
-        {
-            string query = "SELECT COUNT(*) FROM vw_students WHERE IsActive = 0;";
-            int count = DatabaseHelper.Instance.ExecuteScalar(query, null);
-            return count != -1 ? count : 0;
-        }
-        public static DataTable GetStudentsForAdmin()
+        public static DataTable GetStudents()
         {
             string query = "SELECT * FROM vw_students ORDER BY StudentID;";
             return DatabaseHelper.Instance.GetDataTable(query);
@@ -184,8 +166,14 @@ namespace SQL_Judge_System.DL
         }
         public static int GetRank(int studentId)
         {
-            string query = $"SELECT GlobalRank FROM vw_students_leaderboard WHERE StudentID = {studentId};";
-            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
+            string query = $"SELECT GlobalRank FROM vw_students_leaderboard WHERE StudentID = @StudnetID;";
+
+            MySqlParameter[] parameters =
+            {
+                new MySqlParameter("@StudnetID", studentId)
+            };
+
+            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query, parameters));
         }
     }
 } 

@@ -48,13 +48,6 @@ namespace SQL_Judge_System.BL
 
             return ContestDL.GetContestByID(contestID);
         }
-        public static DataTable GetContestsByName(string name)
-        {
-            if (string.IsNullOrWhiteSpace(name)) 
-                throw new ArgumentNullException("Please enter Name of Contest.");
-
-            return ContestDL.GetAllContestsByName(name);
-        }
 
         // Managing Contest Problems
         public static void AddProblem(ContestProblem contestProblem)
@@ -105,27 +98,36 @@ namespace SQL_Judge_System.BL
 
             ContestParticipantsDL.AddContestParticipent(p);
         }
+        public static bool IsParticipantRegistered(ContestParticipant p)
+        {
+            if (p == null)
+                throw new ArgumentNullException(nameof(p), "ContestParticipent cannot be null.");
+
+            if (p.ContestID <= 0)
+                throw new ArgumentException("ContestId must be a positive integer.", nameof(p.ContestID));
+
+            if (p.StudentID <= 0)
+                throw new ArgumentException("StudentId must be a positive integer.", nameof(p.StudentID));
+
+            if (ContestParticipantsDL.IsParticpantAlreadyJoined(p.ContestID, p.StudentID))
+                return true;
+
+            return false;
+        }
+
+        public static bool IsContestFullySolved(int studentID, int contestID)
+        {
+            int contestProblems = ContestProblemsDL.CountContestProblems(contestID);
+            int submittedProblems = SubmissionDL.SubmittedContestProblems(studentID, contestID);
+
+            if (contestProblems == submittedProblems) return true;
+            return false;
+        }
 
         // For Contest Panel in Admin Dashboard
         public static DataTable GetContests()
         {
             return ContestDL.GetAllContests();
-        }
-        public static int TotalContests()
-        {
-            return ContestDL.TotalContests();
-        }
-        public static int ActiveContests()
-        {
-            return ContestDL.ActiveContests();
-        }
-        public static int InactiveContests()
-        {
-            return ContestDL.InactiveContests();
-        }
-        public static int UpcomingContests()
-        {
-            return ContestDL.UpcomingContests();
         }
     }
 }

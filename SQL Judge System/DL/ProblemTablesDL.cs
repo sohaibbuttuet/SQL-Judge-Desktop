@@ -22,7 +22,7 @@ namespace SQL_Judge_System.DL
                 new MySqlParameter("@TableName", table.TableName)
             };
 
-            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query, parameters)); // Returns the new ProblemTableID
+            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query, parameters)); 
         }
         public static void DeleteAllByProblemID(int problemId)
         {

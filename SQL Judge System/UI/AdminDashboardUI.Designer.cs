@@ -30,7 +30,6 @@ namespace SQL_Judge_System.UI
             this.pnlSidebar = new System.Windows.Forms.Panel();
             this.btn_Settings = new FontAwesome.Sharp.IconButton();
             this.btnLogout = new FontAwesome.Sharp.IconButton();
-            this.btnContestLeaderboard = new FontAwesome.Sharp.IconButton();
             this.btnReport = new FontAwesome.Sharp.IconButton();
             this.btnSubmissions = new FontAwesome.Sharp.IconButton();
             this.btn_contests = new FontAwesome.Sharp.IconButton();
@@ -209,7 +208,6 @@ namespace SQL_Judge_System.UI
             this.pnlSidebar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(29)))), ((int)(((byte)(56)))));
             this.pnlSidebar.Controls.Add(this.btn_Settings);
             this.pnlSidebar.Controls.Add(this.btnLogout);
-            this.pnlSidebar.Controls.Add(this.btnContestLeaderboard);
             this.pnlSidebar.Controls.Add(this.btnReport);
             this.pnlSidebar.Controls.Add(this.btnSubmissions);
             this.pnlSidebar.Controls.Add(this.btn_contests);
@@ -271,30 +269,6 @@ namespace SQL_Judge_System.UI
             this.btnLogout.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnLogout.UseVisualStyleBackColor = true;
             this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
-            // 
-            // btnContestLeaderboard
-            // 
-            this.btnContestLeaderboard.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnContestLeaderboard.FlatAppearance.BorderSize = 0;
-            this.btnContestLeaderboard.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(40)))), ((int)(((byte)(69)))));
-            this.btnContestLeaderboard.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(40)))), ((int)(((byte)(69)))));
-            this.btnContestLeaderboard.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnContestLeaderboard.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnContestLeaderboard.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
-            this.btnContestLeaderboard.IconChar = FontAwesome.Sharp.IconChar.RankingStar;
-            this.btnContestLeaderboard.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
-            this.btnContestLeaderboard.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnContestLeaderboard.IconSize = 24;
-            this.btnContestLeaderboard.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnContestLeaderboard.Location = new System.Drawing.Point(0, 406);
-            this.btnContestLeaderboard.Name = "btnContestLeaderboard";
-            this.btnContestLeaderboard.Padding = new System.Windows.Forms.Padding(14, 0, 0, 0);
-            this.btnContestLeaderboard.Size = new System.Drawing.Size(200, 48);
-            this.btnContestLeaderboard.TabIndex = 23;
-            this.btnContestLeaderboard.Text = "Leaderboard";
-            this.btnContestLeaderboard.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnContestLeaderboard.UseVisualStyleBackColor = true;
-            this.btnContestLeaderboard.Click += new System.EventHandler(this.btnContestLeaderboard_Click);
             // 
             // btnReport
             // 
@@ -779,7 +753,7 @@ namespace SQL_Judge_System.UI
             this.dgvContest.BorderStyle = System.Windows.Forms.BorderStyle.None;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F);
             dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
@@ -789,7 +763,7 @@ namespace SQL_Judge_System.UI
             this.dgvContest.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F);
             dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(201)))), ((int)(((byte)(224)))));
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(40)))), ((int)(((byte)(69)))));
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White;
@@ -1014,7 +988,7 @@ namespace SQL_Judge_System.UI
             this.dgvSubmissions.BorderStyle = System.Windows.Forms.BorderStyle.None;
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 9F);
             dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
             dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
             dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
@@ -1024,7 +998,7 @@ namespace SQL_Judge_System.UI
             this.dgvSubmissions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 9F);
             dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(201)))), ((int)(((byte)(224)))));
             dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(40)))), ((int)(((byte)(69)))));
             dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.White;
@@ -1111,7 +1085,7 @@ namespace SQL_Judge_System.UI
             this.dgvAdmins.BorderStyle = System.Windows.Forms.BorderStyle.None;
             dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Segoe UI", 9F);
             dataGridViewCellStyle9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
             dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
             dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
@@ -1121,7 +1095,7 @@ namespace SQL_Judge_System.UI
             this.dgvAdmins.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Segoe UI", 9F);
             dataGridViewCellStyle10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(201)))), ((int)(((byte)(224)))));
             dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(40)))), ((int)(((byte)(69)))));
             dataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.White;
@@ -1607,7 +1581,7 @@ namespace SQL_Judge_System.UI
             this.dgvStudents.BorderStyle = System.Windows.Forms.BorderStyle.None;
             dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Segoe UI", 9F);
             dataGridViewCellStyle12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
             dataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
             dataGridViewCellStyle12.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
@@ -1617,7 +1591,7 @@ namespace SQL_Judge_System.UI
             this.dgvStudents.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
-            dataGridViewCellStyle13.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            dataGridViewCellStyle13.Font = new System.Drawing.Font("Segoe UI", 9F);
             dataGridViewCellStyle13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(201)))), ((int)(((byte)(224)))));
             dataGridViewCellStyle13.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(40)))), ((int)(((byte)(69)))));
             dataGridViewCellStyle13.SelectionForeColor = System.Drawing.Color.White;
@@ -1841,7 +1815,7 @@ namespace SQL_Judge_System.UI
             this.dgv_Users.BorderStyle = System.Windows.Forms.BorderStyle.None;
             dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle15.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle15.Font = new System.Drawing.Font("Segoe UI", 9F);
             dataGridViewCellStyle15.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
             dataGridViewCellStyle15.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
             dataGridViewCellStyle15.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
@@ -1851,7 +1825,7 @@ namespace SQL_Judge_System.UI
             this.dgv_Users.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle16.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
-            dataGridViewCellStyle16.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            dataGridViewCellStyle16.Font = new System.Drawing.Font("Segoe UI", 9F);
             dataGridViewCellStyle16.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(201)))), ((int)(((byte)(224)))));
             dataGridViewCellStyle16.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(40)))), ((int)(((byte)(69)))));
             dataGridViewCellStyle16.SelectionForeColor = System.Drawing.Color.White;
@@ -2072,7 +2046,7 @@ namespace SQL_Judge_System.UI
             this.dgvProblems.BorderStyle = System.Windows.Forms.BorderStyle.None;
             dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle18.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
-            dataGridViewCellStyle18.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle18.Font = new System.Drawing.Font("Segoe UI", 9F);
             dataGridViewCellStyle18.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
             dataGridViewCellStyle18.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
             dataGridViewCellStyle18.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
@@ -2082,7 +2056,7 @@ namespace SQL_Judge_System.UI
             this.dgvProblems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle19.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
-            dataGridViewCellStyle19.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            dataGridViewCellStyle19.Font = new System.Drawing.Font("Segoe UI", 9F);
             dataGridViewCellStyle19.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(201)))), ((int)(((byte)(224)))));
             dataGridViewCellStyle19.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(40)))), ((int)(((byte)(69)))));
             dataGridViewCellStyle19.SelectionForeColor = System.Drawing.Color.White;
@@ -2339,7 +2313,6 @@ namespace SQL_Judge_System.UI
         private FontAwesome.Sharp.IconButton btn_contests;
         private FontAwesome.Sharp.IconButton btnSubmissions;
         private FontAwesome.Sharp.IconButton btnReport;
-        private FontAwesome.Sharp.IconButton btnContestLeaderboard;
         private FontAwesome.Sharp.IconButton btn_Settings;
         private FontAwesome.Sharp.IconButton btnLogout;
         private FontAwesome.Sharp.IconButton btnAddAdmin;

@@ -343,7 +343,8 @@ CREATE PROCEDURE contestProblems (IN contestID INT)
 BEGIN
 SELECT p.ProblemID, p.Title, p.DifficultyName, p.Points FROM vw_problems p 
 JOIN ContestProblems c ON p.ProblemID = c.ProblemID  
-WHERE c.ContestID = contestID AND p.IsActive = 1;
+WHERE c.ContestID = contestID AND p.IsActive = 1
+ORDER BY p.ProblemID, p.Title, p.DifficultyName, p.Points;
 END$$
 
 DELIMITER ;

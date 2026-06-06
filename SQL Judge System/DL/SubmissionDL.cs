@@ -48,33 +48,32 @@ namespace SQL_Judge_System.DL
             string query = "SELECT * FROM vw_Submissions;";
             return DatabaseHelper.Instance.GetDataTable(query);
         }
-        public static int TotalSubmissions()
+        public static int GetAttemptNumber(int studentID, int problemID)
         {
-            string query = $"SELECT COUNT(*) FROM Submissions;";
-            int count = DatabaseHelper.Instance.ExecuteScalar(query, null);
-            return count != -1 ? count : 0;
-        }
-        public static int AcceptedSubmissions()
-        {
-            string query = $"SELECT COUNT(*) FROM Submissions WHERE StatusID = @StatusID;";
+            string query = "SELECT MAX(AttemptNumber) FROM submissions WHERE StudentID = @StudentID AND ProblemID = @ProblemID;";
 
-            MySqlParameter[] parameters = {
-                new MySqlParameter("@StatusID", SubmissionStatusDL.GetAccepted())
+            MySqlParameter[] parameters =
+            {
+                new MySqlParameter("@StudentID", studentID),
+                new MySqlParameter("@ProblemID", problemID)
             };
 
             int count = DatabaseHelper.Instance.ExecuteScalar(query, parameters);
             return count != -1 ? count : 0;
         }
-        public static int RejectedSubmissions()
+        public static int SubmittedContestProblems(int contestID, int studentID)
         {
-            string query = $"SELECT COUNT(*) FROM Submissions WHERE StatusID <> @StatusID;";
+            string query = $"SELECT DISTINCT COUNT(problemID) FROM submissions WHERE ContestID = @ContestID AND StudentID = @StudentID AND StatusID = @StatusID";
 
-            MySqlParameter[] parameters = {
-                new MySqlParameter("@StatusID", SubmissionStatusDL.GetAccepted())
+            MySqlParameter[] parameters =
+            {
+                new MySqlParameter("@ContestID", contestID),
+                new MySqlParameter("@StatusID", SubmissionStatusDL.GetAccepted()),
+                new MySqlParameter("@StudentID", studentID)
             };
 
-            int count = DatabaseHelper.Instance.ExecuteScalar(query, parameters);
-            return count != -1 ? count : 0;
+            int result = DatabaseHelper.Instance.ExecuteScalar(query,parameters);
+            return result != -1 ? result : 0;
         }
     }
 }

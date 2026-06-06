@@ -77,9 +77,10 @@ namespace SQL_Judge_System.DL
         public static bool IsProblemExists(int problemId)
         {
             string query = "SELECT COUNT(*) FROM Problems WHERE ProblemID = @ProblemID;";
+
             MySqlParameter[] parameters = { new MySqlParameter("@ProblemID", problemId) };
 
-            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query)) > 0;
+            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query, parameters)) > 0;
         }
         public static bool IsProblemExists(string title, int difficultyID)
         {
@@ -108,14 +109,14 @@ namespace SQL_Judge_System.DL
         }
 
         // ==========================================
-        // DATA OBJECT RETRIEVAL MATCHERS
+        // DATA RETRIEVAL
         // ==========================================
         public static Problem GetProblemByID(int problemID)
         {
             string query = "SELECT * FROM Problems WHERE ProblemID = @ProblemID;";
             MySqlParameter[] parameters = { new MySqlParameter("@ProblemID", problemID) };
 
-            DataTable dt = DatabaseHelper.Instance.GetDataTable(query);
+            DataTable dt = DatabaseHelper.Instance.GetDataTable(query, parameters);
 
             if (dt.Rows.Count > 0)
             {
@@ -141,6 +142,11 @@ namespace SQL_Judge_System.DL
             MySqlParameter[] parameters = { new MySqlParameter("@ContestID", contestID) };
             return DatabaseHelper.Instance.GetDataTable(query, parameters);
         }
+        public static DataTable ProblemsList()
+        {
+            string query = "SELECT * FROM vw_problems Order BY ProblemID;";
+            return DatabaseHelper.Instance.GetDataTable(query);
+        }
 
         // ==========================================
         // DATA ROW MAPPING 
@@ -165,33 +171,6 @@ namespace SQL_Judge_System.DL
         }
 
         // ==========================================
-        // ADMIN DASHBOARD PANELS VIEW VIEWS
-        // ==========================================
-        public static DataTable ProblemsList()
-        {
-            string query = "SELECT * FROM vw_problems Order BY ProblemID;";
-            return DatabaseHelper.Instance.GetDataTable(query);
-        }
-        public static int TotalProblems()
-        {
-            string query = "SELECT COUNT(*) FROM Problems;";
-            int count = DatabaseHelper.Instance.ExecuteScalar(query);
-            return count != -1 ? count : 0;
-        }
-        public static int ActiveProblems()
-        {
-            string query = "SELECT COUNT(*) FROM Problems WHERE IsActive = 1;";
-            int count = DatabaseHelper.Instance.ExecuteScalar(query);
-            return count != -1 ? count : 0;
-        }
-        public static int InactiveProblems()
-        {
-            string query = "SELECT COUNT(*) FROM Problems WHERE IsActive = 0;";
-            int count = DatabaseHelper.Instance.ExecuteScalar(query);
-            return count != -1 ? count : 0;
-        }
-
-        // ==========================================
         // STUDENT INTERFACE GRID VIEWS
         // ==========================================
         public static DataTable AllProblemsList()
@@ -199,20 +178,5 @@ namespace SQL_Judge_System.DL
             string query = "SELECT ProblemID, Title, DifficultyName FROM vw_problems Order BY ProblemID;";
             return DatabaseHelper.Instance.GetDataTable(query);
         }
-        public static DataTable EasyProblemsList()
-        {
-            string query = "SELECT ProblemID, Title, DifficultyName FROM vw_problems WHERE DifficultyName = 'Easy' Order BY ProblemID;";
-            return DatabaseHelper.Instance.GetDataTable(query);
-        }
-        public static DataTable MediumProblemsList()
-        {
-            string query = "SELECT ProblemID, Title, DifficultyName FROM vw_problems WHERE DifficultyName = 'Medium' Order BY ProblemID;";
-            return DatabaseHelper.Instance.GetDataTable(query);
-        }
-        public static DataTable HardProblemsList()
-        {
-            string query = "SELECT ProblemID, Title, DifficultyName FROM vw_problems WHERE DifficultyName = 'Hard' Order BY ProblemID;";
-            return DatabaseHelper.Instance.GetDataTable(query);
-        }      
     }
 }

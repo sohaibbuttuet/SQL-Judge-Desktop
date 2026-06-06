@@ -59,16 +59,6 @@ namespace SQL_Judge_System.DL
 
             return MapDataRowToContest(dt.Rows[0]);
         }
-        public static DataTable GetAllContestsByName(string contestName)
-        {
-            string query = "SELECT * FROM vw_contests WHERE Title LIKE @ContestName;";
-
-            MySqlParameter[] parameters =
-            {
-                new MySqlParameter("@ContestName", $"%{contestName}%")
-            };
-            return DatabaseHelper.Instance.GetDataTable(query, parameters);
-        }
 
         // Helping Function
         private static Contest MapDataRowToContest(DataRow row)
@@ -93,10 +83,17 @@ namespace SQL_Judge_System.DL
             string query = $"SELECT COUNT(*) FROM Contests WHERE Title = '{Title}';";
             return DatabaseHelper.Instance.ExecuteScalar(query) > 0;
         }
-        public static bool IsContestExists(int contestID, string Title)
+        public static bool IsContestExists(int contestID, string title)
         {
-            string query = $"SELECT COUNT(*) FROM Contests WHERE ContestID <> {contestID} AND Title = '{Title}'";
-            return DatabaseHelper.Instance.ExecuteScalar(query) > 0;
+            string query = $"SELECT COUNT(*) FROM Contests WHERE ContestID <> @ContestID AND Title = @Title";
+
+            MySqlParameter[] parameters =
+           {
+                new MySqlParameter("@ContestID", contestID),
+                new MySqlParameter("@Title", title)
+            };
+
+            return DatabaseHelper.Instance.ExecuteScalar(query, parameters) > 0;
         }
 
         // Contests in Admin Dashboard
@@ -104,26 +101,6 @@ namespace SQL_Judge_System.DL
         {
             string query = "SELECT * FROM vw_contests;";
             return DatabaseHelper.Instance.GetDataTable(query);
-        }
-        public static int TotalContests()
-        {
-            string query = "SELECT COUNT(*) FROM Contests;";
-            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
-        }
-        public static int ActiveContests()
-        {
-            string query = "SELECT COUNT(*) FROM Contests WHERE NOW() BETWEEN StartDate AND EndDate;";
-            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
-        }
-        public static int InactiveContests()
-        {
-            string query = "SELECT COUNT(*) FROM Contests WHERE NOW() > EndDate;";
-            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
-        }
-        public static int UpcomingContests()
-        {
-            string query = "SELECT COUNT(*) FROM Contests WHERE NOW() < StartDate; ";
-            return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query));
         }
     }
 }

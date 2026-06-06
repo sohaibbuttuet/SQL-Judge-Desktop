@@ -20,7 +20,7 @@ namespace SQL_Judge_System.DL
                 new MySqlParameter("@RoleID", u.RoleID)
             };
 
-            DatabaseHelper.Instance.Update(query);
+            DatabaseHelper.Instance.Update(query, parameters);
         }
         public static string GetRoleNameByUserID(int userID)
         {
@@ -33,7 +33,7 @@ namespace SQL_Judge_System.DL
                 new MySqlParameter("@UserID", userID)
             };
 
-            return DatabaseHelper.Instance.ExecuteScalarObject(query).ToString();
+            return DatabaseHelper.Instance.ExecuteScalarObject(query, parameters).ToString();
         }
     }
 }

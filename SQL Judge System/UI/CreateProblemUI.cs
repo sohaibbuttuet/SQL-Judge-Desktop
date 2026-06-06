@@ -150,6 +150,8 @@ namespace SQL_Judge_System.UI
             {
                 string selectedDatabase = cmbDatabase.SelectedItem.ToString();
                 LoadTreeView(selectedDatabase);
+
+                isQueryVerified = false;
             }
         }
 
@@ -366,7 +368,7 @@ namespace SQL_Judge_System.UI
                     ProblemBL.SaveCheckedTables(problem.ProblemID, tablesToSave);
                 }
 
-                MessageBox.Show("Problem created successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Problem saved successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();
             }
             catch (Exception ex)
@@ -409,8 +411,6 @@ namespace SQL_Judge_System.UI
 
                 MessageBox.Show($"Query Verification Failed:\n{ex.Message}", "SQL Compiler Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-        
+        }        
     }
 }
- 

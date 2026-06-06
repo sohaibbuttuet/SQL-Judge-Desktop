@@ -232,6 +232,9 @@
     <EmbeddedResource Include="UI\CreateProblemUI.resx">
       <DependentUpon>CreateProblemUI.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\JoinContestUI.resx">
+      <DependentUpon>JoinContestUI.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </EmbeddedResource>

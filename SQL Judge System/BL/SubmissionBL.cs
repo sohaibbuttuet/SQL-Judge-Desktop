@@ -140,17 +140,15 @@ namespace SQL_Judge_System.BL
         {
             return SubmissionDL.GetSubmissionsForAdmin();
         }
-        public static int TotalSubmissions()
+        public static int AttemptNumber(int studentID, int problemID)
         {
-            return SubmissionDL.TotalSubmissions();
-        }
-        public static int AcceptedSubmissions()
-        {
-            return SubmissionDL.AcceptedSubmissions();
-        }
-        public static int RejectedSubmissions()
-        {
-            return SubmissionDL.RejectedSubmissions();
+            if (studentID <= 0)
+                throw new ArgumentException("Invalid Studnet ID");
+
+            if (problemID <= 0)
+                throw new ArgumentException("Invalid Problem ID");
+
+            return SubmissionDL.GetAttemptNumber(studentID, problemID);
         }
     }
 }

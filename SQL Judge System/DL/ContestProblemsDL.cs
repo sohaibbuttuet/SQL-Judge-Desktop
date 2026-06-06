@@ -45,7 +45,7 @@ namespace SQL_Judge_System.DL
                 new MySqlParameter("@ProblemID", contestProblem.ProblemID)
             };
 
-            return DatabaseHelper.Instance.ExecuteScalar(query) > 0;
+            return DatabaseHelper.Instance.ExecuteScalar(query, parameters) > 0;
         }
         public static bool IsContestExists(int contestID)
         {
@@ -56,7 +56,19 @@ namespace SQL_Judge_System.DL
                 new MySqlParameter("@ContestID", contestID)
             };
 
-            return DatabaseHelper.Instance.ExecuteScalar(query) > 0;
+            return DatabaseHelper.Instance.ExecuteScalar(query, parameters) > 0;
+        }
+        public static int CountContestProblems(int contestID)
+        {
+            string query = "SELECT COUNT(*) FROM contestProblems WHERE ContestID = @contestID";
+            MySqlParameter[] parameters =
+            {
+                new MySqlParameter("@contestID", contestID)
+            };
+
+            int result = DatabaseHelper.Instance.ExecuteScalar(query, parameters);
+
+            return result != -1 ? result : 0;
         }
         public static List<ContestProblem> GetProblemsByContestID(int contestID)
         {
@@ -67,7 +79,8 @@ namespace SQL_Judge_System.DL
                 new MySqlParameter("@ContestID", contestID)
             };
 
-            DataTable dt = DatabaseHelper.Instance.GetDataTable(query);
+            DataTable dt = DatabaseHelper.Instance.GetDataTable(query, parameters);
+
             List<ContestProblem> problems = new List<ContestProblem>();
 
             foreach (DataRow row in dt.Rows)

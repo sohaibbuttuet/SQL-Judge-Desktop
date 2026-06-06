@@ -50,21 +50,9 @@ namespace SQL_Judge_System.BL
         // ==========================================
         // ADMIN DASHBOARD ANALYTICS PANEL
         // ==========================================
-        public static DataTable GetStudentsForAdmin()
+        public static DataTable GetStudents()
         {
-            return StudentDL.GetStudentsForAdmin();
-        }
-        public static int TotalStudents()
-        {
-            return StudentDL.TotalStudents();
-        }
-        public static int ActiveStudents()
-        {
-            return StudentDL.ActiveStudents();
-        }
-        public static int InactiveStudents()
-        {
-            return StudentDL.InactiveStudents();
+            return StudentDL.GetStudents();
         }
 
         // ==========================================

@@ -101,41 +101,17 @@ namespace SQL_Judge_System.BL
         {
             return UserDL.GetUsers();
         }
-        public static int TotalUsers()
-        {
-            return UserDL.TotalUsers();
-        }
-        public static int ActiveUsers()
-        {
-            return UserDL.ActiveUsers();
-        }
-        public static int InactiveUsers()
-        {
-            return UserDL.InactiveUsers();
-        }
 
         // ==========================================
         // SUPER-ADMIN MANAGEMENT ROLES
         // ==========================================
-        public static DataTable GetAdminList()
+        public static DataTable GetAdmins()
         {
-            return UserDL.GetAdminList();
-        }
-        public static int TotalAdmins()
-        {
-            return UserDL.TotalAdmins();
+            return UserDL.GetAdmins();
         }
         public static int TotalSuperAdmins()
         {
             return UserDL.TotalSuperAdmins();
-        }
-        public static int ActiveAdmins()
-        {
-            return UserDL.ActiveAdmins();
-        }
-        public static int InactiveAdmins()
-        {
-            return UserDL.InactiveAdmins();
         }
 
         // ==========================================

@@ -61,7 +61,7 @@ namespace SQL_Judge_System.BL
         // ==========================================
         // ADMIN DASHBOARD DATA VIEWS
         // ==========================================
-        public static DataTable ProblemsList()
+        public static DataTable GetProblemsDT()
         {
             return ProblemDL.ProblemsList();
         }
@@ -84,40 +84,12 @@ namespace SQL_Judge_System.BL
         {
             return ProblemDL.AllProblemsList();
         }
-        public static DataTable GetEasyProblems()
-        {
-            return ProblemDL.EasyProblemsList();
-        }
-        public static DataTable GetMediumProblems()
-        {
-            return ProblemDL.MediumProblemsList();
-        }
-        public static DataTable GetHardProblems()
-        {
-            return ProblemDL.HardProblemsList();
-        }
         public static Problem GetProblemByID(int problemId)
         {
             if (problemId <= 0)
                 throw new ArgumentOutOfRangeException(nameof(problemId), "Problem ID must be greater than 0.");
 
             return ProblemDL.GetProblemByID(problemId);
-        }
-
-        // ==========================================
-        // SYSTEM ANALYTICS COUNTERS
-        // ==========================================
-        public static int TotalProblems()
-        {
-            return ProblemDL.TotalProblems();
-        }
-        public static int ActiveProblems()
-        {
-            return ProblemDL.ActiveProblems();
-        }
-        public static int InactiveProblems()
-        {
-            return ProblemDL.InactiveProblems();
         }
 
         // ==========================================

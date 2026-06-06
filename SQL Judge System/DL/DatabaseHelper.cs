@@ -27,7 +27,7 @@ namespace SQL_Judge_System.DL
         private MySqlConnection getConnection()
         {
             string connectionString =
-                $"server={serverName};port={port};user={databaseUser};database={databaseName};password={databasePassword};SslMode=Required;";
+                $"server={serverName};port={port};user={databaseUser};database={databaseName};password={databasePassword};SslMode=Required;Pooling=false;";
 
             return new MySqlConnection(connectionString);
         }
@@ -114,7 +114,6 @@ namespace SQL_Judge_System.DL
                     {
                         command.Parameters.AddRange(parameters);
                     }
-
                     return command.ExecuteScalar();
                 }
             }
