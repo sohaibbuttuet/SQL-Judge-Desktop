@@ -117,11 +117,30 @@ namespace SQL_Judge_System.BL
 
         public static bool IsContestFullySolved(int studentID, int contestID)
         {
+            VerifyData(studentID, contestID);
+
             int contestProblems = ContestProblemsDL.CountContestProblems(contestID);
             int submittedProblems = SubmissionDL.SubmittedContestProblems(studentID, contestID);
 
             if (contestProblems == submittedProblems) return true;
             return false;
+        }
+        public static bool IsContestPartiallyPassed(int studentID, int contestID)
+        {
+            VerifyData(studentID, contestID);
+
+            int contestProblems = ContestProblemsDL.CountContestProblems(contestID);
+            int submittedProblems = SubmissionDL.SubmittedContestProblems(studentID, contestID);
+
+            if (contestProblems > submittedProblems) return true;
+            return false;
+        }
+        private static void VerifyData(int studentID, int contestID)
+        {
+            if (studentID <= 0)
+                throw new ArgumentOutOfRangeException(nameof(studentID), "Invalid Student ID");
+            if (contestID <= 0)
+                throw new ArgumentOutOfRangeException(nameof(studentID), "Invalid Contest ID");
         }
 
         // For Contest Panel in Admin Dashboard

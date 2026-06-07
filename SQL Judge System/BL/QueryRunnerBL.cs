@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Windows.Documents;
+using SQL_Judge_System.Helper;
 
 namespace SQL_Judge_System.BL
 {

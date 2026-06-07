@@ -3,6 +3,7 @@ using SQL_Judge_System.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using SQL_Judge_System.Helper;
 
 namespace SQL_Judge_System.LookupDL
 {

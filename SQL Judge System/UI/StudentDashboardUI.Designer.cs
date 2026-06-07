@@ -70,7 +70,7 @@ namespace SQL_Judge_System.UI
             // 
             // pnlSidebar
             // 
-            this.pnlSidebar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(29)))), ((int)(((byte)(56)))));
+            this.pnlSidebar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(14)))), ((int)(((byte)(26)))));
             this.pnlSidebar.Controls.Add(this.btnReport);
             this.pnlSidebar.Controls.Add(this.btn_contest);
             this.pnlSidebar.Controls.Add(this.btn_problems);
@@ -86,7 +86,7 @@ namespace SQL_Judge_System.UI
             // 
             // btnReport
             // 
-            this.btnReport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(29)))), ((int)(((byte)(56)))));
+            this.btnReport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(14)))), ((int)(((byte)(26)))));
             this.btnReport.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnReport.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnReport.FlatAppearance.BorderSize = 0;
@@ -112,7 +112,7 @@ namespace SQL_Judge_System.UI
             // 
             // btn_contest
             // 
-            this.btn_contest.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(29)))), ((int)(((byte)(56)))));
+            this.btn_contest.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(14)))), ((int)(((byte)(26)))));
             this.btn_contest.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_contest.Dock = System.Windows.Forms.DockStyle.Top;
             this.btn_contest.FlatAppearance.BorderSize = 0;
@@ -138,7 +138,7 @@ namespace SQL_Judge_System.UI
             // 
             // btn_problems
             // 
-            this.btn_problems.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(29)))), ((int)(((byte)(56)))));
+            this.btn_problems.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(14)))), ((int)(((byte)(26)))));
             this.btn_problems.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_problems.Dock = System.Windows.Forms.DockStyle.Top;
             this.btn_problems.FlatAppearance.BorderSize = 0;
@@ -164,7 +164,7 @@ namespace SQL_Judge_System.UI
             // 
             // btn_home
             // 
-            this.btn_home.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(29)))), ((int)(((byte)(56)))));
+            this.btn_home.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(14)))), ((int)(((byte)(26)))));
             this.btn_home.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_home.Dock = System.Windows.Forms.DockStyle.Top;
             this.btn_home.FlatAppearance.BorderSize = 0;
@@ -190,7 +190,7 @@ namespace SQL_Judge_System.UI
             // 
             // pnlSidebarLogo
             // 
-            this.pnlSidebarLogo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(29)))), ((int)(((byte)(56)))));
+            this.pnlSidebarLogo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(14)))), ((int)(((byte)(26)))));
             this.pnlSidebarLogo.Controls.Add(this.picLogo);
             this.pnlSidebarLogo.Controls.Add(this.lblAppSub);
             this.pnlSidebarLogo.Controls.Add(this.lblAppName);
@@ -234,7 +234,7 @@ namespace SQL_Judge_System.UI
             // 
             // btn_settings
             // 
-            this.btn_settings.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(29)))), ((int)(((byte)(56)))));
+            this.btn_settings.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(14)))), ((int)(((byte)(26)))));
             this.btn_settings.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_settings.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.btn_settings.FlatAppearance.BorderSize = 0;
@@ -260,7 +260,7 @@ namespace SQL_Judge_System.UI
             // 
             // btn_Logout
             // 
-            this.btn_Logout.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(29)))), ((int)(((byte)(56)))));
+            this.btn_Logout.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(14)))), ((int)(((byte)(26)))));
             this.btn_Logout.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_Logout.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.btn_Logout.FlatAppearance.BorderSize = 0;
@@ -286,6 +286,7 @@ namespace SQL_Judge_System.UI
             // 
             // pnlHome
             // 
+            this.pnlHome.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(14)))), ((int)(((byte)(26)))));
             this.pnlHome.Controls.Add(this.pnlContentArea);
             this.pnlHome.Controls.Add(this.pnlStatsContainer);
             this.pnlHome.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -296,7 +297,7 @@ namespace SQL_Judge_System.UI
             // 
             // pnlContentArea
             // 
-            this.pnlContentArea.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(31)))), ((int)(((byte)(58)))));
+            this.pnlContentArea.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(14)))), ((int)(((byte)(26)))));
             this.pnlContentArea.Controls.Add(this.dgvLeaderboard);
             this.pnlContentArea.Controls.Add(this.lblGridTitle);
             this.pnlContentArea.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -320,7 +321,7 @@ namespace SQL_Judge_System.UI
             this.dgvLeaderboard.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvLeaderboard.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
+            this.dgvLeaderboard.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(24)))), ((int)(((byte)(39)))));
             this.dgvLeaderboard.BorderStyle = System.Windows.Forms.BorderStyle.None;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
@@ -340,15 +341,15 @@ namespace SQL_Judge_System.UI
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvLeaderboard.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvLeaderboard.EnableHeadersVisualStyles = false;
-            this.dgvLeaderboard.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(52)))), ((int)(((byte)(88)))));
-            this.dgvLeaderboard.Location = new System.Drawing.Point(-2, 47);
+            this.dgvLeaderboard.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(33)))), ((int)(((byte)(47)))));
+            this.dgvLeaderboard.Location = new System.Drawing.Point(18, 47);
             this.dgvLeaderboard.MultiSelect = false;
             this.dgvLeaderboard.Name = "dgvLeaderboard";
             this.dgvLeaderboard.ReadOnly = true;
             this.dgvLeaderboard.RowHeadersVisible = false;
             this.dgvLeaderboard.RowTemplate.Height = 36;
             this.dgvLeaderboard.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvLeaderboard.Size = new System.Drawing.Size(985, 409);
+            this.dgvLeaderboard.Size = new System.Drawing.Size(947, 397);
             this.dgvLeaderboard.TabIndex = 1;
             // 
             // lblGridTitle
@@ -366,7 +367,7 @@ namespace SQL_Judge_System.UI
             // 
             // pnlStatsContainer
             // 
-            this.pnlStatsContainer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(31)))), ((int)(((byte)(58)))));
+            this.pnlStatsContainer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(14)))), ((int)(((byte)(26)))));
             this.pnlStatsContainer.Controls.Add(this.tlpnlStudentDashboard);
             this.pnlStatsContainer.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlStatsContainer.Location = new System.Drawing.Point(0, 0);
@@ -377,7 +378,7 @@ namespace SQL_Judge_System.UI
             // 
             // tlpnlStudentDashboard
             // 
-            this.tlpnlStudentDashboard.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(31)))), ((int)(((byte)(58)))));
+            this.tlpnlStudentDashboard.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(14)))), ((int)(((byte)(26)))));
             this.tlpnlStudentDashboard.ColumnCount = 4;
             this.tlpnlStudentDashboard.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tlpnlStudentDashboard.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
@@ -397,7 +398,7 @@ namespace SQL_Judge_System.UI
             // 
             // pnlSkillLevel
             // 
-            this.pnlSkillLevel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
+            this.pnlSkillLevel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(24)))), ((int)(((byte)(39)))));
             this.pnlSkillLevel.Controls.Add(this.lblSkillValue);
             this.pnlSkillLevel.Controls.Add(this.lblSkillLevel);
             this.pnlSkillLevel.Controls.Add(this.lblSkillBadge);
@@ -447,7 +448,7 @@ namespace SQL_Judge_System.UI
             // 
             // pnlRankCard
             // 
-            this.pnlRankCard.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
+            this.pnlRankCard.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(24)))), ((int)(((byte)(39)))));
             this.pnlRankCard.Controls.Add(this.lblRankValue);
             this.pnlRankCard.Controls.Add(this.lblRankTitle);
             this.pnlRankCard.Controls.Add(this.lblRankBadge);
@@ -497,7 +498,7 @@ namespace SQL_Judge_System.UI
             // 
             // pnlSolvedCard
             // 
-            this.pnlSolvedCard.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
+            this.pnlSolvedCard.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(24)))), ((int)(((byte)(39)))));
             this.pnlSolvedCard.Controls.Add(this.lblSolvedValue);
             this.pnlSolvedCard.Controls.Add(this.lblSolvedTitle);
             this.pnlSolvedCard.Controls.Add(this.lblSolvedBadge);
@@ -547,7 +548,7 @@ namespace SQL_Judge_System.UI
             // 
             // pnlScoreCard
             // 
-            this.pnlScoreCard.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
+            this.pnlScoreCard.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(24)))), ((int)(((byte)(39)))));
             this.pnlScoreCard.Controls.Add(this.lblScoreValue);
             this.pnlScoreCard.Controls.Add(this.lblScoreTitle);
             this.pnlScoreCard.Controls.Add(this.lblScoreBadge);
@@ -620,7 +621,7 @@ namespace SQL_Judge_System.UI
             // 
             // pnlHeader
             // 
-            this.pnlHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
+            this.pnlHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(24)))), ((int)(((byte)(39)))));
             this.pnlHeader.Controls.Add(this.lblOnlineStatus);
             this.pnlHeader.Controls.Add(this.lblWelcome);
             this.pnlHeader.Dock = System.Windows.Forms.DockStyle.Top;

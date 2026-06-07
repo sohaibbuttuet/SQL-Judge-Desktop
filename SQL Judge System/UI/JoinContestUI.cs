@@ -21,6 +21,7 @@ namespace SQL_Judge_System.UI
         private readonly int studentID;
         private DataTable dtAllContest;
         private DateTime? contestEndTime = null;
+        private Timer clockTimer = new Timer {Interval = 1000 };
 
         public JoinContestUI(int studentID)
         {
@@ -99,7 +100,25 @@ namespace SQL_Judge_System.UI
                     lblBadgeStartValue.Text = "Start: " + contest.StartDate.ToString("g");
                     lblBadgeEndValue.Text = "End: " + contest.EndDate.ToString("g");
                     txtContestDescription.Text = contest.Description;
-                    lblBadgeDurationValue.Text = $"{contest.Duration} mins";                    
+                    lblBadgeDurationValue.Text = $"{contest.Duration} mins";
+                    lblAttemptsValue.Text = SubmissionBL.GetContestAttempts(studentID, contestID).ToString();
+                    lblRankValue.Text = "";
+
+                    if (ContestBL.IsContestFullySolved(studentID, contestID))
+                    {
+                        lblLastSubmissionValue.Text = "Solved";
+                        lblLastSubmissionValue.ForeColor = Color.Green;
+                    }
+                    else if (ContestBL.IsContestPartiallyPassed(studentID, contestID))
+                    {
+                        lblLastSubmissionValue.Text = "Attempted";
+                        lblLastSubmissionValue.ForeColor = Color.Orange;
+                    }
+                    else
+                    {
+                        lblLastSubmissionValue.Text = "Not Attempted";
+                        lblLastSubmissionValue.ForeColor = Color.Gray;
+                    }
                 }
             }
             catch (Exception ex)

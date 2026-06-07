@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlFormBackground = new System.Windows.Forms.Panel();
             this.pnlMainCard = new System.Windows.Forms.Panel();
             this.pnlBody = new System.Windows.Forms.Panel();
@@ -88,8 +88,6 @@
             this.pnlOutputAccent = new System.Windows.Forms.Panel();
             this.pnlRightColumn = new System.Windows.Forms.Panel();
             this.pnlSchemaCard = new System.Windows.Forms.Panel();
-            this.pnlSchemaFooter = new System.Windows.Forms.Panel();
-            this.lblSchemaHint = new System.Windows.Forms.Label();
             this.trvDatabaseSchema = new System.Windows.Forms.TreeView();
             this.pnlSchemaHeader = new System.Windows.Forms.Panel();
             this.lblSchemaSubtitle = new System.Windows.Forms.Label();
@@ -100,6 +98,9 @@
             this.pnlStatRowsReturned = new System.Windows.Forms.Panel();
             this.lblSubmissionStatus = new System.Windows.Forms.Label();
             this.lblRowsReturnedCaption = new System.Windows.Forms.Label();
+            this.pnlInfoTimeRemaining = new System.Windows.Forms.Panel();
+            this.lblTimeRemainingValue = new System.Windows.Forms.Label();
+            this.lblTimeRemainingCaption = new System.Windows.Forms.Label();
             this.pnlStatLastResult = new System.Windows.Forms.Panel();
             this.lblLastResultValue = new System.Windows.Forms.Label();
             this.lblLastResultCaption = new System.Windows.Forms.Label();
@@ -109,9 +110,6 @@
             this.lblFormSubtitle = new System.Windows.Forms.Label();
             this.lblFormTitle = new System.Windows.Forms.Label();
             this.pnlHeaderLeftAccent = new System.Windows.Forms.Panel();
-            this.lblTimeRemainingCaption = new System.Windows.Forms.Label();
-            this.lblTimeRemainingValue = new System.Windows.Forms.Label();
-            this.pnlInfoTimeRemaining = new System.Windows.Forms.Panel();
             this.submitCooldownTimer = new System.Windows.Forms.Timer(this.components);
             this.pnlFormBackground.SuspendLayout();
             this.pnlMainCard.SuspendLayout();
@@ -154,14 +152,13 @@
             this.pnlOutputHeader.SuspendLayout();
             this.pnlRightColumn.SuspendLayout();
             this.pnlSchemaCard.SuspendLayout();
-            this.pnlSchemaFooter.SuspendLayout();
             this.pnlSchemaHeader.SuspendLayout();
             this.pnlHeaderBar.SuspendLayout();
             this.pnlHeaderStats.SuspendLayout();
             this.pnlStatRowsReturned.SuspendLayout();
+            this.pnlInfoTimeRemaining.SuspendLayout();
             this.pnlStatLastResult.SuspendLayout();
             this.pnlStatAttempts.SuspendLayout();
-            this.pnlInfoTimeRemaining.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlFormBackground
@@ -241,33 +238,33 @@
             this.dgvProblems.AllowUserToAddRows = false;
             this.dgvProblems.AllowUserToDeleteRows = false;
             this.dgvProblems.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(28)))), ((int)(((byte)(41)))));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(163)))), ((int)(((byte)(175)))));
-            this.dgvProblems.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(28)))), ((int)(((byte)(41)))));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(163)))), ((int)(((byte)(175)))));
+            this.dgvProblems.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
             this.dgvProblems.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvProblems.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(33)))), ((int)(((byte)(47)))));
             this.dgvProblems.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvProblems.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.dgvProblems.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(24)))), ((int)(((byte)(39)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(85)))), ((int)(((byte)(99)))));
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(24)))), ((int)(((byte)(39)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(85)))), ((int)(((byte)(99)))));
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvProblems.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(24)))), ((int)(((byte)(39)))));
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(85)))), ((int)(((byte)(99)))));
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(24)))), ((int)(((byte)(39)))));
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(85)))), ((int)(((byte)(99)))));
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvProblems.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
             this.dgvProblems.ColumnHeadersHeight = 28;
             this.dgvProblems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(33)))), ((int)(((byte)(47)))));
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(163)))), ((int)(((byte)(175)))));
-            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(185)))), ((int)(((byte)(129)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(24)))), ((int)(((byte)(39)))));
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvProblems.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(33)))), ((int)(((byte)(47)))));
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(163)))), ((int)(((byte)(175)))));
+            dataGridViewCellStyle9.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(185)))), ((int)(((byte)(129)))));
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(24)))), ((int)(((byte)(39)))));
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvProblems.DefaultCellStyle = dataGridViewCellStyle9;
             this.dgvProblems.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvProblems.EnableHeadersVisualStyles = false;
             this.dgvProblems.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(41)))), ((int)(((byte)(55)))));
@@ -597,7 +594,7 @@
             this.txtSqlEditor.Name = "txtSqlEditor";
             this.txtSqlEditor.Size = new System.Drawing.Size(626, 154);
             this.txtSqlEditor.TabIndex = 1;
-            this.txtSqlEditor.Text = "-- Write your SQL query here\nSELECT ";
+            this.txtSqlEditor.Text = "-- Write your SQL query here\n";
             this.txtSqlEditor.WordWrap = false;
             this.txtSqlEditor.KeyUp += new System.Windows.Forms.KeyEventHandler(this.rtbSQLEditor_KeyUp);
             // 
@@ -798,9 +795,9 @@
             this.dgvQueryOutput.AllowUserToAddRows = false;
             this.dgvQueryOutput.AllowUserToDeleteRows = false;
             this.dgvQueryOutput.AllowUserToResizeRows = false;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(17)))), ((int)(((byte)(27)))));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(163)))), ((int)(((byte)(175)))));
-            this.dgvQueryOutput.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(17)))), ((int)(((byte)(27)))));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(163)))), ((int)(((byte)(175)))));
+            this.dgvQueryOutput.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle10;
             this.dgvQueryOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -809,25 +806,25 @@
             this.dgvQueryOutput.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvQueryOutput.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.dgvQueryOutput.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(24)))), ((int)(((byte)(39)))));
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(85)))), ((int)(((byte)(99)))));
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(24)))), ((int)(((byte)(39)))));
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(85)))), ((int)(((byte)(99)))));
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvQueryOutput.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(24)))), ((int)(((byte)(39)))));
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(85)))), ((int)(((byte)(99)))));
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(24)))), ((int)(((byte)(39)))));
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(85)))), ((int)(((byte)(99)))));
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvQueryOutput.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
             this.dgvQueryOutput.ColumnHeadersHeight = 26;
             this.dgvQueryOutput.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(24)))), ((int)(((byte)(39)))));
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(163)))), ((int)(((byte)(175)))));
-            dataGridViewCellStyle6.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(185)))), ((int)(((byte)(129)))));
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(24)))), ((int)(((byte)(39)))));
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvQueryOutput.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(24)))), ((int)(((byte)(39)))));
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(163)))), ((int)(((byte)(175)))));
+            dataGridViewCellStyle12.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(185)))), ((int)(((byte)(129)))));
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(24)))), ((int)(((byte)(39)))));
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvQueryOutput.DefaultCellStyle = dataGridViewCellStyle12;
             this.dgvQueryOutput.EnableHeadersVisualStyles = false;
             this.dgvQueryOutput.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(41)))), ((int)(((byte)(55)))));
             this.dgvQueryOutput.Location = new System.Drawing.Point(0, 0);
@@ -900,7 +897,6 @@
             // pnlSchemaCard
             // 
             this.pnlSchemaCard.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(33)))), ((int)(((byte)(47)))));
-            this.pnlSchemaCard.Controls.Add(this.pnlSchemaFooter);
             this.pnlSchemaCard.Controls.Add(this.trvDatabaseSchema);
             this.pnlSchemaCard.Controls.Add(this.pnlSchemaHeader);
             this.pnlSchemaCard.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -908,30 +904,6 @@
             this.pnlSchemaCard.Name = "pnlSchemaCard";
             this.pnlSchemaCard.Size = new System.Drawing.Size(224, 577);
             this.pnlSchemaCard.TabIndex = 0;
-            // 
-            // pnlSchemaFooter
-            // 
-            this.pnlSchemaFooter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(24)))), ((int)(((byte)(39)))));
-            this.pnlSchemaFooter.Controls.Add(this.lblSchemaHint);
-            this.pnlSchemaFooter.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlSchemaFooter.Location = new System.Drawing.Point(0, 551);
-            this.pnlSchemaFooter.Name = "pnlSchemaFooter";
-            this.pnlSchemaFooter.Padding = new System.Windows.Forms.Padding(10, 4, 10, 4);
-            this.pnlSchemaFooter.Size = new System.Drawing.Size(224, 26);
-            this.pnlSchemaFooter.TabIndex = 3;
-            // 
-            // lblSchemaHint
-            // 
-            this.lblSchemaHint.BackColor = System.Drawing.Color.Transparent;
-            this.lblSchemaHint.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblSchemaHint.Font = new System.Drawing.Font("Segoe UI", 7.5F);
-            this.lblSchemaHint.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(65)))), ((int)(((byte)(81)))));
-            this.lblSchemaHint.Location = new System.Drawing.Point(10, 4);
-            this.lblSchemaHint.Name = "lblSchemaHint";
-            this.lblSchemaHint.Size = new System.Drawing.Size(204, 18);
-            this.lblSchemaHint.TabIndex = 0;
-            this.lblSchemaHint.Text = "Click a column to copy name";
-            this.lblSchemaHint.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // trvDatabaseSchema
             // 
@@ -1010,8 +982,8 @@
             // 
             this.pnlHeaderStats.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlHeaderStats.BackColor = System.Drawing.Color.Transparent;
-            this.pnlHeaderStats.Controls.Add(this.pnlInfoTimeRemaining);
             this.pnlHeaderStats.Controls.Add(this.pnlStatRowsReturned);
+            this.pnlHeaderStats.Controls.Add(this.pnlInfoTimeRemaining);
             this.pnlHeaderStats.Controls.Add(this.pnlStatLastResult);
             this.pnlHeaderStats.Controls.Add(this.pnlStatAttempts);
             this.pnlHeaderStats.Location = new System.Drawing.Point(577, 10);
@@ -1021,15 +993,16 @@
             // 
             // pnlStatRowsReturned
             // 
+            this.pnlStatRowsReturned.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlStatRowsReturned.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(33)))), ((int)(((byte)(47)))));
             this.pnlStatRowsReturned.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlStatRowsReturned.Controls.Add(this.lblSubmissionStatus);
             this.pnlStatRowsReturned.Controls.Add(this.lblRowsReturnedCaption);
-            this.pnlStatRowsReturned.Location = new System.Drawing.Point(292, 3);
+            this.pnlStatRowsReturned.Location = new System.Drawing.Point(146, 4);
             this.pnlStatRowsReturned.Name = "pnlStatRowsReturned";
             this.pnlStatRowsReturned.Padding = new System.Windows.Forms.Padding(10, 3, 10, 3);
             this.pnlStatRowsReturned.Size = new System.Drawing.Size(134, 37);
-            this.pnlStatRowsReturned.TabIndex = 2;
+            this.pnlStatRowsReturned.TabIndex = 7;
             // 
             // lblSubmissionStatus
             // 
@@ -1053,13 +1026,49 @@
             this.lblRowsReturnedCaption.TabIndex = 0;
             this.lblRowsReturnedCaption.Text = "Status";
             // 
+            // pnlInfoTimeRemaining
+            // 
+            this.pnlInfoTimeRemaining.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlInfoTimeRemaining.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(33)))), ((int)(((byte)(47)))));
+            this.pnlInfoTimeRemaining.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlInfoTimeRemaining.Controls.Add(this.lblTimeRemainingValue);
+            this.pnlInfoTimeRemaining.Controls.Add(this.lblTimeRemainingCaption);
+            this.pnlInfoTimeRemaining.Location = new System.Drawing.Point(2, 4);
+            this.pnlInfoTimeRemaining.Name = "pnlInfoTimeRemaining";
+            this.pnlInfoTimeRemaining.Padding = new System.Windows.Forms.Padding(10, 2, 10, 2);
+            this.pnlInfoTimeRemaining.Size = new System.Drawing.Size(134, 37);
+            this.pnlInfoTimeRemaining.TabIndex = 6;
+            // 
+            // lblTimeRemainingValue
+            // 
+            this.lblTimeRemainingValue.BackColor = System.Drawing.Color.Transparent;
+            this.lblTimeRemainingValue.Font = new System.Drawing.Font("Consolas", 11F, System.Drawing.FontStyle.Bold);
+            this.lblTimeRemainingValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(185)))), ((int)(((byte)(129)))));
+            this.lblTimeRemainingValue.Location = new System.Drawing.Point(10, 17);
+            this.lblTimeRemainingValue.Name = "lblTimeRemainingValue";
+            this.lblTimeRemainingValue.Size = new System.Drawing.Size(96, 18);
+            this.lblTimeRemainingValue.TabIndex = 1;
+            this.lblTimeRemainingValue.Text = "--:--:--";
+            // 
+            // lblTimeRemainingCaption
+            // 
+            this.lblTimeRemainingCaption.BackColor = System.Drawing.Color.Transparent;
+            this.lblTimeRemainingCaption.Font = new System.Drawing.Font("Segoe UI", 7.5F, System.Drawing.FontStyle.Bold);
+            this.lblTimeRemainingCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(114)))), ((int)(((byte)(128)))));
+            this.lblTimeRemainingCaption.Location = new System.Drawing.Point(10, 3);
+            this.lblTimeRemainingCaption.Name = "lblTimeRemainingCaption";
+            this.lblTimeRemainingCaption.Size = new System.Drawing.Size(130, 12);
+            this.lblTimeRemainingCaption.TabIndex = 0;
+            this.lblTimeRemainingCaption.Text = "TIME REMAINING";
+            // 
             // pnlStatLastResult
             // 
+            this.pnlStatLastResult.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlStatLastResult.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(33)))), ((int)(((byte)(47)))));
             this.pnlStatLastResult.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlStatLastResult.Controls.Add(this.lblLastResultValue);
             this.pnlStatLastResult.Controls.Add(this.lblLastResultCaption);
-            this.pnlStatLastResult.Location = new System.Drawing.Point(143, 3);
+            this.pnlStatLastResult.Location = new System.Drawing.Point(432, 4);
             this.pnlStatLastResult.Name = "pnlStatLastResult";
             this.pnlStatLastResult.Padding = new System.Windows.Forms.Padding(10, 3, 10, 3);
             this.pnlStatLastResult.Size = new System.Drawing.Size(138, 37);
@@ -1089,11 +1098,12 @@
             // 
             // pnlStatAttempts
             // 
+            this.pnlStatAttempts.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlStatAttempts.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(33)))), ((int)(((byte)(47)))));
             this.pnlStatAttempts.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlStatAttempts.Controls.Add(this.lblAttemptsValue);
             this.pnlStatAttempts.Controls.Add(this.lblAttemptsCaption);
-            this.pnlStatAttempts.Location = new System.Drawing.Point(0, 3);
+            this.pnlStatAttempts.Location = new System.Drawing.Point(290, 4);
             this.pnlStatAttempts.Name = "pnlStatAttempts";
             this.pnlStatAttempts.Padding = new System.Windows.Forms.Padding(10, 3, 10, 3);
             this.pnlStatAttempts.Size = new System.Drawing.Size(132, 37);
@@ -1150,40 +1160,6 @@
             this.pnlHeaderLeftAccent.Name = "pnlHeaderLeftAccent";
             this.pnlHeaderLeftAccent.Size = new System.Drawing.Size(4, 64);
             this.pnlHeaderLeftAccent.TabIndex = 3;
-            // 
-            // lblTimeRemainingCaption
-            // 
-            this.lblTimeRemainingCaption.BackColor = System.Drawing.Color.Transparent;
-            this.lblTimeRemainingCaption.Font = new System.Drawing.Font("Segoe UI", 7.5F, System.Drawing.FontStyle.Bold);
-            this.lblTimeRemainingCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(114)))), ((int)(((byte)(128)))));
-            this.lblTimeRemainingCaption.Location = new System.Drawing.Point(10, 3);
-            this.lblTimeRemainingCaption.Name = "lblTimeRemainingCaption";
-            this.lblTimeRemainingCaption.Size = new System.Drawing.Size(130, 12);
-            this.lblTimeRemainingCaption.TabIndex = 0;
-            this.lblTimeRemainingCaption.Text = "TIME REMAINING";
-            // 
-            // lblTimeRemainingValue
-            // 
-            this.lblTimeRemainingValue.BackColor = System.Drawing.Color.Transparent;
-            this.lblTimeRemainingValue.Font = new System.Drawing.Font("Consolas", 11F, System.Drawing.FontStyle.Bold);
-            this.lblTimeRemainingValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(185)))), ((int)(((byte)(129)))));
-            this.lblTimeRemainingValue.Location = new System.Drawing.Point(10, 17);
-            this.lblTimeRemainingValue.Name = "lblTimeRemainingValue";
-            this.lblTimeRemainingValue.Size = new System.Drawing.Size(96, 18);
-            this.lblTimeRemainingValue.TabIndex = 1;
-            this.lblTimeRemainingValue.Text = "--:--:--";
-            // 
-            // pnlInfoTimeRemaining
-            // 
-            this.pnlInfoTimeRemaining.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(33)))), ((int)(((byte)(47)))));
-            this.pnlInfoTimeRemaining.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlInfoTimeRemaining.Controls.Add(this.lblTimeRemainingValue);
-            this.pnlInfoTimeRemaining.Controls.Add(this.lblTimeRemainingCaption);
-            this.pnlInfoTimeRemaining.Location = new System.Drawing.Point(437, 3);
-            this.pnlInfoTimeRemaining.Name = "pnlInfoTimeRemaining";
-            this.pnlInfoTimeRemaining.Padding = new System.Windows.Forms.Padding(10, 2, 10, 2);
-            this.pnlInfoTimeRemaining.Size = new System.Drawing.Size(134, 37);
-            this.pnlInfoTimeRemaining.TabIndex = 5;
             // 
             // submitCooldownTimer
             // 
@@ -1244,14 +1220,13 @@
             this.pnlOutputHeader.ResumeLayout(false);
             this.pnlRightColumn.ResumeLayout(false);
             this.pnlSchemaCard.ResumeLayout(false);
-            this.pnlSchemaFooter.ResumeLayout(false);
             this.pnlSchemaHeader.ResumeLayout(false);
             this.pnlHeaderBar.ResumeLayout(false);
             this.pnlHeaderStats.ResumeLayout(false);
             this.pnlStatRowsReturned.ResumeLayout(false);
+            this.pnlInfoTimeRemaining.ResumeLayout(false);
             this.pnlStatLastResult.ResumeLayout(false);
             this.pnlStatAttempts.ResumeLayout(false);
-            this.pnlInfoTimeRemaining.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1281,9 +1256,6 @@
 
         // Body
         private System.Windows.Forms.Panel pnlBody;
-        private System.Windows.Forms.Panel pnlStatRowsReturned;
-        private System.Windows.Forms.Label lblSubmissionStatus;
-        private System.Windows.Forms.Label lblRowsReturnedCaption;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Panel pnlLeftColumn;
         private System.Windows.Forms.Panel pnlProblemListCard;
@@ -1298,8 +1270,6 @@
         private System.Windows.Forms.Panel pnlCenterColumn;
         private System.Windows.Forms.Panel pnlRightColumn;
         private System.Windows.Forms.Panel pnlSchemaCard;
-        private System.Windows.Forms.Panel pnlSchemaFooter;
-        private System.Windows.Forms.Label lblSchemaHint;
         private System.Windows.Forms.TreeView trvDatabaseSchema;
         private System.Windows.Forms.Panel pnlSchemaHeader;
         private System.Windows.Forms.Label lblSchemaSubtitle;
@@ -1341,9 +1311,12 @@
         private System.Windows.Forms.Label lblOutputRowsInfo;
         private System.Windows.Forms.Label lblOutputTitle;
         private System.Windows.Forms.Panel pnlOutputAccent;
+        private System.Windows.Forms.Timer submitCooldownTimer;
         private System.Windows.Forms.Panel pnlInfoTimeRemaining;
         private System.Windows.Forms.Label lblTimeRemainingValue;
         private System.Windows.Forms.Label lblTimeRemainingCaption;
-        private System.Windows.Forms.Timer submitCooldownTimer;
+        private System.Windows.Forms.Panel pnlStatRowsReturned;
+        private System.Windows.Forms.Label lblSubmissionStatus;
+        private System.Windows.Forms.Label lblRowsReturnedCaption;
     }
 }

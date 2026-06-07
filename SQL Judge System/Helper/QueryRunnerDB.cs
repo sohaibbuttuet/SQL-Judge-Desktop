@@ -2,7 +2,7 @@
 using System;
 using System.Data;
 
-namespace SQL_Judge_System.DL
+namespace SQL_Judge_System.Helper
 {
     internal class QueryRunnerDB
     {

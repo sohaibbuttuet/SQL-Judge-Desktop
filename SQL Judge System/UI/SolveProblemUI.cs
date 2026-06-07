@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SQL_Judge_System.Helper;
 
 namespace SQL_Judge_System.UI
 {
@@ -57,6 +58,9 @@ namespace SQL_Judge_System.UI
             {
                 this.pnlInfoTimeRemaining.Visible = true;
             }
+
+            pnlStatLastResult.Visible = false;
+            pnlStatAttempts.Visible = false;
 
             InitializeFormPipeline();
             InitializeContestCountdown();
@@ -132,7 +136,7 @@ namespace SQL_Judge_System.UI
                 btnRunQuery.Enabled = false;
                 btnSubmitSolution.Enabled = false;
 
-                MessageBox.Show("The contest duration limit has expired! Submissions are locked.", "Contest Ended", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("The contest duration limit has expired! Submissions are locked.\n\nYour current query draft inside the editor will be automatically submitted as your final contest response.", "Contest Ended", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
                 this.DialogResult = DialogResult.OK;
                 this.Close();

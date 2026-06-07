@@ -20,6 +20,11 @@ namespace SQL_Judge_System.UI
             this.pnlHeader = new System.Windows.Forms.Panel();
             this.lblPageTitle = new System.Windows.Forms.Label();
             this.pnlProfileCard = new System.Windows.Forms.Panel();
+            this.pnlextrastd = new System.Windows.Forms.Panel();
+            this.cmbskill = new System.Windows.Forms.ComboBox();
+            this.lblskill = new System.Windows.Forms.Label();
+            this.lblregno = new System.Windows.Forms.Label();
+            this.txtregno = new System.Windows.Forms.TextBox();
             this.pnlProfileAccent = new System.Windows.Forms.Panel();
             this.lblProfileCardTitle = new System.Windows.Forms.Label();
             this.pnlProfileDivider = new System.Windows.Forms.Panel();
@@ -47,19 +52,10 @@ namespace SQL_Judge_System.UI
             this.txtConfirmPassword = new System.Windows.Forms.TextBox();
             this.lblPasswordMatchHint = new System.Windows.Forms.Label();
             this.btnChangePassword = new System.Windows.Forms.Button();
-            this.pnlFooter = new System.Windows.Forms.Panel();
-            this.lblFooterNote = new System.Windows.Forms.Label();
-            this.btnClose = new System.Windows.Forms.Button();
-            this.pnlextrastd = new System.Windows.Forms.Panel();
-            this.cmbskill = new System.Windows.Forms.ComboBox();
-            this.lblskill = new System.Windows.Forms.Label();
-            this.lblregno = new System.Windows.Forms.Label();
-            this.txtregno = new System.Windows.Forms.TextBox();
             this.pnlHeader.SuspendLayout();
             this.pnlProfileCard.SuspendLayout();
-            this.pnlPasswordCard.SuspendLayout();
-            this.pnlFooter.SuspendLayout();
             this.pnlextrastd.SuspendLayout();
+            this.pnlPasswordCard.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlSidebar
@@ -72,7 +68,7 @@ namespace SQL_Judge_System.UI
             // 
             // pnlHeader
             // 
-            this.pnlHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(42)))));
+            this.pnlHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(24)))), ((int)(((byte)(39)))));
             this.pnlHeader.Controls.Add(this.lblPageTitle);
             this.pnlHeader.Location = new System.Drawing.Point(6, 0);
             this.pnlHeader.Name = "pnlHeader";
@@ -91,7 +87,7 @@ namespace SQL_Judge_System.UI
             // 
             // pnlProfileCard
             // 
-            this.pnlProfileCard.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(48)))));
+            this.pnlProfileCard.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(24)))), ((int)(((byte)(39)))));
             this.pnlProfileCard.Controls.Add(this.pnlextrastd);
             this.pnlProfileCard.Controls.Add(this.pnlProfileAccent);
             this.pnlProfileCard.Controls.Add(this.lblProfileCardTitle);
@@ -112,9 +108,62 @@ namespace SQL_Judge_System.UI
             this.pnlProfileCard.Size = new System.Drawing.Size(400, 490);
             this.pnlProfileCard.TabIndex = 2;
             // 
+            // pnlextrastd
+            // 
+            this.pnlextrastd.Controls.Add(this.cmbskill);
+            this.pnlextrastd.Controls.Add(this.lblskill);
+            this.pnlextrastd.Controls.Add(this.lblregno);
+            this.pnlextrastd.Controls.Add(this.txtregno);
+            this.pnlextrastd.Location = new System.Drawing.Point(20, 116);
+            this.pnlextrastd.Name = "pnlextrastd";
+            this.pnlextrastd.Size = new System.Drawing.Size(360, 110);
+            this.pnlextrastd.TabIndex = 17;
+            // 
+            // cmbskill
+            // 
+            this.cmbskill.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(14)))), ((int)(((byte)(26)))));
+            this.cmbskill.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cmbskill.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(255)))));
+            this.cmbskill.FormattingEnabled = true;
+            this.cmbskill.Location = new System.Drawing.Point(0, 84);
+            this.cmbskill.Name = "cmbskill";
+            this.cmbskill.Size = new System.Drawing.Size(357, 23);
+            this.cmbskill.TabIndex = 24;
+            // 
+            // lblskill
+            // 
+            this.lblskill.Font = new System.Drawing.Font("Segoe UI", 8.5F);
+            this.lblskill.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
+            this.lblskill.Location = new System.Drawing.Point(0, 57);
+            this.lblskill.Name = "lblskill";
+            this.lblskill.Size = new System.Drawing.Size(360, 18);
+            this.lblskill.TabIndex = 23;
+            this.lblskill.Text = "Skill Level";
+            // 
+            // lblregno
+            // 
+            this.lblregno.Font = new System.Drawing.Font("Segoe UI", 8.5F);
+            this.lblregno.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
+            this.lblregno.Location = new System.Drawing.Point(0, -1);
+            this.lblregno.Name = "lblregno";
+            this.lblregno.Size = new System.Drawing.Size(360, 18);
+            this.lblregno.TabIndex = 21;
+            this.lblregno.Text = "Registration Number";
+            // 
+            // txtregno
+            // 
+            this.txtregno.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(14)))), ((int)(((byte)(26)))));
+            this.txtregno.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtregno.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.txtregno.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(255)))));
+            this.txtregno.Location = new System.Drawing.Point(0, 24);
+            this.txtregno.Name = "txtregno";
+            this.txtregno.Size = new System.Drawing.Size(360, 25);
+            this.txtregno.TabIndex = 22;
+            // 
             // pnlProfileAccent
             // 
-            this.pnlProfileAccent.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(99)))), ((int)(((byte)(102)))), ((int)(((byte)(241)))));
+            this.pnlProfileAccent.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(185)))), ((int)(((byte)(129)))));
             this.pnlProfileAccent.Location = new System.Drawing.Point(0, 0);
             this.pnlProfileAccent.Name = "pnlProfileAccent";
             this.pnlProfileAccent.Size = new System.Drawing.Size(400, 4);
@@ -123,7 +172,7 @@ namespace SQL_Judge_System.UI
             // lblProfileCardTitle
             // 
             this.lblProfileCardTitle.Font = new System.Drawing.Font("Segoe UI Semibold", 11F, System.Drawing.FontStyle.Bold);
-            this.lblProfileCardTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(99)))), ((int)(((byte)(102)))), ((int)(((byte)(241)))));
+            this.lblProfileCardTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(185)))), ((int)(((byte)(129)))));
             this.lblProfileCardTitle.Location = new System.Drawing.Point(20, 18);
             this.lblProfileCardTitle.Name = "lblProfileCardTitle";
             this.lblProfileCardTitle.Size = new System.Drawing.Size(350, 26);
@@ -141,7 +190,7 @@ namespace SQL_Judge_System.UI
             // lblSettingsFullName
             // 
             this.lblSettingsFullName.Font = new System.Drawing.Font("Segoe UI", 8.5F);
-            this.lblSettingsFullName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(200)))));
+            this.lblSettingsFullName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
             this.lblSettingsFullName.Location = new System.Drawing.Point(20, 60);
             this.lblSettingsFullName.Name = "lblSettingsFullName";
             this.lblSettingsFullName.Size = new System.Drawing.Size(360, 18);
@@ -150,7 +199,7 @@ namespace SQL_Judge_System.UI
             // 
             // txtSettingsFullName
             // 
-            this.txtSettingsFullName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(62)))));
+            this.txtSettingsFullName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(14)))), ((int)(((byte)(26)))));
             this.txtSettingsFullName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtSettingsFullName.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txtSettingsFullName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(255)))));
@@ -162,7 +211,7 @@ namespace SQL_Judge_System.UI
             // lblSettingsEmail
             // 
             this.lblSettingsEmail.Font = new System.Drawing.Font("Segoe UI", 8.5F);
-            this.lblSettingsEmail.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(200)))));
+            this.lblSettingsEmail.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
             this.lblSettingsEmail.Location = new System.Drawing.Point(20, 236);
             this.lblSettingsEmail.Name = "lblSettingsEmail";
             this.lblSettingsEmail.Size = new System.Drawing.Size(360, 18);
@@ -171,7 +220,7 @@ namespace SQL_Judge_System.UI
             // 
             // txtSettingsEmail
             // 
-            this.txtSettingsEmail.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(62)))));
+            this.txtSettingsEmail.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(14)))), ((int)(((byte)(26)))));
             this.txtSettingsEmail.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtSettingsEmail.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txtSettingsEmail.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(255)))));
@@ -183,7 +232,7 @@ namespace SQL_Judge_System.UI
             // lblSettingsRole
             // 
             this.lblSettingsRole.Font = new System.Drawing.Font("Segoe UI", 8.5F);
-            this.lblSettingsRole.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(200)))));
+            this.lblSettingsRole.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
             this.lblSettingsRole.Location = new System.Drawing.Point(20, 291);
             this.lblSettingsRole.Name = "lblSettingsRole";
             this.lblSettingsRole.Size = new System.Drawing.Size(170, 18);
@@ -192,7 +241,7 @@ namespace SQL_Judge_System.UI
             // 
             // txtSettingsRole
             // 
-            this.txtSettingsRole.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(50)))));
+            this.txtSettingsRole.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(14)))), ((int)(((byte)(26)))));
             this.txtSettingsRole.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtSettingsRole.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
             this.txtSettingsRole.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(99)))), ((int)(((byte)(102)))), ((int)(((byte)(241)))));
@@ -205,7 +254,7 @@ namespace SQL_Judge_System.UI
             // lblSettingsStatus
             // 
             this.lblSettingsStatus.Font = new System.Drawing.Font("Segoe UI", 8.5F);
-            this.lblSettingsStatus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(200)))));
+            this.lblSettingsStatus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
             this.lblSettingsStatus.Location = new System.Drawing.Point(210, 291);
             this.lblSettingsStatus.Name = "lblSettingsStatus";
             this.lblSettingsStatus.Size = new System.Drawing.Size(170, 18);
@@ -214,7 +263,7 @@ namespace SQL_Judge_System.UI
             // 
             // txtSettingsStatus
             // 
-            this.txtSettingsStatus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(50)))));
+            this.txtSettingsStatus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(14)))), ((int)(((byte)(26)))));
             this.txtSettingsStatus.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtSettingsStatus.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
             this.txtSettingsStatus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(211)))), ((int)(((byte)(153)))));
@@ -227,7 +276,7 @@ namespace SQL_Judge_System.UI
             // lblSettingsCreatedAt
             // 
             this.lblSettingsCreatedAt.Font = new System.Drawing.Font("Segoe UI", 8.5F);
-            this.lblSettingsCreatedAt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(200)))));
+            this.lblSettingsCreatedAt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
             this.lblSettingsCreatedAt.Location = new System.Drawing.Point(20, 347);
             this.lblSettingsCreatedAt.Name = "lblSettingsCreatedAt";
             this.lblSettingsCreatedAt.Size = new System.Drawing.Size(360, 18);
@@ -236,7 +285,7 @@ namespace SQL_Judge_System.UI
             // 
             // txtSettingsCreatedAt
             // 
-            this.txtSettingsCreatedAt.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(50)))));
+            this.txtSettingsCreatedAt.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(14)))), ((int)(((byte)(26)))));
             this.txtSettingsCreatedAt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtSettingsCreatedAt.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txtSettingsCreatedAt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(220)))));
@@ -248,7 +297,7 @@ namespace SQL_Judge_System.UI
             // 
             // btnSaveProfile
             // 
-            this.btnSaveProfile.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(99)))), ((int)(((byte)(102)))), ((int)(((byte)(241)))));
+            this.btnSaveProfile.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(185)))), ((int)(((byte)(129)))));
             this.btnSaveProfile.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSaveProfile.FlatAppearance.BorderSize = 0;
             this.btnSaveProfile.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(79)))), ((int)(((byte)(82)))), ((int)(((byte)(221)))));
@@ -265,7 +314,7 @@ namespace SQL_Judge_System.UI
             // 
             // pnlPasswordCard
             // 
-            this.pnlPasswordCard.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(48)))));
+            this.pnlPasswordCard.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(24)))), ((int)(((byte)(39)))));
             this.pnlPasswordCard.Controls.Add(this.pnlPasswordAccent);
             this.pnlPasswordCard.Controls.Add(this.lblPasswordCardTitle);
             this.pnlPasswordCard.Controls.Add(this.pnlPasswordDivider);
@@ -285,7 +334,7 @@ namespace SQL_Judge_System.UI
             // 
             // pnlPasswordAccent
             // 
-            this.pnlPasswordAccent.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(113)))), ((int)(((byte)(133)))));
+            this.pnlPasswordAccent.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(79)))), ((int)(((byte)(70)))), ((int)(((byte)(229)))));
             this.pnlPasswordAccent.Location = new System.Drawing.Point(0, 0);
             this.pnlPasswordAccent.Name = "pnlPasswordAccent";
             this.pnlPasswordAccent.Size = new System.Drawing.Size(420, 4);
@@ -294,7 +343,7 @@ namespace SQL_Judge_System.UI
             // lblPasswordCardTitle
             // 
             this.lblPasswordCardTitle.Font = new System.Drawing.Font("Segoe UI Semibold", 11F, System.Drawing.FontStyle.Bold);
-            this.lblPasswordCardTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(113)))), ((int)(((byte)(133)))));
+            this.lblPasswordCardTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(79)))), ((int)(((byte)(70)))), ((int)(((byte)(229)))));
             this.lblPasswordCardTitle.Location = new System.Drawing.Point(20, 18);
             this.lblPasswordCardTitle.Name = "lblPasswordCardTitle";
             this.lblPasswordCardTitle.Size = new System.Drawing.Size(380, 26);
@@ -312,7 +361,7 @@ namespace SQL_Judge_System.UI
             // lblSecurityTip
             // 
             this.lblSecurityTip.Font = new System.Drawing.Font("Segoe UI", 8F);
-            this.lblSecurityTip.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(140)))));
+            this.lblSecurityTip.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
             this.lblSecurityTip.Location = new System.Drawing.Point(20, 56);
             this.lblSecurityTip.Name = "lblSecurityTip";
             this.lblSecurityTip.Size = new System.Drawing.Size(380, 18);
@@ -322,7 +371,7 @@ namespace SQL_Judge_System.UI
             // lblCurrentPassword
             // 
             this.lblCurrentPassword.Font = new System.Drawing.Font("Segoe UI", 8.5F);
-            this.lblCurrentPassword.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(200)))));
+            this.lblCurrentPassword.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
             this.lblCurrentPassword.Location = new System.Drawing.Point(20, 88);
             this.lblCurrentPassword.Name = "lblCurrentPassword";
             this.lblCurrentPassword.Size = new System.Drawing.Size(380, 18);
@@ -331,7 +380,7 @@ namespace SQL_Judge_System.UI
             // 
             // txtCurrentPassword
             // 
-            this.txtCurrentPassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(62)))));
+            this.txtCurrentPassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(14)))), ((int)(((byte)(26)))));
             this.txtCurrentPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtCurrentPassword.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txtCurrentPassword.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(255)))));
@@ -344,7 +393,7 @@ namespace SQL_Judge_System.UI
             // lblNewPassword
             // 
             this.lblNewPassword.Font = new System.Drawing.Font("Segoe UI", 8.5F);
-            this.lblNewPassword.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(200)))));
+            this.lblNewPassword.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
             this.lblNewPassword.Location = new System.Drawing.Point(20, 154);
             this.lblNewPassword.Name = "lblNewPassword";
             this.lblNewPassword.Size = new System.Drawing.Size(380, 18);
@@ -353,7 +402,7 @@ namespace SQL_Judge_System.UI
             // 
             // txtNewPassword
             // 
-            this.txtNewPassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(62)))));
+            this.txtNewPassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(14)))), ((int)(((byte)(26)))));
             this.txtNewPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtNewPassword.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txtNewPassword.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(255)))));
@@ -366,7 +415,7 @@ namespace SQL_Judge_System.UI
             // lblConfirmPassword
             // 
             this.lblConfirmPassword.Font = new System.Drawing.Font("Segoe UI", 8.5F);
-            this.lblConfirmPassword.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(200)))));
+            this.lblConfirmPassword.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
             this.lblConfirmPassword.Location = new System.Drawing.Point(20, 220);
             this.lblConfirmPassword.Name = "lblConfirmPassword";
             this.lblConfirmPassword.Size = new System.Drawing.Size(380, 18);
@@ -375,7 +424,7 @@ namespace SQL_Judge_System.UI
             // 
             // txtConfirmPassword
             // 
-            this.txtConfirmPassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(62)))));
+            this.txtConfirmPassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(14)))), ((int)(((byte)(26)))));
             this.txtConfirmPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtConfirmPassword.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txtConfirmPassword.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(255)))));
@@ -397,7 +446,7 @@ namespace SQL_Judge_System.UI
             // 
             // btnChangePassword
             // 
-            this.btnChangePassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(113)))), ((int)(((byte)(133)))));
+            this.btnChangePassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(79)))), ((int)(((byte)(70)))), ((int)(((byte)(229)))));
             this.btnChangePassword.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnChangePassword.FlatAppearance.BorderSize = 0;
             this.btnChangePassword.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(93)))), ((int)(((byte)(113)))));
@@ -412,105 +461,14 @@ namespace SQL_Judge_System.UI
             this.btnChangePassword.UseVisualStyleBackColor = false;
             this.btnChangePassword.Click += new System.EventHandler(this.btnChangePassword_Click);
             // 
-            // pnlFooter
-            // 
-            this.pnlFooter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(36)))));
-            this.pnlFooter.Controls.Add(this.lblFooterNote);
-            this.pnlFooter.Controls.Add(this.btnClose);
-            this.pnlFooter.Location = new System.Drawing.Point(6, 580);
-            this.pnlFooter.Name = "pnlFooter";
-            this.pnlFooter.Size = new System.Drawing.Size(894, 40);
-            this.pnlFooter.TabIndex = 4;
-            // 
-            // lblFooterNote
-            // 
-            this.lblFooterNote.Font = new System.Drawing.Font("Segoe UI", 8F);
-            this.lblFooterNote.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(100)))));
-            this.lblFooterNote.Location = new System.Drawing.Point(20, 12);
-            this.lblFooterNote.Name = "lblFooterNote";
-            this.lblFooterNote.Size = new System.Drawing.Size(400, 18);
-            this.lblFooterNote.TabIndex = 0;
-            this.lblFooterNote.Text = "SQL Judge System  •  Admin Settings";
-            // 
-            // btnClose
-            // 
-            this.btnClose.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(70)))));
-            this.btnClose.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnClose.FlatAppearance.BorderSize = 0;
-            this.btnClose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(90)))));
-            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClose.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.btnClose.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(220)))));
-            this.btnClose.Location = new System.Drawing.Point(790, 6);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(88, 28);
-            this.btnClose.TabIndex = 1;
-            this.btnClose.Text = "Close";
-            this.btnClose.UseVisualStyleBackColor = false;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
-            // 
-            // pnlextrastd
-            // 
-            this.pnlextrastd.Controls.Add(this.cmbskill);
-            this.pnlextrastd.Controls.Add(this.lblskill);
-            this.pnlextrastd.Controls.Add(this.lblregno);
-            this.pnlextrastd.Controls.Add(this.txtregno);
-            this.pnlextrastd.Location = new System.Drawing.Point(20, 116);
-            this.pnlextrastd.Name = "pnlextrastd";
-            this.pnlextrastd.Size = new System.Drawing.Size(360, 110);
-            this.pnlextrastd.TabIndex = 17;
-            // 
-            // cmbskill
-            // 
-            this.cmbskill.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(62)))));
-            this.cmbskill.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cmbskill.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(255)))));
-            this.cmbskill.FormattingEnabled = true;
-            this.cmbskill.Location = new System.Drawing.Point(0, 84);
-            this.cmbskill.Name = "cmbskill";
-            this.cmbskill.Size = new System.Drawing.Size(357, 23);
-            this.cmbskill.TabIndex = 24;
-            // 
-            // lblskill
-            // 
-            this.lblskill.Font = new System.Drawing.Font("Segoe UI", 8.5F);
-            this.lblskill.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(200)))));
-            this.lblskill.Location = new System.Drawing.Point(0, 57);
-            this.lblskill.Name = "lblskill";
-            this.lblskill.Size = new System.Drawing.Size(360, 18);
-            this.lblskill.TabIndex = 23;
-            this.lblskill.Text = "Skill Level";
-            // 
-            // lblregno
-            // 
-            this.lblregno.Font = new System.Drawing.Font("Segoe UI", 8.5F);
-            this.lblregno.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(200)))));
-            this.lblregno.Location = new System.Drawing.Point(0, -1);
-            this.lblregno.Name = "lblregno";
-            this.lblregno.Size = new System.Drawing.Size(360, 18);
-            this.lblregno.TabIndex = 21;
-            this.lblregno.Text = "Registration Number";
-            // 
-            // txtregno
-            // 
-            this.txtregno.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(62)))));
-            this.txtregno.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtregno.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.txtregno.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(255)))));
-            this.txtregno.Location = new System.Drawing.Point(0, 24);
-            this.txtregno.Name = "txtregno";
-            this.txtregno.Size = new System.Drawing.Size(360, 25);
-            this.txtregno.TabIndex = 22;
-            // 
             // SettingsForm
             // 
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(18)))), ((int)(((byte)(30)))));
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(14)))), ((int)(((byte)(26)))));
             this.ClientSize = new System.Drawing.Size(884, 581);
             this.Controls.Add(this.pnlSidebar);
             this.Controls.Add(this.pnlHeader);
             this.Controls.Add(this.pnlProfileCard);
             this.Controls.Add(this.pnlPasswordCard);
-            this.Controls.Add(this.pnlFooter);
             this.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
@@ -521,11 +479,10 @@ namespace SQL_Judge_System.UI
             this.pnlHeader.ResumeLayout(false);
             this.pnlProfileCard.ResumeLayout(false);
             this.pnlProfileCard.PerformLayout();
-            this.pnlPasswordCard.ResumeLayout(false);
-            this.pnlPasswordCard.PerformLayout();
-            this.pnlFooter.ResumeLayout(false);
             this.pnlextrastd.ResumeLayout(false);
             this.pnlextrastd.PerformLayout();
+            this.pnlPasswordCard.ResumeLayout(false);
+            this.pnlPasswordCard.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -566,10 +523,6 @@ namespace SQL_Judge_System.UI
         private System.Windows.Forms.TextBox txtConfirmPassword;
         private System.Windows.Forms.Label lblPasswordMatchHint;
         private System.Windows.Forms.Button btnChangePassword;
-
-        private System.Windows.Forms.Panel pnlFooter;
-        private System.Windows.Forms.Label lblFooterNote;
-        private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Panel pnlextrastd;
         private System.Windows.Forms.ComboBox cmbskill;
         private System.Windows.Forms.Label lblskill;

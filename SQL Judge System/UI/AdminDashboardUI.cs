@@ -1,6 +1,7 @@
 ﻿using FontAwesome.Sharp;
 using SQL_Judge_System.BL;
 using SQL_Judge_System.DL;
+using SQL_Judge_System.Helper;
 using SQL_Judge_System.Models;
 using System;
 using System.Data;
@@ -221,6 +222,7 @@ namespace SQL_Judge_System.UI
                 dgvStudents.Columns["UserID"].Visible = false;
 
                 // ===== Students Grid Column Styling & Layout =====
+                SafeColumn(dgvStudents, "GlobalRank", "Global Rank", 50);
                 SafeColumn(dgvStudents, "FullName", "Student Name", 70);
                 SafeColumn(dgvStudents, "RegistrationNumber", "Reg No.", 50);
                 SafeColumn(dgvStudents, "LevelName", "Skill Level", 50);
@@ -606,7 +608,7 @@ namespace SQL_Judge_System.UI
         }
         private void btnReport_Click(object sender, EventArgs e)
         {
-
+           
         }
         private void btn_Settings_Click(object sender, EventArgs e)
         {

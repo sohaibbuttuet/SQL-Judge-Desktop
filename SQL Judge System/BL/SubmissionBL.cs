@@ -150,5 +150,14 @@ namespace SQL_Judge_System.BL
 
             return SubmissionDL.GetAttemptNumber(studentID, problemID);
         }
+        public static int GetContestAttempts(int studentID, int contestID)
+        {
+            if (studentID <= 0)
+                throw new ArgumentOutOfRangeException(nameof(studentID), "Invalid Student ID");
+            if (contestID <= 0)
+                throw new ArgumentOutOfRangeException(nameof(studentID), "Invalid Contest ID");
+
+            return SubmissionDL.GetContestAttemptNumber(studentID, contestID);
+        }
     }
 }

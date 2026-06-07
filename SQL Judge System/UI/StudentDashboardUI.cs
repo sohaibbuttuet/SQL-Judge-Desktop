@@ -8,6 +8,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using SQL_Judge_System.Helper;
 
 namespace SQL_Judge_System.UI
 {
@@ -15,8 +16,6 @@ namespace SQL_Judge_System.UI
     {
         private User user;
         private Student student;
-        private string databaseName;
-        private int? activeContestID = null;
 
         private readonly Color clrAccentPurple = Color.FromArgb(124, 111, 255);
 
@@ -93,7 +92,7 @@ namespace SQL_Judge_System.UI
             {
                 if (dgvLeaderboard == null) return;
 
-                DataTable dt = StudentBL.GetLeaderboard();
+                DataTable dt = StudentBL.GetStudents();
                 dgvLeaderboard.DataSource = dt;
 
                 if (dt == null || dt.Columns.Count == 0) return;
@@ -101,6 +100,10 @@ namespace SQL_Judge_System.UI
                 dgvLeaderboard.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
                 dgvLeaderboard.Columns["StudentID"].Visible = false;
+                dgvLeaderboard.Columns["UserID"].Visible = false;
+                dgvLeaderboard.Columns["IsActive"].Visible = false;
+                dgvLeaderboard.Columns["CreatedAt"].Visible = false;
+
 
                 SafeColumn("GlobalRank", "Global Rank", 50);
                 SafeColumn("FullName", "Student Name", 150);

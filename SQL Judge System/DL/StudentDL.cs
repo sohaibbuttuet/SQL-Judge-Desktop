@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using SQL_Judge_System.Models;
+using SQL_Judge_System.Helper;
 
 namespace SQL_Judge_System.DL
 {
@@ -148,25 +149,16 @@ namespace SQL_Judge_System.DL
         }
 
         // ==========================================
-        // ADMIN MANAGEMENT PANEL ANALYTICS
+        // ADMIN/Student MANAGEMENT PANEL ANALYTICS
         // ==========================================
         public static DataTable GetStudents()
         {
             string query = "SELECT * FROM vw_students ORDER BY StudentID;";
             return DatabaseHelper.Instance.GetDataTable(query);
         }
-
-        // ==========================================
-        // STUDENT MANAGEMENT PANEL ANALYTICS
-        // ==========================================
-        public static DataTable GetLeaderboard()
-        {
-            string query = "SELECT * FROM vw_students_leaderboard;";
-            return DatabaseHelper.Instance.GetDataTable(query);
-        }
         public static int GetRank(int studentId)
         {
-            string query = $"SELECT GlobalRank FROM vw_students_leaderboard WHERE StudentID = @StudnetID;";
+            string query = $"SELECT GlobalRank FROM vw_students WHERE StudentID = @StudnetID;";
 
             MySqlParameter[] parameters =
             {

@@ -12,6 +12,7 @@ using System.Security.RightsManagement;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SQL_Judge_System.Helper;
 
 namespace SQL_Judge_System.UI
 {

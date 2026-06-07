@@ -41,7 +41,7 @@ namespace SQL_Judge_System.UI
             // 
             // pnlContainer
             // 
-            this.pnlContainer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(31)))), ((int)(((byte)(58)))));
+            this.pnlContainer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(14)))), ((int)(((byte)(30)))));
             this.pnlContainer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlContainer.Controls.Add(this.lblTitle);
             this.pnlContainer.Controls.Add(this.lblSubtitle);
@@ -52,16 +52,16 @@ namespace SQL_Judge_System.UI
             this.pnlContainer.Controls.Add(this.pnlStudentExtra);
             this.pnlContainer.Controls.Add(this.btnMainAction);
             this.pnlContainer.Controls.Add(this.lnkToggle);
-            this.pnlContainer.Location = new System.Drawing.Point(45, 35);
+            this.pnlContainer.Location = new System.Drawing.Point(45, 25);
             this.pnlContainer.Name = "pnlContainer";
-            this.pnlContainer.Size = new System.Drawing.Size(430, 650);
+            this.pnlContainer.Size = new System.Drawing.Size(430, 576);
             this.pnlContainer.TabIndex = 0;
             // 
             // lblTitle
             // 
             this.lblTitle.Font = new System.Drawing.Font("Segoe UI Semibold", 24F, System.Drawing.FontStyle.Bold);
             this.lblTitle.ForeColor = System.Drawing.Color.White;
-            this.lblTitle.Location = new System.Drawing.Point(40, 25);
+            this.lblTitle.Location = new System.Drawing.Point(44, 19);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(340, 50);
             this.lblTitle.TabIndex = 0;
@@ -71,8 +71,8 @@ namespace SQL_Judge_System.UI
             // lblSubtitle
             // 
             this.lblSubtitle.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.lblSubtitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(180)))), ((int)(((byte)(210)))));
-            this.lblSubtitle.Location = new System.Drawing.Point(40, 75);
+            this.lblSubtitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
+            this.lblSubtitle.Location = new System.Drawing.Point(44, 69);
             this.lblSubtitle.Name = "lblSubtitle";
             this.lblSubtitle.Size = new System.Drawing.Size(340, 25);
             this.lblSubtitle.TabIndex = 1;
@@ -82,20 +82,20 @@ namespace SQL_Judge_System.UI
             // lblEmail
             // 
             this.lblEmail.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            this.lblEmail.ForeColor = System.Drawing.Color.Gainsboro;
-            this.lblEmail.Location = new System.Drawing.Point(45, 130);
+            this.lblEmail.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
+            this.lblEmail.Location = new System.Drawing.Point(45, 124);
             this.lblEmail.Name = "lblEmail";
-            this.lblEmail.Size = new System.Drawing.Size(120, 25);
+            this.lblEmail.Size = new System.Drawing.Size(120, 15);
             this.lblEmail.TabIndex = 2;
             this.lblEmail.Text = "Email Address";
             // 
             // txtEmail
             // 
-            this.txtEmail.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
+            this.txtEmail.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(24)))), ((int)(((byte)(39)))));
             this.txtEmail.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtEmail.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.txtEmail.ForeColor = System.Drawing.Color.White;
-            this.txtEmail.Location = new System.Drawing.Point(45, 160);
+            this.txtEmail.Location = new System.Drawing.Point(45, 147);
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(340, 27);
             this.txtEmail.TabIndex = 0;
@@ -103,20 +103,20 @@ namespace SQL_Judge_System.UI
             // lblPassword
             // 
             this.lblPassword.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            this.lblPassword.ForeColor = System.Drawing.Color.Gainsboro;
-            this.lblPassword.Location = new System.Drawing.Point(45, 215);
+            this.lblPassword.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
+            this.lblPassword.Location = new System.Drawing.Point(45, 189);
             this.lblPassword.Name = "lblPassword";
-            this.lblPassword.Size = new System.Drawing.Size(120, 25);
+            this.lblPassword.Size = new System.Drawing.Size(120, 17);
             this.lblPassword.TabIndex = 3;
             this.lblPassword.Text = "Password";
             // 
             // txtPassword
             // 
-            this.txtPassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
+            this.txtPassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(24)))), ((int)(((byte)(39)))));
             this.txtPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtPassword.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.txtPassword.ForeColor = System.Drawing.Color.White;
-            this.txtPassword.Location = new System.Drawing.Point(45, 245);
+            this.txtPassword.Location = new System.Drawing.Point(45, 212);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
             this.txtPassword.Size = new System.Drawing.Size(340, 27);
@@ -132,16 +132,16 @@ namespace SQL_Judge_System.UI
             this.pnlStudentExtra.Controls.Add(this.txtRegNo);
             this.pnlStudentExtra.Controls.Add(this.lblSkill);
             this.pnlStudentExtra.Controls.Add(this.cmbSkillLevel);
-            this.pnlStudentExtra.Location = new System.Drawing.Point(45, 305);
+            this.pnlStudentExtra.Location = new System.Drawing.Point(45, 253);
             this.pnlStudentExtra.Name = "pnlStudentExtra";
-            this.pnlStudentExtra.Size = new System.Drawing.Size(340, 220);
+            this.pnlStudentExtra.Size = new System.Drawing.Size(340, 193);
             this.pnlStudentExtra.TabIndex = 4;
             // 
             // lblName
             // 
             this.lblName.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            this.lblName.ForeColor = System.Drawing.Color.Gainsboro;
-            this.lblName.Location = new System.Drawing.Point(0, 0);
+            this.lblName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
+            this.lblName.Location = new System.Drawing.Point(0, 2);
             this.lblName.Name = "lblName";
             this.lblName.Size = new System.Drawing.Size(120, 25);
             this.lblName.TabIndex = 0;
@@ -149,7 +149,7 @@ namespace SQL_Judge_System.UI
             // 
             // txtName
             // 
-            this.txtName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
+            this.txtName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(24)))), ((int)(((byte)(39)))));
             this.txtName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtName.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.txtName.ForeColor = System.Drawing.Color.White;
@@ -161,8 +161,8 @@ namespace SQL_Judge_System.UI
             // lblRegNo
             // 
             this.lblRegNo.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            this.lblRegNo.ForeColor = System.Drawing.Color.Gainsboro;
-            this.lblRegNo.Location = new System.Drawing.Point(0, 80);
+            this.lblRegNo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
+            this.lblRegNo.Location = new System.Drawing.Point(0, 71);
             this.lblRegNo.Name = "lblRegNo";
             this.lblRegNo.Size = new System.Drawing.Size(180, 25);
             this.lblRegNo.TabIndex = 2;
@@ -170,11 +170,11 @@ namespace SQL_Judge_System.UI
             // 
             // txtRegNo
             // 
-            this.txtRegNo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
+            this.txtRegNo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(24)))), ((int)(((byte)(39)))));
             this.txtRegNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtRegNo.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.txtRegNo.ForeColor = System.Drawing.Color.White;
-            this.txtRegNo.Location = new System.Drawing.Point(0, 110);
+            this.txtRegNo.Location = new System.Drawing.Point(0, 99);
             this.txtRegNo.Name = "txtRegNo";
             this.txtRegNo.Size = new System.Drawing.Size(340, 27);
             this.txtRegNo.TabIndex = 3;
@@ -182,8 +182,8 @@ namespace SQL_Judge_System.UI
             // lblSkill
             // 
             this.lblSkill.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            this.lblSkill.ForeColor = System.Drawing.Color.Gainsboro;
-            this.lblSkill.Location = new System.Drawing.Point(0, 160);
+            this.lblSkill.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
+            this.lblSkill.Location = new System.Drawing.Point(0, 138);
             this.lblSkill.Name = "lblSkill";
             this.lblSkill.Size = new System.Drawing.Size(120, 25);
             this.lblSkill.TabIndex = 4;
@@ -191,7 +191,7 @@ namespace SQL_Judge_System.UI
             // 
             // cmbSkillLevel
             // 
-            this.cmbSkillLevel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
+            this.cmbSkillLevel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(24)))), ((int)(((byte)(39)))));
             this.cmbSkillLevel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSkillLevel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbSkillLevel.Font = new System.Drawing.Font("Segoe UI", 10F);
@@ -200,14 +200,14 @@ namespace SQL_Judge_System.UI
             "Beginner",
             "Intermediate",
             "Advanced"});
-            this.cmbSkillLevel.Location = new System.Drawing.Point(0, 190);
+            this.cmbSkillLevel.Location = new System.Drawing.Point(0, 166);
             this.cmbSkillLevel.Name = "cmbSkillLevel";
             this.cmbSkillLevel.Size = new System.Drawing.Size(340, 25);
             this.cmbSkillLevel.TabIndex = 5;
             // 
             // btnMainAction
             // 
-            this.btnMainAction.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(101)))), ((int)(((byte)(242)))));
+            this.btnMainAction.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(79)))), ((int)(((byte)(70)))), ((int)(((byte)(229)))));
             this.btnMainAction.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnMainAction.FlatAppearance.BorderSize = 0;
             this.btnMainAction.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(82)))), ((int)(((byte)(220)))));
@@ -215,7 +215,7 @@ namespace SQL_Judge_System.UI
             this.btnMainAction.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMainAction.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.btnMainAction.ForeColor = System.Drawing.Color.White;
-            this.btnMainAction.Location = new System.Drawing.Point(45, 545);
+            this.btnMainAction.Location = new System.Drawing.Point(45, 470);
             this.btnMainAction.Name = "btnMainAction";
             this.btnMainAction.Size = new System.Drawing.Size(340, 50);
             this.btnMainAction.TabIndex = 5;
@@ -228,7 +228,7 @@ namespace SQL_Judge_System.UI
             this.lnkToggle.ActiveLinkColor = System.Drawing.Color.White;
             this.lnkToggle.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.lnkToggle.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(140)))), ((int)(((byte)(255)))));
-            this.lnkToggle.Location = new System.Drawing.Point(45, 613);
+            this.lnkToggle.Location = new System.Drawing.Point(45, 531);
             this.lnkToggle.Name = "lnkToggle";
             this.lnkToggle.Size = new System.Drawing.Size(340, 25);
             this.lnkToggle.TabIndex = 6;
@@ -241,8 +241,8 @@ namespace SQL_Judge_System.UI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(18)))), ((int)(((byte)(36)))));
-            this.ClientSize = new System.Drawing.Size(520, 720);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(14)))), ((int)(((byte)(26)))));
+            this.ClientSize = new System.Drawing.Size(520, 626);
             this.Controls.Add(this.pnlContainer);
             this.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;

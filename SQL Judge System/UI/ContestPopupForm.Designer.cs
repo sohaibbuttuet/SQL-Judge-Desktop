@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.pnlContest = new System.Windows.Forms.Panel();
+            this.txtDuration = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.clbProblem = new System.Windows.Forms.CheckedListBox();
             this.btnSaveProblem = new System.Windows.Forms.Button();
@@ -42,8 +44,6 @@
             this.dtStartDate = new System.Windows.Forms.DateTimePicker();
             this.lblEndDate = new System.Windows.Forms.Label();
             this.dtEndDate = new System.Windows.Forms.DateTimePicker();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtDuration = new System.Windows.Forms.TextBox();
             this.pnlContest.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -69,6 +69,24 @@
             this.pnlContest.Size = new System.Drawing.Size(520, 459);
             this.pnlContest.TabIndex = 2;
             // 
+            // txtDuration
+            // 
+            this.txtDuration.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(24)))), ((int)(((byte)(39)))));
+            this.txtDuration.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtDuration.Location = new System.Drawing.Point(20, 247);
+            this.txtDuration.Name = "txtDuration";
+            this.txtDuration.Size = new System.Drawing.Size(462, 20);
+            this.txtDuration.TabIndex = 16;
+            // 
+            // label1
+            // 
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
+            this.label1.Location = new System.Drawing.Point(20, 229);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(100, 15);
+            this.label1.TabIndex = 15;
+            this.label1.Text = "Duration";
+            // 
             // label3
             // 
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
@@ -80,7 +98,7 @@
             // 
             // clbProblem
             // 
-            this.clbProblem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
+            this.clbProblem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(24)))), ((int)(((byte)(39)))));
             this.clbProblem.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.clbProblem.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.clbProblem.ForeColor = System.Drawing.Color.White;
@@ -91,7 +109,7 @@
             // 
             // btnSaveProblem
             // 
-            this.btnSaveProblem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
+            this.btnSaveProblem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(185)))), ((int)(((byte)(129)))));
             this.btnSaveProblem.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSaveProblem.FlatAppearance.BorderSize = 0;
             this.btnSaveProblem.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(40)))), ((int)(((byte)(69)))));
@@ -108,7 +126,7 @@
             // 
             // btnClear
             // 
-            this.btnClear.BackColor = System.Drawing.Color.IndianRed;
+            this.btnClear.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(79)))), ((int)(((byte)(70)))), ((int)(((byte)(229)))));
             this.btnClear.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnClear.FlatAppearance.BorderSize = 0;
             this.btnClear.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(40)))), ((int)(((byte)(69)))));
@@ -146,7 +164,7 @@
             // 
             // txtTitle
             // 
-            this.txtTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
+            this.txtTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(24)))), ((int)(((byte)(39)))));
             this.txtTitle.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtTitle.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTitle.ForeColor = System.Drawing.Color.White;
@@ -166,7 +184,7 @@
             // 
             // txtDescription
             // 
-            this.txtDescription.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
+            this.txtDescription.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(24)))), ((int)(((byte)(39)))));
             this.txtDescription.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtDescription.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDescription.ForeColor = System.Drawing.Color.White;
@@ -212,27 +230,9 @@
             this.dtEndDate.Size = new System.Drawing.Size(202, 20);
             this.dtEndDate.TabIndex = 8;
             // 
-            // label1
-            // 
-            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(146)))), ((int)(((byte)(184)))));
-            this.label1.Location = new System.Drawing.Point(20, 229);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(100, 15);
-            this.label1.TabIndex = 15;
-            this.label1.Text = "Duration";
-            // 
-            // txtDuration
-            // 
-            this.txtDuration.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
-            this.txtDuration.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtDuration.Location = new System.Drawing.Point(20, 247);
-            this.txtDuration.Name = "txtDuration";
-            this.txtDuration.Size = new System.Drawing.Size(462, 20);
-            this.txtDuration.TabIndex = 16;
-            // 
             // ContestPopupForm
             // 
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(29)))), ((int)(((byte)(56)))));
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(14)))), ((int)(((byte)(26)))));
             this.ClientSize = new System.Drawing.Size(584, 511);
             this.Controls.Add(this.pnlContest);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;

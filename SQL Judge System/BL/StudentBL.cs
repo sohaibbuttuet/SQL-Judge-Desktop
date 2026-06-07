@@ -48,19 +48,11 @@ namespace SQL_Judge_System.BL
         }
 
         // ==========================================
-        // ADMIN DASHBOARD ANALYTICS PANEL
+        // ADMIN/Student DASHBOARD ANALYTICS PANEL
         // ==========================================
         public static DataTable GetStudents()
         {
             return StudentDL.GetStudents();
-        }
-
-        // ==========================================
-        // STUDENT DASHBOARD LEADERBOARD METRICS
-        // ==========================================
-        public static DataTable GetLeaderboard()
-        {
-            return StudentDL.GetLeaderboard();
         }
         public static int GetRank(int studentId)
         {

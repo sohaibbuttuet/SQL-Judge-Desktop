@@ -6,7 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static Mysqlx.Datatypes.Scalar.Types;
+using SQL_Judge_System.Helper;
 
 namespace SQL_Judge_System.DL
 {

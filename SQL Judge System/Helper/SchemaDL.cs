@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SQL_Judge_System.DL
+namespace SQL_Judge_System.Helper
 {
     internal class SchemaDL
     {

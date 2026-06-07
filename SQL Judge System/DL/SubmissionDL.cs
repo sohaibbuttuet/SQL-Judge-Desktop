@@ -7,6 +7,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SQL_Judge_System.Helper;
 
 namespace SQL_Judge_System.DL
 {
@@ -56,6 +57,19 @@ namespace SQL_Judge_System.DL
             {
                 new MySqlParameter("@StudentID", studentID),
                 new MySqlParameter("@ProblemID", problemID)
+            };
+
+            int count = DatabaseHelper.Instance.ExecuteScalar(query, parameters);
+            return count != -1 ? count : 0;
+        }
+        public static int GetContestAttemptNumber(int studentID, int contestID)
+        {
+            string query = "SELECT MAX(AttemptNumber) FROM submissions WHERE StudentID = @StudentID AND ContestID = @ContestID;";
+
+            MySqlParameter[] parameters =
+            {
+                new MySqlParameter("@StudentID", studentID),
+                new MySqlParameter("@ContestID", contestID)
             };
 
             int count = DatabaseHelper.Instance.ExecuteScalar(query, parameters);

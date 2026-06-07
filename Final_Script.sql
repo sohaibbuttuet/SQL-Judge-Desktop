@@ -196,20 +196,11 @@ FROM Users u
 LEFT JOIN UserRoles ur ON u.UserID = ur.UserID
 LEFT JOIN Roles r ON ur.RoleID = r.RoleID;
 
------------------------------------------ -- 2 -- -----------------------------
+----------------------------------------- -- 3 -- -----------------------------
 CREATE OR REPLACE VIEW vw_students AS
 SELECT
-    s.StudentID, s.UserID, u.FullName, s.RegistrationNumber, sk.LevelName,
-    s.ProblemsSolved, s.TotalScore, u.IsActive, DATE(u.CreatedAt) AS CreatedAt
-FROM Students s
-LEFT JOIN SkillLevels sk ON s.SkillLevelID = sk.SkillLevelID
-JOIN Users u ON s.UserID = u.UserID;
-
------------------------------------------ -- 3 -- -----------------------------
-CREATE OR REPLACE VIEW vw_students_leaderboard AS
-SELECT
     RANK() OVER (ORDER BY s.TotalScore DESC) AS GlobalRank,
-    s.StudentID, u.FullName, s.RegistrationNumber, sk.LevelName, s.ProblemsSolved, s.TotalScore
+    s.StudentID, u.UserID, u.FullName, s.RegistrationNumber, sk.LevelName, s.ProblemsSolved, s.TotalScore, u.IsActive, DATE(u.CreatedAt) AS CreatedAt
 FROM Students s
 JOIN Users u ON s.UserID = u.UserID
 LEFT JOIN SkillLevels sk ON s.SkillLevelID = sk.SkillLevelID;
