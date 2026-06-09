@@ -246,6 +246,29 @@ LEFT JOIN Users u ON st.UserID = u.UserID
 LEFT JOIN Problems p ON s.ProblemID = p.ProblemID;
 
 ----------------------------------------- -- 6 -- -----------------------------
+CREATE OR REPLACE VIEW vw_contest_rankings AS
+SELECT
+	RANK() OVER (
+        PARTITION BY c.ContestID
+        ORDER BY SUM(s.TotalScore) DESC
+				) AS ContestRank,
+    c.Title,
+    vs.FullName,
+    vs.RegistrationNumber,
+    vs.LevelName,
+    SUM(s.TotalScore) AS ContestScore
+FROM Submissions s
+JOIN vw_students vs ON vs.StudentID = s.StudentID
+JOIN Contests c ON c.ContestID = s.ContestID
+WHERE s.ContestID IS NOT NULL
+GROUP BY
+    c.ContestID,
+    c.Title,
+    s.StudentID,
+    vs.FullName,
+    vs.RegistrationNumber,
+    vs.LevelName;
+
 -- =====================================
 -- TRIGGERS
 -- =====================================

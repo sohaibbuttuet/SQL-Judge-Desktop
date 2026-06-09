@@ -122,6 +122,8 @@
             // 
             // clbTags
             // 
+            this.clbTags.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.clbTags.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(24)))), ((int)(((byte)(39)))));
             this.clbTags.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.clbTags.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(243)))));
@@ -144,6 +146,8 @@
             // 
             // txtProblemName
             // 
+            this.txtProblemName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtProblemName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(24)))), ((int)(((byte)(39)))));
             this.txtProblemName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtProblemName.Font = new System.Drawing.Font("Segoe UI", 13F);
@@ -166,6 +170,8 @@
             // 
             // txtDescription
             // 
+            this.txtDescription.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtDescription.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(24)))), ((int)(((byte)(39)))));
             this.txtDescription.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtDescription.Font = new System.Drawing.Font("Segoe UI", 10F);
@@ -179,6 +185,8 @@
             // 
             // pnlMetaRow
             // 
+            this.pnlMetaRow.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlMetaRow.BackColor = System.Drawing.Color.Transparent;
             this.pnlMetaRow.Controls.Add(this.pnlDBbox);
             this.pnlMetaRow.Controls.Add(this.pnlDiffBox);
@@ -192,9 +200,10 @@
             // 
             this.pnlDBbox.Controls.Add(this.lblDatabase);
             this.pnlDBbox.Controls.Add(this.cmbDatabase);
-            this.pnlDBbox.Location = new System.Drawing.Point(526, 0);
+            this.pnlDBbox.Dock = System.Windows.Forms.DockStyle.Right;
+            this.pnlDBbox.Location = new System.Drawing.Point(487, 0);
             this.pnlDBbox.Name = "pnlDBbox";
-            this.pnlDBbox.Size = new System.Drawing.Size(215, 76);
+            this.pnlDBbox.Size = new System.Drawing.Size(255, 76);
             this.pnlDBbox.TabIndex = 13;
             // 
             // lblDatabase
@@ -210,6 +219,8 @@
             // 
             // cmbDatabase
             // 
+            this.cmbDatabase.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbDatabase.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(24)))), ((int)(((byte)(39)))));
             this.cmbDatabase.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbDatabase.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -220,17 +231,19 @@
             "dublinbikes_judge"});
             this.cmbDatabase.Location = new System.Drawing.Point(3, 22);
             this.cmbDatabase.Name = "cmbDatabase";
-            this.cmbDatabase.Size = new System.Drawing.Size(211, 25);
+            this.cmbDatabase.Size = new System.Drawing.Size(251, 25);
             this.cmbDatabase.TabIndex = 11;
+            this.cmbDatabase.SelectedIndexChanged += new System.EventHandler(this.cmbDatabase_SelectedIndexChanged);
             // 
             // pnlDiffBox
             // 
             this.pnlDiffBox.BackColor = System.Drawing.Color.Transparent;
             this.pnlDiffBox.Controls.Add(this.lblDifficulty);
             this.pnlDiffBox.Controls.Add(this.cmbDifficulty);
+            this.pnlDiffBox.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlDiffBox.Location = new System.Drawing.Point(0, 0);
             this.pnlDiffBox.Name = "pnlDiffBox";
-            this.pnlDiffBox.Size = new System.Drawing.Size(220, 76);
+            this.pnlDiffBox.Size = new System.Drawing.Size(255, 76);
             this.pnlDiffBox.TabIndex = 0;
             // 
             // lblDifficulty
@@ -253,11 +266,13 @@
             this.cmbDifficulty.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(243)))));
             this.cmbDifficulty.Location = new System.Drawing.Point(0, 22);
             this.cmbDifficulty.Name = "cmbDifficulty";
-            this.cmbDifficulty.Size = new System.Drawing.Size(210, 25);
+            this.cmbDifficulty.Size = new System.Drawing.Size(238, 25);
             this.cmbDifficulty.TabIndex = 1;
             // 
             // pnlPointsBox
             // 
+            this.pnlPointsBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlPointsBox.BackColor = System.Drawing.Color.Transparent;
             this.pnlPointsBox.Controls.Add(this.lblPoints);
             this.pnlPointsBox.Controls.Add(this.txtPoints);
@@ -279,6 +294,8 @@
             // 
             // txtPoints
             // 
+            this.txtPoints.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtPoints.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(24)))), ((int)(((byte)(39)))));
             this.txtPoints.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtPoints.Font = new System.Drawing.Font("Segoe UI", 10F);
@@ -313,6 +330,8 @@
             // 
             // pnlQueryContainer
             // 
+            this.pnlQueryContainer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlQueryContainer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(37)))), ((int)(((byte)(63)))));
             this.pnlQueryContainer.Controls.Add(this.txtMasterQuery);
             this.pnlQueryContainer.Location = new System.Drawing.Point(0, 537);
@@ -323,9 +342,10 @@
             // 
             // txtMasterQuery
             // 
+            this.txtMasterQuery.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtMasterQuery.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(24)))), ((int)(((byte)(39)))));
             this.txtMasterQuery.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtMasterQuery.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtMasterQuery.Font = new System.Drawing.Font("Consolas", 10F);
             this.txtMasterQuery.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(171)))), ((int)(((byte)(213)))), ((int)(((byte)(247)))));
             this.txtMasterQuery.Location = new System.Drawing.Point(2, 2);
@@ -344,7 +364,6 @@
             this.pnlRight.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlRight.Location = new System.Drawing.Point(0, 0);
             this.pnlRight.Name = "pnlRight";
-            this.pnlRight.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
             this.pnlRight.Size = new System.Drawing.Size(266, 588);
             this.pnlRight.TabIndex = 2;
             // 
@@ -353,7 +372,7 @@
             this.lblSchema.AutoSize = true;
             this.lblSchema.Font = new System.Drawing.Font("Segoe UI", 8.5F, System.Drawing.FontStyle.Bold);
             this.lblSchema.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(142)))), ((int)(((byte)(163)))));
-            this.lblSchema.Location = new System.Drawing.Point(0, 0);
+            this.lblSchema.Location = new System.Drawing.Point(-12, 0);
             this.lblSchema.Name = "lblSchema";
             this.lblSchema.Size = new System.Drawing.Size(134, 15);
             this.lblSchema.TabIndex = 0;
@@ -364,7 +383,7 @@
             this.lblSchemaHint.AutoSize = true;
             this.lblSchemaHint.Font = new System.Drawing.Font("Segoe UI", 7.5F, System.Drawing.FontStyle.Italic);
             this.lblSchemaHint.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(90)))), ((int)(((byte)(111)))));
-            this.lblSchemaHint.Location = new System.Drawing.Point(12, 19);
+            this.lblSchemaHint.Location = new System.Drawing.Point(0, 19);
             this.lblSchemaHint.Name = "lblSchemaHint";
             this.lblSchemaHint.Size = new System.Drawing.Size(139, 12);
             this.lblSchemaHint.TabIndex = 1;
@@ -372,28 +391,32 @@
             // 
             // pnlTreeContainer
             // 
-            this.pnlTreeContainer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(37)))), ((int)(((byte)(48)))));
+            this.pnlTreeContainer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlTreeContainer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(14)))), ((int)(((byte)(26)))));
             this.pnlTreeContainer.Controls.Add(this.tvSchema);
-            this.pnlTreeContainer.Location = new System.Drawing.Point(13, 38);
+            this.pnlTreeContainer.Location = new System.Drawing.Point(1, 38);
             this.pnlTreeContainer.Name = "pnlTreeContainer";
-            this.pnlTreeContainer.Size = new System.Drawing.Size(240, 548);
+            this.pnlTreeContainer.Size = new System.Drawing.Size(262, 548);
             this.pnlTreeContainer.TabIndex = 2;
             // 
             // tvSchema
             // 
+            this.tvSchema.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tvSchema.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(24)))), ((int)(((byte)(39)))));
             this.tvSchema.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tvSchema.CheckBoxes = true;
-            this.tvSchema.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tvSchema.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.tvSchema.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(243)))));
             this.tvSchema.HotTracking = true;
             this.tvSchema.Indent = 20;
             this.tvSchema.ItemHeight = 24;
-            this.tvSchema.Location = new System.Drawing.Point(0, 0);
+            this.tvSchema.Location = new System.Drawing.Point(3, 0);
             this.tvSchema.Name = "tvSchema";
-            this.tvSchema.Size = new System.Drawing.Size(240, 548);
+            this.tvSchema.Size = new System.Drawing.Size(259, 548);
             this.tvSchema.TabIndex = 0;
+            this.tvSchema.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvSchema_NodeMouseDoubleClick);
             // 
             // pnlHeader
             // 

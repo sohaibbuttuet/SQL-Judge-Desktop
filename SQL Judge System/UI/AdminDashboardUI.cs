@@ -5,6 +5,7 @@ using SQL_Judge_System.Helper;
 using SQL_Judge_System.Models;
 using System;
 using System.Data;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace SQL_Judge_System.UI
@@ -12,6 +13,7 @@ namespace SQL_Judge_System.UI
     public partial class AdminDashboardUI : Form
     {
         User user = null;
+        private readonly Color clrAccentPurple = Color.FromArgb(124, 111, 255);
 
         public AdminDashboardUI(int userID)
         {
@@ -31,7 +33,36 @@ namespace SQL_Judge_System.UI
         private void AdminDashboard_Load(object sender, EventArgs e)
         {
             LoadHomeGrid();
+            LoadLogo();
             SetupToolTips();
+        }
+        private void LoadLogo()
+        {
+            try
+            {
+                var bmp = new Bitmap(44, 44);
+                using (var g = Graphics.FromImage(bmp))
+                {
+                    g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+                    g.Clear(Color.Transparent);
+
+                    g.FillEllipse(new SolidBrush(clrAccentPurple), 0, 0, 43, 43);
+
+                    g.DrawString(
+                        "SJ",
+                        new Font("Segoe UI", 13F, FontStyle.Bold),
+                        Brushes.White,
+                        new RectangleF(0, 0, 44, 44),
+                        new StringFormat
+                        {
+                            Alignment = StringAlignment.Center,
+                            LineAlignment = StringAlignment.Center
+                        });
+                }
+
+                picLogo.Image = bmp;
+            }
+            catch { }
         }
 
         // ==========================================
@@ -608,7 +639,8 @@ namespace SQL_Judge_System.UI
         }
         private void btnReport_Click(object sender, EventArgs e)
         {
-           
+           ReportForm form = new ReportForm(user.UserID);
+            form.ShowDialog();
         }
         private void btn_Settings_Click(object sender, EventArgs e)
         {

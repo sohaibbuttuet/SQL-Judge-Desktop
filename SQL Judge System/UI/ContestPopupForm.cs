@@ -69,6 +69,7 @@ namespace SQL_Judge_System.UI
                 txtDescription.Text = c.Description;
                 dtStartDate.Value = c.StartDate;
                 dtEndDate.Value = c.EndDate;
+                txtDuration.Text = c.Duration.ToString();
 
                 List<ContestProblem> problems = ContestBL.GetProblemsByContestID(c.ContestID);
                 List<int> problemID = problems.Select(p => p.ProblemID).ToList();

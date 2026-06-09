@@ -67,44 +67,6 @@ namespace SQL_Judge_System.DL
 
             return MapDataRowToStudent(dt.Rows[0]);
         }
-        public static Student GetStudentByID(int studentID)
-        {
-            string query = "SELECT * FROM Students WHERE StudentID = @StudentID;";
-            MySqlParameter[] parameters = { new MySqlParameter("@StudentID", studentID) };
-
-            DataTable dt = DatabaseHelper.Instance.GetDataTable(query, parameters);
-
-            if (dt == null || dt.Rows.Count == 0)
-                return null;
-
-            return MapDataRowToStudent(dt.Rows[0]);
-        }
-        public static List<Student> GetAllStudents()
-        {
-            string query = "SELECT * FROM Students;";
-
-            DataTable dt = DatabaseHelper.Instance.GetDataTable(query);
-
-            List<Student> students = new List<Student>();
-            foreach (DataRow row in dt.Rows)
-            {
-                students.Add(MapDataRowToStudent(row));
-            }
-            return students;
-        }
-        public static List<Student> GetTopStudents(int limit)
-        {
-            string query = "SELECT * FROM Students ORDER BY TotalScore DESC LIMIT @Limit;";
-            MySqlParameter[] parameters = { new MySqlParameter("@Limit", limit) };
-
-            DataTable dt = DatabaseHelper.Instance.GetDataTable(query, parameters);
-            List<Student> list = new List<Student>();
-
-            foreach (DataRow row in dt.Rows)
-                list.Add(MapDataRowToStudent(row));
-
-            return list;
-        }
 
         // ==========================================
         // HELPER FUNCTIONS
@@ -114,7 +76,7 @@ namespace SQL_Judge_System.DL
             return new Student(
                 Convert.ToInt32(row["StudentID"]),
                 Convert.ToInt32(row["UserID"]),
-                row["RegistrationNumber"].ToString(),               
+                row["RegistrationNumber"].ToString(),
                 Convert.ToInt32(row["TotalScore"]),
                 Convert.ToInt32(row["ProblemsSolved"]),
                  Convert.ToInt32(row["SkillLevelID"])
@@ -156,6 +118,24 @@ namespace SQL_Judge_System.DL
             string query = "SELECT * FROM vw_students ORDER BY StudentID;";
             return DatabaseHelper.Instance.GetDataTable(query);
         }
+        public static DataTable GetTopStudents(int limit, DateTime startDate, DateTime endDate)
+        {
+            // Combines chronological filtering, leaderboard ordering, and top-tier row truncation
+            string query = @"SELECT GlobalRank, FullName AS StudentName, RegistrationNumber, LevelName, TotalScore FROM vw_students 
+                     WHERE CreatedAt >= @StartDate 
+                       AND CreatedAt <= @EndDate
+                     ORDER BY TotalScore DESC 
+                     LIMIT @Limit;";
+
+            MySqlParameter[] parameters =
+            {
+        new MySqlParameter("@Limit", limit),
+        new MySqlParameter("@StartDate", startDate),
+        new MySqlParameter("@EndDate", endDate)
+    };
+
+            return DatabaseHelper.Instance.GetDataTable(query, parameters);
+        }
         public static int GetRank(int studentId)
         {
             string query = $"SELECT GlobalRank FROM vw_students WHERE StudentID = @StudnetID;";
@@ -166,6 +146,38 @@ namespace SQL_Judge_System.DL
             };
 
             return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query, parameters));
+        }
+
+        public static int GetTotalStudentsRegistered(DateTime startDate, DateTime endDate)
+        {
+            // Counts all unique student profiles created within the date frame
+            string query = @"SELECT COUNT(*) FROM vw_students 
+                     WHERE CreatedAt >= @StartDate 
+                       AND CreatedAt <= @EndDate;";
+
+            MySqlParameter[] parameters =
+            {
+        new MySqlParameter("@StartDate", startDate),
+        new MySqlParameter("@EndDate", endDate)
+    };
+
+            return DatabaseHelper.Instance.ExecuteScalar(query, parameters);
+        }
+        public static double GetAverageProblemsSolved(DateTime startDate, DateTime endDate)
+        {
+            // Computes the true platform average of solved problems per student in the given window
+            string query = @"SELECT IFNULL(ROUND(AVG(ProblemsSolved), 1), 0.0) FROM vw_students 
+                     WHERE CreatedAt >= @StartDate 
+                       AND CreatedAt <= @EndDate;";
+
+            MySqlParameter[] parameters =
+            {
+        new MySqlParameter("@StartDate", startDate),
+        new MySqlParameter("@EndDate", endDate)
+    };
+
+            object result = DatabaseHelper.Instance.ExecuteScalar(query, parameters);
+            return result != null && result != DBNull.Value ? Convert.ToDouble(result) : 0.0;
         }
     }
 } 

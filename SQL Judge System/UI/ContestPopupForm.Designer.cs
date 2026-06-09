@@ -73,6 +73,7 @@
             // 
             this.txtDuration.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(24)))), ((int)(((byte)(39)))));
             this.txtDuration.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtDuration.ForeColor = System.Drawing.Color.White;
             this.txtDuration.Location = new System.Drawing.Point(20, 247);
             this.txtDuration.Name = "txtDuration";
             this.txtDuration.Size = new System.Drawing.Size(462, 20);

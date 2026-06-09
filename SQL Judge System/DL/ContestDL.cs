@@ -103,5 +103,12 @@ namespace SQL_Judge_System.DL
             string query = "SELECT * FROM vw_contests;";
             return DatabaseHelper.Instance.GetDataTable(query);
         }
+        public static DataTable GetContestRanking(int limit)
+        {
+            string query = $@"SELECT * FROM vw_contest_rankings  LIMIT {limit};";
+
+            return DatabaseHelper.Instance.GetDataTable(query);
+        }
+
     }
 }

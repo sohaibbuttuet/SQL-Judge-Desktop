@@ -219,10 +219,19 @@ namespace SQL_Judge_System.UI
         }
         private void btnReport_Click(object sender, EventArgs e)
         {
+            if (user == null) return;
+
+            ReportForm form = new ReportForm(user.UserID);
+            form.ShowDialog();
+
+            // Re-sync dashboard user elements if details are modified in settings
+            user = UserBL.GetUserById(user.UserID);
+            LoadStudentData();
         }
         private void btn_settings_Click(object sender, EventArgs e)
         {
             if (user == null) return;
+
             SettingsForm form = new SettingsForm(user.UserID);
             form.ShowDialog();
 

@@ -148,5 +148,16 @@ namespace SQL_Judge_System.BL
         {
             return ContestDL.GetAllContests();
         }
+
+        // Report
+        public static DataTable GetContestRanking(int limit)
+        {
+            if (limit <= 0)
+            {
+                return new DataTable(); // Return a clean empty table layout structural baseline
+            }
+
+            return ContestDL.GetContestRanking(limit);
+        }
     }
 }

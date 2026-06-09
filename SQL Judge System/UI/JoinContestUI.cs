@@ -102,7 +102,7 @@ namespace SQL_Judge_System.UI
                     txtContestDescription.Text = contest.Description;
                     lblBadgeDurationValue.Text = $"{contest.Duration} mins";
                     lblAttemptsValue.Text = SubmissionBL.GetContestAttempts(studentID, contestID).ToString();
-                    lblRankValue.Text = "";
+                    lblRankValue.Text = StudentBL.GetRank(studentID).ToString();
 
                     if (ContestBL.IsContestFullySolved(studentID, contestID))
                     {

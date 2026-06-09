@@ -23,6 +23,10 @@ namespace SQL_Judge_System.UI
         private string databaseName;
         private DataTable dtAllProblems;
         private int cooldownSecondsRemaining = 0;
+        private bool isTimeoutClosure = false; // Flag to skip manual exit confirmation prompts
+
+        // Tracks ProblemIDs that have been officially submitted in this form session
+        private HashSet<int> submittedProblemIDs = new HashSet<int>(); // Contains Unique IDs
 
         // Contest timing components
         private DateTime? contestEndTime = null;
@@ -61,6 +65,7 @@ namespace SQL_Judge_System.UI
 
             pnlStatLastResult.Visible = false;
             pnlStatAttempts.Visible = false;
+            pnlStatStatus.Visible = false;
 
             InitializeFormPipeline();
             InitializeContestCountdown();
@@ -128,6 +133,7 @@ namespace SQL_Judge_System.UI
             if (timeRemaining.TotalSeconds <= 0)
             {
                 contestCountdownTimer.Stop();
+                isTimeoutClosure = true; // Prevents the OnFormClosing event from displaying confirmation messageboxes
 
                 // ---- AUTOMATICALLY SAVE THE QUERY ON TIMEOUT ----
                 AutoSaveCurrentQuery();
@@ -156,23 +162,29 @@ namespace SQL_Judge_System.UI
         {
             cooldownSecondsRemaining--;
 
-            if (cooldownSecondsRemaining <= 0)
-            {
-                submitCooldownTimer.Stop();
-                btnSubmitSolution.Enabled = true;
-                btnSubmitSolution.Text = "Submit Solution";
-            }
-            else
+            if (cooldownSecondsRemaining > 0)
             {
                 btnSubmitSolution.Text = $"Wait ({cooldownSecondsRemaining}s)";
+                return;
             }
+
+            submitCooldownTimer.Stop();
+
+            bool canEnable = !activeContestID.HasValue || activeContestID <= 0 || !submittedProblemIDs.Contains(problemID);
+
+            btnSubmitSolution.Enabled = canEnable;
+            btnSubmitSolution.Text = canEnable ? "Submit Solution" : "Already Submitted";
         }
-        private void AutoSaveCurrentQuery()
+        private void AutoSaveCurrentQuery() 
         {
             try
             {
-                // Check if a problem is loaded and code exists
+                // Guard check
                 if (this.problemID <= 0 || string.IsNullOrWhiteSpace(txtSqlEditor.Text))
+                    return;
+
+                // --- DUPLICATE PROTECTION ---
+                if (submittedProblemIDs.Contains(this.problemID))
                     return;
 
                 string query = txtSqlEditor.Text.Trim();
@@ -184,6 +196,8 @@ namespace SQL_Judge_System.UI
                 // Save the code directly to the database via Business Logic layer
                 // This logs it under the active contest context so instructors can view the final snapshot
                 SubmissionBL.ProcessAndGradeSubmission(studentID, this.problemID, this.activeContestID, query, this.databaseName);
+
+                submittedProblemIDs.Add(this.problemID);
             }
             catch (Exception)
             {
@@ -273,8 +287,6 @@ namespace SQL_Judge_System.UI
                 MessageBox.Show("Unable to load problems into the table grid view.", "UI Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-        // ===== Selection Changed Events =====
         private void dgvProblems_SelectionChanged(object sender, EventArgs e)
         {
             try
@@ -297,6 +309,25 @@ namespace SQL_Judge_System.UI
 
                 RefreshProblemStats(this.problemID);
                 LoadTreeView();
+
+                // This is for contest Mode
+                if (activeContestID.HasValue && activeContestID > 0)
+                {
+                    // In Contest Mode: Lock if it was already submitted in this session
+                    if (submittedProblemIDs.Contains(this.problemID))
+                    {
+                        DisableEditorForSubmittedProblem();
+                    }
+                    else
+                    {
+                        EnableEditorForWorkspace();
+                    }
+                }
+                else
+                {
+                    // In Practice Mode: Always keep the editor unlocked and functional
+                    EnableEditorForWorkspace();
+                }
             }
             catch (Exception)
             {
@@ -305,8 +336,26 @@ namespace SQL_Judge_System.UI
                 txtProblemDescription.Text = "Unable to load problem metrics from backend servers.";
             }
         }
+        private void DisableEditorForSubmittedProblem()
+        {
+            txtSqlEditor.ReadOnly = true;
+            btnSubmitSolution.Enabled = false;
+            txtSqlEditor.BackColor = Color.White;
+            btnSubmitSolution.Text = "Already Submitted";
+            btnRunQuery.Enabled = false;
+        }
+        private void EnableEditorForWorkspace()
+        {
+            txtSqlEditor.ReadOnly = false;
+            txtSqlEditor.BackColor = Color.FromArgb(13, 17, 27);
 
-        // ===== Real-Time Statistics Handler =====
+            if (cooldownSecondsRemaining <= 0)
+            {
+                btnSubmitSolution.Enabled = true;
+                btnSubmitSolution.Text = "Submit Solution";
+            }
+            btnRunQuery.Enabled = true;
+        }
         private void RefreshProblemStats(int targetProblemID)
         {
             try
@@ -314,14 +363,16 @@ namespace SQL_Judge_System.UI
                 // Fetch up-to-date indicators from underlying execution pipelines
                 lblAttemptsValue.Text = SubmissionBL.AttemptNumber(studentID, targetProblemID).ToString();
 
-                string result = SubmissionStatusDL.StatusOfLastSubmission(studentID, targetProblemID);
+                string result = SubmissionBL.StatusOfLastSubmission(studentID, targetProblemID);
                 lblLastResultValue.Text = string.IsNullOrEmpty(result) ? "No Submissions" : result;
 
                 // Adjust textual badges dynamically based on outcomes
                 if (result == "Accepted")
                 {
+                    lblLastResultValue.ForeColor = Color.DarkGreen;
+
                     lblSubmissionStatus.Text = "Solved";
-                    lblSubmissionStatus.ForeColor = Color.Green;
+                    lblSubmissionStatus.ForeColor = Color.DarkGreen;
                 }
                 else if (!string.IsNullOrEmpty(result))
                 {
@@ -400,6 +451,54 @@ namespace SQL_Judge_System.UI
                 trvDatabaseSchema.EndUpdate();
             }
         }
+        private void tvSchema_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            if(txtSqlEditor.ReadOnly) return; // Ignore schema double clicks if problem is locked down
+
+            // Ensure the description box is focused before inserting text
+            if (!txtSqlEditor.Focused)
+            {
+                txtSqlEditor.Focus();
+            }
+
+            // CASE 1: Student double-clicked a TABLE (Level 0)
+            if (e.Node.Level == 0)
+            {
+                string tableName = e.Node.Text;
+                string template = $"{tableName}();\r\n";
+
+                int cursorPosition = txtSqlEditor.SelectionStart;
+                txtSqlEditor.SelectedText = template;
+
+                // Place the cursor perfectly inside the brackets: ( | )
+                txtSqlEditor.SelectionStart = cursorPosition + tableName.Length + 1;
+                txtSqlEditor.Focus();
+            }
+
+            // CASE 2: Studnet double-clicked a COLUMN (Level 1)
+            else if (e.Node.Level == 1)
+            {
+                // e.Node.Text looks like "customer_id (int)". We only want "customer_id".
+                // Splits "customer_id (int)" into parts["customer_id", "(int)"]
+                string[] parts = e.Node.Text.Split(' ');
+                string columnName = parts[0]; // Grabs the very first part
+
+                // Get the current cursor position in the text box
+                int cursorPosition = txtSqlEditor.SelectionStart;
+
+                // Smart Formatting: Determine if we need a comma separator
+                // Look at the character right before the cursor. 
+                // If it isn't an open parenthesis '(', it means a column is already there!
+                if (cursorPosition > 0 && txtSqlEditor.Text[cursorPosition - 1] != '(')
+                {
+                    columnName = ", " + columnName;
+                }
+
+                // 5. Inject the column name into the text box
+                txtSqlEditor.SelectedText = columnName;
+                txtSqlEditor.Focus();
+            }
+        }
 
         // Button Events
         private void btnRunQuery_Click(object sender, EventArgs e)
@@ -476,6 +575,17 @@ namespace SQL_Judge_System.UI
                 return;
             }
 
+            if (activeContestID.HasValue && activeContestID > 0)
+            {
+                // --- RULE CHECK: ONLY ONE SUBMISSION PER PROBLEM ---
+                if (submittedProblemIDs.Contains(this.problemID))
+                {
+                    MessageBox.Show("You have already submitted a solution for this problem. Multiple submissions are disabled for this contest.",
+                                    "Submission Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+
             // Lock down the UI button instantly to stop double clicks
             btnSubmitSolution.Enabled = false;
             btnSubmitSolution.Text = "Grading...";
@@ -499,10 +609,18 @@ namespace SQL_Judge_System.UI
                 // Pass student context values down directly to the core grading engines
                 SubmissionResult result = SubmissionBL.ProcessAndGradeSubmission(studentID, this.problemID, this.activeContestID, query, databaseName);
 
+                submittedProblemIDs.Add(this.problemID);
+
+                if (activeContestID.HasValue && activeContestID > 0)
+                {
+                    submitCooldownTimer.Stop();
+                    DisableEditorForSubmittedProblem();
+                }
+
                 RefreshProblemStats(this.problemID);
 
                 // The submission was successfully created and logged in the database by this point.
-                // Now we simply display the evaluation verdict cleanly to the student:
+                // Now simply display the evaluation verdict cleanly to the student:
 
                 if (result.IsPassed)
                 {
@@ -558,18 +676,21 @@ namespace SQL_Judge_System.UI
             }
             finally
             {
-                // Start the mandatory 5 seconds cooling-off system
-                cooldownSecondsRemaining = 5;
-                btnSubmitSolution.Text = $"Wait ({cooldownSecondsRemaining}s)";
+                bool isContestMode = activeContestID.HasValue && activeContestID > 0;
 
-                submitCooldownTimer.Start();
+                if (!isContestMode)
+                {
+                    cooldownSecondsRemaining = 5;
+                    btnSubmitSolution.Text = $"Wait ({cooldownSecondsRemaining}s)";
+                    submitCooldownTimer.Start();
+                }
             }
         }
         private void btnClearEditor_Click(object sender, EventArgs e)
         {
             txtSqlEditor.Clear();
 
-            txtSqlEditor.Text = "-- Write your SQL query here \nSELECT ";
+            txtSqlEditor.Text = "-- Write your SQL query here.";
         }
         private void rtbSQLEditor_KeyUp(object sender, KeyEventArgs e)
         {
@@ -591,6 +712,14 @@ namespace SQL_Judge_System.UI
         }      
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
+            // If the closure was triggered programmatically via countdown running out, skip checks
+            if (isTimeoutClosure)
+            {
+                CleanupTimers();
+                base.OnFormClosing(e);
+                return;
+            }
+
             // 1. Check if the user manually tried to close the window via 'X' or Alt+F4
             if (e.CloseReason == CloseReason.UserClosing)
             {
@@ -603,7 +732,7 @@ namespace SQL_Judge_System.UI
                     if (activeContestID.HasValue && activeContestID.Value > 0)
                     {
                         result = MessageBox.Show(
-                            "Are you sure you want to exit the contest workspace?\n\nYour current query draft inside the editor will be automatically submitted as your final contest response.",
+                            "Are you sure you want to exit the contest workspace?\n\nYour current query draft inside the editor will be automatically submitted.",
                             "Confirm Contest Exit",
                             MessageBoxButtons.YesNo,
                             MessageBoxIcon.Warning
@@ -635,20 +764,24 @@ namespace SQL_Judge_System.UI
                 }
             }
 
-            // 2. Perform background cleanup safely since the form is definitely closing
+            CleanupTimers();
+            base.OnFormClosing(e);
+        }
+        private void CleanupTimers()
+        {
             if (contestCountdownTimer != null)
             {
                 contestCountdownTimer.Stop();
                 contestCountdownTimer.Dispose();
+                contestCountdownTimer = null;
             }
 
             if (submitCooldownTimer != null)
             {
                 submitCooldownTimer.Stop();
                 submitCooldownTimer.Dispose();
+                submitCooldownTimer = null;
             }
-
-            base.OnFormClosing(e);
         }
     }
 }
