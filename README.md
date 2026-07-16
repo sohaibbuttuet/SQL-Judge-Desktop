@@ -24,6 +24,17 @@ Instead of manually checking SQL assignments, instructors define the correct sol
 
 ---
 
+## 🎥 Demo Video
+
+Watch the complete demonstration of the project on LinkedIn:
+
+**LinkedIn Demo:**
+https://www.linkedin.com/posts/muhammad-sohaib-hassan-681a33394_sqljudgesystem-oop-mysql-ugcPost-7471232554549997569-qAxu/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAGD5AwEBJej_TaksV1YKq3aQFyKbiRpIqgo
+
+> The demo showcases the complete workflow, including login, SQL query execution, automatic judging, contest management, leaderboards, reports, and dashboards.
+
+---
+
 # ✨ Features
 
 ## 🔐 Authentication
@@ -208,36 +219,12 @@ Authentication
 
 ---
 
-# 📸 Screenshots
-
-> Add screenshots here after uploading them.
-
-Example:
-
-```
-screenshots/
-
-login.png
-
-admin-dashboard.png
-
-student-dashboard.png
-
-contest.png
-
-sql-editor.png
-
-leaderboard.png
-```
-
----
-
 # 🚀 Installation
 
 ### Clone Repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/SQL-Judge-System.git
+git clone https://github.com/sohaibbuttuet/SQL-Judge-System.git
 ```
 
 Open the solution in **Visual Studio 2022**.
