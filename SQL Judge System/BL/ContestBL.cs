@@ -150,14 +150,14 @@ namespace SQL_Judge_System.BL
         }
 
         // Report
-        public static DataTable GetContestRanking(int limit)
+        public static DataTable GetContestRanking(int limit, DateTime startDate, DateTime endDate)
         {
             if (limit <= 0)
             {
                 return new DataTable(); // Return a clean empty table layout structural baseline
             }
 
-            return ContestDL.GetContestRanking(limit);
+            return ContestDL.GetContestRanking(limit, startDate, endDate);
         }
     }
 }

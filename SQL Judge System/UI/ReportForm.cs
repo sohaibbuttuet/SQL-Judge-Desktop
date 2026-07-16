@@ -15,6 +15,7 @@ using SQL_Judge_System.Models;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using SQL_Judge_System.DL;
+using SQL_Judge_System.Helper;
 
 namespace SQL_Judge_System.UI
 {
@@ -311,6 +312,7 @@ namespace SQL_Judge_System.UI
         }
 
         // --- REPORT REGIONS ---
+
         private void LoadContestRanking()
         {
             if (cmbRows.SelectedItem == null)
@@ -331,28 +333,24 @@ namespace SQL_Judge_System.UI
                 lblStat3Label.Text = "Average Score";
                 lblStat4Label.Text = "Completion Rate";
 
-                // Fetch un-truncated data table directly first to avoid indexing row errors
-                DataTable dtContests = ContestBL.GetContestRanking(limit);
-                int totalContests = (dtContests != null) ? dtContests.Rows.Count : 0;
+                ExecuteReportLoad(() => ContestBL.GetContestRanking(limit, startDate, endDate), LoadContestGrid);
 
-                if (totalContests > 0)
+                DataTable contestMetrics_0 = ReportsBL.ContestMetrics(startDate, endDate);
+                DataTable contestMetrics_1 = ReportsBL.ContestCompletionRate(startDate, endDate);
+
+                if (contestMetrics_0 != null && contestMetrics_0.Rows.Count > 0 && contestMetrics_1 != null && contestMetrics_1.Rows.Count > 0)
                 {
-                    // Load grid dynamically via modern functional evaluation loop
-                    ExecuteReportLoad(() => dtContests, LoadContestGrid);
+                    DataRow row_1 = contestMetrics_0.Rows[0];
+                    DataRow row_2 = contestMetrics_1.Rows[0];
 
-                    // Guard metric scalar evaluations with structured fallbacks
-                    int highest = SubmissionBL.GetHighestScore(startDate, endDate);
-                    double average = SubmissionBL.GetAverageScore(startDate, endDate);
-                    double completionRate = SubmissionBL.GetOverallCompletionRate(startDate, endDate);
-
-                    lblStat1Value.Text = totalContests.ToString();
-                    lblStat2Value.Text = highest.ToString();
-                    lblStat3Value.Text = average.ToString("F2");
-                    lblStat4Value.Text = $"{completionRate:F1}%";
+                    lblStat1Value.Text = row_1["TotalContests"].ToString();
+                    lblStat2Value.Text = row_1["MaxContestScore"].ToString();
+                    lblStat3Value.Text = row_1["AvgContestScore"].ToString();
+                    lblStat4Value.Text = row_2["CompletionRate"].ToString();
                 }
                 else
                 {
-                    if (dtContests != null) LoadContestGrid(dtContests);
+                    LoadContestGrid(null);
 
                     lblStat1Value.Text = "0";
                     lblStat2Value.Text = "0";
@@ -388,15 +386,25 @@ namespace SQL_Judge_System.UI
 
                 ExecuteReportLoad(() => StudentBL.GetTopStudents(limit, startDate, endDate), LoadStudentGrid);
 
-                int totalReg = StudentBL.GetTotalStudentsRegistered(startDate, endDate);
-                int contestActive = SubmissionBL.GetContestRegisteredStudents(startDate, endDate);
-                double avgSolved = StudentBL.GetAverageProblemsSolved(startDate, endDate);
+                DataTable metrics = ReportsBL.GetStudentMetrics(startDate, endDate);
 
-                lblStat1Value.Text = totalReg.ToString();
-                lblStat2Value.Text = contestActive.ToString();
-                lblStat3Value.Text = avgSolved.ToString("F1");
+                if (metrics != null && metrics.Rows.Count > 0)
+                {
+                    DataRow row = metrics.Rows[0];
+
+                    lblStat1Value.Text = row["TotalStudents"].ToString();
+                    // FIXED: Mapped correctly to match label assignments above
+                    lblStat2Value.Text = row["ContestRegisteredStudent"].ToString();
+                    lblStat3Value.Text = row["AvgProblemsSolved"].ToString();
+                }
+                else
+                {
+                    lblStat1Value.Text = "0";
+                    lblStat2Value.Text = "0";
+                    lblStat3Value.Text = "0";
+                }
+
                 int totalDays = (dtpTo.Value.Date - startDate).Days + 1;
-
                 lblStat4Label.Text = $"Days Monitored ({startDate:MMM dd} - {dtpTo.Value:MMM dd})";
                 lblStat4Value.Text = $"{totalDays} Days";
             }
@@ -407,11 +415,8 @@ namespace SQL_Judge_System.UI
             }
         }
 
-        // Admin Reports
-        private void btnTopStudentsReport_Click(object sender, EventArgs e)
-        {
-            LoadTopStudents();
-        }
+        // --- ADMIN REPORTS ---
+
         private void btnSubmissionsReport_Click(object sender, EventArgs e)
         {
             if (cmbRows.SelectedItem == null)
@@ -432,34 +437,22 @@ namespace SQL_Judge_System.UI
                 lblStat3Label.Text = "Pass Rate %";
                 lblStat4Label.Text = "Runtime Error Count";
 
-                // 1. Fetch the raw data table from the Business Logic Layer first
-                DataTable dtSubmissions = SubmissionBL.GetSubmissions(limit, startDate, endDate);
+                ExecuteReportLoad(() => SubmissionBL.GetSubmissions(limit, startDate, endDate), LoadSubmissionsGrid);
 
-                // 2. Use the actual full row count from the database retrieval for calculations
-                int totalSubmissions = (dtSubmissions != null) ? dtSubmissions.Rows.Count : 0;
+                DataTable submissionMetrics = ReportsBL.GetSubmissionMetrics(startDate, endDate);
 
-                if (totalSubmissions > 0)
+                if (submissionMetrics != null && submissionMetrics.Rows.Count > 0)
                 {
-                    // 3. Bind the fetched data using your existing display runner logic
-                    ExecuteReportLoad(() => dtSubmissions, LoadSubmissionsGrid);
+                    DataRow row = submissionMetrics.Rows[0];
 
-                    int correctCount = SubmissionBL.GetCorrectSubCount(startDate, endDate);
-                    int pendingCount = SubmissionBL.GetPendingStatusCount(startDate, endDate);
-                    int runtimeErrors = SubmissionBL.GetRunTimeErrorCount(startDate, endDate);
-
-                    // 4. Calculate the mathematically correct pass rate (capped naturally at 100%)
-                    double passRate = ((double)correctCount / totalSubmissions) * 100;
-
-                    // 5. Update UI values cleanly
-                    lblStat1Value.Text = totalSubmissions.ToString();
-                    lblStat2Value.Text = pendingCount.ToString();
-                    lblStat3Value.Text = $"{passRate:F1}%";
-                    lblStat4Value.Text = runtimeErrors.ToString();
+                    lblStat1Value.Text = row["TotalSubmissions"].ToString();
+                    lblStat2Value.Text = row["PendingSubmissions"].ToString();
+                    lblStat3Value.Text = row["PassRate"].ToString();
+                    lblStat4Value.Text = row["RunTimeErrorCount"].ToString();
                 }
                 else
                 {
-                    // Clear the grid structural layout safely if no data matches the filters
-                    if (dtSubmissions != null) LoadSubmissionsGrid(dtSubmissions);
+                    LoadSubmissionsGrid(null);
 
                     lblStat1Value.Text = "0";
                     lblStat2Value.Text = "0";
@@ -473,15 +466,19 @@ namespace SQL_Judge_System.UI
                                 "UI Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        private void btnTopStudentsReport_Click(object sender, EventArgs e)
+        {
+            LoadTopStudents();
+        }
         private void btnContestLeaderboard_Click(object sender, EventArgs e)
         {
             LoadContestRanking();
         }
 
-        // Student Reports
+        // --- STUDENT REPORTS ---
+
         private void btnMySubmissions_Click(object sender, EventArgs e)
         {
-            // 1. Guard Clause: Ensure a row limit selection is made in the combo box
             if (cmbRows.SelectedItem == null)
             {
                 MessageBox.Show("Please select a valid row truncation limit before loading your history.",
@@ -491,41 +488,35 @@ namespace SQL_Judge_System.UI
 
             try
             {
-                // 2. Setup structural UI text headings for the export engine context
                 _activeReportTitle = "Personal Submission History & Performance Tracking Log";
 
                 lblStat1Label.Text = "Total Submissions";
-                lblStat2Label.Text = "Highest Score Achieved";
-                lblStat3Label.Text = "Average Score";
+                lblStat2Label.Text = "Accepted Submissions";
+                lblStat3Label.Text = "Total Points";
                 lblStat4Label.Text = "Success Rate";
 
-                // 3. Gather form inputs and evaluate database operational variables
                 DateTime startDate = dtpFrom.Value.Date;
-                DateTime endDate = dtpTo.Value.Date.AddDays(1).AddTicks(-1); // Captures full end-day details
+                DateTime endDate = dtpTo.Value.Date.AddDays(1).AddTicks(-1);
                 int limit = Convert.ToInt32(cmbRows.SelectedItem.ToString());
 
-                // 4. Resolve the StudentID from the logged-in UserID
                 int studentID = StudentBL.GetStudentByUserID(userID).StudentID;
 
-                // 5. Fetch and bind the detailed history grid rows
                 DataTable dtMySubmissions = SubmissionBL.GetSubmissionsByStudent(studentID, limit, startDate, endDate);
                 if (dtMySubmissions != null)
                 {
                     ExecuteReportLoad(() => dtMySubmissions, LoadContestGrid);
                 }
 
-                // 6. Fetch optimized aggregate metrics directly from the database server
-                DataTable dtMetrics = SubmissionBL.GetStudentSubmissionMetrics(studentID, startDate, endDate);
+                DataTable dtMetrics = ReportsBL.GetStudentSubmissionMetrics(studentID, startDate, endDate);
 
                 if (dtMetrics != null && dtMetrics.Rows.Count > 0)
                 {
                     DataRow row = dtMetrics.Rows[0];
 
-                    // Assign DB computed summaries directly to your dashboard labels
                     lblStat1Value.Text = row["TotalSubmissions"].ToString();
-                    lblStat2Value.Text = row["HighestPoints"].ToString();
+                    lblStat2Value.Text = row["AcceptedSubmissions"].ToString();
 
-                    double avgScore = row["AveragePoints"] != DBNull.Value ? Convert.ToDouble(row["AveragePoints"]) : 0.0;
+                    double avgScore = row["TotalPoints"] != DBNull.Value ? Convert.ToDouble(row["TotalPoints"]) : 0.0;
                     double successRate = row["SuccessRate"] != DBNull.Value ? Convert.ToDouble(row["SuccessRate"]) : 0.0;
 
                     lblStat3Value.Text = avgScore.ToString("F1");
@@ -533,7 +524,6 @@ namespace SQL_Judge_System.UI
                 }
                 else
                 {
-                    // Fallback UI reset parameters if records yield empty null returns
                     lblStat1Value.Text = "0";
                     lblStat2Value.Text = "0";
                     lblStat3Value.Text = "0.0";
@@ -548,8 +538,8 @@ namespace SQL_Judge_System.UI
         }
         private void btnStudentTopStudents_Click(object sender, EventArgs e)
         {
-           LoadTopStudents();
-        }       
+            LoadTopStudents();
+        }
         private void btnStudentLeaderboard_Click(object sender, EventArgs e)
         {
             LoadContestRanking();

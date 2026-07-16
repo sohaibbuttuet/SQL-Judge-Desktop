@@ -64,10 +64,8 @@ namespace SQL_Judge_System.UI
             pnlStudentExtra.Visible = true;
 
             btnMainAction.Location = new Point(45, pnlStudentExtra.Bottom + 25);
-
             lnkToggle.Location = new Point(45, btnMainAction.Bottom + 15);
-
-            this.ClientSize = new Size(520, 760);
+            this.ClientSize = new Size(536, 665);
         }
 
         // SIGN IN MODE
@@ -77,18 +75,14 @@ namespace SQL_Judge_System.UI
 
             lblTitle.Text = "Welcome Back";
             lblSubtitle.Text = "Sign in to continue";
-
             btnMainAction.Text = "LOGIN";
-
             lnkToggle.Text = "Don't have an account? Sign Up";
 
             pnlStudentExtra.Visible = false;
-
             btnMainAction.Location = new Point(45, txtPassword.Bottom + 45);
-
             lnkToggle.Location = new Point(45, btnMainAction.Bottom + 15);
 
-            this.ClientSize = new Size(520, 720);
+            this.ClientSize = new Size(536, 665);
         }
 
         // MAIN BUTTON CLICK

@@ -130,7 +130,7 @@
             this.clbTags.FormattingEnabled = true;
             this.clbTags.Location = new System.Drawing.Point(0, 344);
             this.clbTags.Name = "clbTags";
-            this.clbTags.Size = new System.Drawing.Size(742, 160);
+            this.clbTags.Size = new System.Drawing.Size(725, 160);
             this.clbTags.TabIndex = 12;
             // 
             // lblProblemName
@@ -154,7 +154,7 @@
             this.txtProblemName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(243)))));
             this.txtProblemName.Location = new System.Drawing.Point(0, 20);
             this.txtProblemName.Name = "txtProblemName";
-            this.txtProblemName.Size = new System.Drawing.Size(742, 31);
+            this.txtProblemName.Size = new System.Drawing.Size(725, 31);
             this.txtProblemName.TabIndex = 1;
             // 
             // lblDescription
@@ -179,7 +179,7 @@
             this.txtDescription.Location = new System.Drawing.Point(0, 85);
             this.txtDescription.Name = "txtDescription";
             this.txtDescription.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            this.txtDescription.Size = new System.Drawing.Size(742, 130);
+            this.txtDescription.Size = new System.Drawing.Size(725, 130);
             this.txtDescription.TabIndex = 3;
             this.txtDescription.Text = "";
             // 
@@ -193,7 +193,7 @@
             this.pnlMetaRow.Controls.Add(this.pnlPointsBox);
             this.pnlMetaRow.Location = new System.Drawing.Point(0, 234);
             this.pnlMetaRow.Name = "pnlMetaRow";
-            this.pnlMetaRow.Size = new System.Drawing.Size(742, 76);
+            this.pnlMetaRow.Size = new System.Drawing.Size(725, 76);
             this.pnlMetaRow.TabIndex = 4;
             // 
             // pnlDBbox
@@ -201,7 +201,7 @@
             this.pnlDBbox.Controls.Add(this.lblDatabase);
             this.pnlDBbox.Controls.Add(this.cmbDatabase);
             this.pnlDBbox.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pnlDBbox.Location = new System.Drawing.Point(487, 0);
+            this.pnlDBbox.Location = new System.Drawing.Point(470, 0);
             this.pnlDBbox.Name = "pnlDBbox";
             this.pnlDBbox.Size = new System.Drawing.Size(255, 76);
             this.pnlDBbox.TabIndex = 13;
@@ -278,7 +278,7 @@
             this.pnlPointsBox.Controls.Add(this.txtPoints);
             this.pnlPointsBox.Location = new System.Drawing.Point(261, 0);
             this.pnlPointsBox.Name = "pnlPointsBox";
-            this.pnlPointsBox.Size = new System.Drawing.Size(220, 76);
+            this.pnlPointsBox.Size = new System.Drawing.Size(203, 76);
             this.pnlPointsBox.TabIndex = 1;
             // 
             // lblPoints
@@ -302,7 +302,7 @@
             this.txtPoints.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(243)))));
             this.txtPoints.Location = new System.Drawing.Point(0, 22);
             this.txtPoints.Name = "txtPoints";
-            this.txtPoints.Size = new System.Drawing.Size(210, 25);
+            this.txtPoints.Size = new System.Drawing.Size(193, 25);
             this.txtPoints.TabIndex = 1;
             this.txtPoints.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -337,7 +337,7 @@
             this.pnlQueryContainer.Location = new System.Drawing.Point(0, 537);
             this.pnlQueryContainer.Name = "pnlQueryContainer";
             this.pnlQueryContainer.Padding = new System.Windows.Forms.Padding(2);
-            this.pnlQueryContainer.Size = new System.Drawing.Size(742, 135);
+            this.pnlQueryContainer.Size = new System.Drawing.Size(725, 135);
             this.pnlQueryContainer.TabIndex = 11;
             // 
             // txtMasterQuery
@@ -350,7 +350,7 @@
             this.txtMasterQuery.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(171)))), ((int)(((byte)(213)))), ((int)(((byte)(247)))));
             this.txtMasterQuery.Location = new System.Drawing.Point(2, 2);
             this.txtMasterQuery.Name = "txtMasterQuery";
-            this.txtMasterQuery.Size = new System.Drawing.Size(738, 131);
+            this.txtMasterQuery.Size = new System.Drawing.Size(721, 131);
             this.txtMasterQuery.TabIndex = 0;
             this.txtMasterQuery.Text = "";
             this.txtMasterQuery.WordWrap = false;
@@ -572,6 +572,7 @@
             this.Name = "CreateProblemUI";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Problem Designer — SQL Challenge Builder";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.pnlMain.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);

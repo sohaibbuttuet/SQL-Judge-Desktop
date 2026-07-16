@@ -61,6 +61,7 @@ namespace SQL_Judge_System.UI
             if (this.lblTimeRemainingValue != null)
             {
                 this.pnlInfoTimeRemaining.Visible = true;
+                this.pnlInfoTimeRemaining.Location = new Point(432, 4);
             }
 
             pnlStatLastResult.Visible = false;

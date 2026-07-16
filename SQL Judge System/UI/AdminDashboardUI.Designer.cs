@@ -2178,6 +2178,7 @@ namespace SQL_Judge_System.UI
             this.Name = "AdminDashboardUI";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Settings — Profile";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.AdminDashboard_Load);
             this.pnlSidebar.ResumeLayout(false);
             this.pnlSidebarLogo.ResumeLayout(false);

@@ -1018,6 +1018,7 @@
             this.Name = "JoinContestUI";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SQL Judge System — Contest Arena";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.pnlFormBackground.ResumeLayout(false);
             this.pnlMainCard.ResumeLayout(false);
             this.pnlBody.ResumeLayout(false);

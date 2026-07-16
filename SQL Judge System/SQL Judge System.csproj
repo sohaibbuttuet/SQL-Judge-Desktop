@@ -126,6 +126,7 @@
     <Compile Include="BL\ContestBL.cs" />
     <Compile Include="BL\ProblemBL.cs" />
     <Compile Include="BL\QueryRunnerBL.cs" />
+    <Compile Include="BL\ReportsBL.cs" />
     <Compile Include="BL\StudentBL.cs" />
     <Compile Include="BL\SubmissionBL.cs" />
     <Compile Include="BL\UserBL.cs" />
@@ -137,6 +138,7 @@
     <Compile Include="DL\ProblemDL.cs" />
     <Compile Include="DL\ProblemTagMapDL.cs" />
     <Compile Include="DL\SubmissionResultDL.cs" />
+    <Compile Include="Helper\ReportsDL.cs" />
     <Compile Include="LookupDL\ProblemDifficultiesDL.cs" />
     <Compile Include="LookupDL\ProblemTagsDL.cs" />
     <Compile Include="DL\SubmissionDL.cs" />

@@ -64,9 +64,9 @@
 
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.mainLayout = new System.Windows.Forms.TableLayoutPanel();
             this.pnlSidebar = new System.Windows.Forms.Panel();
             this.pnlStudnet = new System.Windows.Forms.Panel();
@@ -88,7 +88,7 @@
             this.lblSidebarTitle = new System.Windows.Forms.Label();
             this.lblSidebarIcon = new System.Windows.Forms.Label();
             this.pnlContent = new System.Windows.Forms.Panel();
-            this.dgvReport = new System.Windows.Forms.DataGridView();
+            this.pnlHeaderDivider = new System.Windows.Forms.Panel();
             this.pnlStatsStrip = new System.Windows.Forms.Panel();
             this.pnlStat4 = new System.Windows.Forms.Panel();
             this.lblStat4Label = new System.Windows.Forms.Label();
@@ -105,7 +105,6 @@
             this.pnlStat1 = new System.Windows.Forms.Panel();
             this.lblStat1Label = new System.Windows.Forms.Label();
             this.lblStat1Value = new System.Windows.Forms.Label();
-            this.pnlHeaderDivider = new System.Windows.Forms.Panel();
             this.pnlReportHeader = new System.Windows.Forms.Panel();
             this.pnlHeaderRight = new System.Windows.Forms.Panel();
             this.btnRefresh = new System.Windows.Forms.Button();
@@ -118,6 +117,7 @@
             this.pnlHeaderLeft = new System.Windows.Forms.Panel();
             this.lblReportDescription = new System.Windows.Forms.Label();
             this.lblReportTitle = new System.Windows.Forms.Label();
+            this.dgvReport = new System.Windows.Forms.DataGridView();
             this.mainLayout.SuspendLayout();
             this.pnlSidebar.SuspendLayout();
             this.pnlStudnet.SuspendLayout();
@@ -125,7 +125,6 @@
             this.pnlSidebarFooter.SuspendLayout();
             this.pnlSidebarHeader.SuspendLayout();
             this.pnlContent.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvReport)).BeginInit();
             this.pnlStatsStrip.SuspendLayout();
             this.pnlStat4.SuspendLayout();
             this.pnlStat3.SuspendLayout();
@@ -134,6 +133,7 @@
             this.pnlReportHeader.SuspendLayout();
             this.pnlHeaderRight.SuspendLayout();
             this.pnlHeaderLeft.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvReport)).BeginInit();
             this.SuspendLayout();
             // 
             // mainLayout
@@ -454,53 +454,15 @@
             this.pnlContent.Size = new System.Drawing.Size(834, 556);
             this.pnlContent.TabIndex = 1;
             // 
-            // dgvReport
+            // pnlHeaderDivider
             // 
-            this.dgvReport.AllowUserToAddRows = false;
-            this.dgvReport.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(35)))));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(220)))));
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(52)))), ((int)(((byte)(90)))));
-            this.dgvReport.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
-            this.dgvReport.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.pnlHeaderDivider.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvReport.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvReport.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(15)))), ((int)(((byte)(25)))));
-            this.dgvReport.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dgvReport.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(38)))));
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI", 9.5F);
-            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(150)))), ((int)(((byte)(200)))));
-            dataGridViewCellStyle8.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(38)))));
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvReport.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
-            this.dgvReport.ColumnHeadersHeight = 40;
-            this.dgvReport.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(18)))), ((int)(((byte)(30)))));
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Segoe UI", 9.5F);
-            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(235)))));
-            dataGridViewCellStyle9.NullValue = "—";
-            dataGridViewCellStyle9.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(52)))), ((int)(((byte)(90)))));
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvReport.DefaultCellStyle = dataGridViewCellStyle9;
-            this.dgvReport.EnableHeadersVisualStyles = false;
-            this.dgvReport.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(50)))));
-            this.dgvReport.Location = new System.Drawing.Point(0, 193);
-            this.dgvReport.MultiSelect = false;
-            this.dgvReport.Name = "dgvReport";
-            this.dgvReport.ReadOnly = true;
-            this.dgvReport.RowHeadersVisible = false;
-            this.dgvReport.RowTemplate.Height = 38;
-            this.dgvReport.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvReport.Size = new System.Drawing.Size(834, 362);
-            this.dgvReport.TabIndex = 50;
+            this.pnlHeaderDivider.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(60)))));
+            this.pnlHeaderDivider.Location = new System.Drawing.Point(0, 192);
+            this.pnlHeaderDivider.Name = "pnlHeaderDivider";
+            this.pnlHeaderDivider.Size = new System.Drawing.Size(834, 1);
+            this.pnlHeaderDivider.TabIndex = 53;
             // 
             // pnlStatsStrip
             // 
@@ -534,12 +496,11 @@
             // 
             // lblStat4Label
             // 
-            this.lblStat4Label.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblStat4Label.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblStat4Label.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(120)))), ((int)(((byte)(160)))));
             this.lblStat4Label.Location = new System.Drawing.Point(16, 44);
             this.lblStat4Label.Name = "lblStat4Label";
-            this.lblStat4Label.Size = new System.Drawing.Size(173, 24);
+            this.lblStat4Label.Size = new System.Drawing.Size(221, 24);
             this.lblStat4Label.TabIndex = 0;
             this.lblStat4Label.Text = "Pending";
             // 
@@ -688,16 +649,6 @@
             this.lblStat1Value.Text = "—";
             this.lblStat1Value.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // pnlHeaderDivider
-            // 
-            this.pnlHeaderDivider.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlHeaderDivider.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(60)))));
-            this.pnlHeaderDivider.Location = new System.Drawing.Point(0, 192);
-            this.pnlHeaderDivider.Name = "pnlHeaderDivider";
-            this.pnlHeaderDivider.Size = new System.Drawing.Size(834, 1);
-            this.pnlHeaderDivider.TabIndex = 53;
-            // 
             // pnlReportHeader
             // 
             this.pnlReportHeader.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -707,7 +658,6 @@
             this.pnlReportHeader.Controls.Add(this.pnlHeaderLeft);
             this.pnlReportHeader.Location = new System.Drawing.Point(0, 0);
             this.pnlReportHeader.Name = "pnlReportHeader";
-            this.pnlReportHeader.Padding = new System.Windows.Forms.Padding(24, 16, 24, 14);
             this.pnlReportHeader.Size = new System.Drawing.Size(834, 110);
             this.pnlReportHeader.TabIndex = 54;
             // 
@@ -722,7 +672,7 @@
             this.pnlHeaderRight.Controls.Add(this.lblTo);
             this.pnlHeaderRight.Controls.Add(this.dtpFrom);
             this.pnlHeaderRight.Controls.Add(this.lblDateRangeLabel);
-            this.pnlHeaderRight.Location = new System.Drawing.Point(365, 16);
+            this.pnlHeaderRight.Location = new System.Drawing.Point(389, 0);
             this.pnlHeaderRight.Name = "pnlHeaderRight";
             this.pnlHeaderRight.Size = new System.Drawing.Size(445, 80);
             this.pnlHeaderRight.TabIndex = 0;
@@ -816,9 +766,9 @@
             this.pnlHeaderLeft.Controls.Add(this.lblReportDescription);
             this.pnlHeaderLeft.Controls.Add(this.lblReportTitle);
             this.pnlHeaderLeft.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlHeaderLeft.Location = new System.Drawing.Point(24, 16);
+            this.pnlHeaderLeft.Location = new System.Drawing.Point(0, 0);
             this.pnlHeaderLeft.Name = "pnlHeaderLeft";
-            this.pnlHeaderLeft.Size = new System.Drawing.Size(341, 80);
+            this.pnlHeaderLeft.Size = new System.Drawing.Size(341, 110);
             this.pnlHeaderLeft.TabIndex = 1;
             // 
             // lblReportDescription
@@ -841,6 +791,54 @@
             this.lblReportTitle.TabIndex = 1;
             this.lblReportTitle.Text = "Select a Report";
             // 
+            // dgvReport
+            // 
+            this.dgvReport.AllowUserToAddRows = false;
+            this.dgvReport.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(35)))));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(220)))));
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(52)))), ((int)(((byte)(90)))));
+            this.dgvReport.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvReport.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvReport.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvReport.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(15)))), ((int)(((byte)(25)))));
+            this.dgvReport.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvReport.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(38)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(150)))), ((int)(((byte)(200)))));
+            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(22)))), ((int)(((byte)(38)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvReport.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvReport.ColumnHeadersHeight = 40;
+            this.dgvReport.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(18)))), ((int)(((byte)(30)))));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(235)))));
+            dataGridViewCellStyle3.NullValue = "—";
+            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(52)))), ((int)(((byte)(90)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvReport.DefaultCellStyle = dataGridViewCellStyle3;
+            this.dgvReport.EnableHeadersVisualStyles = false;
+            this.dgvReport.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(50)))));
+            this.dgvReport.Location = new System.Drawing.Point(0, 193);
+            this.dgvReport.MultiSelect = false;
+            this.dgvReport.Name = "dgvReport";
+            this.dgvReport.ReadOnly = true;
+            this.dgvReport.RowHeadersVisible = false;
+            this.dgvReport.RowTemplate.Height = 38;
+            this.dgvReport.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvReport.Size = new System.Drawing.Size(834, 362);
+            this.dgvReport.TabIndex = 50;
+            // 
             // ReportForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -854,6 +852,7 @@
             this.Name = "ReportForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Reports & Analytics";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.mainLayout.ResumeLayout(false);
             this.pnlSidebar.ResumeLayout(false);
             this.pnlStudnet.ResumeLayout(false);
@@ -861,7 +860,6 @@
             this.pnlSidebarFooter.ResumeLayout(false);
             this.pnlSidebarHeader.ResumeLayout(false);
             this.pnlContent.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvReport)).EndInit();
             this.pnlStatsStrip.ResumeLayout(false);
             this.pnlStat4.ResumeLayout(false);
             this.pnlStat3.ResumeLayout(false);
@@ -870,6 +868,7 @@
             this.pnlReportHeader.ResumeLayout(false);
             this.pnlHeaderRight.ResumeLayout(false);
             this.pnlHeaderLeft.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvReport)).EndInit();
             this.ResumeLayout(false);
 
         }

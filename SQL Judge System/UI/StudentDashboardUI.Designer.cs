@@ -642,6 +642,7 @@ namespace SQL_Judge_System.UI
             this.Name = "StudentDashboardUI";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Student SQL Judge Workspace";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.StudentDashboard_Load);
             this.pnlSidebar.ResumeLayout(false);
             this.pnlSidebarLogo.ResumeLayout(false);

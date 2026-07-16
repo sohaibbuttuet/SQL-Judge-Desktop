@@ -115,7 +115,7 @@ namespace SQL_Judge_System.DL
         // ==========================================
         public static DataTable GetStudents()
         {
-            string query = "SELECT * FROM vw_students ORDER BY StudentID;";
+            string query = "SELECT * FROM vw_students;";
             return DatabaseHelper.Instance.GetDataTable(query);
         }
         public static DataTable GetTopStudents(int limit, DateTime startDate, DateTime endDate)
@@ -123,8 +123,7 @@ namespace SQL_Judge_System.DL
             // Combines chronological filtering, leaderboard ordering, and top-tier row truncation
             string query = @"SELECT GlobalRank, FullName AS StudentName, RegistrationNumber, LevelName, TotalScore FROM vw_students 
                      WHERE CreatedAt >= @StartDate 
-                       AND CreatedAt <= @EndDate
-                     ORDER BY TotalScore DESC 
+                       AND CreatedAt <= @EndDate      
                      LIMIT @Limit;";
 
             MySqlParameter[] parameters =
@@ -146,38 +145,6 @@ namespace SQL_Judge_System.DL
             };
 
             return Convert.ToInt32(DatabaseHelper.Instance.ExecuteScalar(query, parameters));
-        }
-
-        public static int GetTotalStudentsRegistered(DateTime startDate, DateTime endDate)
-        {
-            // Counts all unique student profiles created within the date frame
-            string query = @"SELECT COUNT(*) FROM vw_students 
-                     WHERE CreatedAt >= @StartDate 
-                       AND CreatedAt <= @EndDate;";
-
-            MySqlParameter[] parameters =
-            {
-        new MySqlParameter("@StartDate", startDate),
-        new MySqlParameter("@EndDate", endDate)
-    };
-
-            return DatabaseHelper.Instance.ExecuteScalar(query, parameters);
-        }
-        public static double GetAverageProblemsSolved(DateTime startDate, DateTime endDate)
-        {
-            // Computes the true platform average of solved problems per student in the given window
-            string query = @"SELECT IFNULL(ROUND(AVG(ProblemsSolved), 1), 0.0) FROM vw_students 
-                     WHERE CreatedAt >= @StartDate 
-                       AND CreatedAt <= @EndDate;";
-
-            MySqlParameter[] parameters =
-            {
-        new MySqlParameter("@StartDate", startDate),
-        new MySqlParameter("@EndDate", endDate)
-    };
-
-            object result = DatabaseHelper.Instance.ExecuteScalar(query, parameters);
-            return result != null && result != DBNull.Value ? Convert.ToDouble(result) : 0.0;
         }
     }
 } 
