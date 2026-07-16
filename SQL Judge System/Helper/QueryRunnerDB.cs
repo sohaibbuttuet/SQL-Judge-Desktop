@@ -10,7 +10,7 @@ namespace SQL_Judge_System.Helper
         private readonly string serverName = "127.0.0.1";
         private readonly string port = "3306";
         private readonly string databaseUser = "root";
-        private readonly string databasePassword = "SohaibButt@16122006";
+        private readonly string databasePassword = "password";
 
         public QueryRunnerDB(string databaseName)
         {

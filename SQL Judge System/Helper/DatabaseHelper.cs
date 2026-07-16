@@ -10,7 +10,7 @@ namespace SQL_Judge_System.Helper
         private string port = "3306";
         private string databaseName = "sqljudgesystem";
         private string databaseUser = "root";
-        private string databasePassword = "SohaibButt@16122006";
+        private string databasePassword = "password";
 
         private static DatabaseHelper _instance;
 
