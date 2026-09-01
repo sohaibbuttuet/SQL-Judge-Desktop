@@ -1,0 +1,149 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace SQL_Judge_System.Models
+{
+    internal class Submission
+    {
+        private int submissionID;
+        private int studentID;
+        private int problemID;
+        private int? contestID; // optional
+        private string queryText;
+        private int statusID;
+        private int attemptNumber;
+        private int totalScore;
+        private DateTime submittedAt;
+
+        public int SubmissionID
+        {
+            get { return submissionID; }
+            set
+            {
+                if (value <= 0)
+                    throw new Exception("Invalid Submission ID.");
+
+                submissionID = value;
+            }
+        }
+        public int StudentID
+        {
+            get { return studentID; }
+            set
+            {
+                if (value <= 0)
+                    throw new Exception("Invalid Student ID.");
+
+                studentID = value;
+            }
+        }
+        public int ProblemID
+        {
+            get { return problemID; }
+            set
+            {
+                if (value <= 0)
+                    throw new Exception("Invalid Problem ID.");
+
+                problemID = value;
+            }
+        }
+        public int? ContestID
+        {
+            get { return contestID; }
+            set
+            {
+                // Only validate if the incoming value is NOT null
+                if (value.HasValue && value.Value <= 0)
+                    throw new Exception("Invalid Contest ID. It must be a positive number.");
+                contestID = value;
+            }
+        }
+        public string QueryText
+        {
+            get { return queryText; }
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                    throw new Exception("Query cannot be empty.");
+
+                queryText = value;
+            }
+        }
+        public int StatusID
+        {
+            get { return statusID; }
+            set
+            {
+                if (value <= 0)
+                    throw new Exception("Invalid Status ID");
+                statusID = value;
+            }
+        }
+        public int AttemptNumber
+        {
+            get { return attemptNumber; }
+            set
+            {
+                if (value <= 0)
+                    throw new Exception("Attempt number must be at least 1.");
+
+                attemptNumber = value;
+            }
+        }
+        public int TotalScore
+        {
+            get { return totalScore; }
+            set
+            {
+                if (value < 0)
+                    throw new Exception("Score cannot be negative.");
+
+                totalScore = value;
+            }
+        }
+        public DateTime SubmittedAt
+        {
+            get { return submittedAt; }
+            private set { submittedAt = value; }
+        }
+
+        // =========================
+        // Constructers
+        // =========================
+        public Submission()
+        {
+            SubmittedAt = DateTime.Now;
+            AttemptNumber = 1;
+            TotalScore = 0;
+        }
+        public Submission(int studentID, int problemID, int? contestID, string queryText, int statusID)
+        {
+            StudentID = studentID;
+            ProblemID = problemID;
+            ContestID = contestID;
+            QueryText = queryText;
+            StatusID = statusID;
+
+            SubmittedAt = DateTime.Now;
+            AttemptNumber = 1;
+            TotalScore = 0;
+        }
+        public Submission(int submissionID, int studentID, int problemID, int? contestID, string queryText, int statusID, int attemptNumber, int totalScore, DateTime submittedAt)
+        {
+            SubmissionID = submissionID;
+            StudentID = studentID;
+            ProblemID = problemID;
+            ContestID = contestID;
+            QueryText = queryText;
+            StatusID = statusID;
+            AttemptNumber = attemptNumber;
+            TotalScore = totalScore;
+            SubmittedAt = submittedAt;
+        }
+    }
+}

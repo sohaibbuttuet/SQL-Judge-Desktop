@@ -1,0 +1,34 @@
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build folders
+bin/
+obj/
+
+# NuGet
+packages/
+*.nupkg
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Environment / Secrets (IMPORTANT for your DB project)
+appsettings.json
+.env
+*.config
+
+# Database files (if any local)
+*.mdf
+*.ldf
+
+# Rider / VSCode (optional)
+.idea/
+.vscode/
